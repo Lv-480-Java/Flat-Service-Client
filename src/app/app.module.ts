@@ -1,3 +1,4 @@
+import { ProfileComponent } from './profile/profile.component';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
@@ -14,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent,
     RegistrationComponent,
     LoginComponent,
     HeaderComponent
@@ -21,6 +23,9 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     HttpClientModule,
