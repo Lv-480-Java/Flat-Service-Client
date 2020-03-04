@@ -7,14 +7,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
-import {HttpService} from './services/http.service';
+import {HttpUserService} from './services/http.user.service';
 import {FormsModule} from '@angular/forms';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +26,7 @@ import {FormsModule} from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [HttpService],
+  providers: [HttpUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../User';
-import {HttpService} from '../services/http.service';
+import {HttpUserService} from '../services/http.user.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +11,7 @@ export class RegistrationComponent implements OnInit {
 
   user: User = new User();
   done = false;
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpUserService) {}
   submit(user: User) {
     this.httpService.postData(user)
       .subscribe(
