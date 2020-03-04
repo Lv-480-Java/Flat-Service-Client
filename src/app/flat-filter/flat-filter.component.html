@@ -1,0 +1,57 @@
+<mat-card style="width:240px; padding-left: 20px;">
+  <p>ціна</p>
+  <div class="custom-slider">
+    <ng5-slider style="width:200px" [(value)]="minPrice" [(highValue)]="maxPrice" [options]="priceOptions"></ng5-slider>
+  </div>
+
+  <section class="example-section" fxLayout="column">
+    <div><p>Район:</p></div>
+    <mat-checkbox (change)="setRegions($event, 'Шевченківський')" class="example-margin">Шевченківський</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Франківський')" class="example-margin">Франківський</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Галицький')" class="example-margin">Галицький</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Залізничний')" class="example-margin">Залізничний</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Psychiv')" class="example-margin">Сихівський</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Личаківський')" class="example-margin">Личаківський</mat-checkbox>
+  </section>
+
+  <div><p>Поверх</p></div>
+  <div class="custom-slider">
+    <ng5-slider style="width:200px" [(value)]="minFloor" [(highValue)]="maxFloor" [options]="floorOptions"></ng5-slider>
+  </div>
+
+  <div><p>Кількість кімнат:</p></div>
+  <div class="custom-slider">
+    <ng5-slider style="width:200px" [(value)]="minNumberOfRooms" [(highValue)]="maxNumberOfRooms"
+                [options]="roomOptions"></ng5-slider>
+  </div>
+
+  <div>
+    <mat-form-field class="example-chip-list">
+      <mat-chip-list #chipList aria-label="Fruit selection">
+        <mat-chip
+          *ngFor="let fruit of tags"
+          [selectable]="selectable"
+          [removable]="removable"
+          (removed)="remove(fruit)">
+          {{fruit}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input
+          placeholder="Критерії пошуку..."
+          #tagInput
+          [formControl]="tagCtrl"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let fruit of filteredTags | async" [value]="fruit">
+          {{fruit}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" (click)="filterFlats()">Primary</button>
+</mat-card>
