@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Landlord, ProfileService, LandlordUser} from './profile.service';
+import {Landlord, LandlordUser, ProfileService} from '../services/profile.service';
 
 @Component({
   selector: 'app-profile',
