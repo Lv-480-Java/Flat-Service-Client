@@ -7,9 +7,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
-import {HttpService} from './services/http.service';
+import {HttpUserService} from './services/http.user.service';
+import { HeaderComponent } from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-
 import { FlatListComponent } from './flat-list/flat-list.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
@@ -25,16 +25,18 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    AppComponent,
+    HeaderComponent,
     FlatListComponent,
     FlatFilterComponent,
-    ProfileComponent
+    ProfileComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,7 @@ import {ProfileComponent} from './profile/profile.component';
     ReactiveFormsModule,
     MatAutocompleteModule
   ],
-  providers: [HttpService],
+  providers: [HttpUserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

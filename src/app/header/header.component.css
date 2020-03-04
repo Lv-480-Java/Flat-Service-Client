@@ -1,0 +1,13 @@
+a {
+  margin: 10px;
+  float: right;
+  vertical-align: center;
+  color: white;
+}
+
+header {
+  height: 50px;
+  background-color: black;
+}
+
+/*# sourceMappingURL=header.component.css.map */
