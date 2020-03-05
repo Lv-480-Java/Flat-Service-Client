@@ -1,3 +1,49 @@
 <p>flat-detailed works!</p>
-<gallery class="flat-gallery" [items]="images" thumbPosition="left"></gallery>
+<div fxLayout="row" fxLayoutAlign="center none">
+  <mat-card class="example-card">
 
+    <div fxLayout="row">
+      <mat-card-header>
+        <mat-card-title>Неймовірно кльовий загаоловк (класна квартира)</mat-card-title>
+        <mat-card-subtitle>Адреса квартири з юансами</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-header>
+        <mat-card-title>2500грн</mat-card-title>
+        <mat-card-subtitle>ціна</mat-card-subtitle>
+      </mat-card-header>
+    </div>
+
+    <div fxLayout="row">
+      <div fxLayout="column" style="margin-right: 20px">
+
+        <div fxLayout="row">
+          <mat-card-header fxFlex="70">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title style="font-size: 16px">Автор цієї квартири</mat-card-title>
+          </mat-card-header>
+          <button fxFlex="30" mat-raised-button color="primary">Початитись</button>
+        </div>
+
+        <mat-chip-list style="margin-top: 20px" >
+          <mat-chip>Papadum</mat-chip>
+          <mat-chip>Naan</mat-chip>
+          <mat-chip>Dal</mat-chip>
+          <mat-chip>efses fesfDal</mat-chip>
+          <mat-chip>Desesfal</mat-chip>
+          <mat-chip>Defs sefal</mat-chip>
+          <mat-chip>Dalol</mat-chip>
+          <mat-chip>oooDal</mat-chip>
+        </mat-chip-list>
+
+      </div>
+
+
+      <mat-card fxFlex="50" style="width: 500px; height: 400px;background-color: aqua; ">
+        <!--      <gallery class="flat-gallery" [items]="images" ></gallery>-->
+      </mat-card>
+    </div>
+
+
+  </mat-card>
+</div>
