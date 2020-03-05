@@ -1,25 +1,25 @@
 <!-- Default form register -->
-<form class="text-center border border-light p-5" rel="">
+<form class="text-center border border-light p-5" [formGroup]="form"(ngSubmit)="submit(user)">
 
   <p class="h4 mb-4">Sign up</p>
 
   <!-- User name -->
-  <input type="text" id="defaultRegisterFormFirstName" class="form-control mb-4" placeholder="User name"  [(ngModel)]="user.username" name = "username">
+  <input type="text" id="defaultRegisterFormFirstName" class="form-control mb-4" placeholder="User name" formControlName="username">
 
   <!-- E-mail -->
-  <input type="email" required="required" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"  [(ngModel)] = "user.email" name ="email">
+  <input type="email" required="required" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail"  formControlName="email">
 
-  <input type="tel" class="form-control mb-4" placeholder="Phone number"  [(ngModel)] = "user.phoneNumber" name = "phoneNumber">
+  <input type="tel" class="form-control mb-4" placeholder="Phone number"  formControlName="phoneNumber">
 
   <!-- Password -->
   <input type="password"  class="form-control" placeholder="Password"
-         aria-describedby="defaultRegisterFormPasswordHelpBlock"  [(ngModel)] = "user.password" name = "password">
+         aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="password">
   <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
     At least 8 characters and 1 digit
   </small>
 
   <!-- Sign up button -->
-  <button mdbBtn  block="true" class="btn btn-info btn-block my-4" type="submit" (click)=submit(user) >Sign in</button>
+  <button mdbBtn  block="true" class="btn btn-info btn-block my-4" type="submit" [disabled]="form.invalid">Sign in</button>
 
   <hr>
 
