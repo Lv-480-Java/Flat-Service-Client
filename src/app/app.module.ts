@@ -26,6 +26,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
+import { FlatDetailedComponent } from './flat-detailed/flat-detailed.component';
+import { GalleryModule } from  '@ngx-gallery/core';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { MenuComponent } from './menu/menu.component';
     FlatListComponent,
     FlatFilterComponent,
     ProfileComponent,
-    MenuComponent
+    MenuComponent,
+    FlatDetailedComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,9 @@ import { MenuComponent } from './menu/menu.component';
     MatTableModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    GalleryModule
   ],
   providers: [HttpUserService],
   bootstrap: [AppComponent]

@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "~9.0.2",
+    "@angular/animations": "^9.0.4",
     "@angular/cdk": "^9.1.0",
     "@angular/common": "~9.0.2",
     "@angular/compiler": "~9.0.2",
@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.0.2",
     "@angular/router": "~9.0.2",
     "@fortawesome/fontawesome-free": "^5.12.1",
+    "@ngx-gallery/core": "^5.0.0-beta.0",
     "@types/chart.js": "^2.9.15",
     "angular-bootstrap-md": "^8.10.1",
     "animate.css": "^3.7.2",
