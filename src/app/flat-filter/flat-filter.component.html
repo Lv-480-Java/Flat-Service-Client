@@ -6,15 +6,15 @@
 
   <section class="example-section" fxLayout="column">
     <div><p>Район:</p></div>
-    <mat-checkbox (change)="setRegions($event, 'Шевченківський')" class="example-margin">Шевченківський</mat-checkbox>
-    <mat-checkbox (change)="setRegions($event, 'Франківський')" class="example-margin">Франківський</mat-checkbox>
-    <mat-checkbox (change)="setRegions($event, 'Галицький')" class="example-margin">Галицький</mat-checkbox>
-    <mat-checkbox (change)="setRegions($event, 'Залізничний')" class="example-margin">Залізничний</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Shev')" class="example-margin">Шевченківський</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Frank')" class="example-margin">Франківський</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Gal')" class="example-margin">Галицький</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Zaliz')" class="example-margin">Залізничний</mat-checkbox>
     <mat-checkbox (change)="setRegions($event, 'Psychiv')" class="example-margin">Сихівський</mat-checkbox>
-    <mat-checkbox (change)="setRegions($event, 'Личаківський')" class="example-margin">Личаківський</mat-checkbox>
+    <mat-checkbox (change)="setRegions($event, 'Lich')" class="example-margin">Личаківський</mat-checkbox>
   </section>
 
-  <div><p>Поверх</p></div>
+  <div><p>Поверх</p></ div>
   <div class="custom-slider">
     <ng5-slider style="width:200px" [(value)]="minFloor" [(highValue)]="maxFloor" [options]="floorOptions"></ng5-slider>
   </div>

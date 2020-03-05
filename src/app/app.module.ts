@@ -26,6 +26,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
+import { FlatDetailedComponent } from './flat-detailed/flat-detailed.component';
+import { GalleryModule } from  '@ngx-gallery/core';
 import { ListUserPageComponent } from './admin-panel/list-user-page/list-user-page.component';
 import { ListPostsPageComponent } from './admin-panel/list-posts-page/list-posts-page.component';
 import { ListCommentsPageComponent } from './admin-panel/list-comments-page/list-comments-page.component';
@@ -44,6 +46,8 @@ import { ChatComponent } from './chat/chat.component';
     FlatListComponent,
     FlatFilterComponent,
     ProfileComponent,
+    MenuComponent,
+    FlatDetailedComponent,
     MenuComponent,
     AdminLayoutComponent,
     ListUserPageComponent,
@@ -71,6 +75,9 @@ import { ChatComponent } from './chat/chat.component';
     MatTableModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    GalleryModule,
     MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule
