@@ -26,6 +26,14 @@ import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
+import { ListUserPageComponent } from './admin-panel/list-user-page/list-user-page.component';
+import { ListPostsPageComponent } from './admin-panel/list-posts-page/list-posts-page.component';
+import { ListCommentsPageComponent } from './admin-panel/list-comments-page/list-comments-page.component';
+import { DashboardPageComponent } from './admin-panel/dashboard-page/dashboard-page.component';
+import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,13 @@ import { MenuComponent } from './menu/menu.component';
     FlatListComponent,
     FlatFilterComponent,
     ProfileComponent,
-    MenuComponent
+    MenuComponent,
+    AdminLayoutComponent,
+    ListUserPageComponent,
+    ListPostsPageComponent,
+    ListCommentsPageComponent,
+    DashboardPageComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +71,9 @@ import { MenuComponent } from './menu/menu.component';
     MatTableModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSidenavModule,
+    MatPaginatorModule
   ],
   providers: [HttpUserService],
   bootstrap: [AppComponent]

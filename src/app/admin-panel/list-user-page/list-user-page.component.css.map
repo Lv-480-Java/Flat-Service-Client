@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACJ,KAAK,EAAE,IAAI",
+"sources": ["list-user-page.component.scss"],
+"names": [],
+"file": "list-user-page.component.css"
+}

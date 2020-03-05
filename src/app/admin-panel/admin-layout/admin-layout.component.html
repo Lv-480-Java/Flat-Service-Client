@@ -1,0 +1,18 @@
+<mat-drawer-container class="main-content">
+  <mat-drawer class="drawer-content" mode="side" opened>
+
+    <div class="nav-bar">
+        <button mat-raised-button color="accent"  routerLink="dashboard">Dashboard</button>
+        <button mat-raised-button color="accent" routerLink="user">List Users</button>
+        <button mat-raised-button color="accent" routerLink="posts">List Posts</button>
+        <button mat-raised-button color="accent" routerLink="comments">List Comments</button>
+        <button mat-raised-button color="accent" routerLink="comments">Statistics</button>
+    </div>
+
+  </mat-drawer>
+  <mat-drawer-content>
+
+    <router-outlet></router-outlet>
+
+  </mat-drawer-content>
+</mat-drawer-container>
