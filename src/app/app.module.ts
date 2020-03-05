@@ -28,6 +28,13 @@ import {ProfileComponent} from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
 import { FlatDetailedComponent } from './flat-detailed/flat-detailed.component';
 import { GalleryModule } from  '@ngx-gallery/core';
+import { ListUserPageComponent } from './admin-panel/list-user-page/list-user-page.component';
+import { ListPostsPageComponent } from './admin-panel/list-posts-page/list-posts-page.component';
+import { ListCommentsPageComponent } from './admin-panel/list-comments-page/list-comments-page.component';
+import { DashboardPageComponent } from './admin-panel/dashboard-page/dashboard-page.component';
+import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -39,7 +46,13 @@ import { GalleryModule } from  '@ngx-gallery/core';
     FlatFilterComponent,
     ProfileComponent,
     MenuComponent,
-    FlatDetailedComponent
+    FlatDetailedComponent,
+    MenuComponent,
+    AdminLayoutComponent,
+    ListUserPageComponent,
+    ListPostsPageComponent,
+    ListCommentsPageComponent,
+    DashboardPageComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +75,10 @@ import { GalleryModule } from  '@ngx-gallery/core';
     ReactiveFormsModule,
     MatAutocompleteModule,
     BrowserAnimationsModule,
-    GalleryModule
+    GalleryModule,
+    MatAutocompleteModule,
+    MatSidenavModule,
+    MatPaginatorModule
   ],
   providers: [HttpUserService],
   bootstrap: [AppComponent]
