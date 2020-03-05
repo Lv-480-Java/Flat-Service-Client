@@ -1,3 +1,4 @@
+
 export class SearchParameters {
   public regions: Array<string>;
   public tags: string[];

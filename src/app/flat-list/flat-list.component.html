@@ -5,8 +5,8 @@
   font-size: 16px;margin:40px; " >
     <app-flat-filter [parameters]="parameters" (loadFlats)="loadFlats()"></app-flat-filter>
   </div>
-  <div >
-    <div infinite-scroll *ngFor="let flat of flats.content ">
+  <div *ngIf="flats!==undefined">
+    <div infinite-scroll  *ngFor="let flat of flats.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -59,7 +59,7 @@
               </div>
               <div fxFlex><p class="price">{{flat.monthPrice}} грн</p></div>
               <div class="donate-button" fxFlexAlign="end end" fxFlex="25">
-                <button fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
+                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
                   Детально
                 </button>
               </div>

@@ -9,6 +9,7 @@ import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-pag
 import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
 import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
 import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
+import {FlatDetailedComponent} from './flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   },
   { path: 'profile', component: ProfileComponent },
   { path: 'flats', component: FlatListComponent },
+  { path: 'detailed/:id',      component: FlatDetailedComponent },
   { path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
