@@ -11,22 +11,35 @@ import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page
 import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
 import {FlatDetailedComponent} from './flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
+import {RequestsComponent} from './admin-panel/requests/requests.component';
+import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
+import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
+import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
 
 const routes: Routes = [
-  { path: 'registration', component: RegistrationComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'admin', component: AdminLayoutComponent, children: [
+  {path: 'registration', component: RegistrationComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'chat', component: ChatComponent},
+  {
+    path: 'admin', component: AdminLayoutComponent, children: [
       {path: 'dashboard', component: DashboardPageComponent},
       {path: 'comments', component: ListCommentsPageComponent},
       {path: 'user', component: ListUserPageComponent},
-      {path: 'posts', component: ListPostsPageComponent}
+      {path: 'posts', component: ListPostsPageComponent},
+      {
+        path: 'requests', component: RequestsComponent, children: [
+          {path: 'flats', component: FlatRequestsComponent},
+          {path: 'landlords', component: LandlordRequestsComponent},
+          {path: 'moderators', component: ModeratorRequestsComponent}
+        ]
+      },
     ]
   },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'flats', component: FlatListComponent },
-  { path: 'detailed/:id',      component: FlatDetailedComponent },
-  { path: '',
+  {path: 'profile', component: ProfileComponent},
+  {path: 'flats', component: FlatListComponent},
+  {path: 'detailed/:id', component: FlatDetailedComponent},
+  {
+    path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
   }

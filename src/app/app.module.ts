@@ -40,6 +40,7 @@ import { RequestsComponent } from './admin-panel/requests/requests.component';
 import { FlatRequestsComponent } from './admin-panel/requests/flat-requests/flat-requests.component';
 import { LandlordRequestsComponent } from './admin-panel/requests/landlord-requests/landlord-requests.component';
 import { ModeratorRequestsComponent } from './admin-panel/requests/moderator-requests/moderator-requests.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { ModeratorRequestsComponent } from './admin-panel/requests/moderator-req
     GalleryModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonToggleModule
   ],
   providers: [HttpUserService],
   bootstrap: [AppComponent]
