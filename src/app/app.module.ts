@@ -36,6 +36,8 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import { UserCommentComponent } from './comment/user-comment/user-comment.component';
+import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ChatComponent } from './chat/chat.component';
     ListPostsPageComponent,
     ListCommentsPageComponent,
     DashboardPageComponent,
-    ChatComponent
+    ChatComponent,
+    UserCommentComponent,
+    FlatCommentComponent
   ],
   imports: [
     BrowserModule,
