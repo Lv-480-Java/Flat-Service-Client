@@ -36,6 +36,10 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import { RequestsComponent } from './admin-panel/requests/requests.component';
+import { FlatRequestsComponent } from './admin-panel/requests/flat-requests/flat-requests.component';
+import { LandlordRequestsComponent } from './admin-panel/requests/landlord-requests/landlord-requests.component';
+import { ModeratorRequestsComponent } from './admin-panel/requests/moderator-requests/moderator-requests.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,11 @@ import { ChatComponent } from './chat/chat.component';
     ListPostsPageComponent,
     ListCommentsPageComponent,
     DashboardPageComponent,
-    ChatComponent
+    ChatComponent,
+    RequestsComponent,
+    FlatRequestsComponent,
+    LandlordRequestsComponent,
+    ModeratorRequestsComponent
   ],
   imports: [
     BrowserModule,
