@@ -1,6 +1,6 @@
 import {User} from '../../../user';
 
-export class RequestsForUserVerification{
+export class RequestsForUserVerification {
   id?: number;
   status: string;
   creationDate: Date;

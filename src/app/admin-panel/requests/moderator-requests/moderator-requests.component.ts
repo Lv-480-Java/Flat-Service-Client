@@ -1,9 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {RequestsForUserVerification} from '../entity/requests-for-user-verification';
+import {RequestsForFlatVerification} from '../entity/requests-for-flat-verification';
 import {Subscription} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {AdminService} from '../../../services/admin.service';
+import {RequestsForUserVerification} from '../entity/request-for-user-verification';
 
 @Component({
   selector: 'app-moderator-requests',
@@ -17,7 +18,7 @@ export class ModeratorRequestsComponent implements OnInit {
   aSub: Subscription;
   dSub: Subscription;
 
-  displayedColumns: string[] = ['id', 'date', 'status', 'review'];
+  displayedColumns: string[] = ['id', 'date', 'review'];
   dataSource: MatTableDataSource<RequestsForUserVerification>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
