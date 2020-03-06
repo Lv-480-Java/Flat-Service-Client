@@ -1,1 +1,45 @@
-<p>flat-requests works!</p>
+<div>Requests For Flat Publication</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID.</th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Creation Date</th>
+      <td mat-cell *matCellDef="let element"> {{element.creationDate | date:'mediumDate'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary">Edit</button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="review">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" [ngSwitch]="element.status">
+        {{element.approvalDate | date:'mediumDate'}}
+        <button mat-raised-button color="primary" (click)="review(element.id)" *ngSwitchCase="'VERIFYING'">Review</button>
+        <span *ngSwitchCase="'APPROVED'">Approved at {{element.verificationDate | date:'mediumDate'}}</span>
+        <span *ngSwitchCase="'DECLINED'">Declined at {{element.verificationDate | date:'mediumDate'}}</span>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
+

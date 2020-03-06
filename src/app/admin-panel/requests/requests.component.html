@@ -1,6 +1,12 @@
 <div>
-  <button class="request-type-button" mat-raised-button>Flats</button>
-  <button class="request-type-button" mat-raised-button>Landlords</button>
-  <button class="request-type-button" mat-raised-button>Moderators</button>
+  <button class="request-type-button" routerLink="flats" mat-raised-button>Flats</button>
+  <button class="request-type-button" routerLink="landlords" mat-raised-button>Landlords</button>
+  <button class="request-type-button" routerLink="moderators" mat-raised-button>Moderators</button>
 
 </div>
+
+<div class="request-table">
+  <router-outlet></router-outlet>
+</div>
+
+
