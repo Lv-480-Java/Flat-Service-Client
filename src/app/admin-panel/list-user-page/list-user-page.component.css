@@ -1,4 +1,8 @@
 table {
   width: 100%; }
 
+.example-full-width {
+  width: 150px;
+  margin-left: 10px; }
+
 /*# sourceMappingURL=list-user-page.component.css.map */
