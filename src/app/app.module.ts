@@ -27,6 +27,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
 import { FlatDetailedComponent } from './flat-detailed/flat-detailed.component';
+// tslint:disable-next-line:import-spacing
 import { GalleryModule } from  '@ngx-gallery/core';
 import { ListUserPageComponent } from './admin-panel/list-user-page/list-user-page.component';
 import { ListPostsPageComponent } from './admin-panel/list-posts-page/list-posts-page.component';
@@ -36,6 +37,9 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
+import {GroupMessageDisplayNamePipe} from './pipes/group-message-display-name.pipe';
+
 
 @NgModule({
   declarations: [
@@ -54,7 +58,9 @@ import { ChatComponent } from './chat/chat.component';
     ListPostsPageComponent,
     ListCommentsPageComponent,
     DashboardPageComponent,
-    ChatComponent
+    ChatComponent,
+    NgChatOptionsComponent,
+    GroupMessageDisplayNamePipe,
   ],
   imports: [
     BrowserModule,
@@ -80,10 +86,10 @@ import { ChatComponent } from './chat/chat.component';
     GalleryModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [HttpUserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

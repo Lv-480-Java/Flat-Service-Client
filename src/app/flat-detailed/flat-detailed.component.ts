@@ -16,6 +16,7 @@ export class FlatDetailedComponent implements OnInit {
 
   ngOnInit(): void {
     this.images = [
+      // tslint:disable-next-line:max-line-length
       new ImageItem({src: 'https://www.thebigflatbarcelona.com/wp-content/uploads/2016/12/bigflathomebarcelona.jpg', thumb: 'IMAGE_THUMBNAIL_URL'}),
       new ImageItem({src: 'https://www.thebigflatbarcelona.com/wp-content/uploads/2016/12/MG_8339-e1542377773910.jpg', thumb: 'IMAGE_THUMBNAIL_URL'}),
       new ImageItem({src: 'https://www.thebigflatbarcelona.com/wp-content/uploads/2016/12/full-yellow-e1542377993284.jpg', thumb: 'IMAGE_THUMBNAIL_URL'}),

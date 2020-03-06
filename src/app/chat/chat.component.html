@@ -1,4 +1,6 @@
-
+<!--<div id="divCheckbox" style="display: none;">-->
+  <a href="javascript:void(0);" class="ng-chat-title secondary-background shadowed" (click)="onChatTitleClicked($event)">
+  </a>
 <div class="chat">
   <div class="chat-title">
     <h1>Павел Дуров</h1>
@@ -9,6 +11,7 @@
   <div class="messages">
     <div class="messages-content" #scrollMe >
       <div *ngFor="let mes of messages">
+
         <div class="message-personal message-margins" *ngIf="mes.senderId == 1">
           <span style="
   white-space: pre-wrap;
@@ -30,7 +33,9 @@
   <div class="message-box">
     <div class="type_msg">
       <div class="message-box">
+
         <!--<input type="text" class="write_msg" placeholder="Type a message" />-->
+
         <input id="input" type="text" class="message-input" placeholder="Type a message"
                #input
                (keyup.enter)="sendMessage(input.value); input.value='' "
@@ -51,3 +56,4 @@
   </div>
 </div>
 <div class="bg"></div>
+<!--</div>-->

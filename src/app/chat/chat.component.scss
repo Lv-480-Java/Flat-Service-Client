@@ -138,8 +138,12 @@ img{ max-width:100%;}
 }
 
 
+
 /*-----------------  --- Chat --------------------*/
 .chat {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
   width: 300px;
   height: 80vh;
   max-height: 500px;
