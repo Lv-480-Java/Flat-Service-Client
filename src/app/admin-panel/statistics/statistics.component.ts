@@ -32,9 +32,6 @@ export class StatisticsComponent implements OnInit {
     this.lSub = this.adminService.countActiveLandlords().subscribe(count => {
       this.countLandlord = count;
     });
-
-    this.slides = [[]];
-
   }
 
 }
