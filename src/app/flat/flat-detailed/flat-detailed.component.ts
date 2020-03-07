@@ -19,6 +19,16 @@ export class FlatDetailedComponent implements OnInit {
   data: any;
   public flatDetailed: FlatDetailed = new FlatDetailed();
 
+  chatIsActive = false;
+
+  activateChat() {
+    if (this.chatIsActive === false) {
+      this.chatIsActive = true;
+    } else {
+      this.chatIsActive = false;
+    }
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.id = Number(params.get('id'));
@@ -39,7 +49,7 @@ export class FlatDetailedComponent implements OnInit {
   loadImages(): void {
     this.images = [];
     this.flatDetailed.photos.forEach((value) => {
-      this.images.push( new ImageItem({
+      this.images.push(new ImageItem({
         src: value,
         thumb: value
       }));
