@@ -11,7 +11,8 @@ export class FlatCommentComponent implements OnInit {
 
   comments: FlatComment[] = [];
   data: any;
-  id: number;
+
+  @Input() id: number;
 
   constructor(private http: HttpClient) {
   }
@@ -24,9 +25,9 @@ export class FlatCommentComponent implements OnInit {
     const c = 'http://localhost:8080/flatcomments/getall/' + this.id;
     this.http.get(c)
       .subscribe(data => {
-        this.data = data;
-        this.comments = this.data;
-      });
+      this.data = data;
+      this.comments = this.data;
+    });
     console.log(this.comments);
   }
 }
