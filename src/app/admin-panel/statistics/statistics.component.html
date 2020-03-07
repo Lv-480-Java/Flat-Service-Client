@@ -1,38 +1,5 @@
-<div class="active-cards">
-  <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'">
-    <mdb-carousel-item>
-      <div class="col-md-4">
-        <mdb-card class="my-1">
-          <mdb-card-body>
-            <mdb-card-title>
-              <p class="count-number">{{countFlats}}</p>
-              <p class="count-label">Active Flats</p>
-            </mdb-card-title>
-          </mdb-card-body>
-        </mdb-card>
-      </div>
-      <div class="col-md-4">
-        <mdb-card class="my-1">
-          <mdb-card-body>
-            <mdb-card-title>
-              <p class="count-number">{{countUsers}}</p>
-              <p class="count-label">Active Users</p>
-            </mdb-card-title>
-          </mdb-card-body>
-        </mdb-card>
-      </div>
-      <div class="col-md-4">
-        <mdb-card class="my-1">
-          <mdb-card-body>
-            <mdb-card-title>
-              <p class="count-number">{{countLandlord}}</p>
-              <p class="count-label">Active Landlords</p>
-            </mdb-card-title>
-          </mdb-card-body>
-        </mdb-card>
-      </div>
-    </mdb-carousel-item>
-  </mdb-carousel>
+<app-active-count></app-active-count>
+<div>
+  <app-diagram-users></app-diagram-users>
+  <app-diagram-flats></app-diagram-flats>
 </div>
-
-

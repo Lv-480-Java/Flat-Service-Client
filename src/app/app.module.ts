@@ -45,6 +45,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {UserCommentComponent} from './comment/user-comment/user-comment.component';
 import {FlatCommentComponent} from './comment/flat-comment/flat-comment.component';
 import { StatisticsComponent } from './admin-panel/statistics/statistics.component';
+import { ActiveCountComponent } from './admin-panel/statistics/active-count/active-count.component';
+import { DiagramUsersComponent } from './admin-panel/statistics/diagram-users/diagram-users.component';
+import { DiagramFlatsComponent } from './admin-panel/statistics/diagram-flats/diagram-flats.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,10 @@ import { StatisticsComponent } from './admin-panel/statistics/statistics.compone
     ModeratorRequestsComponent,
     UserCommentComponent,
     FlatCommentComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ActiveCountComponent,
+    DiagramUsersComponent,
+    DiagramFlatsComponent
   ],
   imports: [
     BrowserModule,

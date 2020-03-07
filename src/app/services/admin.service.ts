@@ -48,11 +48,20 @@ export class AdminService {
   countActiveFlats(): Observable<number> {
     return this.http.get<number>('http://localhost:8080/admin/statistics/active-flats');
   }
+
   countActiveUsers(): Observable<number> {
     return this.http.get<number>('http://localhost:8080/admin/statistics/active-users');
   }
+
   countActiveLandlords(): Observable<number> {
     return this.http.get<number>('http://localhost:8080/admin/statistics/active-landlords');
   }
 
+  getUsersData(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/users-landlords');
+  }
+
+  getFlatsData(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/active-unactive-flats');
+  }
 }
