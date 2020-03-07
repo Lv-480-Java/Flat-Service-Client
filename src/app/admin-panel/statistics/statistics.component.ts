@@ -26,10 +26,10 @@ export class StatisticsComponent implements OnInit {
     this.fSub = this.adminService.countActiveFlats().subscribe(count => {
       this.countFlats = count;
     });
-    this.uSub = this.adminService.countActiveFlats().subscribe(count => {
+    this.uSub = this.adminService.countActiveUsers().subscribe(count => {
       this.countUsers = count;
     });
-    this.lSub = this.adminService.countActiveFlats().subscribe(count => {
+    this.lSub = this.adminService.countActiveLandlords().subscribe(count => {
       this.countLandlord = count;
     });
 
