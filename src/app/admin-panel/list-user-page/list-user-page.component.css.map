@@ -1,1 +1,7 @@
-{"version":3,"sourceRoot":"","sources":["list-user-page.component.scss"],"names":[],"mappings":"AAAA;EACE","file":"list-user-page.component.css"}
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACJ,KAAK,EAAE,IAAI;;AAGb,mBAAoB;EAClB,KAAK,EAAE,KAAK;EACZ,WAAW,EAAE,IAAI",
+"sources": ["list-user-page.component.scss"],
+"names": [],
+"file": "list-user-page.component.css"
+}

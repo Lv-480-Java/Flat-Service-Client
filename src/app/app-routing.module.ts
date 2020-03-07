@@ -3,12 +3,13 @@ import {Routes, RouterModule} from '@angular/router';
 import {RegistrationComponent} from './registration/registration.component';
 import {LoginComponent} from './login/login.component';
 import {ProfileComponent} from './profile/profile.component';
-import {FlatListComponent} from './flat-list/flat-list.component';
+import {FlatListComponent} from './flat/flat-list/flat-list.component';
 import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
 import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-page.component';
 import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
 import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
 import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
+import {FlatDetailedComponent} from './flat/flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   },
   { path: 'profile', component: ProfileComponent },
   { path: 'flats', component: FlatListComponent },
+  { path: 'detailed/:id',      component: FlatDetailedComponent },
   { path: '',
     redirectTo: '/registration',
     pathMatch: 'full'

@@ -6,7 +6,7 @@ import {FlatResponse} from '../flat-filter/entity/Flat';
 @Component({
   selector: 'app-flat-list',
   templateUrl: './flat-list.component.html',
-  styleUrls: ['./flat-list.component.css']
+  styleUrls: ['./flat-list.component.scss']
 })
 export class FlatListComponent implements OnInit {
 

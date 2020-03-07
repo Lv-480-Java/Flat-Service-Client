@@ -10,7 +10,7 @@ import {LoginComponent} from './login/login.component';
 import {RegistrationService} from './services/registration.service';
 import { HeaderComponent } from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FlatListComponent } from './flat-list/flat-list.component';
+import { FlatListComponent } from './flat/flat-list/flat-list.component';
 import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
@@ -18,7 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-import { FlatFilterComponent } from './flat-filter/flat-filter.component';
+import { FlatFilterComponent } from './flat/flat-filter/flat-filter.component';
 import { Ng5SliderModule } from 'ng5-slider';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -26,6 +26,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
 import { MenuComponent } from './menu/menu.component';
+import { FlatDetailedComponent } from './flat/flat-detailed/flat-detailed.component';
+import { GalleryModule } from '@ngx-gallery/core';
 import { ListUserPageComponent } from './admin-panel/list-user-page/list-user-page.component';
 import { ListPostsPageComponent } from './admin-panel/list-posts-page/list-posts-page.component';
 import { ListCommentsPageComponent } from './admin-panel/list-comments-page/list-comments-page.component';
@@ -34,6 +36,8 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import { UserCommentComponent } from './comment/user-comment/user-comment.component';
+import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 
 @NgModule({
   declarations: [
@@ -45,12 +49,16 @@ import { ChatComponent } from './chat/chat.component';
     FlatFilterComponent,
     ProfileComponent,
     MenuComponent,
+    FlatDetailedComponent,
+    MenuComponent,
     AdminLayoutComponent,
     ListUserPageComponent,
     ListPostsPageComponent,
     ListCommentsPageComponent,
     DashboardPageComponent,
-    ChatComponent
+    ChatComponent,
+    UserCommentComponent,
+    FlatCommentComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +79,9 @@ import { ChatComponent } from './chat/chat.component';
     MatTableModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    GalleryModule,
     MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule
