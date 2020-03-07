@@ -11,7 +11,7 @@ export class FlatCommentComponent implements OnInit {
 
   comments: FlatComment[] = [];
   data: any;
-  id: number;
+  @Input() id: number;
 
   constructor(private http: HttpClient) {
   }

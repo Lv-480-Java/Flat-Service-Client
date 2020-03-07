@@ -15,7 +15,7 @@ export class FlatDetailedComponent implements OnInit {
   }
 
   images: GalleryItem[];
-  private id: number;
+  public id: number;
   data: any;
   public flatDetailed: FlatDetailed = new FlatDetailed();
 
