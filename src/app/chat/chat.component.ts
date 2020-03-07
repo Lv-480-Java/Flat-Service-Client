@@ -21,6 +21,9 @@ export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService) {
   }
 
+
+  @Input() username: string;
+
   @Input() chatId: number;
 
   @ViewChild('content') content: ElementRef;
