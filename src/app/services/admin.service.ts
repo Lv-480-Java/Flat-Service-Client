@@ -64,4 +64,10 @@ export class AdminService {
   getFlatsData(): Observable<Array<number>> {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/active-unactive-flats');
   }
+
+  getRegisteredUsers(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-regisration-dynamics');
+  }
+
+
 }
