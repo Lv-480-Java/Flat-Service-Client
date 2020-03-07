@@ -49,6 +49,8 @@ import { ActiveCountComponent } from './admin-panel/statistics/active-count/acti
 import { DiagramUsersComponent } from './admin-panel/statistics/diagram-users/diagram-users.component';
 import { DiagramFlatsComponent } from './admin-panel/statistics/diagram-flats/diagram-flats.component';
 import { UserChartComponent } from './admin-panel/statistics/user-chart/user-chart.component';
+import { FlatChartComponent } from './admin-panel/statistics/flat-chart/flat-chart.component';
+import { UsersLineChartComponent } from './admin-panel/statistics/users-line-chart/users-line-chart.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { UserChartComponent } from './admin-panel/statistics/user-chart/user-cha
     ActiveCountComponent,
     DiagramUsersComponent,
     DiagramFlatsComponent,
-    UserChartComponent
+    UserChartComponent,
+    FlatChartComponent,
+    UsersLineChartComponent
   ],
   imports: [
     BrowserModule,

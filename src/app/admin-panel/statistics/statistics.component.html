@@ -1,11 +1,21 @@
 <div class="statistics">
   <app-active-count></app-active-count>
-  <div>
+  <div class="pie-charts">
     <app-diagram-users></app-diagram-users>
+    <app-diagram-flats></app-diagram-flats>
     <app-diagram-flats></app-diagram-flats>
   </div>
 
-  <div>
-    <app-user-chart></app-user-chart>
+  <div class="bar-charts">
+    <div class="week-label">Last Week Dynamics</div>
+    <div>
+      <app-user-chart></app-user-chart>
+      <app-flat-chart></app-flat-chart>
+    </div>
   </div>
+
+  <div class="line-charts">
+    <app-users-line-chart></app-users-line-chart>
+  </div>
+
 </div>

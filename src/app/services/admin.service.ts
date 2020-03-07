@@ -57,6 +57,14 @@ export class AdminService {
     return this.http.get<number>('http://localhost:8080/admin/statistics/active-landlords');
   }
 
+  getAllUsersCount(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/users-dynamics');
+  }
+
+  getAllLandlordsCount(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/landlords-dynamics');
+  }
+
   getUsersData(): Observable<Array<number>> {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/users-landlords');
   }
@@ -67,6 +75,10 @@ export class AdminService {
 
   getRegisteredUsers(): Observable<Array<number>> {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-regisration-dynamics');
+  }
+
+  getCreatedFlats(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-creation-dynamics');
   }
 
 
