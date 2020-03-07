@@ -25,7 +25,7 @@ const routes: Routes = [
   },
   { path: 'profile', component: ProfileComponent },
   { path: 'flats', component: FlatListComponent },
-  { path: 'detailed',      component: FlatDetailedComponent },
+  { path: 'detailed/:id',      component: FlatDetailedComponent },
   { path: '',
     redirectTo: '/flats',
     pathMatch: 'full'

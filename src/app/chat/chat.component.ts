@@ -64,9 +64,10 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     // this.authService.getCurrentUser().subscribe(data => this.currentAccountId = data.id);
     this.initializeWebSocketConnection();
-    this.chatService.getMessagesByChatId(4).subscribe(data => this.messages = data);
+    this.chatService.getMessagesByChatId(this.chatId).subscribe(data => this.messages = data);
     this.scrollToBottom();
   }
+
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewChecked() {
@@ -99,7 +100,7 @@ export class ChatComponent implements OnInit {
   }*/
 
     openSocket() {
-      this.stompClient.subscribe('/topic/messages/' + 4, (message) => {
+      this.stompClient.subscribe('/topic/messages/' + this.chatId, (message) => {
         this.handleResult(message);
       });
     }
@@ -131,8 +132,8 @@ export class ChatComponent implements OnInit {
   sendMessage(message: string) {
     message = message.trim();
     if (message !== '') {
-      /* this.chatMessageInfo.chatId = this.chatId;*/
-      this.chatMessageInfo.chatId = 4;
+      this.chatMessageInfo.chatId = this.chatId;
+      /*this.chatMessageInfo.chatId = 4;*/
       this.chatMessageInfo.userId = 1;
       this.chatMessageInfo.content = message;
       console.log(message);
@@ -215,7 +216,6 @@ export class ChatComponent implements OnInit {
     }
   }
 
-
   /*triggerToggleChatWindowVisibility(userId: any): void {
     const openedWindow = this.windows.find(x => x.participant.id == userId);
 
@@ -223,7 +223,6 @@ export class ChatComponent implements OnInit {
     this.onChatWindowClicked(openedWindow);
   }
   }*/
-
 }
 
 

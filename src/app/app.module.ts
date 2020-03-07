@@ -41,6 +41,7 @@ import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-
 import {GroupMessageDisplayNamePipe} from './pipes/group-message-display-name.pipe';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

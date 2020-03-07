@@ -3,6 +3,7 @@ export class FlatResponse {
 }
 
 export class Flat {
+  public id: number;
   public address: any;
   public creationDate: string;
   public photoUrl: string;
