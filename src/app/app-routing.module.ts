@@ -15,6 +15,7 @@ import {RequestsComponent} from './admin-panel/requests/requests.component';
 import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
 import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
 import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
+import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
           {path: 'moderators', component: ModeratorRequestsComponent}
         ]
       },
+      {path: 'statistics', component: StatisticsComponent}
     ]
   },
   {path: 'profile', component: ProfileComponent},

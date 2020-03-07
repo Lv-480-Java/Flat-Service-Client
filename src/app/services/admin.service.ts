@@ -45,4 +45,14 @@ export class AdminService {
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
+  countActiveFlats(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/admin/statistics/active-flats');
+  }
+  countActiveUsers(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/admin/statistics/active-users');
+  }
+  countActiveLandlords(): Observable<number> {
+    return this.http.get<number>('http://localhost:8080/admin/statistics/active-landlords');
+  }
+
 }

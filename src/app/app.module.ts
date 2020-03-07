@@ -44,6 +44,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {UserCommentComponent} from './comment/user-comment/user-comment.component';
 import {FlatCommentComponent} from './comment/flat-comment/flat-comment.component';
+import { StatisticsComponent } from './admin-panel/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {FlatCommentComponent} from './comment/flat-comment/flat-comment.componen
     LandlordRequestsComponent,
     ModeratorRequestsComponent,
     UserCommentComponent,
-    FlatCommentComponent
+    FlatCommentComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
