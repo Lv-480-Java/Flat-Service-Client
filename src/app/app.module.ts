@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
-import {HttpUserService} from './services/http.user.service';
+import {RegistrationService} from './services/registration.service';
 import { HeaderComponent } from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlatListComponent } from './flat-list/flat-list.component';
@@ -75,7 +75,7 @@ import { ChatComponent } from './chat/chat.component';
     MatSidenavModule,
     MatPaginatorModule
   ],
-  providers: [HttpUserService],
+  providers: [RegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

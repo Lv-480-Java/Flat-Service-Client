@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../User';
-import {HttpUserService} from '../services/http.user.service';
+import {RegistrationService} from '../services/registration.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -11,32 +10,31 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class RegistrationComponent implements OnInit {
   form: FormGroup;
 
-  user: User = new User();
-  done = false;
-
-  constructor(private httpService: HttpUserService) {
+  constructor(private registrationService: RegistrationService) {
   }
 
-  submit(user: User) {
-    this.httpService.postData(user)
+  submit() {
+    this.registrationService.register(this.form.value)
       .subscribe(
-        (data: User) => {
-          this.done = true;
-        },
-        error => console.log(error)
+        response => console.log('Success!', response),
+        error => console.log('Error!', error)
       );
-  }
 
+    this.form.reset();
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
       username: new FormControl('', [
-        Validators.required]),
+        Validators.required,
+      ]),
       email: new FormControl(null, [
         Validators.email,
-        Validators.required]),
-      phoneNumber: new FormControl('', [
         Validators.required
+      ]),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^\\+?3?8?(0\\d{9})$')
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -44,10 +42,4 @@ export class RegistrationComponent implements OnInit {
       ])
     });
   }
-
-  /*  submit() {
-      console.log("Form submitted: ", this.form)
-      const formData = {...this.form.value}
-      console.log("Form Data", formData)
-    }*/
 }
