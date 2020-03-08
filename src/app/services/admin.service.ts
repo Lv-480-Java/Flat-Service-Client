@@ -81,5 +81,13 @@ export class AdminService {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-creation-dynamics');
   }
 
+  getUserCommentsCount(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-comments-dynamics');
+  }
+
+  getFlatCommentsCount(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-comments-dynamics');
+  }
+
 
 }

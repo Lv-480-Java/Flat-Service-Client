@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AdminService} from '../../../services/admin.service';
 
@@ -36,23 +36,24 @@ export class CommentsLineChartComponent implements OnInit {
   ];
 
   public chartOptions: any = {
-    responsive: true
+    responsive: true,
   };
 
   constructor(private adminService: AdminService) {
   }
 
   ngOnInit(): void {
-    this.uSub = this.adminService.getAllUsersCount().subscribe(d => {
-      this.aSub = this.adminService.getAllLandlordsCount().subscribe(b => {
+    this.uSub = this.adminService.getFlatCommentsCount().subscribe(d => {
+      this.aSub = this.adminService.getUserCommentsCount().subscribe(b => {
+        console.log('comments');
         console.log(d);
         console.log(d);
 
-        this.chartDatasets.shift();
         this.chartDatasets = [
-          {data: d, label: 'Users'},
-          {data: b, label: 'Landlords'}
+          {data: b, label: 'User Comments'},
+          {data: d, label: 'Flat Comments'}
         ];
+        console.log(this.chartDatasets);
 
       });
     });

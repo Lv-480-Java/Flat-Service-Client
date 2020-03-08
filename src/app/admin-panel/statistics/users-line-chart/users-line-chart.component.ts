@@ -48,7 +48,6 @@ export class UsersLineChartComponent implements OnInit {
         console.log(d);
         console.log(d);
 
-        this.chartDatasets.shift();
         this.chartDatasets = [
           {data: d, label: 'Users'},
           {data: b, label: 'Landlords'}
