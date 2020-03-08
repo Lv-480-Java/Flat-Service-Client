@@ -51,6 +51,7 @@ import { DiagramFlatsComponent } from './admin-panel/statistics/diagram-flats/di
 import { UserChartComponent } from './admin-panel/statistics/user-chart/user-chart.component';
 import { FlatChartComponent } from './admin-panel/statistics/flat-chart/flat-chart.component';
 import { UsersLineChartComponent } from './admin-panel/statistics/users-line-chart/users-line-chart.component';
+import { CommentsLineChartComponent } from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { UsersLineChartComponent } from './admin-panel/statistics/users-line-cha
     DiagramFlatsComponent,
     UserChartComponent,
     FlatChartComponent,
-    UsersLineChartComponent
+    UsersLineChartComponent,
+    CommentsLineChartComponent
   ],
   imports: [
     BrowserModule,
