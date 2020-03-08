@@ -38,6 +38,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,7 @@ import { FlatCommentComponent } from './comment/flat-comment/flat-comment.compon
     MatSidenavModule,
     MatPaginatorModule
   ],
-  providers: [RegistrationService],
+  providers: [RegistrationService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

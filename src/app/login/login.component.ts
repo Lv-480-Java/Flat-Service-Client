@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../services/login.service';
+import {AuthService} from '../services/auth.service';
+import {User} from '../shared/interfaces';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,32 +12,36 @@ import {LoginService} from '../services/login.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private loginService: LoginService) {
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-    email: new FormControl(null, [
-      Validators.email,
-      Validators.required
-    ]),
+      email: new FormControl(null, [
+        Validators.email,
+        Validators.required
+      ]),
       password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6)
-    ])
-  });
+        Validators.required,
+        Validators.minLength(6)
+      ])
+    });
   }
 
   submit() {
-    if (this.loginForm.invalid){
-      return
+    if (this.loginForm.invalid) {
+      return;
     }
-    this.loginService.signIn(this.loginForm.value)
-      .subscribe(
-        response => console.log('Success!', response),
-        error => console.log('Error!', error)
-      );
+
+    const user: User = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
+
+    this.authService.login(user).subscribe(() => {
+      this.loginForm.reset(),
+        this.router.navigate(['/flats']);
+    });
   }
-
-
 }
