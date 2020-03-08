@@ -39,8 +39,10 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password
     };
 
-    this.authService.login(user).subscribe(() => {
-      this.loginForm.reset(),
+    this.authService.login(user).subscribe((res) => {
+      localStorage.setItem('token', res.headers.get('accesstoken'));
+      localStorage.setItem('user', JSON.stringify(res.body));
+      this.loginForm.reset();
         this.router.navigate(['/flats']);
     });
   }

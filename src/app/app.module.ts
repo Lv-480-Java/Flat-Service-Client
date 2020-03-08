@@ -39,6 +39,7 @@ import { ChatComponent } from './chat/chat.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
+import {AuthGuard} from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import {AuthService} from './services/auth.service';
     MatSidenavModule,
     MatPaginatorModule
   ],
-  providers: [RegistrationService, AuthService],
+  providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

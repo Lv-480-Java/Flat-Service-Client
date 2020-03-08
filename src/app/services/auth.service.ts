@@ -8,7 +8,7 @@ import {tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  url = `http://localhost:8080/users/signIn`;
+  url = `/api/users/signIn`;
 
   constructor(private http: HttpClient) {
   }
@@ -23,13 +23,7 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    user.returnSecureToken = true;
-    this.http.post<any>(this.url, user)
-      .subscribe(resp => {
-        console.log(resp.headers.get('token'));
-        console.log(resp.body.someField);
-      });
-    return null;
+    return this.http.post(this.url, user, {observe: 'response'});
   }
 
   logout() {
