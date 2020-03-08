@@ -1,5 +1,9 @@
+import {User} from '../../admin-panel/component/interfaces';
+
 export interface FlatComment {
-  text: string
-  id?: number
-  date: string
+  id?: number;
+  flatId?: number;
+  userAuthor?: User;
+  text: string;
+  publicationDate?: any;
 }

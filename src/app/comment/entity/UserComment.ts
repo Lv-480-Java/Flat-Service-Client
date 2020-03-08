@@ -1,4 +1,9 @@
+import {User} from '../../admin-panel/component/interfaces';
+
 export interface UserComment {
-  text: string
-  id?: number
+  id?: number;
+  userId?: number;
+  userAuthor?: User;
+  text: string;
+  publicationDate?: any;
 }

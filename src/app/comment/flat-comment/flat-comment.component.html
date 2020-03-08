@@ -1,12 +1,16 @@
- <div>
+<div>
+  <div>
     <input
       type="text"
+      class="form-control"
       placeholder="Text..."
+      [(ngModel)]="text"
     >
-    <button>add comment</button>
+    <button class="btn" (click)="add()">add comment</button>
   </div>
-    <div *ngFor="let comment of comments">
-      <p> {{comment.text}}</p>
-      <p> {{comment.date}}</p>
-      <button>remove</button>
-    </div>
+  <hr>
+  <div class="card" *ngFor="let comment of comments">
+    <p> {{comment.text}}{{comment.publicationDate}}</p>
+    <button class="btn" (click)="remove(comment.id)"></button>
+  </div>
+</div>
