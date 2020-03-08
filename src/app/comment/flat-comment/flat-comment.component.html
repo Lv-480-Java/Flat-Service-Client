@@ -9,8 +9,14 @@
     <button class="btn" (click)="add()">add comment</button>
   </div>
   <hr>
-  <div class="card" *ngFor="let comment of comments">
+  <div *ngIf="comments.length; else noComments">
+    <div class="card" *ngFor="let comment of comments">
     <p> {{comment.text}}{{comment.publicationDate}}</p>
     <button class="btn" (click)="remove(comment.id)"></button>
+    </div>
   </div>
+
+  <ng-template #noComments>
+    <p>No Comments. Be first)</p>
+  </ng-template>
 </div>

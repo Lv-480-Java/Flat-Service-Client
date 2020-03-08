@@ -4,22 +4,32 @@ import {Observable} from 'rxjs';
 import {User} from '../admin-panel/component/interfaces';
 import {map} from 'rxjs/operators';
 
+export interface FlatComment {
+  id?: number;
+  flatId?: number;
+  userAuthor?: User;
+  text: string;
+  publicationDate?: any;
+}
+
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class FlatCommentService {
 
   constructor(private http: HttpClient) {}
 
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8080/users//create', user);
+  add(flatComment: FlatComment): Observable<FlatComment> {
+    return this.http.post<FlatComment>('http://localhost:8080/flatcomments/create/', {flatComment});
   }
 
-  getAllUser(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8080/users/all');
+  remove(id: number): Observable<void>{
+    return this.http.delete<void>('http://localhost:8080/flatcomments//delete/' + id);
   }
 
-  removeUser(id: string): Observable<void> {
-    return this.http.delete<void>(`http://localhost:8080/users/delete/${id}`);
+  loadComments(id: number): Observable<FlatComment[]>{
+    return this.http.get<FlatComment[]>('http://localhost:8080/flatcomments/getall/' + id);
   }
+
+
 }

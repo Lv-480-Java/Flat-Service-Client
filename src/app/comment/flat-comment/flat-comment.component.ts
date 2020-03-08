@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FlatComment} from '../entity/FlatComment';
-import {HttpClient} from '@angular/common/http';
+import {Component, Input, OnInit} from '@angular/core';
+import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
+
 
 @Component({
   selector: 'app-flat-comment',
@@ -10,41 +10,48 @@ import {HttpClient} from '@angular/common/http';
 export class FlatCommentComponent implements OnInit {
 
   comments: FlatComment[] = [];
-  data: any;
+
   text = '';
+  @Input() id: number;
 
-  @Input('id')  flatId: number;
-
-  constructor(private http: HttpClient) {
+  constructor(private flatCommentService: FlatCommentService) {
   }
 
   ngOnInit(): void {
-    this.loadComments();
+    this.loadComments(this.id);
   }
 
-  loadComments(): void {
-    const c = 'http://localhost:8080/flatcomments/getall/' + this.flatId;
-    this.http.get(c)
-      .subscribe(data => {
-        this.data = data;
-        this.comments = this.data;
+  loadComments(id: number): void {
+    this.flatCommentService.loadComments(id)
+      .subscribe(comments => {
+        this.comments = comments;
       });
     console.log(this.comments);
   }
 
-  
 
-  remove(id) {
-    this.comments = this.comments.filter(item => item.id !== id);
+  remove(id: number) {
+    this.flatCommentService.remove(id)
+      .subscribe(() => {
+        this.comments = this.comments.filter(item => item.id !== id);
+      });
   }
 
   add() {
     if (this.text.trim()) {
-      const c: FlatComment = {
-        text: this.text
-      };
-      this.text = '';
-      this.comments.unshift(c);
+      return;
     }
+    const newFlatComment: FlatComment = {
+      text: this.text,
+      flatId: this.id
+    };
+
+    this.flatCommentService.add(newFlatComment)
+      .subscribe(flatComment => {
+        this.comments.unshift(flatComment)
+        this.text = '';
+      });
   }
 }
+
+
