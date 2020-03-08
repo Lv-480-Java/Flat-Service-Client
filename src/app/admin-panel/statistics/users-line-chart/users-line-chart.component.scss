@@ -1,16 +1,19 @@
 .users-line-chart {
   width: 80%;
-  margin: 130px;
+  margin: 500px 130px 130px 130px;
 }
 
 .count-label {
-  margin: 40px 0px 15px 0px;
+  margin: 10px 0px 15px 0px;
   font-size: 25px;
-  align-self: center;
+
 }
 
-.users-line-chart-label{
-  margin-top: 500px;
+.users-line-chart-label {
   text-align: center;
-  margin-bottom: 50px;
+  margin: auto;
+  width: 1000px;
+  padding-bottom: 50px;
 }
+
+

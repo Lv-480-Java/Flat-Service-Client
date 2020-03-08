@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {AdminService} from '../../../services/admin.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-comments-line-chart',
@@ -9,11 +10,10 @@ import {AdminService} from '../../../services/admin.service';
 })
 export class CommentsLineChartComponent implements OnInit {
 
+  public chartType = 'line';
 
-  public chartType: string = 'line';
-
-  uSub: Subscription;
-  aSub: Subscription;
+  uc: Array<number>;
+  fc: Array<number>;
 
 
   public chartDatasets: Array<any> = [
@@ -39,21 +39,30 @@ export class CommentsLineChartComponent implements OnInit {
     responsive: true,
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private adminService: AdminService, private http: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.uSub = this.adminService.getFlatCommentsCount().subscribe(d => {
-      this.aSub = this.adminService.getUserCommentsCount().subscribe(b => {
+    this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-comments-dynamics').subscribe(d => {
+      this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-comments-dynamics').subscribe(b => {
         console.log('comments');
         console.log(d);
-        console.log(d);
+        console.log(b);
 
         this.chartDatasets = [
           {data: b, label: 'User Comments'},
+          {data: d, label: 'Flat Comments'},
           {data: d, label: 'Flat Comments'}
+
         ];
+
         console.log(this.chartDatasets);
+
+        // this.chartDatasets = [
+        //   {data: [2, 59, 80, 81, 56, 55, 2], label: 'My First dataset'},
+        //   {data: [2, 48, 40, 19, 86, 27, 2], label: 'My Second dataset'}
+        // ];
+
 
       });
     });

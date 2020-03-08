@@ -8,13 +8,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./users-line-chart.component.scss']
 })
 export class UsersLineChartComponent implements OnInit {
-
-
-  public chartType: string = 'line';
-
-  uSub: Subscription;
-  aSub: Subscription;
-
+  public chartType = 'line';
 
   public chartDatasets: Array<any> = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset'},
@@ -43,8 +37,8 @@ export class UsersLineChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uSub = this.adminService.getAllUsersCount().subscribe(d => {
-      this.aSub = this.adminService.getAllLandlordsCount().subscribe(b => {
+    this.adminService.getAllUsersCount().subscribe(d => {
+      this.adminService.getAllLandlordsCount().subscribe(b => {
         console.log(d);
         console.log(d);
 

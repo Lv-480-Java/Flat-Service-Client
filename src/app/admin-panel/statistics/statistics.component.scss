@@ -1,5 +1,5 @@
 .statistics {
-  height: 2000px;
+  margin-bottom: 700px;
 }
 
 .week-label {
@@ -13,10 +13,33 @@
 }
 
 .bar-charts {
-  margin-top: 550px;
+  margin-top: 50px;
+  align-content: center;
 }
 
-.line-charts{
-  align-content: center;
+.line-chart-user {
+  margin-top: 500px;
+}
+
+.line-charts-comments {
+  margin-top: 600px;
+}
+
+.bar-chart-card {
+  margin: auto;
+  text-align: center;
+  width: 1000px;
+}
+
+.diagram-card {
+  text-align: center;
+  width: 1000px;
+  margin: auto;
+  padding-bottom: 50px;
+}
+
+.bar-chart-label {
+  margin: 40px 0px 15px 0px;
+  font-size: 25px;
   align-self: center;
 }
