@@ -7,6 +7,7 @@ table {
   margin-left: 10px;
 }
 
+
 .field-add {
   text-align: center;
   height: 80px;
@@ -23,6 +24,25 @@ table {
 }
 
 .dialog-window {
+  height: 300px;
   text-align: center;
   font-size: 13px;
+}
+
+.dialog-button {
+  margin-right: 15px;
+}
+
+.input-file {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+label {
+  color: black;
+  background-color: #c9cdfe;
 }

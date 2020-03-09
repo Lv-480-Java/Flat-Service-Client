@@ -19,7 +19,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
   pageSize = 5;
   vSub: Subscription;
   dSub: Subscription;
-  displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'edit', 'button'];
+  displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'role', 'edit', 'button'];
   dataSource = new MatTableDataSource<User>();
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
