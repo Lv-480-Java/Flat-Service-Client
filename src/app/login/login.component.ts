@@ -11,8 +11,9 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  submitted = false;
 
-  constructor(private authService: AuthService,
+  constructor(public authService: AuthService,
               private router: Router) {
   }
 
@@ -34,16 +35,19 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.submitted = true;
+
     const user: User = {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     };
 
     this.authService.login(user).subscribe((res) => {
-      localStorage.setItem('token', res.headers.get('accesstoken'));
+      localStorage.setItem('accesstoken', res.headers.get('accesstoken'));
       localStorage.setItem('user', JSON.stringify(res.body));
       this.loginForm.reset();
-        this.router.navigate(['/flats']);
+      this.router.navigate(['/flats']);
+      this.submitted = false;
     });
   }
 }

@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'flats', component: FlatListComponent },
   { path: 'detailed/:id',      component: FlatDetailedComponent },
   { path: '',
-    redirectTo: '/registration',
+    redirectTo: '/flats',
     pathMatch: 'full'
   }
 ];

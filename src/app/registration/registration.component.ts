@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RegistrationService} from '../services/registration.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +11,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class RegistrationComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService,
+              private router: Router) {
   }
 
   submit() {
@@ -21,6 +23,7 @@ export class RegistrationComponent implements OnInit {
       );
 
     this.form.reset();
+    this.router.navigate(['/login']);
   }
 
   ngOnInit() {

@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class RegistrationService {
-  url = '/api/users';
+  url = '/api/users/create';
 
   constructor(private http: HttpClient) {
   }

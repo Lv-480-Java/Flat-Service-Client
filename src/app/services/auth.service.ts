@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {ServerResponse, User} from '../shared/interfaces';
-import {Observable} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {Observable, Subject, throwError} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   url = `/api/users/signIn`;
+  public error$: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient) {
   }
@@ -23,27 +24,34 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    return this.http.post(this.url, user, {observe: 'response'});
+    return this.http.post(this.url, user, {observe: 'response'})
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const {message} = error.error;
+    console.log(message);
+    switch (message) {
+      case 'Email is not valid':
+        this.error$.next('Email is not valid');
+        break;
+      case 'Password is not valid':
+        this.error$.next('Password is not valid');
+        break;
+      default:
+        this.error$.next('Email or password is not valid');
+    }
+
+    return throwError(error);
   }
 
   logout() {
-    this.setToken(null);
+    localStorage.clear();
   }
 
   isAuthenticated(): boolean {
     return !!this.token;
   }
-
-  private setToken(response: ServerResponse | null) {
-    if (response) {
-      const expDate = new Date(new Date().getTime() + +response.expiresIn * 1000);
-      localStorage.setItem('token', response.idToken);
-      localStorage.setItem('token-exp', expDate.toString());
-    } else {
-      localStorage.clear();
-    }
-
-
-  }
-
 }
