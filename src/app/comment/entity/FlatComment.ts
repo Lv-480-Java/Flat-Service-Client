@@ -1,5 +1,5 @@
 export interface FlatComment {
-  text: string
-  id?: number
-  date: string
+  text: string;
+  id?: number;
+  date: string;
 }

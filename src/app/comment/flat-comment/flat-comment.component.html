@@ -1,12 +1,13 @@
- <div>
+ <div *ngIf="comments !== undefined">
     <input
       type="text"
       placeholder="Text..."
     >
     <button>add comment</button>
-  </div>
-    <div *ngFor="let comment of comments">
+
+    <div  *ngFor="let comment of comments">
       <p> {{comment.text}}</p>
       <p> {{comment.date}}</p>
       <button>remove</button>
     </div>
+ </div>
