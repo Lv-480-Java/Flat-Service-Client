@@ -11,6 +11,7 @@ import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page
 import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
 import {FlatDetailedComponent} from './flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
+import {ProfileUserComponent} from './profile-user/profile-user.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -24,8 +25,9 @@ const routes: Routes = [
     ]
   },
   { path: 'profile', component: ProfileComponent },
+  { path: 'data', component: ProfileUserComponent},
   { path: 'flats', component: FlatListComponent },
-  { path: 'detailed/:id',      component: FlatDetailedComponent },
+  { path: 'detailed/:id', component: FlatDetailedComponent },
   { path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
