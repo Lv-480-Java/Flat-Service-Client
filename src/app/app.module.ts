@@ -53,6 +53,7 @@ import { FlatChartComponent } from './admin-panel/statistics/flat-chart/flat-cha
 import { UsersLineChartComponent } from './admin-panel/statistics/users-line-chart/users-line-chart.component';
 import { CommentsLineChartComponent } from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { DiagramCommentsComponent } from './admin-panel/statistics/diagram-comments/diagram-comments.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     UserChartComponent,
     FlatChartComponent,
     UsersLineChartComponent,
-    CommentsLineChartComponent
+    CommentsLineChartComponent,
+    DiagramCommentsComponent
   ],
     imports: [
         BrowserModule,
