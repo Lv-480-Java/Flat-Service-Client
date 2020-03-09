@@ -70,6 +70,7 @@ export class ChatComponent implements OnInit {
     this.initializeWebSocketConnection();
     this.chatService.getMessagesByChatId(3).subscribe(data => this.messages = data);
     this.scrollToBottom();
+    console.log(JSON.parse(localStorage.getItem('user')).userId);
   }
 
   // tslint:disable-next-line:use-lifecycle-interface

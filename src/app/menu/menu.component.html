@@ -23,6 +23,7 @@
           <a *ngIf="isAuthenticated()" class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/profile" routerLinkActive="active">Profile</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/login" routerLinkActive="active">Sign in</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/registration" routerLinkActive="active">Sign up</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#" (click)="logout($event)" routerLink="/flats" routerLinkActive="active">Log out</a>
         </div>
       </li>
     </ul>

@@ -1,25 +1,32 @@
-<div>
-  <form class="example-form">
-    <button style="margin: 20px 20px 50px" mat-raised-button>Add User</button>
+<div class="field-add">
+  <form method="post" class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Username</mat-label>
-      <input matInput placeholder="Field" value="Input">
+      <input type="text" id="username" value="" matInput placeholder="Field" required>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Field" value="Input">
+      <input type="text" id="email" value="" matInput placeholder="Field" required>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
-      <input matInput placeholder="Field" value="Input">
+      <input type="text" id="password" value="" matInput placeholder="Field" required>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Phone</mat-label>
       <span matPrefix>+38 &nbsp;</span>
-      <input type="tel" matInput placeholder="555-555-1234">
+      <input type="text" id="phone" value="" matInput placeholder="555-555-1234" required>
       <mat-icon matSuffix>mode_edit</mat-icon>
     </mat-form-field>
+    <button (click)="create()" style="margin: 20px 20px 50px; font-size: 13px;" mat-raised-button color="accent">Add User</button>
   </form>
+</div>
+
+<div class="form-field">
+  <mat-form-field>
+    <mat-label>Search</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+  </mat-form-field>
 </div>
 
 <div class="mat-elevation-z8">
@@ -27,7 +34,6 @@
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID. </th>
       <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-
     </ng-container>
 
     <ng-container matColumnDef="username">
@@ -57,17 +63,17 @@
 
     <ng-container matColumnDef="edit">
       <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="primary">Edit</button> </td>
+      <td mat-cell *matCellDef="let element"><button (click)="openDialog()" class="action-button" mat-raised-button color="primary">Edit</button></td>
     </ng-container>
 
     <ng-container matColumnDef="button">
       <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element"> <button mat-raised-button color="warn" (click)="remove(element.id)">Remove</button> </td>
+      <td mat-cell *matCellDef="let element"> <button class="action-button" mat-raised-button color="warn" (click)="remove(element.id)">Remove</button> </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>,
+  <mat-paginator (page)="paginationPage()" [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons></mat-paginator>
 </div>
