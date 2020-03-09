@@ -8,7 +8,7 @@ import {AdminService} from '../../../services/admin.service';
 })
 export class DiagramFlatsComponent implements OnInit {
   public chartType = 'pie';
-  public chartDatasets: Array<any>;
+  public chartDatasets: Array<any> = [{data: [0, 0, 0]}];
   public chartLabels: Array<any> = ['Active', 'Unactive'];
   public chartColors: Array<any> = [
     {
@@ -25,15 +25,8 @@ export class DiagramFlatsComponent implements OnInit {
   constructor(private adminService: AdminService) {
   }
 
-  updateData() {
-    this.adminService.getFlatsData().subscribe(c => {
-      console.log(c);
-      this.chartDatasets = c;
-    });
-  }
-
   ngOnInit(): void {
-    console.log('flat diagram');
-    this.updateData();
-  }
+    this.adminService.getFlatsData().subscribe(data => {
+      this.chartDatasets = data;
+    });  }
 }

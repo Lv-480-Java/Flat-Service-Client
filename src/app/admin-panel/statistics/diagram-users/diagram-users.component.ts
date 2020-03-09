@@ -11,7 +11,7 @@ export class DiagramUsersComponent implements OnInit {
 
   public chartType = 'pie';
 
-  public chartDatasets: Array<any>;
+  public chartDatasets: Array<any> = [{data: [0, 0, 0]}];
   public chartLabels: Array<any> = ['Renters', 'Landlords', 'Moderators'];
   public chartColors: Array<any> = [
     {
@@ -27,18 +27,9 @@ export class DiagramUsersComponent implements OnInit {
   constructor(private adminService: AdminService) {
   }
 
-  data;
-
-  inizialize() {
-    this.chartDatasets = this.data;
-  }
-
   ngOnInit(): void {
-    console.log('flat diagram');
-
-    this.adminService.getUsersData().subscribe(bg => {
-      this.data = bg;
-      this.inizialize();
+    this.adminService.getUsersData().subscribe(data => {
+      this.chartDatasets = data;
     });
   }
 }

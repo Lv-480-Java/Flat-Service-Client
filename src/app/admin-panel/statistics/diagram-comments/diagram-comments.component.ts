@@ -9,7 +9,7 @@ import {AdminService} from '../../../services/admin.service';
 export class DiagramCommentsComponent implements OnInit {
 
   public chartType = 'pie';
-  public chartDatasets: Array<any>;
+  public chartDatasets: Array<any> = [{data: [0, 0, 0]}];
   public chartLabels: Array<any> = ['Flats', 'Users'];
   public chartColors: Array<any> = [
     {
@@ -27,9 +27,7 @@ export class DiagramCommentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('flat diagram');
     this.adminService.getCommentsData().subscribe(data => {
-      console.log(data);
       this.chartDatasets = data;
     });
   }
