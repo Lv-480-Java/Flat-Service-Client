@@ -9,14 +9,13 @@
           [(ngModel)]="text"
           autocomplete="off"
           matInput
+          (keyup.enter)="add()"
         >
-
         <button style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
-                color="primary">
+                color="primary" >
           Add comment
         </button>
       </div>
-
     </mat-card>
 
     <div *ngIf="comments.length; else noComments">
