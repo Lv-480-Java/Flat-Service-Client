@@ -1,22 +1,34 @@
-<div>
+<div fxLayout="row" fxLayoutAlign="center none">
   <div>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Text..."
-      [(ngModel)]="text"
-    >
-    <button class="btn" (click)="add()">add comment</button>
-  </div>
-  <hr>
-  <div *ngIf="comments.length; else noComments">
-    <div class="card" *ngFor="let comment of comments">
-    <p *ngIf="comment.text!==null"> {{comment.text}}{{comment.publicationDate}}</p>
-    <button class="btn" (click)="remove(comment.id)"></button>
-    </div>
-  </div>
+    <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
+      <div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Text..."
+          [(ngModel)]="text"
+          autocomplete="off"
+          matInput
+        >
 
-  <ng-template #noComments>
-    <p>No Comments. Be first)</p>
-  </ng-template>
+        <button style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary">
+          Add comment
+        </button>
+      </div>
+
+    </mat-card>
+
+    <div *ngIf="comments.length; else noComments">
+      <mat-card class="mat-elevation-z5"  style="width: 900px; margin: 16px" *ngFor="let comment of comments">
+        <p *ngIf="comment.text!==null"> {{comment.text}}{{comment.publicationDate}}</p>
+        <button class="btn" (click)="remove(comment.id)"></button>
+      </mat-card>
+    </div>
+
+    <ng-template #noComments>
+      <p>No Comments. Be first)</p>
+    </ng-template>
+
+  </div>
 </div>
