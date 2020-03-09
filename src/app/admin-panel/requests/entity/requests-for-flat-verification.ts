@@ -1,4 +1,4 @@
-import {Flat} from '../../../flat-filter/entity/Flat';
+import {Flat} from '../../../flat/flat-filter/entity/Flat';
 
 export class RequestsForFlatVerification {
   id?: number;

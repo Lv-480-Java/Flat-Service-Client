@@ -10,62 +10,21 @@ import {LoginComponent} from './login/login.component';
 import {HttpUserService} from './services/http.user.service';
 import {HeaderComponent} from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-<<<<<<< HEAD
-import {FlatListComponent} from './flat-list/flat-list.component';
-import {MatSliderModule} from '@angular/material/slider';
-=======
 import { FlatListComponent } from './flat/flat-list/flat-list.component';
 import { MatSliderModule } from '@angular/material/slider';
->>>>>>> master
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-<<<<<<< HEAD
-import {FlatFilterComponent} from './flat-filter/flat-filter.component';
-import {Ng5SliderModule} from 'ng5-slider';
-=======
 import { FlatFilterComponent } from './flat/flat-filter/flat-filter.component';
 import { Ng5SliderModule } from 'ng5-slider';
->>>>>>> master
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
-<<<<<<< HEAD
-import {MenuComponent} from './menu/menu.component';
-import {FlatDetailedComponent} from './flat-detailed/flat-detailed.component';
-import {GalleryModule} from '@ngx-gallery/core';
-import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
-import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
-import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
-import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-page.component';
-import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {ChatComponent} from './chat/chat.component';
-import {RequestsComponent} from './admin-panel/requests/requests.component';
-import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
-import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
-import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatTabsModule} from '@angular/material/tabs';
-import {UserCommentComponent} from './comment/user-comment/user-comment.component';
-import {FlatCommentComponent} from './comment/flat-comment/flat-comment.component';
-import { StatisticsComponent } from './admin-panel/statistics/statistics.component';
-import { ActiveCountComponent } from './admin-panel/statistics/active-count/active-count.component';
-import { DiagramUsersComponent } from './admin-panel/statistics/diagram-users/diagram-users.component';
-import { DiagramFlatsComponent } from './admin-panel/statistics/diagram-flats/diagram-flats.component';
-import { UserChartComponent } from './admin-panel/statistics/user-chart/user-chart.component';
-import { FlatChartComponent } from './admin-panel/statistics/flat-chart/flat-chart.component';
-import { UsersLineChartComponent } from './admin-panel/statistics/users-line-chart/users-line-chart.component';
-import { CommentsLineChartComponent } from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import { DiagramCommentsComponent } from './admin-panel/statistics/diagram-comments/diagram-comments.component';
-=======
 import {DialogWindowEditUserComponent} from './admin-panel/list-user-page/dialog-window-edit-user';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MenuComponent } from './menu/menu.component';
@@ -85,7 +44,19 @@ import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
->>>>>>> master
+import {RequestsComponent} from './admin-panel/requests/requests.component';
+import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
+import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
+import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
+import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
+import {CommentsLineChartComponent} from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
+import {DiagramCommentsComponent} from './admin-panel/statistics/diagram-comments/diagram-comments.component';
+import {DiagramFlatsComponent} from './admin-panel/statistics/diagram-flats/diagram-flats.component';
+import {DiagramUsersComponent} from './admin-panel/statistics/diagram-users/diagram-users.component';
+import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart/users-line-chart.component';
+import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
+import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
+import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 
 @NgModule({
   declarations: [
@@ -105,30 +76,27 @@ import {SanitizePipe} from './pipes/sanitize.pipe';
     ListCommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
-<<<<<<< HEAD
-    RequestsComponent,
-    FlatRequestsComponent,
-    LandlordRequestsComponent,
-    ModeratorRequestsComponent,
-    UserCommentComponent,
-    FlatCommentComponent,
-    StatisticsComponent,
-    ActiveCountComponent,
-    DiagramUsersComponent,
-    DiagramFlatsComponent,
-    UserChartComponent,
-    FlatChartComponent,
-    UsersLineChartComponent,
-    CommentsLineChartComponent,
-    DiagramCommentsComponent
-=======
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,
     NgChatOptionsComponent,
     EmojifyPipe,
     LinkfyPipe,
-    SanitizePipe
+    SanitizePipe,
+    RequestsComponent,
+    ModeratorRequestsComponent,
+    LandlordRequestsComponent,
+    FlatRequestsComponent,
+    StatisticsComponent,
+    CommentsLineChartComponent,
+    DiagramCommentsComponent,
+    DiagramFlatsComponent,
+    DiagramUsersComponent,
+    UsersLineChartComponent,
+    UserChartComponent,
+    FlatChartComponent,
+    ActiveCountComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -155,38 +123,8 @@ import {SanitizePipe} from './pipes/sanitize.pipe';
     MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule,
-    MatDialogModule
->>>>>>> master
+    MatDialogModule,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MDBBootstrapModule.forRoot(),
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        Ng5SliderModule,
-        MatSliderModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        FlexModule,
-        InfiniteScrollModule,
-        MatChipsModule,
-        MatTableModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        BrowserAnimationsModule,
-        GalleryModule,
-        MatAutocompleteModule,
-        MatSidenavModule,
-        MatPaginatorModule,
-        MatButtonToggleModule,
-        MatTabsModule,
-        MatDatepickerModule
-    ],
   providers: [HttpUserService],
   bootstrap: [AppComponent],
 })

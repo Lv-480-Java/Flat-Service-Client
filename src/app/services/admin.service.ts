@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../admin-panel/component/interfaces';
+import {User} from '../admin-panel/component/Users';
 import {Observable} from 'rxjs';
 import {RequestsForFlatVerification} from '../admin-panel/requests/entity/requests-for-flat-verification';
 import {RequestsForUserVerification} from '../admin-panel/requests/entity/request-for-user-verification';
@@ -10,11 +10,13 @@ import {RequestsForUserVerification} from '../admin-panel/requests/entity/reques
 })
 export class AdminService {
 
+  path = 'api';
+
   constructor(private http: HttpClient) {
   }
 
   getFlatRequests(): Observable<RequestsForFlatVerification[]> {
-    return this.http.get<RequestsForFlatVerification[]>('http://localhost:8080/admin/requests/flats');
+    return this.http.get<RequestsForFlatVerification[]>('api/admin/requests/flats');
   }
 
   getLandlordRequests(): Observable<RequestsForUserVerification[]> {
@@ -88,7 +90,6 @@ export class AdminService {
   getCreatedFlatsForWeek(): Observable<Array<number>> {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-creation-dynamics/7');
   }
-
 
 
 }
