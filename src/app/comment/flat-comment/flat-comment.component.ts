@@ -49,7 +49,7 @@ export class FlatCommentComponent implements OnInit {
 
     this.flatCommentService.add(newFlatComment)
       .subscribe(flatComment => {
-        this.text = ' ';
+        this.text = '';
       });
     this.comments = this.comments.concat(newFlatComment);
   }
