@@ -74,7 +74,7 @@ export class FlatFilterComponent implements OnInit {
   }
 
   loadTags() {
-    this.http.get('http://localhost:8080/tag').subscribe((data: string[]) => {
+    this.http.get('/api/tag').subscribe((data: string[]) => {
       console.log(data);
       this.allTags = data;
       this.filteredTags = this.tagCtrl.valueChanges.pipe(
