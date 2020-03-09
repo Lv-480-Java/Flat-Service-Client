@@ -15,7 +15,9 @@ const emojiDictionary = [
     { patterns: ['<3'], unicode: '❤️' },
     { patterns: ['^.^'], unicode: '😊' },
     { patterns: [':+1'], unicode: '👍' },
-    { patterns: [':-1'], unicode: '👎' }
+    { patterns: [':-1'], unicode: '👎' },
+    { patterns: [':free:'], unicode: '🆓' },
+    { patterns: [':poo'], unicode: '💩' }
 ];
 
 /*

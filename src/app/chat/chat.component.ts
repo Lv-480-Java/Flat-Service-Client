@@ -4,19 +4,15 @@ import * as SockJS from 'sockjs-client';
 import {Message} from '../model/message.model';
 import {ChatMessageInfoDTO} from '../model/chat-message.model';
 import {ChatService} from './chat.service';
-/*import {CustomAuthService} from '../authentication/custom-auth.service';*/
 /*import {Comment} from '../../model/comment.model';*/
 import {DeleteMessageInfoDTO} from '../model/chat-message-delete.model';
 import {Window} from '../model/window';
 import {IChatOption} from '../model/chat-option';
 import {IChatGroupAdapter} from '../model/chat-group-adapter';
-import {User} from '../User';
 import {ChatParticipantType} from '../model/chat-participant-type.enum';
-import {IChatParticipant} from './chat-participant';
+
 
 (window as any).global = window;
-// import {DeleteMessageInfoDTO} from "../../model/chat-message-delete.model";
-
 
 @Component({
   selector: 'app-chat',
@@ -27,6 +23,8 @@ export class ChatComponent implements OnInit {
 
   constructor(private chatService: ChatService) {
   }
+
+  @Input() username: string;
 
   public ChatParticipantType = ChatParticipantType;
   /* public ChatParticipantStatus = ChatParticipantStatus;
@@ -45,6 +43,12 @@ export class ChatComponent implements OnInit {
   @Input()
   public messageDatePipeFormat = 'short';
 
+  @Input()
+  public emojisEnabled = true;
+
+  @Input()
+  public linkfyEnabled = true;
+
   @ViewChild('content') content: ElementRef;
 
   serverUrl = 'http://localhost:8080/ws/';
@@ -53,8 +57,6 @@ export class ChatComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   msg: String;
   messages: Message[] = [];
-  protected selectedUsersFromFriendsList: User[] = [];
-
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   chatMessageInfo: ChatMessageInfoDTO = new ChatMessageInfoDTO(null, null, null);
@@ -63,11 +65,12 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
     // this.authService.getCurrentUser().subscribe(data => this.currentAccountId = data.id);
+    console.log(this.username);
+    this.currentUserId = 1;
     this.initializeWebSocketConnection();
-    this.chatService.getMessagesByChatId(this.chatId).subscribe(data => this.messages = data);
+    this.chatService.getMessagesByChatId(3).subscribe(data => this.messages = data);
     this.scrollToBottom();
   }
-
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewChecked() {
@@ -100,7 +103,7 @@ export class ChatComponent implements OnInit {
   }*/
 
     openSocket() {
-      this.stompClient.subscribe('/topic/messages/' + this.chatId, (message) => {
+      this.stompClient.subscribe('/topic/messages/' + 3, (message) => {
         this.handleResult(message);
       });
     }
@@ -118,23 +121,12 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  toggleEmojiPicker() {
-    this.showEmojiPicker = !this.showEmojiPicker;
-  }
-
-  /* addEmoji(event) {
-     const { message } = this;
-     const text = `${message}${event.emoji.native}`;
-     this.message = text;
-     this.showEmojiPicker = false;
-   }*/
-
   sendMessage(message: string) {
     message = message.trim();
     if (message !== '') {
-      this.chatMessageInfo.chatId = this.chatId;
-      /*this.chatMessageInfo.chatId = 4;*/
-      this.chatMessageInfo.userId = 1;
+      /*this.chatMessageInfo.chatId = this.chatId;*/
+      this.chatMessageInfo.chatId = 3;
+      this.chatMessageInfo.userId = this.currentUserId;
       this.chatMessageInfo.content = message;
       console.log(message);
       this.stompClient.send('/chat/send/message', {}, JSON.stringify(this.chatMessageInfo));
@@ -158,10 +150,10 @@ export class ChatComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  onChatWindowClicked(window: Window): void {
+ /* onChatWindowClicked(window: Window): void {
     window.isCollapsed = !window.isCollapsed;
     this.scrollToBottom();
-  }
+  }*/
 
   /*
     onCloseChatWindow(window: Window): void {
@@ -198,7 +190,7 @@ export class ChatComponent implements OnInit {
   }
 
 
-  public defaultWindowOptions(currentWindow: Window): IChatOption[] {
+/*  public defaultWindowOptions(currentWindow: Window): IChatOption[] {
     // tslint:disable-next-line:triple-equals
     if (this.groupAdapter && currentWindow.participant.participantType == ChatParticipantType.User) {
       return [{
@@ -213,8 +205,8 @@ export class ChatComponent implements OnInit {
         },
         displayLabel: 'Add People' // TODO: Localize this
       }];
-    }
-  }
+    }*/
+
 
   /*triggerToggleChatWindowVisibility(userId: any): void {
     const openedWindow = this.windows.find(x => x.participant.id == userId);
