@@ -8,8 +8,16 @@ form {
   background-color: whitesmoke;
 }
 
-button {
-  background-color: black;
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+input.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+
+small {
+  color: red;
+  font-size: 14px;
 }
 
 /*# sourceMappingURL=login.component.css.map */

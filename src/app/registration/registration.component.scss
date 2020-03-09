@@ -1,3 +1,7 @@
+body {
+  background-color: red;
+}
+
 form {
   width: 500px;
   height: 500px;
@@ -8,8 +12,18 @@ form {
   background-color: whitesmoke;
 }
 
-button {
-  background-color: black;
-  color: white;
+input {
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.ng-valid.ng-touched {
+    border: 1px solid green;
+  }
+}
+
+small {
+  color: red;
+  font-size: 14px;
 }
 
