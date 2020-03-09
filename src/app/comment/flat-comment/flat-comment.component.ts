@@ -24,7 +24,7 @@ export class FlatCommentComponent implements OnInit {
   loadComments(id: number): void {
     this.flatCommentService.loadComments(id)
       .subscribe(comments => {
-        this.comments = comments;
+          this.comments = comments.reverse();
       });
     console.log(this.comments);
   }
@@ -50,8 +50,9 @@ export class FlatCommentComponent implements OnInit {
     this.flatCommentService.add(newFlatComment)
       .subscribe(flatComment => {
         this.text = '';
+        this.comments = this.comments.concat(newFlatComment);
+        this.ngOnInit();
       });
-    this.comments = this.comments.concat(newFlatComment);
   }
 }
 
