@@ -137,5 +137,8 @@
       }
     }
   },
-  "defaultProject": "Flat-Service-Client"
+  "defaultProject": "Flat-Service-Client",
+  "cli": {
+    "analytics": false
+  }
 }

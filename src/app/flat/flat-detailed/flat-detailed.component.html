@@ -1,0 +1,64 @@
+<div style="margin-right:16px" fxLayout="row" fxLayoutAlign="center none">
+  <mat-card class="example-card mat-elevation-z5">
+    <div style ="min-width: 400px" fxLayout="row">
+      <mat-card-header fxFlex="70">
+        <mat-card-title>{{flatDetailed.title}}</mat-card-title>
+        <mat-card-subtitle>{{flatDetailed.title}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-header fxLayoutAlign="end" fxFlex="15">
+        <mat-card-title>{{flatDetailed.monthPrice}}</mat-card-title>
+        <mat-card-subtitle>ціна</mat-card-subtitle>
+      </mat-card-header>
+      <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent">Бронювати</button>
+    </div>
+
+    <div fxLayout="row">
+      <div fxLayout="column" style="margin-right: 20px;margin-left: 10px">
+
+        <div fxLayout="row">
+          <mat-card-header fxFlex="70">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title style="font-size: 16px">{{flatDetailed.username}}</mat-card-title>
+          </mat-card-header>
+          <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click) = activateChat()>Початитись</button>
+        </div>
+
+        <mat-chip-list style="margin-top: 20px">
+          <mat-chip  *ngFor="let tag of flatDetailed.tags " >{{tag}}</mat-chip>
+          <mat-chip  *ngFor="let tag of flatDetailed.tags " >{{tag}}</mat-chip>
+        </mat-chip-list>
+
+        <div style="margin-top:20px" fxLayout="row">
+          <ul>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">дата</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">кількість кімнат</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">поверх</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">район</li>
+          </ul>
+
+          <ul>
+            <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">: {{flatDetailed.creationDate}}</li>
+            <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">: {{flatDetailed.numberOfRooms}}</li>
+            <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">: {{flatDetailed.floor}}</li>
+            <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">: {{flatDetailed.region}}</li>
+          </ul>
+        </div>
+      </div>
+
+      <gallery fxFlex="50" style="margin-top:-12px ;width: 400px; height: 400px;background-color: white;" class="flat-gallery"
+               [items]="images"></gallery>
+
+
+    </div>
+
+    <div style="font-size: 16px; margin: 15px; ">
+      {{flatDetailed.description}}
+    </div>
+
+  </mat-card>
+</div>
+
+<app-flat-comment [id]="id"></app-flat-comment>
+
+<app-chat *ngIf="chatIsActive" [username]="flatDetailed.username" ></app-chat>

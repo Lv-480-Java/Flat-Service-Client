@@ -1,0 +1,14 @@
+.flat-gallery {
+  width: 865px;
+  background-color: white; }
+
+.example-card {
+  padding: 20px;
+  margin: 40px;
+  width: 900px; }
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover; }
+
+/*# sourceMappingURL=flat-detailed.component.css.map */

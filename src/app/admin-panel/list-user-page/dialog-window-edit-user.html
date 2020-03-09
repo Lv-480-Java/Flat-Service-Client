@@ -1,0 +1,28 @@
+<div class="dialog-window">
+  <form method="post" class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" id="username" value="" placeholder="Field">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" id="email" value="" placeholder="Field">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="text" id="password" value="" placeholder="Field">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Phone</mat-label>
+      <span matPrefix>+38 &nbsp;</span>
+      <input matInput type="text" id="phone" value="" placeholder="555-555-1234">
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Photo</mat-label>
+      <input matInput type="text" id="photoUrl" value="" placeholder="Field">
+    </mat-form-field>
+    <button cdkFocusInitial mat-raised-button color="primary" [mat-dialog-close]="" (click)="put()">Save</button>
+    <button mat-raised-button color="basic" (click)="closeClick()">Cancel</button>
+  </form>
+</div>
