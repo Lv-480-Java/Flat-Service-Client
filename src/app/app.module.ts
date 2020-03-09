@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {MDBBootstrapModule} from 'angular-bootstrap-md';
+import {IconsModule, MDBBootstrapModule} from 'angular-bootstrap-md';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { RegistrationComponent } from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -38,6 +38,11 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
+import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
+import {EmojifyPipe} from './pipes/emojify.pipe';
+import {LinkfyPipe} from './pipes/linkfy.pipe';
+import {SanitizePipe} from './pipes/sanitize.pipe';
+
 
 @NgModule({
   declarations: [
@@ -58,7 +63,11 @@ import { FlatCommentComponent } from './comment/flat-comment/flat-comment.compon
     DashboardPageComponent,
     ChatComponent,
     UserCommentComponent,
-    FlatCommentComponent
+    FlatCommentComponent,
+    NgChatOptionsComponent,
+    EmojifyPipe,
+    LinkfyPipe,
+    SanitizePipe
   ],
   imports: [
     BrowserModule,
@@ -84,10 +93,10 @@ import { FlatCommentComponent } from './comment/flat-comment/flat-comment.compon
     GalleryModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
   providers: [HttpUserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
