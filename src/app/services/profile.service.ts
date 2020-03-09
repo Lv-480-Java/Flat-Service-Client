@@ -1,18 +1,10 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-
-export interface LandlordUser {
-  id?: number;
-  username: string;
-  email: string;
-  password: string;
-  phoneNumber: string;
-  photoUrl: string;
-}
+import {User} from '../admin-panel/component/Users';
 
 export interface Landlord {
-  id?: number;
+  id: number;
   firstName: string;
   lastName: string;
   middleName: string;
@@ -31,34 +23,19 @@ export interface Landlord {
 
 @Injectable({providedIn: 'root'})
 export class ProfileService {
-  constructor(private http: HttpClient) {
 
+  private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
+
+  constructor(private http: HttpClient) {
   }
 
   addPassport(): Observable<Landlord[]> {
-    return this.http.get<Landlord[]>('http://localhost:8080/passport');
+    return this.http.get<Landlord[]>('api/passport/1');
   }
-
-  addUserData(): Observable<LandlordUser[]> {
-    return this.http.get<LandlordUser[]>('http://localhost:8080/user');
+  addUserInfo(): Observable<User> {
+    return this.http.get<User>('api/user/1');
   }
-  updatePassport(): Observable<Landlord> {
-    const updatedLandlord: Landlord = {
-      authority: '',
-      birthDate: '',
-      birthPlace: '',
-      dateOfIssue: '',
-      expirationDate: '',
-      firstName: '',
-      gender: false,
-      identificationNumber: 0,
-      lastName: '',
-      middleName: '',
-      nationality: '',
-      passportNumber: '',
-      passportType: false
-
-    };
-    return this.http.post<Landlord>('https://jsonplaceholder.typicode.com/todos', updatedLandlord);
+  updatePassport(data: Landlord[]): Observable<Landlord[]> {
+    return this.http.post<Landlord[]>('api/passport', JSON.stringify(data), this.options);
   }
 }

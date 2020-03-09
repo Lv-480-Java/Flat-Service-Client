@@ -17,6 +17,7 @@ import {LandlordRequestsComponent} from './admin-panel/requests/landlord-request
 import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
 import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
 import {AuthGuard} from './guards/auth.guard';
+import {ProfileUserComponent} from './profile-user/profile-user.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -38,7 +39,6 @@ const routes: Routes = [
       {path: 'statistics', component: StatisticsComponent}
     ]
   },
-
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'flats', component: FlatListComponent},
   {path: 'detailed/:id', component: FlatDetailedComponent},

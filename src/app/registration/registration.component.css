@@ -1,6 +1,5 @@
 body {
-  background-color: red;
-}
+  background-color: red; }
 
 form {
   width: 500px;
@@ -9,19 +8,15 @@ form {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: whitesmoke;
-}
+  background-color: whitesmoke; }
 
 input.ng-invalid.ng-touched {
-  border: 1px solid red;
-}
+  border: 1px solid red; }
 input.ng-valid.ng-touched {
-  border: 1px solid green;
-}
+  border: 1px solid green; }
 
 small {
   color: red;
-  font-size: 14px;
-}
+  font-size: 14px; }
 
 /*# sourceMappingURL=registration.component.css.map */

@@ -38,6 +38,7 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
@@ -60,6 +61,7 @@ import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart
 import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +80,7 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
     ListCommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
+    ProfileUserComponent,
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,
