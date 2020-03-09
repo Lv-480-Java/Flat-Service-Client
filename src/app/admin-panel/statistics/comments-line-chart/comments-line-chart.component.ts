@@ -40,8 +40,8 @@ export class CommentsLineChartComponent implements OnInit {
   }
 
   updateData() {
-    this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-comments-dynamics/7').subscribe(userCommnts => {
-      this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-comments-dynamics/7').subscribe(flatCommnet => {
+    this.http.get<Array<number>>('api/admin/statistics/user-comments-dynamics/7').subscribe(userCommnts => {
+      this.http.get<Array<number>>('api/admin/statistics/flat-comments-dynamics/7').subscribe(flatCommnet => {
         this.chartDatasets = [
           {data: userCommnts, label: 'User Comments'},
           {data: flatCommnet, label: 'Flat Comments'},

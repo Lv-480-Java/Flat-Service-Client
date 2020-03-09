@@ -17,7 +17,7 @@ export class ModeratorRequestsComponent implements OnInit {
   aSub: Subscription;
   dSub: Subscription;
 
-  displayedColumns: string[] = ['id', 'date', 'review'];
+  displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
   dataSource: MatTableDataSource<RequestsForUserVerification>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -35,7 +35,7 @@ export class ModeratorRequestsComponent implements OnInit {
   }
 
   review(id: string) {
-
+    window.location.href = ('http://localhost:4200/profile');
   }
 
   decline(id: number) {
@@ -43,6 +43,7 @@ export class ModeratorRequestsComponent implements OnInit {
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });
+    window.location.href = ('http://localhost:4200/admin/requests/moderators');
   }
 
   approve(id: number) {
@@ -50,6 +51,7 @@ export class ModeratorRequestsComponent implements OnInit {
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });
+    window.location.href = ('http://localhost:4200/admin/requests/moderators');
   }
 
 }

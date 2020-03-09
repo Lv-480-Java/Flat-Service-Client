@@ -4,6 +4,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {AdminService} from '../../../services/admin.service';
 import {Subscription} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
+import {RequestsForUserVerification} from '../entity/request-for-user-verification';
 
 @Component({
   selector: 'app-flat-requests',
@@ -17,7 +18,7 @@ export class FlatRequestsComponent implements OnInit {
   dSub: Subscription;
 
 
-  displayedColumns: string[] = ['id', 'date', 'review'];
+  displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
   dataSource: MatTableDataSource<RequestsForFlatVerification>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -28,6 +29,7 @@ export class FlatRequestsComponent implements OnInit {
   ngOnInit(): void {
     this.vSub = this.adminService.getFlatRequests()
       .subscribe(request => {
+        console.log(request);
         this.requests = request;
         this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(request);
       });
@@ -35,21 +37,25 @@ export class FlatRequestsComponent implements OnInit {
   }
 
   review(id: string) {
-
+    window.location.href = ('http://localhost:4200/');
   }
 
   decline(id: number) {
-    this.dSub = this.adminService.declineFlatRequests(id)
+    this.adminService.declineFlatRequests(id)
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(this.requests);
       });
+    window.location.href = ('http://localhost:4200/admin/requests/flats');
+
   }
 
   approve(id: number) {
-    this.aSub = this.adminService.approveFlatRequests(id)
+    this.adminService.approveFlatRequests(id)
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(this.requests);
       });
+    window.location.href = ('http://localhost:4200/admin/requests/flats');
+
   }
 
 }

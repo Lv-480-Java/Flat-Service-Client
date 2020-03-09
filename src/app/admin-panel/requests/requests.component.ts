@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class RequestsComponent implements OnInit {
 
-  constructor(route: ActivatedRoute) {}
+  constructor() {}
 
   ngOnInit(): void {
   }

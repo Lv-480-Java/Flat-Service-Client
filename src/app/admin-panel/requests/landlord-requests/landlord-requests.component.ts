@@ -17,7 +17,7 @@ export class LandlordRequestsComponent implements OnInit {
   aSub: Subscription;
   dSub: Subscription;
 
-  displayedColumns: string[] = ['id', 'date', 'review'];
+  displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
   dataSource: MatTableDataSource<RequestsForUserVerification>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -35,20 +35,24 @@ export class LandlordRequestsComponent implements OnInit {
   }
 
   review(id: string) {
-
+    window.location.href = ('http://localhost:4200/profile');
   }
 
   decline(id: number) {
-    this.dSub = this.adminService.declineUserRequests(id)
+    this.adminService.declineUserRequests(id)
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });
+    window.location.href = ('http://localhost:4200/admin/requests/landlords');
+
   }
 
   approve(id: number) {
-    this.aSub = this.adminService.approveUserRequests(id)
+    this.adminService.approveUserRequests(id)
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });
+    window.location.href = ('http://localhost:4200/admin/requests/landlords');
+
   }
 }
