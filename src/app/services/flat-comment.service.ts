@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../admin-panel/component/interfaces';
-import {map} from 'rxjs/operators';
 
 export interface FlatComment {
   id?: number;
@@ -17,17 +16,20 @@ export interface FlatComment {
 })
 export class FlatCommentService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
+
+  private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   add(flatComment: FlatComment): Observable<FlatComment> {
-    return this.http.post<FlatComment>('http://localhost:8080/flatcomments/create/', {flatComment});
+    return this.http.post<FlatComment>('http://localhost:8080/flatcomments/create/', JSON.stringify(flatComment), this.options);
   }
 
-  remove(id: number): Observable<void>{
-    return this.http.delete<void>('http://localhost:8080/flatcomments//delete/' + id);
+  remove(id: number): Observable<void> {
+    return this.http.delete<void>('http://localhost:8080/flatcomments/delete/' + id);
   }
 
-  loadComments(id: number): Observable<FlatComment[]>{
+  loadComments(id: number): Observable<FlatComment[]> {
     return this.http.get<FlatComment[]>('http://localhost:8080/flatcomments/getall/' + id);
   }
 

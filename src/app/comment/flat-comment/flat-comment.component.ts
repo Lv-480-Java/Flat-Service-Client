@@ -38,19 +38,20 @@ export class FlatCommentComponent implements OnInit {
   }
 
   add() {
-    if (this.text.trim()) {
+    if (!this.text.trim()) {
       return;
     }
     const newFlatComment: FlatComment = {
       text: this.text,
       flatId: this.id
     };
+    console.log();
 
     this.flatCommentService.add(newFlatComment)
       .subscribe(flatComment => {
-        this.comments.unshift(flatComment)
-        this.text = '';
+        this.text = ' ';
       });
+    this.comments = this.comments.concat(newFlatComment);
   }
 }
 
