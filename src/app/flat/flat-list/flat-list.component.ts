@@ -26,7 +26,7 @@ export class FlatListComponent implements OnInit {
 
   loadFlats() {
     this.pageNumber = 0;
-    this.http.put('http://localhost:8080/flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options)
+    this.http.put('/api/flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options)
       .subscribe(data => {
         this.data = data;
         this.flats = this.data;
@@ -40,7 +40,7 @@ export class FlatListComponent implements OnInit {
   }
 
   loadNextPost() {
-    this.http.put('http://localhost:8080/flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options).subscribe(data => {
+    this.http.put('/api/flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options).subscribe(data => {
       this.data = data;
       this.flats.content = this.flats.content.concat(this.data.content);
     });
