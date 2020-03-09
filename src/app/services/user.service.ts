@@ -22,6 +22,7 @@ export class UserService {
     return this.http.put<User>('http://localhost:8080/users/update/all', user);
   }
 
+
   removeUser(id: string): Observable<void> {
     return this.http.delete<void>(`http://localhost:8080/users/delete/${id}`);
   }

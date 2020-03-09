@@ -175,8 +175,15 @@ img {
   height: 600px;
   overflow-y: scroll; }
 
+.toggle-emoji svg {
+  width: 28px;
+  height: 28px; }
+
 /*-----------------  --- Chat --------------------*/
 .chat {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
   width: 300px;
   height: 80vh;
   max-height: 500px;

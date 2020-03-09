@@ -10,34 +10,40 @@ import {LoginComponent} from './login/login.component';
 import {HttpUserService} from './services/http.user.service';
 import {HeaderComponent} from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {FlatListComponent} from './flat-list/flat-list.component';
-import {MatSliderModule} from '@angular/material/slider';
+import { FlatListComponent } from './flat/flat-list/flat-list.component';
+import { MatSliderModule } from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-import {FlatFilterComponent} from './flat-filter/flat-filter.component';
-import {Ng5SliderModule} from 'ng5-slider';
+import { FlatFilterComponent } from './flat/flat-filter/flat-filter.component';
+import { Ng5SliderModule } from 'ng5-slider';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
-import {MenuComponent} from './menu/menu.component';
-import {FlatDetailedComponent} from './flat-detailed/flat-detailed.component';
-import {GalleryModule} from '@ngx-gallery/core';
-import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
-import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
-import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
-import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-page.component';
+import {DialogWindowEditUserComponent} from './admin-panel/list-user-page/dialog-window-edit-user';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MenuComponent } from './menu/menu.component';
+import { FlatDetailedComponent } from './flat/flat-detailed/flat-detailed.component';
+import { GalleryModule } from '@ngx-gallery/core';
+import { ListUserPageComponent } from './admin-panel/list-user-page/list-user-page.component';
+import { ListPostsPageComponent } from './admin-panel/list-posts-page/list-posts-page.component';
+import { ListCommentsPageComponent } from './admin-panel/list-comments-page/list-comments-page.component';
+import { DashboardPageComponent } from './admin-panel/dashboard-page/dashboard-page.component';
 import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {ChatComponent} from './chat/chat.component';
-import {DialogWindowEditUserComponent} from './admin-panel/list-user-page/dialog-window-edit-user';
-import {MatDialogModule} from '@angular/material/dialog';
+import { ChatComponent } from './chat/chat.component';
+import { UserCommentComponent } from './comment/user-comment/user-comment.component';
+import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
+import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
+import {EmojifyPipe} from './pipes/emojify.pipe';
+import {LinkfyPipe} from './pipes/linkfy.pipe';
+import {SanitizePipe} from './pipes/sanitize.pipe';
 
 @NgModule({
   declarations: [
@@ -57,7 +63,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     ListCommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
-    DialogWindowEditUserComponent
+    DialogWindowEditUserComponent,
+    UserCommentComponent,
+    FlatCommentComponent,
+    NgChatOptionsComponent,
+    EmojifyPipe,
+    LinkfyPipe,
+    SanitizePipe
   ],
   imports: [
     BrowserModule,
@@ -87,7 +99,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatDialogModule
   ],
   providers: [HttpUserService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }
