@@ -1,4 +1,4 @@
-import { EmojifyPipe } from '../ng-chat/pipes/emojify.pipe';
+import { EmojifyPipe } from '../pipes/emojify.pipe';
 
 let subject: EmojifyPipe = null;
 
@@ -7,13 +7,13 @@ describe('EmojifyPipe', () => {
         subject = new EmojifyPipe();
     });
 
-    it('Must work on empty messages', () => {       
+    it('Must work on empty messages', () => {
         let result = subject.transform('', true);
 
         expect(result).toBe('');
     });
 
-    it('Must not replace with emoji when piple is disabled', () => {       
+    it('Must not replace with emoji when piple is disabled', () => {
         let result = subject.transform(':)', false);
 
         expect(result).toBe(':)');
@@ -21,7 +21,7 @@ describe('EmojifyPipe', () => {
 
     it('Must not replace the message text when no emoji is found', () => {
         let message = 'Test message';
-        
+
         let result = subject.transform(message, true);
 
         expect(result).toBe(message);
