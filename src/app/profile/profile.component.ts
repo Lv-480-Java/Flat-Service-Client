@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Landlord, ProfileService} from '../services/profile.service';
-import {User} from '../admin-panel/component/interfaces';
+import {User} from '../admin-panel/component/Users';
 
 @Component({
   selector: 'app-profile',
