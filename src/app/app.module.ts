@@ -7,8 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RegistrationComponent} from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
-import {HttpUserService} from './services/http.user.service';
-import {HeaderComponent} from './header/header.component';
+import {RegistrationService} from './services/registration.service';
+import { HeaderComponent } from './header/header.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FlatListComponent } from './flat/flat-list/flat-list.component';
 import { MatSliderModule } from '@angular/material/slider';
@@ -40,6 +40,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
+import {AuthService} from './services/auth.service';
+import {AuthGuard} from './guards/auth.guard';
 import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
@@ -125,8 +127,8 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
     MatPaginatorModule,
     MatDialogModule,
   ],
-  providers: [HttpUserService],
-  bootstrap: [AppComponent],
+  providers: [RegistrationService, AuthService, AuthGuard],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

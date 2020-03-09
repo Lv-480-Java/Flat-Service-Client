@@ -1,24 +1,30 @@
 table {
-  width: 100%; }
+  width: 100%;
+}
 
 .example-full-width {
   width: 150px;
-  margin-left: 10px; }
+  margin-left: 10px;
+}
 
 .field-add {
   text-align: center;
-  height: 80px; }
+  height: 80px;
+}
 
 .form-field {
-  text-align: center; }
+  text-align: center;
+}
 
 .action-button {
   text-align: center;
   width: 80px;
-  font-size: 13px; }
+  font-size: 13px;
+}
 
 .dialog-window {
   text-align: center;
-  font-size: 13px; }
+  font-size: 13px;
+}
 
 /*# sourceMappingURL=list-user-page.component.css.map */
