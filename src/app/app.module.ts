@@ -4,7 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { RegistrationComponent } from './registration/registration.component';
+import {RegistrationComponent} from './registration/registration.component';
 import {HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
 import {RegistrationService} from './services/registration.service';
@@ -16,7 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
 import { FlatFilterComponent } from './flat/flat-filter/flat-filter.component';
 import { Ng5SliderModule } from 'ng5-slider';
@@ -25,6 +25,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
+import {DialogWindowEditUserComponent} from './admin-panel/list-user-page/dialog-window-edit-user';
+import {MatDialogModule} from '@angular/material/dialog';
 import { MenuComponent } from './menu/menu.component';
 import { FlatDetailedComponent } from './flat/flat-detailed/flat-detailed.component';
 import { GalleryModule } from '@ngx-gallery/core';
@@ -40,6 +42,10 @@ import { UserCommentComponent } from './comment/user-comment/user-comment.compon
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
+import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
+import {EmojifyPipe} from './pipes/emojify.pipe';
+import {LinkfyPipe} from './pipes/linkfy.pipe';
+import {SanitizePipe} from './pipes/sanitize.pipe';
 
 @NgModule({
   declarations: [
@@ -59,8 +65,13 @@ import {AuthGuard} from './guards/auth.guard';
     ListCommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
+    DialogWindowEditUserComponent,
     UserCommentComponent,
-    FlatCommentComponent
+    FlatCommentComponent,
+    NgChatOptionsComponent,
+    EmojifyPipe,
+    LinkfyPipe,
+    SanitizePipe
   ],
   imports: [
     BrowserModule,
@@ -86,7 +97,8 @@ import {AuthGuard} from './guards/auth.guard';
     GalleryModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

@@ -1,7 +1,1 @@
-{
-"version": 3,
-"mappings": "AAAA,aAAc;EACZ,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;;AAGd,eAAgB;EACd,KAAK,EAAE,KAAK;EACZ,UAAU,EAAE,IAAI;EAChB,WAAW,EAAE,GAAG;;AAGlB,MAAO;EACL,UAAU,EAAE,IAAI;EAChB,SAAS,EAAE,IAAI",
-"sources": ["admin-layout.component.scss"],
-"names": [],
-"file": "admin-layout.component.css"
-}
+{"version":3,"sourceRoot":"","sources":["admin-layout.component.scss"],"names":[],"mappings":"AAAA;EACE;EACA;;;AAGF;EACE;EACA;EACA;;;AAGF;EACE;EACA;EACA","file":"admin-layout.component.css"}

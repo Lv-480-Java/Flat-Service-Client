@@ -1,1 +1,7 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"flat-comment.component.css"}
+{
+"version": 3,
+"mappings": "AAiDA,aAAc;EACZ,SAAS,EAAE,KAAK;EAChB,SAAS,EAAE,KAAK;EAChB,KAAK,EAAE,IAAI;;AAGb,mBAAoB;EAClB,KAAK,EAAE,IAAI",
+"sources": ["flat-comment.component.scss"],
+"names": [],
+"file": "flat-comment.component.css"
+}
