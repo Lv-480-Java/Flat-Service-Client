@@ -58,18 +58,14 @@ export class AdminService {
   }
 
   getAllUsersCount(start, end): Observable<Array<number>> {
-    console.log(`http://localhost:8080/admin/statistics/users-dynamics/${end}/${start}`);
-
     return this.http.get<Array<number>>(`http://localhost:8080/admin/statistics/users-dynamics/${end}/${start}`);
   }
 
   getAllLandlordsCount(start, end): Observable<Array<number>> {
-    console.log(`http://localhost:8080/admin/statistics/landlords-dynamics/${start}/${end}`);
     return this.http.get<Array<number>>(`http://localhost:8080/admin/statistics/landlords-dynamics/${end}/${start}`);
   }
 
   getMonthNames(start, end): Observable<Array<number>> {
-    console.log(`http://localhost:8080/admin/statistics/month-names/${start}/${end}`);
     return this.http.get<Array<number>>(`http://localhost:8080/admin/statistics/month-names/${end}/${start}`);
   }
 
@@ -81,18 +77,17 @@ export class AdminService {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/active-unactive-flats');
   }
 
-  getRegisteredUsers(): Observable<Array<number>> {
-    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-regisration-dynamics');
-  }
-
-  getCreatedFlats(): Observable<Array<number>> {
-    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-creation-dynamics');
-  }
-
-  getCommentsCount(): Observable<Array<number>> {
+  getCommentsData(): Observable<Array<number>> {
     return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/count-comments');
   }
 
+  getRegisteredUsersForWeek(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-registration-dynamics/7');
+  }
+
+  getCreatedFlatsForWeek(): Observable<Array<number>> {
+    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-creation-dynamics/7');
+  }
 
 
 

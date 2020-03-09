@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
 import {AdminService} from '../../../services/admin.service';
 
 @Component({
@@ -8,18 +7,9 @@ import {AdminService} from '../../../services/admin.service';
   styleUrls: ['./diagram-flats.component.scss']
 })
 export class DiagramFlatsComponent implements OnInit {
-
-
-  public chartType: string = 'pie';
-
-  public chartDatasets: Array<any> = [
-    {data: [200, 29]}
-  ];
-  uSub: Subscription;
-
-
+  public chartType = 'pie';
+  public chartDatasets: Array<any>;
   public chartLabels: Array<any> = ['Active', 'Unactive'];
-
   public chartColors: Array<any> = [
     {
       backgroundColor: ['#4183fa', '#9c9595'],
@@ -35,10 +25,15 @@ export class DiagramFlatsComponent implements OnInit {
   constructor(private adminService: AdminService) {
   }
 
-  ngOnInit(): void {
-    this.uSub = this.adminService.getFlatsData().subscribe(data => {
-      this.chartDatasets = data;
+  updateData() {
+    this.adminService.getFlatsData().subscribe(c => {
+      console.log(c);
+      this.chartDatasets = c;
     });
   }
 
+  ngOnInit(): void {
+    console.log('flat diagram');
+    this.updateData();
+  }
 }

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
 
 @Component({
@@ -9,17 +8,9 @@ import {AdminService} from '../../../services/admin.service';
 })
 export class DiagramCommentsComponent implements OnInit {
 
-
-  public chartType: string = 'pie';
-
-  public chartDatasets: Array<any> = [
-    {data: [200, 29, 1]}
-  ];
-  uSub: Subscription;
-
-
+  public chartType = 'pie';
+  public chartDatasets: Array<any>;
   public chartLabels: Array<any> = ['Flats', 'Users'];
-
   public chartColors: Array<any> = [
     {
       backgroundColor: ['#2d5569', '#bccb6e'],
@@ -36,7 +27,9 @@ export class DiagramCommentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.uSub = this.adminService.getCommentsCount().subscribe(data => {
+    console.log('flat diagram');
+    this.adminService.getCommentsData().subscribe(data => {
+      console.log(data);
       this.chartDatasets = data;
     });
   }

@@ -1,9 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {RequestsForFlatVerification} from '../entity/requests-for-flat-verification';
 import {MatTableDataSource} from '@angular/material/table';
-import {User} from '../../component/interfaces';
 import {AdminService} from '../../../services/admin.service';
-import {Subscribable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {MatPaginator} from '@angular/material/paginator';
 
 @Component({

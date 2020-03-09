@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
 import {AdminService} from '../../../services/admin.service';
+import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-diagram-users',
@@ -9,16 +9,10 @@ import {AdminService} from '../../../services/admin.service';
 })
 export class DiagramUsersComponent implements OnInit {
 
-  public chartType: string = 'pie';
+  public chartType = 'pie';
 
-  public chartDatasets: Array<any> = [
-    {data: [200, 29, 1]}
-  ];
-  uSub: Subscription;
-
-
+  public chartDatasets: Array<any>;
   public chartLabels: Array<any> = ['Renters', 'Landlords', 'Moderators'];
-
   public chartColors: Array<any> = [
     {
       backgroundColor: ['#75c942', '#e65a72', '#e6cc31'],
@@ -26,24 +20,25 @@ export class DiagramUsersComponent implements OnInit {
       borderWidth: 1,
     }
   ];
-
   public chartOptions: any = {
     responsive: true
   };
 
-  public chartClicked(e: any): void {
-  }
-
-  public chartHovered(e: any): void {
-  }
-
   constructor(private adminService: AdminService) {
   }
 
-  ngOnInit(): void {
-    this.uSub = this.adminService.getUsersData().subscribe(data => {
-      this.chartDatasets = data;
-    });
+  data;
+
+  inizialize() {
+    this.chartDatasets = this.data;
   }
 
+  ngOnInit(): void {
+    console.log('flat diagram');
+
+    this.adminService.getUsersData().subscribe(bg => {
+      this.data = bg;
+      this.inizialize();
+    });
+  }
 }

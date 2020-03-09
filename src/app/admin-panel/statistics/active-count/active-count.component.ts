@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
 
 @Component({
@@ -12,24 +11,19 @@ export class ActiveCountComponent implements OnInit {
   countFlats: number;
   countUsers: number;
   countLandlord: number;
-  fSub: Subscription;
-  uSub: Subscription;
-  lSub: Subscription;
 
   constructor(private adminService: AdminService) {
   }
 
   ngOnInit() {
-
-    this.fSub = this.adminService.countActiveFlats().subscribe(count => {
+    this.adminService.countActiveFlats().subscribe(count => {
       this.countFlats = count;
     });
-    this.uSub = this.adminService.countActiveUsers().subscribe(count => {
+    this.adminService.countActiveUsers().subscribe(count => {
       this.countUsers = count;
     });
-    this.lSub = this.adminService.countActiveLandlords().subscribe(count => {
+    this.adminService.countActiveLandlords().subscribe(count => {
       this.countLandlord = count;
     });
   }
-
 }

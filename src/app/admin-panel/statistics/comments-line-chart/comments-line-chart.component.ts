@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {AdminService} from '../../../services/admin.service';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -11,17 +9,9 @@ import {HttpClient} from '@angular/common/http';
 export class CommentsLineChartComponent implements OnInit {
 
   public chartType = 'line';
-
-  uc: Array<number>;
-  fc: Array<number>;
-
-
-  public chartDatasets: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset'}
-  ];
-  public chartLabels: Array<any> = ['September', 'October', 'November', 'December', 'January', 'February', 'March'];
-
+  public chartDatasets: Array<any>;
+  public chartLabels: Array<any>;
+  private days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
   public chartColors: Array<any> = [
     {
       backgroundColor: 'rgba(105, 0, 132, .2)',
@@ -39,33 +29,30 @@ export class CommentsLineChartComponent implements OnInit {
     responsive: true,
   };
 
-  constructor(private adminService: AdminService, private http: HttpClient) {
+  constructor(private http: HttpClient) {
+  }
+
+  shiftDays() {
+    for (let i = 1; i < new Date().getDay() + 1; i++) {
+      this.days.push(this.days.shift());
+    }
+    this.chartLabels = this.days;
+  }
+
+  updateData() {
+    this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-comments-dynamics/7').subscribe(userCommnts => {
+      this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-comments-dynamics/7').subscribe(flatCommnet => {
+        this.chartDatasets = [
+          {data: userCommnts, label: 'User Comments'},
+          {data: flatCommnet, label: 'Flat Comments'},
+        ];
+        this.shiftDays();
+      });
+    });
   }
 
   ngOnInit(): void {
-    this.http.get<Array<number>>('http://localhost:8080/admin/statistics/user-comments-dynamics').subscribe(d => {
-      this.http.get<Array<number>>('http://localhost:8080/admin/statistics/flat-comments-dynamics').subscribe(b => {
-        console.log('comments');
-        console.log(d);
-        console.log(b);
-
-        this.chartDatasets = [
-          {data: b, label: 'User Comments'},
-          {data: d, label: 'Flat Comments'},
-          {data: d, label: 'Flat Comments'}
-
-        ];
-
-        console.log(this.chartDatasets);
-
-        // this.chartDatasets = [
-        //   {data: [2, 59, 80, 81, 56, 55, 2], label: 'My First dataset'},
-        //   {data: [2, 48, 40, 19, 86, 27, 2], label: 'My Second dataset'}
-        // ];
-
-
-      });
-    });
+    this.updateData();
   }
 
 }

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
-import {DatePipe} from '@angular/common';
 import 'rxjs/add/observable/interval';
 
 @Component({
@@ -15,12 +14,8 @@ export class UsersLineChartComponent implements OnInit {
   toMonth: Date;
   maxDate: Date;
 
-
-  public chartDatasets: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'My First dataset'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'My Second dataset'}
-  ];
-  public chartLabels: Array<any> = ['September', 'October', 'November', 'December', 'January', 'February', 'March'];
+  public chartDatasets: Array<any>;
+  public chartLabels: Array<any>;
 
   public chartColors: Array<any> = [
     {
@@ -46,20 +41,14 @@ export class UsersLineChartComponent implements OnInit {
     const from = new Date(this.fromMonth).toISOString().substr(0, 7);
     const to = new Date(this.toMonth).toISOString().substr(0, 7);
 
-    this.adminService.getAllUsersCount(from, to).subscribe(d => {
-      this.adminService.getAllLandlordsCount(from, to).subscribe(b => {
-        this.adminService.getMonthNames(from, to).subscribe(l => {
-
-          console.log(d);
-          console.log(b);
-          console.log(l);
-
+    this.adminService.getAllUsersCount(from, to).subscribe(userCount => {
+      this.adminService.getAllLandlordsCount(from, to).subscribe(landlordCount => {
+        this.adminService.getMonthNames(from, to).subscribe(months => {
           this.chartDatasets = [
-            {data: d, label: 'Users'},
-            {data: b, label: 'Landlords'}
+            {data: userCount, label: 'Users'},
+            {data: landlordCount, label: 'Landlords'}
           ];
-          this.chartLabels = l;
-          console.log('changed');
+          this.chartLabels = months;
         });
       });
     });
