@@ -57,12 +57,20 @@ export class AdminService {
     return this.http.get<number>('http://localhost:8080/admin/statistics/active-landlords');
   }
 
-  getAllUsersCount(): Observable<Array<number>> {
-    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/users-dynamics');
+  getAllUsersCount(start, end): Observable<Array<number>> {
+    console.log(`http://localhost:8080/admin/statistics/users-dynamics/${end}/${start}`);
+
+    return this.http.get<Array<number>>(`http://localhost:8080/admin/statistics/users-dynamics/${end}/${start}`);
   }
 
-  getAllLandlordsCount(): Observable<Array<number>> {
-    return this.http.get<Array<number>>('http://localhost:8080/admin/statistics/landlords-dynamics');
+  getAllLandlordsCount(start, end): Observable<Array<number>> {
+    console.log(`http://localhost:8080/admin/statistics/landlords-dynamics/${start}/${end}`);
+    return this.http.get<Array<number>>(`http://localhost:8080/admin/statistics/landlords-dynamics/${end}/${start}`);
+  }
+
+  getMonthNames(start, end): Observable<Array<number>> {
+    console.log(`http://localhost:8080/admin/statistics/month-names/${start}/${end}`);
+    return this.http.get<Array<number>>(`http://localhost:8080/admin/statistics/month-names/${end}/${start}`);
   }
 
   getUsersData(): Observable<Array<number>> {

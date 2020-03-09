@@ -52,6 +52,7 @@ import { UserChartComponent } from './admin-panel/statistics/user-chart/user-cha
 import { FlatChartComponent } from './admin-panel/statistics/flat-chart/flat-chart.component';
 import { UsersLineChartComponent } from './admin-panel/statistics/users-line-chart/users-line-chart.component';
 import { CommentsLineChartComponent } from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -86,34 +87,35 @@ import { CommentsLineChartComponent } from './admin-panel/statistics/comments-li
     UsersLineChartComponent,
     CommentsLineChartComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule,
-    GalleryModule,
-    MatAutocompleteModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatButtonToggleModule,
-    MatTabsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        Ng5SliderModule,
+        MatSliderModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        FlexModule,
+        InfiniteScrollModule,
+        MatChipsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        BrowserAnimationsModule,
+        GalleryModule,
+        MatAutocompleteModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatButtonToggleModule,
+        MatTabsModule,
+        MatDatepickerModule
+    ],
   providers: [HttpUserService],
   bootstrap: [AppComponent]
 })
