@@ -38,6 +38,7 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
@@ -46,6 +47,7 @@ import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
+
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import {SanitizePipe} from './pipes/sanitize.pipe';
     ListCommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
+    ProfileUserComponent,
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,

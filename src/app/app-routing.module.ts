@@ -12,6 +12,7 @@ import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-p
 import {FlatDetailedComponent} from './flat/flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
 import {AuthGuard} from './guards/auth.guard';
+import {ProfileUserComponent} from './profile-user/profile-user.component';
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -24,9 +25,10 @@ const routes: Routes = [
       {path: 'posts', component: ListPostsPageComponent}
     ]
   },
+  { path: 'data', component: ProfileUserComponent},
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'flats', component: FlatListComponent },
-  { path: 'detailed/:id',      component: FlatDetailedComponent },
+  { path: 'detailed/:id', component: FlatDetailedComponent },
   { path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
