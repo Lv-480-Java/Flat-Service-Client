@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
       .subscribe(datan => {
         this.data = datan;
       });
-     window.location.href = ('/profile');
+    window.location.href = ('/profile');
   }
 }
 

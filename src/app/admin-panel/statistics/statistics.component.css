@@ -1,47 +1,38 @@
 .statistics {
-  margin-bottom: 700px;
-}
+  margin-bottom: 700px; }
 
 .week-label {
   text-align: center;
   font-size: 25px;
-  width: 100%;
-}
+  width: 100%; }
 
 .pie-charts {
-  width: 100%;
-}
+  width: 100%; }
 
 .bar-charts {
   margin-top: 50px;
-  align-content: center;
-}
+  align-content: center; }
 
 .line-chart-user {
-  margin-top: 500px;
-}
+  margin-top: 500px; }
 
 .line-charts-comments {
-  margin-top: 600px;
-}
+  margin-top: 600px; }
 
 .bar-chart-card {
   margin: auto;
   text-align: center;
-  width: 1000px;
-}
+  width: 1000px; }
 
 .diagram-card {
   text-align: center;
   width: 1000px;
   margin: auto;
-  padding-bottom: 50px;
-}
+  padding-bottom: 50px; }
 
 .bar-chart-label {
   margin: 40px 0px 15px 0px;
   font-size: 25px;
-  align-self: center;
-}
+  align-self: center; }
 
 /*# sourceMappingURL=statistics.component.css.map */

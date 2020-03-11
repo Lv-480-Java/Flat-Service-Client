@@ -1,23 +1,19 @@
 .users-line-chart {
   width: 80%;
-  margin: 500px 130px 130px 130px;
-}
+  margin: 500px 130px 130px 130px; }
 
 .count-label {
   margin: 10px 0px 15px 0px;
-  font-size: 25px;
-}
+  font-size: 25px; }
 
 .users-line-chart-label {
   text-align: center;
   margin: auto;
   width: 1000px;
-  padding-bottom: 50px;
-}
+  padding-bottom: 50px; }
 
 .input-month {
   float: left;
-  margin-left: 200px;
-}
+  margin-left: 200px; }
 
 /*# sourceMappingURL=users-line-chart.component.css.map */

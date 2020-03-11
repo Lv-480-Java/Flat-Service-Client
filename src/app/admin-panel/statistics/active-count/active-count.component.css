@@ -1,14 +1,11 @@
 .active-cards {
-  margin: 30px 20px 30px 20px;
-}
+  margin: 30px 20px 30px 20px; }
 
 .count-number {
-  font-size: 50px;
-}
+  font-size: 50px; }
 
 .count-label {
   margin: 40px 0px 15px 0px;
-  font-size: 25px;
-}
+  font-size: 25px; }
 
 /*# sourceMappingURL=active-count.component.css.map */

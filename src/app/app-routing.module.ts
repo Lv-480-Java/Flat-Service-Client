@@ -39,11 +39,11 @@ const routes: Routes = [
       {path: 'statistics', component: StatisticsComponent}
     ]
   },
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: 'flats', component: FlatListComponent},
-  {path: 'detailed/:id', component: FlatDetailedComponent},
-  {
-    path: '',
+  { path: 'data', component: ProfileUserComponent},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'flats', component: FlatListComponent },
+  { path: 'detailed/:id', component: FlatDetailedComponent },
+  { path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
   }
