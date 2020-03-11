@@ -38,6 +38,7 @@ import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.comp
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ChatComponent } from './chat/chat.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 import { UserCommentComponent } from './comment/user-comment/user-comment.component';
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
@@ -46,6 +47,20 @@ import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
+import {RequestsComponent} from './admin-panel/requests/requests.component';
+import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
+import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
+import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
+import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
+import {CommentsLineChartComponent} from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
+import {DiagramCommentsComponent} from './admin-panel/statistics/diagram-comments/diagram-comments.component';
+import {DiagramFlatsComponent} from './admin-panel/statistics/diagram-flats/diagram-flats.component';
+import {DiagramUsersComponent} from './admin-panel/statistics/diagram-users/diagram-users.component';
+import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart/users-line-chart.component';
+import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
+import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
+import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
+
 
 @NgModule({
   declarations: [
@@ -65,13 +80,28 @@ import {SanitizePipe} from './pipes/sanitize.pipe';
     ListCommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
+    ProfileUserComponent,
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,
     NgChatOptionsComponent,
     EmojifyPipe,
     LinkfyPipe,
-    SanitizePipe
+    SanitizePipe,
+    RequestsComponent,
+    ModeratorRequestsComponent,
+    LandlordRequestsComponent,
+    FlatRequestsComponent,
+    StatisticsComponent,
+    CommentsLineChartComponent,
+    DiagramCommentsComponent,
+    DiagramFlatsComponent,
+    DiagramUsersComponent,
+    UsersLineChartComponent,
+    UserChartComponent,
+    FlatChartComponent,
+    ActiveCountComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -98,7 +128,7 @@ import {SanitizePipe} from './pipes/sanitize.pipe';
     MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Landlord, LandlordUser, ProfileService} from '../services/profile.service';
+import {Landlord, ProfileService} from '../services/profile.service';
+import {User} from '../admin-panel/component/Users';
 
 @Component({
   selector: 'app-profile',
@@ -8,13 +9,12 @@ import {Landlord, LandlordUser, ProfileService} from '../services/profile.servic
 })
 export class ProfileComponent implements OnInit {
   data: Landlord [] = [];
-  userData: LandlordUser [] = [];
-  updData: Landlord;
+  userData: User;
   constructor(private landlordService: ProfileService) {
   }
   ngOnInit()  {
     this.addPassport();
-    this.addUserData();
+    this.addUserInfo();
   }
 
   addPassport() {
@@ -23,17 +23,19 @@ export class ProfileComponent implements OnInit {
         this.data = data;
       });
   }
-  addUserData() {
-    this.landlordService. addUserData()
+  addUserInfo() {
+    this.landlordService.addUserInfo()
       .subscribe(userData => {
         this.userData = userData;
       });
   }
-  updatePassport() {
-    this.landlordService.updatePassport()
-      .subscribe(updData => {
-        this.updData = updData;
+
+  updatePassport(data: Landlord[]) {
+    this.landlordService.updatePassport(data)
+      .subscribe(datan => {
+        this.data = datan;
       });
+    window.location.href = ('/profile');
   }
 }
 

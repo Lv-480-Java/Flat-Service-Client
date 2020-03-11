@@ -1,0 +1,23 @@
+<div class="users-line-chart" >
+
+  <div class="users-line-chart-label">
+    <mdb-card >
+      <mdb-card-body>
+        <mdb-card-title>
+          <span class="count-label">Comments Statistics</span>
+        </mdb-card-title>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+
+  <canvas mdbChart
+          [chartType]="chartType"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [colors]="chartColors"
+          [options]="chartOptions"
+          [legend]="true">
+  </canvas>
+
+
+</div>
