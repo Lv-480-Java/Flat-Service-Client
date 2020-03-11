@@ -26,7 +26,7 @@ export class ProfileUserComponent implements OnInit {
       .subscribe(userdat => {
         this.userData = userdat;
       });
-    window.location.href = ('api/data');
+    window.location.href = ('/data');
   }
 
 }

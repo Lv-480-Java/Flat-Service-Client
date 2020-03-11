@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../admin-panel/component/Users';
-
+import {BASE_URL} from '../utils/constants';
 
 @Injectable({providedIn: 'root'})
 export class ProfileUserService {
@@ -13,9 +13,10 @@ export class ProfileUserService {
   }
 
   addUserData(): Observable<User> {
-    return this.http.get<User>('api/user/1');
+    return this.http.get<User>(BASE_URL + 'user/1');
   }
+
   updateUserData(userData: User): Observable<User> {
-    return this.http.post<User>('api/userUpdate/1', JSON.stringify(userData), this.options);
+    return this.http.post<User>(BASE_URL + 'userUpdate/1', JSON.stringify(userData), this.options);
   }
 }
