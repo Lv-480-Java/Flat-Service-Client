@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,aAAc;EACZ,KAAK,EAAE,GAAG;EACV,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,iBAAiB;;AAG3B,cAAe;EACb,UAAU,EAAE,MAAM;EAClB,SAAS,EAAE,IAAI",
-"sources": ["diagram-flats.component.scss"],
-"names": [],
-"file": "diagram-flats.component.css"
-}

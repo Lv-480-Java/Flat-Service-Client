@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,iBAAkB;EAChB,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,uBAAuB;;AAGjC,YAAa;EACX,MAAM,EAAE,iBAAiB;EACzB,SAAS,EAAE,IAAI;;AAIjB,uBAAwB;EACtB,UAAU,EAAE,MAAM;EAClB,MAAM,EAAE,IAAI;EACZ,KAAK,EAAE,MAAM;EACb,cAAc,EAAE,IAAI;;AAGtB,YAAY;EACV,KAAK,EAAE,IAAI;EACX,WAAW,EAAE,KAAK",
-"sources": ["users-line-chart.component.scss"],
-"names": [],
-"file": "users-line-chart.component.css"
-}
