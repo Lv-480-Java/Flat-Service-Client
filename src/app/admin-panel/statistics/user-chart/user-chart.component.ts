@@ -14,6 +14,7 @@ export class UserChartComponent implements OnInit {
   public totalUsers: number;
   public chartLabels: Array<any>;
   private days: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  numberOfDays = 7;
   public chartColors: Array<any> = [
     {
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -38,7 +39,7 @@ export class UserChartComponent implements OnInit {
   }
 
   updateDataset() {
-    this.adminService.getRegisteredUsersForWeek().subscribe(usersRegistered => {
+    this.adminService.getRegisteredUsersForWeek(this.numberOfDays).subscribe(usersRegistered => {
       this.chartDatasets = [
         {data: usersRegistered, label: 'Users registered'}
       ];

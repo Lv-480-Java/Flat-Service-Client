@@ -9,7 +9,7 @@ import {AdminService} from '../../../services/admin.service';
 export class DiagramCommentsComponent implements OnInit {
 
   public chartType = 'pie';
-  public chartDatasets: Array<any> = [{data: [0, 0, 0]}];
+  public chartDatasets: Array<any> = [{data: [0, 0]}];
   public chartLabels: Array<any> = ['Flats', 'Users'];
   public chartColors: Array<any> = [
     {

@@ -60,6 +60,7 @@ import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart
 import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
 import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -129,6 +130,7 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatListModule,
   ],
   providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

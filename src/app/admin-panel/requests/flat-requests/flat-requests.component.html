@@ -1,4 +1,15 @@
-<div class="mat-elevation-z8">
+<div class="requests-lebel">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <span class="bar-chart-label">Requests For Flat Publication</span>
+      </mdb-card-title>
+    </mdb-card-body>
+  </mdb-card>
+</div>
+
+
+<div class="mat-elevation-z8 req-table">
   <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="id">
@@ -20,7 +31,7 @@
       <th mat-header-cell *matHeaderCellDef>Status</th>
       <td mat-cell *matCellDef="let element" [ngSwitch]="element.status">
         {{element.approvalDate | date:'mediumDate'}}
-        <button mat-raised-button color="primary" (click)="review(element.id)" *ngSwitchCase="'VERIFYING'">Review
+        <button mat-raised-button color="primary" (click)="review(element.flat.id)" *ngSwitchCase="'VERIFYING'">Review
         </button>
         <span *ngSwitchCase="'APPROVED'">Approved at {{element.verificationDate | date:'mediumDate'}}</span>
         <span *ngSwitchCase="'DECLINED'">Declined at {{element.verificationDate | date:'mediumDate'}}</span>
@@ -30,11 +41,12 @@
     <ng-container matColumnDef="approve">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button class="action-button" mat-raised-button color="primary" (click)="approve(element.id)"
+        <button class="action-button requests-button" mat-raised-button color="primary" (click)="approve(element.id)"
                 *ngIf="element.status=='VERIFYING'">Approve
         </button>
       </td>
     </ng-container>
+
 
     <ng-container matColumnDef="decline">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -49,7 +61,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
 
 </div>
 

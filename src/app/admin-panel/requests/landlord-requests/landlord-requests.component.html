@@ -1,4 +1,14 @@
-<div class="mat-elevation-z8">
+<div class="requests-lebel">
+  <mdb-card>
+    <mdb-card-body>
+      <mdb-card-title>
+        <span class="bar-chart-label">Requests For Landlord Verification</span>
+      </mdb-card-title>
+    </mdb-card-body>
+  </mdb-card>
+</div>
+
+<div class="mat-elevation-z8 req-table">
   <table mat-table [dataSource]="dataSource">
 
     <ng-container matColumnDef="id">
@@ -49,8 +59,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
-  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
 
 </div>
 

@@ -13,9 +13,6 @@ import {RequestsForUserVerification} from '../entity/request-for-user-verificati
 export class LandlordRequestsComponent implements OnInit {
 
   requests: RequestsForUserVerification[];
-  vSub: Subscription;
-  aSub: Subscription;
-  dSub: Subscription;
 
   displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
   dataSource: MatTableDataSource<RequestsForUserVerification>;
@@ -26,7 +23,7 @@ export class LandlordRequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.vSub = this.adminService.getLandlordRequests()
+    this.adminService.getLandlordRequests()
       .subscribe(request => {
         this.requests = request;
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(request);

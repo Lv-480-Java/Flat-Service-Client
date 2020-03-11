@@ -1,7 +1,7 @@
 import {Flat} from '../../../flat/flat-filter/entity/Flat';
 import {User} from '../../component/Users';
 
-export class RequestsForFlatVerification {
+export interface RequestsForFlatVerification {
   id?: number;
   status: string;
   creationDate: Date;

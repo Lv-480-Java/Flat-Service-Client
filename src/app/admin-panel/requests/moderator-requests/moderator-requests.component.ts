@@ -13,9 +13,6 @@ import {RequestsForUserVerification} from '../entity/request-for-user-verificati
 export class ModeratorRequestsComponent implements OnInit {
 
   requests: RequestsForUserVerification[];
-  vSub: Subscription;
-  aSub: Subscription;
-  dSub: Subscription;
 
   displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
   dataSource: MatTableDataSource<RequestsForUserVerification>;
@@ -26,7 +23,7 @@ export class ModeratorRequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.vSub = this.adminService.getModeratorRequests()
+    this.adminService.getModeratorRequests()
       .subscribe(request => {
         this.requests = request;
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(request);
@@ -39,7 +36,7 @@ export class ModeratorRequestsComponent implements OnInit {
   }
 
   decline(id: number) {
-    this.dSub = this.adminService.declineUserRequests(id)
+    this.adminService.declineUserRequests(id)
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });
@@ -47,7 +44,7 @@ export class ModeratorRequestsComponent implements OnInit {
   }
 
   approve(id: number) {
-    this.aSub = this.adminService.approveUserRequests(id)
+    this.adminService.approveUserRequests(id)
       .subscribe(request => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });

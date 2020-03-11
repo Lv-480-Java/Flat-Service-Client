@@ -13,9 +13,7 @@ import {RequestsForUserVerification} from '../entity/request-for-user-verificati
 })
 export class FlatRequestsComponent implements OnInit {
   requests: RequestsForFlatVerification[];
-  vSub: Subscription;
-  aSub: Subscription;
-  dSub: Subscription;
+
 
 
   displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
@@ -27,17 +25,16 @@ export class FlatRequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.vSub = this.adminService.getFlatRequests()
+    this.adminService.getFlatRequests()
       .subscribe(request => {
         console.log(request);
         this.requests = request;
         this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(request);
       });
-    setTimeout(() => this.dataSource.paginator = this.paginator);
   }
 
   review(id: string) {
-    window.location.href = ('http://localhost:4200/');
+    window.location.href = (`http://localhost:4200/detailed/${id}`);
   }
 
   decline(id: number) {
@@ -55,7 +52,6 @@ export class FlatRequestsComponent implements OnInit {
         this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(this.requests);
       });
     window.location.href = ('http://localhost:4200/admin/requests/flats');
-
   }
 
 }

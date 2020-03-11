@@ -13,6 +13,8 @@ export class FlatChartComponent implements OnInit {
   public totalFlats: number;
   public chartLabels: Array<any>;
   private days: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  numberOfDays = 7;
+
 
   public chartColors: Array<any> = [
     {
@@ -37,7 +39,7 @@ export class FlatChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adminService.getCreatedFlatsForWeek().subscribe(d => {
+    this.adminService.getCreatedFlatsForWeek(this.numberOfDays).subscribe(d => {
       this.chartDatasets = [
         {data: d, label: 'Flats posted'}
       ];

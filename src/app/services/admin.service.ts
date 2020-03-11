@@ -32,6 +32,7 @@ export class AdminService {
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
+
   declineFlatRequests(id: number): Observable<RequestsForFlatVerification> {
     const url = `api/admin/requests/flats/${id}/decline`;
     return this.http.put<RequestsForFlatVerification>(url, null);
@@ -83,12 +84,12 @@ export class AdminService {
     return this.http.get<Array<number>>('api/admin/statistics/count-comments');
   }
 
-  getRegisteredUsersForWeek(): Observable<Array<number>> {
-    return this.http.get<Array<number>>('api/admin/statistics/user-registration-dynamics/7');
+  getRegisteredUsersForWeek(days: number): Observable<Array<number>> {
+    return this.http.get<Array<number>>(`api/admin/statistics/user-registration-dynamics/${days}`);
   }
 
-  getCreatedFlatsForWeek(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(' api/admin/statistics/flat-creation-dynamics/7');
+  getCreatedFlatsForWeek(days: number): Observable<Array<number>> {
+    return this.http.get<Array<number>>(`api/admin/statistics/flat-creation-dynamics/${days}`);
   }
 
 }
