@@ -10,6 +10,7 @@ import {Window} from '../model/window';
 import {IChatOption} from '../model/chat-option';
 import {IChatGroupAdapter} from '../model/chat-group-adapter';
 import {ChatParticipantType} from '../model/chat-participant-type.enum';
+import {Observable} from 'rxjs';
 
 
 (window as any).global = window;
@@ -32,7 +33,7 @@ export class ChatComponent implements OnInit {
 
   public currentActiveOption: IChatOption | null;
 
-  @Input() chatId: number;
+  /*@Input() chatId: Observable<Object>;*/
 
   @Input()
   public isCollapsed = false;
@@ -57,20 +58,25 @@ export class ChatComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   msg: String;
   messages: Message[] = [];
+  chatId: number;
+  data: any;
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   chatMessageInfo: ChatMessageInfoDTO = new ChatMessageInfoDTO(null, null, null);
-  showEmojiPicker = false;
-  windows: Window[] = [];
 
   ngOnInit() {
     // this.authService.getCurrentUser().subscribe(data => this.currentAccountId = data.id);
     console.log(this.username);
-    this.currentUserId = 1;
-    this.initializeWebSocketConnection();
-    this.chatService.getMessagesByChatId(3).subscribe(data => this.messages = data);
-    this.scrollToBottom();
+    this.currentUserId = 6;
+    this.chatService.getChatId(this.username, this.currentUserId)
+      .subscribe((data: number) => {
+        this.chatId = data;
+        this.chatService.getMessagesByChatId(this.chatId).subscribe(data1 => this.messages = data1);
+        this.initializeWebSocketConnection();
+        this.scrollToBottom();
+      });
   }
+
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewChecked() {
@@ -96,17 +102,12 @@ export class ChatComponent implements OnInit {
     });
   }
 
- /* openSocket() {
+  openSocket() {
     this.stompClient.subscribe('/topic/messages/' + this.chatId, (message) => {
       this.handleResult(message);
     });
-  }*/
+  }
 
-    openSocket() {
-      this.stompClient.subscribe('/topic/messages/' + 3, (message) => {
-        this.handleResult(message);
-      });
-    }
 
   handleResult(message) {
 
@@ -124,8 +125,7 @@ export class ChatComponent implements OnInit {
   sendMessage(message: string) {
     message = message.trim();
     if (message !== '') {
-      /*this.chatMessageInfo.chatId = this.chatId;*/
-      this.chatMessageInfo.chatId = 3;
+      this.chatMessageInfo.chatId = this.chatId;
       this.chatMessageInfo.userId = this.currentUserId;
       this.chatMessageInfo.content = message;
       console.log(message);
@@ -150,10 +150,10 @@ export class ChatComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
- /* onChatWindowClicked(window: Window): void {
-    window.isCollapsed = !window.isCollapsed;
-    this.scrollToBottom();
-  }*/
+  /* onChatWindowClicked(window: Window): void {
+     window.isCollapsed = !window.isCollapsed;
+     this.scrollToBottom();
+   }*/
 
   /*
     onCloseChatWindow(window: Window): void {
@@ -190,22 +190,22 @@ export class ChatComponent implements OnInit {
   }
 
 
-/*  public defaultWindowOptions(currentWindow: Window): IChatOption[] {
-    // tslint:disable-next-line:triple-equals
-    if (this.groupAdapter && currentWindow.participant.participantType == ChatParticipantType.User) {
-      return [{
-        isActive: false,
-        action: (chattingWindow: Window) => {
+  /*  public defaultWindowOptions(currentWindow: Window): IChatOption[] {
+      // tslint:disable-next-line:triple-equals
+      if (this.groupAdapter && currentWindow.participant.participantType == ChatParticipantType.User) {
+        return [{
+          isActive: false,
+          action: (chattingWindow: Window) => {
 
-          this.selectedUsersFromFriendsList = this.selectedUsersFromFriendsList.concat(chattingWindow.participant as unknown as User);
-        },
-        validateContext: (participant: IChatParticipant) => {
-          // tslint:disable-next-line:triple-equals
-          return participant.participantType == ChatParticipantType.User;
-        },
-        displayLabel: 'Add People' // TODO: Localize this
-      }];
-    }*/
+            this.selectedUsersFromFriendsList = this.selectedUsersFromFriendsList.concat(chattingWindow.participant as unknown as User);
+          },
+          validateContext: (participant: IChatParticipant) => {
+            // tslint:disable-next-line:triple-equals
+            return participant.participantType == ChatParticipantType.User;
+          },
+          displayLabel: 'Add People' // TODO: Localize this
+        }];
+      }*/
 
 
   /*triggerToggleChatWindowVisibility(userId: any): void {

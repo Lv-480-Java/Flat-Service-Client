@@ -13,9 +13,14 @@ export class ChatService {
   }
 
   baseUrl = 'http://localhost:8080/messages/';
+  url = 'http://localhost:8080/chat';
 
   getMessagesByChatId(id: number): Observable<Message[]> {
     return this.http.get<Message[]>(this.baseUrl + id);
+  }
+
+  getChatId(username: string, id: number): Observable<number> {
+      return this.http.get<number>(this.url + '?recieverName=' + username + '&senderId=' + id);
   }
 }
 
