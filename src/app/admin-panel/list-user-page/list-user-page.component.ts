@@ -78,7 +78,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.user = result;
+      this.users = result;
     }).unsubscribe();
   }
 

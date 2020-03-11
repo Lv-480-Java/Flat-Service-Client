@@ -26,7 +26,7 @@ const routes: Routes = [
     ]
   },
   { path: 'data', component: ProfileUserComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent },
   { path: 'flats', component: FlatListComponent },
   { path: 'detailed/:id', component: FlatDetailedComponent },
   { path: '',
