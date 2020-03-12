@@ -11,8 +11,6 @@ import {BASE_URL} from '../utils/constants';
 })
 export class AdminService {
 
-  path = 'api';
-
   constructor(private http: HttpClient) {
   }
 
@@ -30,68 +28,23 @@ export class AdminService {
 
 
   approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
-    const url = BASE_URL + 'admin/requests/flats/${id}/approve';
+    const url = BASE_URL + `admin/requests/flats/${id}/approve`;
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
 
   declineFlatRequests(id: number): Observable<RequestsForFlatVerification> {
-    const url = BASE_URL + 'admin/requests/flats/${id}/decline';
+    const url = BASE_URL + `admin/requests/flats/${id}/decline`;
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
   approveUserRequests(id: number): Observable<RequestsForFlatVerification> {
-    const url = BASE_URL + 'admin/requests/users/${id}/approve';
+    const url = BASE_URL + `admin/requests/users/${id}/approve`;
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
   declineUserRequests(id: number): Observable<RequestsForFlatVerification> {
-    const url = BASE_URL + 'admin/requests/users/${id}/decline';
+    const url = BASE_URL + `admin/requests/users/${id}/decline`;
     return this.http.put<RequestsForFlatVerification>(url, null);
-  }
-
-  countActiveFlats(): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'admin/statistics/active-flats');
-  }
-
-  countActiveUsers(): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'admin/statistics/active-users');
-  }
-
-  countActiveLandlords(): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'admin/statistics/active-landlords');
-  }
-
-  getAllUsersCount(start, end): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/users-dynamics/${end}/${start}');
-  }
-
-  getAllLandlordsCount(start, end): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/landlords-dynamics/${end}/${start}');
-  }
-
-  getMonthNames(start, end): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/month-names/${end}/${start}');
-  }
-
-  getUsersData(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/users-landlords');
-  }
-
-  getFlatsData(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/active-unactive-flats');
-  }
-
-  getCommentsData(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/count-comments');
-  }
-
-  getRegisteredUsersForWeek(days: number): Observable<Array<number>> {
-    return this.http.get<Array<number>>(`api/admin/statistics/user-registration-dynamics/${days}`);
-  }
-
-  getCreatedFlatsForWeek(days: number): Observable<Array<number>> {
-    return this.http.get<Array<number>>(`api/admin/statistics/flat-creation-dynamics/${days}`);
-
   }
 }

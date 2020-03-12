@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-active-count',
@@ -12,17 +13,17 @@ export class ActiveCountComponent implements OnInit {
   countUsers: number;
   countLandlord: number;
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   ngOnInit() {
-    this.adminService.countActiveFlats().subscribe(count => {
+    this.statisticsService.countActiveFlats().subscribe(count => {
       this.countFlats = count;
     });
-    this.adminService.countActiveUsers().subscribe(count => {
+    this.statisticsService.countActiveUsers().subscribe(count => {
       this.countUsers = count;
     });
-    this.adminService.countActiveLandlords().subscribe(count => {
+    this.statisticsService.countActiveLandlords().subscribe(count => {
       this.countLandlord = count;
     });
   }

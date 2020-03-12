@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-user-chart',
@@ -27,7 +28,7 @@ export class UserChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
 
@@ -39,12 +40,13 @@ export class UserChartComponent implements OnInit {
   }
 
   updateDataset() {
-    this.adminService.getRegisteredUsersForWeek(this.numberOfDays).subscribe(usersRegistered => {
+    this.statisticsService.getRegisteredUsersForWeek(this.numberOfDays).subscribe(usersRegistered => {
       this.chartDatasets = [
         {data: usersRegistered, label: 'Users registered'}
       ];
       this.totalUsers = usersRegistered.reduce((a, b) => a + b);
       this.shiftDays();
+      console.log('hello');
     });
   }
 

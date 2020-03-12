@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AdminService} from '../../../services/admin.service';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-diagram-comments',
@@ -23,11 +24,11 @@ export class DiagramCommentsComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
-    this.adminService.getCommentsData().subscribe(data => {
+    this.statisticsService.getCommentsData().subscribe(data => {
       this.chartDatasets = data;
     });
   }
