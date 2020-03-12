@@ -29,13 +29,13 @@ export class ProfileService {
   constructor(private http: HttpClient) {
   }
 
-  addPassport(): Observable<Landlord[]> {
-    return this.http.get<Landlord[]>('api/passport/1');
+  addPassport(): Observable<Landlord> {
+    return this.http.get<Landlord>('api/passport/1');
   }
   addUserInfo(): Observable<User> {
     return this.http.get<User>('api/user/1');
   }
-  updatePassport(data: Landlord[]): Observable<Landlord[]> {
-    return this.http.post<Landlord[]>('api/passport', JSON.stringify(data), this.options);
+  updatePassport(data: Landlord): Observable<Landlord> {
+    return this.http.post<Landlord>('api/passport', JSON.stringify(data), this.options);
   }
 }

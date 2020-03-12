@@ -8,7 +8,7 @@ import {User} from '../admin-panel/component/Users';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  data: Landlord [] = [];
+  data: Landlord;
   userData: User;
   constructor(private landlordService: ProfileService) {
   }
@@ -30,12 +30,12 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  updatePassport(data: Landlord[]) {
+  updatePassport(data: Landlord) {
     this.landlordService.updatePassport(data)
-      .subscribe(datan => {
-        this.data = datan;
+      .subscribe(dataREsp => {
+        this.data = dataREsp;
+        this.addPassport();
       });
-     window.location.href = ('api/profile');
   }
 }
 
