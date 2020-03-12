@@ -14,7 +14,8 @@ export class DialogWindowEditUserComponent {
               @Inject(MAT_DIALOG_DATA) public user: User) {}
 
   put() {
-    console.log();
+    this.userService.updateUser(this.user);
+    console.log('Updated user');
   }
 
   closeClick() {

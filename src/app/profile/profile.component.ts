@@ -36,6 +36,10 @@ export class ProfileComponent implements OnInit {
         this.data = dataREsp;
         this.addPassport();
       });
+<<<<<<< HEAD
+=======
+    window.location.href = ('/profile');
+>>>>>>> master
   }
 }
 

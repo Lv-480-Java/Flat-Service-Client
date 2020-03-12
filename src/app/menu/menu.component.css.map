@@ -1,7 +1,7 @@
 {
 "version": 3,
-"mappings": "",
-"sources": [],
+"mappings": "AAAA,eAAgB;EACd,gBAAgB,EAAC,IAAY;EAAC,OAAO,EAAC,GAAG",
+"sources": ["menu.component.scss"],
 "names": [],
 "file": "menu.component.css"
 }
