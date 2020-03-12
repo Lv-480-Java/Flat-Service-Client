@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProfileUserService} from '../services/profile.user.service';
 import {User} from '../admin-panel/component/Users';
 
@@ -9,24 +9,26 @@ import {User} from '../admin-panel/component/Users';
 })
 export class ProfileUserComponent implements OnInit {
   userData: User;
-  constructor(private profileUserService: ProfileUserService) { }
+
+  constructor(private profileUserService: ProfileUserService) {
+  }
 
   ngOnInit(): void {
     this.addUserData();
   }
 
   addUserData() {
-    this.profileUserService. addUserData()
+    this.profileUserService.addUserData()
       .subscribe(userData => {
         this.userData = userData;
       });
   }
+
   updateUserData(userData: User) {
     this.profileUserService.updateUserData(userData)
-      .subscribe(userdat => {
-        this.userData = userdat;
+      .subscribe(userDataResp => {
+        this.userData = userDataResp;
+        this.addUserData();
       });
-    window.location.href = ('api/data');
   }
-
 }

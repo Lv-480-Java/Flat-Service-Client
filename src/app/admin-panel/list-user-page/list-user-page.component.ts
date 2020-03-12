@@ -19,7 +19,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
   pageSize = 5;
   vSub: Subscription;
   dSub: Subscription;
-  displayedColumns: string[] = ['id', 'username', 'email', 'password', 'phone', 'photo', 'edit', 'button'];
+  displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'role', 'edit', 'button'];
   dataSource = new MatTableDataSource<User>();
 
   constructor(private userService: UserService, public dialog: MatDialog) {}
@@ -49,6 +49,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
       (document.getElementById('phone') as HTMLInputElement).value = '';
       this.getAllUserByPage();
     });
+    console.log('Created user');
   }
 
   getAllUserByPage() {
@@ -60,6 +61,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
         this.dataSource = new MatTableDataSource<User>(this.users);
         this.paginator.length = totalElements.length;
       });
+    console.log('Get users');
   }
 
   paginationPage() {
@@ -76,7 +78,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.user = result;
+      this.users = result;
     }).unsubscribe();
   }
 
@@ -86,6 +88,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource<User>(this.users);
       this.getAllUserByPage();
     });
+    console.log('Deleted user');
   }
 
   ngOnDestroy(): void {
@@ -95,5 +98,6 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
     if (this.dSub) {
       this.dSub.unsubscribe();
     }
+    console.log('Finished destroy');
   }
 }

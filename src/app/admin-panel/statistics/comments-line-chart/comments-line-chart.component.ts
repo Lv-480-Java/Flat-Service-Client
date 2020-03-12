@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {BASE_URL} from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-comments-line-chart',
@@ -40,8 +41,8 @@ export class CommentsLineChartComponent implements OnInit {
   }
 
   updateData() {
-    this.http.get<Array<number>>('api/admin/statistics/user-comments-dynamics/7').subscribe(userCommnts => {
-      this.http.get<Array<number>>('api/admin/statistics/flat-comments-dynamics/7').subscribe(flatCommnet => {
+    this.http.get<Array<number>>(BASE_URL + 'admin/statistics/user-comments-dynamics/7').subscribe(userCommnts => {
+      this.http.get<Array<number>>(BASE_URL + 'admin/statistics/flat-comments-dynamics/7').subscribe(flatCommnet => {
         this.chartDatasets = [
           {data: userCommnts, label: 'User Comments'},
           {data: flatCommnet, label: 'Flat Comments'},

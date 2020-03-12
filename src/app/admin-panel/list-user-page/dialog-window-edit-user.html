@@ -1,5 +1,5 @@
 <div class="dialog-window">
-  <form method="post" class="example-form">
+  <form method="post" class="dialog-form">
     <mat-form-field class="example-full-width">
       <mat-label>Username</mat-label>
       <input matInput type="text" id="username" value="" placeholder="Field">
@@ -10,7 +10,7 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Password</mat-label>
-      <input matInput type="text" id="password" value="" placeholder="Field">
+      <input matInput type="password" id="password" value="" placeholder="Field">
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Phone</mat-label>
@@ -18,11 +18,11 @@
       <input matInput type="text" id="phone" value="" placeholder="555-555-1234">
       <mat-icon matSuffix>mode_edit</mat-icon>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Photo</mat-label>
-      <input matInput type="text" id="photoUrl" value="" placeholder="Field">
-    </mat-form-field>
-    <button cdkFocusInitial mat-raised-button color="primary" [mat-dialog-close]="" (click)="put()">Save</button>
+    <br>
+      <label for="photoUrl" style="margin: 10px">Choose a photo</label><i class="material-icons" style="margin-top: 2px">account_box</i><br>
+      <input type="file" style="margin: 10px 10px; width: 220px" id="photoUrl" value="" placeholder="Field" class="input-file">
+    <br>
+    <button class="dialog-button" cdkFocusInitial mat-raised-button color="primary" [mat-dialog-close]="" (click)="put()">Save</button>
     <button mat-raised-button color="basic" (click)="closeClick()">Cancel</button>
   </form>
 </div>
