@@ -32,14 +32,11 @@ export class ProfileComponent implements OnInit {
 
   updatePassport(data: Landlord) {
     this.landlordService.updatePassport(data)
-      .subscribe(dataREsp => {
-        this.data = dataREsp;
+      .subscribe(dataResp => {
+        this.data = dataResp;
         this.addPassport();
       });
-<<<<<<< HEAD
-=======
-    window.location.href = ('/profile');
->>>>>>> master
+
   }
 }
 
