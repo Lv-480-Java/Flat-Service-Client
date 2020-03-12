@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,KAAM;EACJ,KAAK,EAAE,IAAI",
-"sources": ["landlord-requests.component.scss"],
-"names": [],
-"file": "landlord-requests.component.css"
-}
