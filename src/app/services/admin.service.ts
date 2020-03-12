@@ -27,9 +27,11 @@ export class AdminService {
     return this.http.get<RequestsForUserVerification[]>('api/admin/requests/users/moderators');
   }
 
-  approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
+  approveFlatRequests(id: number): void {
+    console.log('approve');
     const url = `api/admin/requests/flats/${id}/approve`;
-    return this.http.put<RequestsForFlatVerification>(url, null);
+    console.log(url);
+    this.http.put<RequestsForFlatVerification>(url, null);
   }
 
 

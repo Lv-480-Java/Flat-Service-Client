@@ -15,7 +15,6 @@ export class FlatRequestsComponent implements OnInit {
   requests: RequestsForFlatVerification[];
 
 
-
   displayedColumns: string[] = ['id', 'author', 'date', 'review', 'approve', 'decline'];
   dataSource: MatTableDataSource<RequestsForFlatVerification>;
 
@@ -24,7 +23,12 @@ export class FlatRequestsComponent implements OnInit {
   constructor(private adminService: AdminService) {
   }
 
+
   ngOnInit(): void {
+    this.getData();
+  }
+
+  getData() {
     this.adminService.getFlatRequests()
       .subscribe(request => {
         console.log(request);
@@ -32,6 +36,7 @@ export class FlatRequestsComponent implements OnInit {
         this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(request);
       });
   }
+
 
   review(id: string) {
     window.location.href = (`http://localhost:4200/detailed/${id}`);
@@ -47,11 +52,9 @@ export class FlatRequestsComponent implements OnInit {
   }
 
   approve(id: number) {
-    this.adminService.approveFlatRequests(id)
-      .subscribe(request => {
-        this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(this.requests);
-      });
-    window.location.href = ('http://localhost:4200/admin/requests/flats');
+    this.adminService.approveFlatRequests(id);
+    this.ngOnInit();
+    // window.location.href = ('http://localhost:4200/admin/requests/flats');
   }
 
 }
