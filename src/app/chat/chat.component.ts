@@ -52,7 +52,11 @@ export class ChatComponent implements OnInit {
 
   @ViewChild('content') content: ElementRef;
 
+/*
   serverUrl = 'http://localhost:8080/ws/';
+*/
+  serverUrl = '/api/ws/';
+
   private stompClient;
   currentUserId: number;
   // tslint:disable-next-line:ban-types
@@ -63,11 +67,13 @@ export class ChatComponent implements OnInit {
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   chatMessageInfo: ChatMessageInfoDTO = new ChatMessageInfoDTO(null, null, null);
+  showEmojiPicker = false;
+  windows: Window[] = [];
 
   ngOnInit() {
     // this.authService.getCurrentUser().subscribe(data => this.currentAccountId = data.id);
     console.log(this.username);
-    this.currentUserId = 6;
+    this.currentUserId = 1;
     this.chatService.getChatId(this.username, this.currentUserId)
       .subscribe((data: number) => {
         this.chatId = data;

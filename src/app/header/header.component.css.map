@@ -1,1 +1,7 @@
-{"version":3,"sourceRoot":"","sources":["header.component.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;;;AAGF;EACE;EACA","file":"header.component.css"}
+{
+"version": 3,
+"mappings": "",
+"sources": [],
+"names": [],
+"file": "header.component.css"
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../User';
-import {HttpUserService} from '../services/http.user.service';
+import {RegistrationService} from '../services/registration.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -8,19 +9,40 @@ import {HttpUserService} from '../services/http.user.service';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+  form: FormGroup;
 
-  user: User = new User();
-  done = false;
-  constructor(private httpService: HttpUserService) {}
-  submit(user: User) {
-    this.httpService.postData(user)
+  constructor(private registrationService: RegistrationService,
+              private router: Router) {
+  }
+
+  submit() {
+    this.registrationService.register(this.form.value)
       .subscribe(
-        (data: User) => {this.done = true; },
-        error => console.log(error)
+        response => console.log('Success!', response),
+        error => console.log('Error!', error)
       );
+
+    this.form.reset();
+    this.router.navigate(['/login']);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.form = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+      ]),
+      email: new FormControl(null, [
+        Validators.email,
+        Validators.required
+      ]),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^\\+?3?8?(0\\d{9})$')
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6)
+      ])
+    });
   }
-
 }

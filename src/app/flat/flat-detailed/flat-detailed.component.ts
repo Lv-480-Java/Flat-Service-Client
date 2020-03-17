@@ -37,7 +37,7 @@ export class FlatDetailedComponent implements OnInit {
   }
 
   loadFlat(): void {
-    const c = 'http://localhost:8080/flat/' + this.id;
+    const c = '/api/flat/' + this.id;
     this.http.get(c)
       .subscribe(data => {
         this.data = data;

@@ -1,1 +1,7 @@
-{"version":3,"sourceRoot":"","sources":["registration.component.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;EACA;EACA;EACA;EACA;;;AAGF;EACE;EACA","file":"registration.component.css"}
+{
+"version": 3,
+"mappings": "AAAA,IAAK;EACH,gBAAgB,EAAE,GAAG;;AAGvB,IAAK;EACH,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,QAAQ,EAAE,QAAQ;EAClB,IAAI,EAAE,GAAG;EACT,GAAG,EAAE,GAAG;EACR,SAAS,EAAE,qBAAqB;EAChC,gBAAgB,EAAE,UAAU;;AAI5B,2BAAwB;EACtB,MAAM,EAAE,aAAa;AAGvB,yBAAsB;EACpB,MAAM,EAAE,eAAe;;AAI3B,KAAM;EACJ,KAAK,EAAE,GAAG;EACV,SAAS,EAAE,IAAI",
+"sources": ["registration.component.scss"],
+"names": [],
+"file": "registration.component.css"
+}
