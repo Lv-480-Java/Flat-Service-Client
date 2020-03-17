@@ -9,6 +9,7 @@ import {SearchParameters} from './entity/SearchParameters';
 import {map, startWith} from 'rxjs/operators';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {BASE_URL} from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-flat-filter',
@@ -74,7 +75,7 @@ export class FlatFilterComponent implements OnInit {
   }
 
   loadTags() {
-    this.http.get('/api/tag').subscribe((data: string[]) => {
+    this.http.get(BASE_URL + 'tag').subscribe((data: string[]) => {
       console.log(data);
       this.allTags = data;
       this.filteredTags = this.tagCtrl.valueChanges.pipe(

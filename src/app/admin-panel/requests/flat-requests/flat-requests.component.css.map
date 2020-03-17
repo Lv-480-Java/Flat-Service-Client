@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAAA,KAAM;EACJ,KAAK,EAAE,IAAI",
-"sources": ["flat-requests.component.scss"],
-"names": [],
-"file": "flat-requests.component.css"
-}

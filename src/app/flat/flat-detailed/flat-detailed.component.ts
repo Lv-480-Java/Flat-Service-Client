@@ -3,6 +3,7 @@ import {GalleryItem, ImageItem} from '@ngx-gallery/core';
 import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {FlatDetailed} from './entity/FlatDetailed';
+import {BASE_URL} from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-flat-detailed',
@@ -37,7 +38,7 @@ export class FlatDetailedComponent implements OnInit {
   }
 
   loadFlat(): void {
-    const c = '/api/flat/' + this.id;
+    const c = BASE_URL + 'flat/' + this.id;
     this.http.get(c)
       .subscribe(data => {
         this.data = data;

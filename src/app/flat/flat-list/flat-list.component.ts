@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
+import {BASE_URL} from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-flat-list',
@@ -26,7 +27,7 @@ export class FlatListComponent implements OnInit {
 
   loadFlats() {
     this.pageNumber = 0;
-    this.http.put('/api/flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options)
+    this.http.put(BASE_URL + 'flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options)
       .subscribe(data => {
         this.data = data;
         this.flats = this.data;
@@ -40,7 +41,7 @@ export class FlatListComponent implements OnInit {
   }
 
   loadNextPost() {
-    this.http.put('/api/flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options).subscribe(data => {
+    this.http.put(BASE_URL + 'flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options).subscribe(data => {
       this.data = data;
       this.flats.content = this.flats.content.concat(this.data.content);
     });

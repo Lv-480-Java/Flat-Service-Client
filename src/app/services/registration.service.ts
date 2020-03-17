@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {BASE_URL} from '../utils/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationService {
-  url = '/api/users/create';
+  url = BASE_URL + 'users/create';
 
   constructor(private http: HttpClient) {
   }

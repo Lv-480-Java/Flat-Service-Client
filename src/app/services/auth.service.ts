@@ -3,12 +3,13 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User} from '../shared/interfaces';
 import {Observable, Subject, throwError} from 'rxjs';
 import {catchError, tap} from 'rxjs/operators';
+import {BASE_URL} from '../utils/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  url = `/api/users/signIn`;
+  url = BASE_URL + 'users/signIn';
   public error$: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient) {
@@ -52,6 +53,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.token;
+    const token = localStorage.getItem('accesstoken');
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (token && user) {
+      return true;
+    }
+    return false;
   }
 }
