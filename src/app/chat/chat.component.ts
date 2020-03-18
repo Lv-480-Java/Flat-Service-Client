@@ -55,7 +55,7 @@ export class ChatComponent implements OnInit {
 /*
   serverUrl = 'http://localhost:8080/ws/';
 */
-  serverUrl = '/api/ws/';
+  serverUrl = 'http://localhost:8080/api/ws/';
 
   private stompClient;
   currentUserId: number;
@@ -73,7 +73,7 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     // this.authService.getCurrentUser().subscribe(data => this.currentAccountId = data.id);
     console.log(this.username);
-    this.currentUserId = 1;
+    this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
     this.chatService.getChatId(this.username, this.currentUserId)
       .subscribe((data: number) => {
         this.chatId = data;

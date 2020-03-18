@@ -12,11 +12,10 @@ export class ChatService {
   constructor(private http: HttpClient) {
   }
 
- /* baseUrl = 'http://localhost:8080/messages/';
-  url = 'http://localhost:8080/chat';
-*/
-  url = '/api/chat';
-  baseUrl = '/api/messages/';
+  baseUrl = 'http://localhost:8080/api/messages/';
+  url = 'http://localhost:8080/api/chat';
+/*  url = '/api/chat';
+  baseUrl = '/api/messages/';*/
   getMessagesByChatId(id: number): Observable<Message[]> {
     return this.http.get<Message[]>(this.baseUrl + id);
   }
