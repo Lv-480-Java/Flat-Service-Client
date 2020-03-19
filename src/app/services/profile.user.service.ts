@@ -17,6 +17,6 @@ export class ProfileUserService {
   }
 
   updateUserData(userData: User): Observable<User> {
-    return this.http.post<User>(BASE_URL + 'users/userUpdate/' + this.id, JSON.stringify(userData), this.options);
+    return this.http.put<User>(BASE_URL + 'users/update/all', JSON.stringify(userData), this.options);
   }
 }
