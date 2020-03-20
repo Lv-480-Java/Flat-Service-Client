@@ -49,11 +49,11 @@ export class FlatDetailedComponent implements OnInit {
 
   loadImages(): void {
     this.images = [];
-    // this.flatDetailed.photos.forEach((value) => {
-    //   this.images.push(new ImageItem({
-    //     src: value,
-    //     thumb: value
-    //   }));
-    // });
+    this.flatDetailed.photos.forEach((value) => {
+      this.images.push(new ImageItem({
+        src: value,
+        thumb: value
+      }));
+    });
   }
 }

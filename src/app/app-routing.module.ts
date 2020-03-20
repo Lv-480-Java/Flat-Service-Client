@@ -18,6 +18,7 @@ import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-reque
 import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
 import {AuthGuard} from './guards/auth.guard';
 import {ProfileUserComponent} from './profile-user/profile-user.component';
+import {ProfileShortComponent} from './profile-short/profile-short.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -41,6 +42,7 @@ const routes: Routes = [
   },
 
   {path: 'data', component: ProfileUserComponent},
+  {path: 'short_profile', component: ProfileShortComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'flats', component: FlatListComponent},
   {path: 'detailed/:id', component: FlatDetailedComponent},
