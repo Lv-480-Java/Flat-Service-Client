@@ -45,7 +45,7 @@ export class ModeratorRequestsComponent implements OnInit {
 
   approve(id: number) {
     this.adminService.approveUserRequests(id)
-      .subscribe(request => {
+      .subscribe(() => {
         this.dataSource = new MatTableDataSource<RequestsForUserVerification>(this.requests);
       });
     window.location.href = ('http://localhost:4200/admin/requests/moderators');

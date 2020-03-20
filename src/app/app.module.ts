@@ -62,6 +62,7 @@ import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 import {MatListModule} from '@angular/material/list';
 import { ProfileShortComponent } from './profile-short/profile-short.component';
+import { RenterRequestsComponent } from './admin-panel/requests/renter-requests/renter-requests.component';
 
 
 @NgModule({
@@ -104,6 +105,7 @@ import { ProfileShortComponent } from './profile-short/profile-short.component';
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
+    RenterRequestsComponent,
 
   ],
   imports: [

@@ -19,6 +19,7 @@ import {StatisticsComponent} from './admin-panel/statistics/statistics.component
 import {AuthGuard} from './guards/auth.guard';
 import {ProfileUserComponent} from './profile-user/profile-user.component';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
+import {RenterRequestsComponent} from './admin-panel/requests/renter-requests/renter-requests.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
       {
         path: 'requests', component: RequestsComponent, children: [
           {path: 'flats', component: FlatRequestsComponent},
+          {path: 'renters', component: RenterRequestsComponent},
           {path: 'landlords', component: LandlordRequestsComponent},
           {path: 'moderators', component: ModeratorRequestsComponent}
         ]
