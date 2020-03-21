@@ -2,12 +2,20 @@
   <mdb-card>
     <mdb-card-body>
       <mdb-card-title>
-        <span class="bar-chart-label">Requests For Flat Publication</span>
+        <div class="requests-lebel-text">Requests For Flat Publication</div>
+        <mat-form-field class="status-select">
+          <mat-label>Status</mat-label>
+          <mat-select [(value)]="selected">
+            <mat-option value="option1">ALL</mat-option>
+            <mat-option value="option2">VERIFYING</mat-option>
+            <mat-option value="option3">APPROVED</mat-option>
+            <mat-option value="option4">DECLINED</mat-option>
+          </mat-select>
+        </mat-form-field>
       </mdb-card-title>
     </mdb-card-body>
   </mdb-card>
 </div>
-
 
 <div class="mat-elevation-z8 req-table">
   <table mat-table [dataSource]="dataSource">

@@ -19,6 +19,7 @@ export class FlatRequestsComponent implements OnInit {
   dataSource: MatTableDataSource<RequestsForFlatVerification>;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  selected = 'option1';
 
   constructor(private adminService: AdminService) {
   }

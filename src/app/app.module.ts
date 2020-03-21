@@ -63,6 +63,7 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
 import {MatListModule} from '@angular/material/list';
 import { ProfileShortComponent } from './profile-short/profile-short.component';
 import { RenterRequestsComponent } from './admin-panel/requests/renter-requests/renter-requests.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -108,34 +109,35 @@ import { RenterRequestsComponent } from './admin-panel/requests/renter-requests/
     RenterRequestsComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule,
-    GalleryModule,
-    MatAutocompleteModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatListModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        Ng5SliderModule,
+        MatSliderModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        FlexModule,
+        InfiniteScrollModule,
+        MatChipsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        BrowserAnimationsModule,
+        GalleryModule,
+        MatAutocompleteModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatListModule,
+        MatSelectModule,
+    ],
   providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
