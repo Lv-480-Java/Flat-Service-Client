@@ -31,7 +31,7 @@ export class ProfileService {
   }
 
   addPassport(): Observable<Landlord> {
-    return this.http.get<Landlord>(BASE_URL + 'passport/1');
+    return this.http.get<Landlord>(BASE_URL + 'passport/' + this.id);
 
   }
 
@@ -40,7 +40,7 @@ export class ProfileService {
   }
 
   updatePassport(data: Landlord): Observable<Landlord> {
-    return this.http.post<Landlord>( BASE_URL + 'passport/1', JSON.stringify(data), this.options);
+    return this.http.post<Landlord>( BASE_URL + 'passport/' + this.id, JSON.stringify(data), this.options);
 
   }
 }
