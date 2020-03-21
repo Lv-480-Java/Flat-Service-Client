@@ -12,7 +12,7 @@ export class AdminService {
 
   constructor(private http: HttpClient) {
   }
-
+  
   getFlatRequests(): Observable<RequestsForFlatVerification[]> {
     return this.http.get<RequestsForFlatVerification[]>(BASE_URL + 'requests/flats');
   }
@@ -28,7 +28,6 @@ export class AdminService {
   getModeratorRequests(): Observable<RequestsForUserVerification[]> {
     return this.http.get<RequestsForUserVerification[]>(BASE_URL + 'requests/users/moderators');
   }
-
 
   approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
     const url = BASE_URL + `requests/flats/${id}/approve`;
