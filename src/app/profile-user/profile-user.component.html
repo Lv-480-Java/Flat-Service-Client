@@ -40,7 +40,7 @@
           <form class="form" action=""  method="post"  enctype="multipart/form-data" id="registrationForm">
             <div class="form-group">
 
-              <div class="col-xs-6">
+              <div class="col-xs-6" >
                 <h4>Nick name</h4>
 
                 <input type="text" class="form-control"   [(ngModel)]="userData.username" [ngModelOptions]="{standalone:true}">
@@ -74,6 +74,7 @@
                 <br>
                 <button mat-raised-button color="primary"  style="margin:20px;" (click)="updateUserData(userData)" type="submit"> Save</button>
                 <button mat-raised-button color="warn"   type="reset">Reset</button>
+                <button mat-raised-button color="primary"  style="margin:20px;"  type="submit" [disabled]="!landlordData"> Landlord</button>
             </div>
             </div>
           </form>
