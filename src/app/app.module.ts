@@ -59,6 +59,7 @@ import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart
 import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
 import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
+import { ProfileShortComponent } from './profile-short/profile-short.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {MatBadgeModule} from '@angular/material/badge';
 
@@ -101,6 +102,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     UserChartComponent,
     FlatChartComponent,
     ActiveCountComponent,
+    ProfileShortComponent,
+
     ChatButtonComponent
   ],
   imports: [

@@ -6,17 +6,17 @@ import {BASE_URL} from '../utils/constants';
 
 @Injectable({providedIn: 'root'})
 export class ProfileUserService {
-
+  id = JSON.parse(localStorage.getItem('user')).userId;
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   constructor(private http: HttpClient) {
   }
 
   addUserData(): Observable<User> {
-    return this.http.get<User>(BASE_URL + 'user/1');
+    return this.http.get<User>(BASE_URL + 'users/' + this.id);
   }
 
   updateUserData(userData: User): Observable<User> {
-    return this.http.post<User>(BASE_URL + 'userUpdate/1', JSON.stringify(userData), this.options);
+    return this.http.put<User>(BASE_URL + 'users/update/all', JSON.stringify(userData), this.options);
   }
 }
