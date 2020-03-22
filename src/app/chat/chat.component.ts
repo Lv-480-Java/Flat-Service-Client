@@ -1,16 +1,23 @@
-import {AfterViewChecked, Component, ElementRef, Input, HostListener, OnInit, ViewChild, ViewChildren} from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  Input,
+  HostListener,
+  OnInit,
+  ViewChild,
+  ViewChildren,
+  EventEmitter,
+  Output
+} from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {Message} from '../model/message.model';
 import {ChatMessageInfoDTO} from '../model/chat-message.model';
 import {ChatService} from './chat.service';
-/*import {Comment} from '../../model/comment.model';*/
 import {DeleteMessageInfoDTO} from '../model/chat-message-delete.model';
-import {Window} from '../model/window';
-import {IChatOption} from '../model/chat-option';
-import {IChatGroupAdapter} from '../model/chat-group-adapter';
-import {ChatParticipantType} from '../model/chat-participant-type.enum';
 import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 
 (window as any).global = window;
@@ -20,26 +27,28 @@ import {Observable} from 'rxjs';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewChecked {
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private http: HttpClient) {
   }
+
+  serverUrl = 'http://localhost:8080/api/ws/';
+  baseUrl = 'http://localhost:8080/api/messages/';
+  url = 'http://localhost:8080/api/chat';
+
+  @Output()
+  public onMessagesSeen: EventEmitter<Message[]> = new EventEmitter<Message[]>();
 
   @Input() username: string;
 
-  public ChatParticipantType = ChatParticipantType;
-  /* public ChatParticipantStatus = ChatParticipantStatus;
-   public MessageType = MessageType;*/
-
-  public currentActiveOption: IChatOption | null;
-
-  /*@Input() chatId: Observable<Object>;*/
+  @Input()
+  public browserNotificationsEnabled = true;
 
   @Input()
   public isCollapsed = false;
 
   @Input()
-  public groupAdapter: IChatGroupAdapter;
+  public audioEnabled = true;
 
   @Input()
   public messageDatePipeFormat = 'short';
@@ -50,43 +59,72 @@ export class ChatComponent implements OnInit {
   @Input()
   public linkfyEnabled = true;
 
-  @ViewChild('content') content: ElementRef;
+  @Input()
+  public browserNotificationIconSource = 'https://raw.githubusercontent.com/rpaschoal/ng-chat/master/src/ng-chat/assets/notification.png';
 
-/*
-  serverUrl = 'http://localhost:8080/ws/';
-*/
-  serverUrl = 'http://localhost:8080/api/ws/';
+  @Input()
+  public audioSource = 'https://raw.githubusercontent.com/rpaschoal/ng-chat/master/src/ng-chat/assets/notification.wav';
+
+  private audioFile: HTMLAudioElement;
+
+  private browserNotificationsBootstrapped = false;
 
   private stompClient;
+  pageNumber: number;
   currentUserId: number;
-  // tslint:disable-next-line:ban-types
-  msg: String;
   messages: Message[] = [];
   chatId: number;
   data: any;
+
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
   chatMessageInfo: ChatMessageInfoDTO = new ChatMessageInfoDTO(null, null, null);
-  showEmojiPicker = false;
   windows: Window[] = [];
+  private hasFocus: boolean;
 
   ngOnInit() {
-    // this.authService.getCurrentUser().subscribe(data => this.currentAccountId = data.id);
     console.log(this.username);
     this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
     this.chatService.getChatId(this.username, this.currentUserId)
       .subscribe((data: number) => {
         this.chatId = data;
-        this.chatService.getMessagesByChatId(this.chatId).subscribe(data1 => this.messages = data1);
+        this.loadMessages();
         this.initializeWebSocketConnection();
         this.scrollToBottom();
+        this.initializeBrowserNotifications();
       });
   }
 
 
-  // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewChecked() {
     this.scrollToBottom();
+  }
+
+  loadMessages() {
+    this.pageNumber = 0;
+    this.getMessagesByChatId(this.chatId).subscribe(data => {
+      this.data = data;
+      this.messages = this.data;
+    });
+  }
+
+  onScroll() {
+    this.pageNumber = this.pageNumber + 1;
+    this.loadNextPost();
+    console.log(this.pageNumber);
+  }
+
+  getMessagesByChatId(id: number): Observable<Message[]> {
+    console.log(this.pageNumber);
+    return this.http.get<Message[]>(this.baseUrl + id + '/' + this.pageNumber);
+  }
+
+  loadNextPost() {
+    this.getMessagesByChatId(this.chatId).subscribe(data => {
+      this.data = data;
+      this.messages = this.data.concat(this.messages);
+      console.log(this.data);
+    });
   }
 
   scrollToBottom(): void {
@@ -97,6 +135,13 @@ export class ChatComponent implements OnInit {
     }
   }
 
+  private async initializeBrowserNotifications() {
+    if (this.browserNotificationsEnabled && ('Notification' in window)) {
+      if (await Notification.requestPermission()) {
+        this.browserNotificationsBootstrapped = true;
+      }
+    }
+  }
 
   initializeWebSocketConnection() {
     const ws = new SockJS(this.serverUrl);
@@ -111,6 +156,7 @@ export class ChatComponent implements OnInit {
   openSocket() {
     this.stompClient.subscribe('/topic/messages/' + this.chatId, (message) => {
       this.handleResult(message);
+      this.emitBrowserNotification(message);
     });
   }
 
@@ -124,6 +170,10 @@ export class ChatComponent implements OnInit {
       } else {
         const messageResult: Message = JSON.parse(message.body);
         this.messages.push(messageResult);
+        console.log(this.currentUser());
+        console.log(this.chatMessageInfo.userId);
+        this.bufferAudioFile();
+        this.emitMessageSound();
       }
     }
   }
@@ -148,34 +198,8 @@ export class ChatComponent implements OnInit {
     console.log('delete message');
   }
 
-  /*  getImageString(id: number) {
-      return 'http://localhost:8080/accounts/' + id + '/image';
-    }*/
-
-  onChatTitleClicked(event: any): void {
-    this.isCollapsed = !this.isCollapsed;
-  }
-
-  /* onChatWindowClicked(window: Window): void {
-     window.isCollapsed = !window.isCollapsed;
-     this.scrollToBottom();
-   }*/
-
-  /*
-    onCloseChatWindow(window: Window): void {
-      const index = this.windows.indexOf(window);
-
-      this.windows.splice(index, 1);
-
-      this.updateWindowsState(this.windows);
-
-      this.onParticipantChatClosed.emit(window.participant);
-    }
-  */
-
   private formatUnreadMessagesTotal(totalUnreadMessages: number): string {
     if (totalUnreadMessages > 0) {
-
       if (totalUnreadMessages > 99) {
         return '99+';
       } else {
@@ -185,42 +209,73 @@ export class ChatComponent implements OnInit {
   }
 
   // Returns the total unread messages from a chat window. TODO: Could use some Angular pipes in the future
+/*
   unreadMessagesTotal(window: Window): string {
     let totalUnreadMessages = 0;
 
     if (window) {
       // tslint:disable-next-line:triple-equals
-      totalUnreadMessages = window.messages.filter(x => x.fromId != this.currentUserId && !x.dateSeen).length;
+      totalUnreadMessages = window.messages.filter(x => x.senderId != this.currentUserId && !x.dateSeen).length;
     }
     return this.formatUnreadMessagesTotal(totalUnreadMessages);
   }
+*/
 
-
-  /*  public defaultWindowOptions(currentWindow: Window): IChatOption[] {
-      // tslint:disable-next-line:triple-equals
-      if (this.groupAdapter && currentWindow.participant.participantType == ChatParticipantType.User) {
-        return [{
-          isActive: false,
-          action: (chattingWindow: Window) => {
-
-            this.selectedUsersFromFriendsList = this.selectedUsersFromFriendsList.concat(chattingWindow.participant as unknown as User);
-          },
-          validateContext: (participant: IChatParticipant) => {
-            // tslint:disable-next-line:triple-equals
-            return participant.participantType == ChatParticipantType.User;
-          },
-          displayLabel: 'Add People' // TODO: Localize this
-        }];
-      }*/
-
-
-  /*triggerToggleChatWindowVisibility(userId: any): void {
-    const openedWindow = this.windows.find(x => x.participant.id == userId);
-
-  if (openedWindow) {
-    this.onChatWindowClicked(openedWindow);
+  public currentUser(): boolean {
+    return this.chatMessageInfo.userId !== this.currentUserId;
   }
-  }*/
+
+
+  // Marks all messages provided as read with the current time.
+  public markMessagesAsRead(messages: Message[]): void {
+    const currentDate = new Date();
+
+    messages.forEach((msg) => {
+      msg.dateSeen = currentDate;
+    });
+  }
+
+  toggleWindowFocus(): void {
+    this.hasFocus = !this.hasFocus;
+    if (this.hasFocus) {
+      const unreadMessages = this.messages
+        .filter(message => message.dateSeen == null
+          && (message.senderId !== this.currentUserId));
+
+      if (unreadMessages && unreadMessages.length > 0) {
+        this.markMessagesAsRead(unreadMessages);
+        this.onMessagesSeen.emit(unreadMessages);
+      }
+    }
+  }
+
+  private bufferAudioFile(): void {
+    if (this.audioSource && this.audioSource.length > 0 && !this.hasFocus) {
+      this.audioFile = new Audio();
+      this.audioFile.src = this.audioSource;
+      this.audioFile.load();
+    }
+  }
+
+  private emitMessageSound(): void {
+    if (this.audioEnabled && this.audioFile && !this.hasFocus) {
+      this.audioFile.play();
+    }
+  }
+
+  private emitBrowserNotification(message: string): void {
+    console.log(this.hasFocus);
+    if (this.browserNotificationsBootstrapped && message && !this.hasFocus) {
+      const notification = new Notification(`${this.username}`, {
+        body: this.chatMessageInfo.content,
+        icon: this.browserNotificationIconSource
+      });
+      setTimeout(() => {
+        notification.close();
+      }, this.chatMessageInfo.content.length <= 50 ? 13000 : 17000); // More time to read longer messages
+      console.log(this.chatMessageInfo.content);
+    }
+  }
 }
 
 
