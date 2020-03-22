@@ -48,9 +48,6 @@ import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
 import {RequestsComponent} from './admin-panel/requests/requests.component';
-import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
-import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
-import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
 import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
 import {CommentsLineChartComponent} from './admin-panel/statistics/comments-line-chart/comments-line-chart.component';
 import {DiagramCommentsComponent} from './admin-panel/statistics/diagram-comments/diagram-comments.component';
@@ -62,7 +59,6 @@ import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 import {MatListModule} from '@angular/material/list';
 import { ProfileShortComponent } from './profile-short/profile-short.component';
-import { RenterRequestsComponent } from './admin-panel/requests/renter-requests/renter-requests.component';
 import {MatSelectModule} from '@angular/material/select';
 
 
@@ -93,9 +89,6 @@ import {MatSelectModule} from '@angular/material/select';
     LinkfyPipe,
     SanitizePipe,
     RequestsComponent,
-    ModeratorRequestsComponent,
-    LandlordRequestsComponent,
-    FlatRequestsComponent,
     StatisticsComponent,
     CommentsLineChartComponent,
     DiagramCommentsComponent,
@@ -106,8 +99,6 @@ import {MatSelectModule} from '@angular/material/select';
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
-    RenterRequestsComponent,
-
   ],
     imports: [
         BrowserModule,

@@ -12,21 +12,22 @@ export class AdminService {
 
   constructor(private http: HttpClient) {
   }
-  
-  getFlatRequests(): Observable<RequestsForFlatVerification[]> {
-    return this.http.get<RequestsForFlatVerification[]>(BASE_URL + 'requests/flats');
-  }
 
-  getRenterRequests(): Observable<RequestsForUserVerification[]> {
-    return this.http.get<RequestsForUserVerification[]>(BASE_URL + 'requests/users/renters');
-  }
-
-  getLandlordRequests(): Observable<RequestsForUserVerification[]> {
-    return this.http.get<RequestsForUserVerification[]>(BASE_URL + 'requests/users/landlords');
-  }
-
-  getModeratorRequests(): Observable<RequestsForUserVerification[]> {
-    return this.http.get<RequestsForUserVerification[]>(BASE_URL + 'requests/users/moderators');
+  getRequests(pageNumber: number, pageSize: number, type: string, status: string) {
+    switch (type) {
+      case 'FLATS':
+        return this.http.get<RequestsForFlatVerification[]>(
+          BASE_URL + `requests/flats?page=${pageNumber}&size=${pageSize}&status=${status}`);
+      case 'RENTERS':
+        return this.http.get<RequestsForFlatVerification[]>(
+          BASE_URL + `requests/renters?page=${pageNumber}&size=${pageSize}&status=${status}`);
+      case 'LANDLORDS':
+        return this.http.get<RequestsForFlatVerification[]>(
+          BASE_URL + `requests/landlords?page=${pageNumber}&size=${pageSize}&status=${status}`);
+      case 'MODERATORS':
+        return this.http.get<RequestsForFlatVerification[]>(
+          BASE_URL + `requests/moderators?page=${pageNumber}&size=${pageSize}&status=${status}`);
+    }
   }
 
   approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
@@ -48,4 +49,5 @@ export class AdminService {
     const url = BASE_URL + `requests/users/${id}/decline`;
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
+
 }
