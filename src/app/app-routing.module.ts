@@ -18,11 +18,13 @@ import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-reque
 import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
 import {AuthGuard} from './guards/auth.guard';
 import {ProfileUserComponent} from './profile-user/profile-user.component';
+import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
   {path: 'chat', component: ChatComponent},
+  {path: 'chatbutton', component: ChatButtonComponent},
   {
     path: 'admin', component: AdminLayoutComponent, children: [
       {path: 'dashboard', component: DashboardPageComponent},
