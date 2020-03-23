@@ -42,7 +42,6 @@ export class ProfileUserComponent implements OnInit {
         if (this.idPassport === null) {
           this.landlordData = false;
         }
-        this.addUserData();
       });
   }
 
