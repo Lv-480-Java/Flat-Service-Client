@@ -2,6 +2,7 @@
   <div>
     <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
       <h1>Comments</h1>
+      <p *ngIf="comments.length>0">Кількість коментарів {{comments.length}}</p>
       <hr>
       <div>
         <input
