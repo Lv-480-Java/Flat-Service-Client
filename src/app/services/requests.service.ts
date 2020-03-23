@@ -4,7 +4,9 @@ import {Observable} from 'rxjs';
 import {RequestsForFlatVerification} from '../admin-panel/requests/entity/requests-for-flat-verification';
 import {RequestsForUserVerification} from '../admin-panel/requests/entity/request-for-user-verification';
 import {BASE_URL} from '../utils/constants';
-import {chunkByNumber} from 'ngx-bootstrap/carousel/utils';
+import {Flat} from '../flat/flat-filter/entity/Flat';
+import {User} from '../admin-panel/component/Users';
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,21 +46,25 @@ export class RequestsService {
 
   approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
     const url = BASE_URL + `requests/flats/${id}/approve`;
+    console.log(url);
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
   declineFlatRequests(id: number): Observable<RequestsForFlatVerification> {
     const url = BASE_URL + `requests/flats/${id}/decline`;
+    console.log(url);
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
   approveUserRequests(id: number): Observable<RequestsForUserVerification> {
     const url = BASE_URL + `requests/users/${id}/approve`;
+    console.log(url);
     return this.http.put<RequestsForUserVerification>(url, null);
   }
 
   declineUserRequests(id: number): Observable<RequestsForUserVerification> {
     const url = BASE_URL + `requests/users/${id}/decline`;
+    console.log(url);
     return this.http.put<RequestsForUserVerification>(url, null);
   }
 

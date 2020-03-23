@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {User} from '../component/Users';
 import {RequestsService} from '../../services/requests.service';
@@ -31,11 +31,9 @@ export class RequestsComponent implements OnInit {
   typeForm: FormGroup;
   statusForm: FormGroup;
 
-
   requests;
   pageNumber = 0;
   pageSize = 5;
-
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -56,20 +54,24 @@ export class RequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.label = this.labelsTypes[0].label;
-    this.type = this.labelsTypes[0].type;
-    this.status = this.statuses[0];
+    this.loadPage(this.labelsTypes[0], this.statuses[0]);
+    this.openSnackBar();
+  }
+
+  loadPage(labelType, status) {
+    this.label = labelType.label;
+    this.type = labelType.type;
+    this.status = status;
 
     this.typeForm = this.formBuilder.group({typeForm: [null]});
-    this.typeForm.get('typeForm').setValue(this.labelsTypes[0]);
+    this.typeForm.get('typeForm').setValue(labelType);
 
     this.statusForm = this.formBuilder.group({statusForm: [null]});
-    this.statusForm.get('statusForm').setValue(this.statuses[0]);
-
-    this.openSnackBar();
+    this.statusForm.get('statusForm').setValue(status);
 
     this.getRequestsByPage();
   }
+
 
   openSnackBar() {
     console.log('snackbar');
@@ -105,30 +107,19 @@ export class RequestsComponent implements OnInit {
 
   review(id: any) {
     console.log('reviewed ' + id + ' ' + this.type);
-    // this.requestsService.reviewRequest(id, this.type).subscribe();
-    this.getRequestsByPage();
+    this.requestsService.reviewRequest(id, this.type).subscribe();
     this.openDialog(id);
   }
 
   openDialog(id: number): void {
     const dialogRef = this.dialog.open(ReviewWindowComponent, {
-      data: {requestId: id}
+      data: {requestId: id, type: this.type}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.loadPage(this.labelsTypes.find(x => x.label === this.label), this.status);
     });
   }
-
-
-  approve(id: any) {
-
-  }
-
-  decline(id: any) {
-
-  }
-
 
 }
 
