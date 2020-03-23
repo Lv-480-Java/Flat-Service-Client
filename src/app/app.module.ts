@@ -63,7 +63,8 @@ import { ProfileShortComponent } from './profile-short/profile-short.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
-
+import {AddFlatComponent } from './flat/add-flat/add-flat.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -104,8 +105,8 @@ import {InterceptorService} from './services/intercept.service';
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
-
-    ChatButtonComponent
+    ChatButtonComponent,
+    AddFlatComponent
   ],
   imports: [
     BrowserModule,
@@ -134,6 +135,7 @@ import {InterceptorService} from './services/intercept.service';
     MatPaginatorModule,
     MatDialogModule,
     MatBadgeModule,
+    MatSelectModule
   ],
   providers: [
     [{

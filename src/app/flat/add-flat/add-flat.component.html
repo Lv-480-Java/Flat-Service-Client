@@ -1,0 +1,173 @@
+<div style="margin-top:50px;margin-right:16px;" fxLayout="row" fxLayoutAlign="center none">
+  <mat-card style=" padding:30px ;min-width:450px" class="example-card mat-elevation-z5">
+
+    <div style="min-width: 400px" fxLayout="row">
+      <mat-card-header fxFlex="70">
+        <mat-card-title>Додавання нової публікації</mat-card-title>
+        <mat-card-subtitle>Оренда нерухомості</mat-card-subtitle>
+      </mat-card-header>
+    </div>
+
+    <div class="overlay" (click)="error=0" *ngIf="error!==0" mat-dialog-content>
+      <mat-card class="example-card mat-elevation-z5">
+        <mat-card-title>Перевірте правильність введення даних</mat-card-title>
+      </mat-card>
+    </div>
+
+    <div class="overlay" [routerLink]="['']" *ngIf="success!==0" mat-dialog-content>
+      <mat-card class="example-card mat-elevation-z5">
+        <mat-card-title> Публікація успішно додана, незабаром з'явиться в пошуку!</mat-card-title>
+      </mat-card>
+    </div>
+
+    <div fxLayout="row">
+      <div fxFlex="50" fxLayout="column">
+        <mat-form-field class="example-full-width">
+          <mat-label>Ціна</mat-label>
+          <input required
+                 type="text"
+                 placeholder="Ціна"
+                 [(ngModel)]="flat.monthPrice"
+                 autocomplete="off"
+                 matInput
+          >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Кількість кімнат</mat-label>
+          <input required
+                 type="text"
+                 placeholder="Кількість кімнат"
+                 [(ngModel)]="flat.numberOfRooms"
+                 autocomplete="off"
+                 matInput
+          >
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Поверх</mat-label>
+          <input required
+                 type="text"
+                 placeholder="Поверх"
+                 [(ngModel)]="flat.floor"
+                 autocomplete="off"
+                 matInput
+          >
+        </mat-form-field>
+
+        <h4>Адреса</h4>
+        <mat-form-field>
+          <mat-label>Район</mat-label>
+          <mat-select [(value)]="flat.district" required>
+            <mat-option value="frank">Франківський</mat-option>
+            <mat-option value="shev">Шевченківський</mat-option>
+            <mat-option value="gal">Галицький</mat-option>
+            <mat-option value="zal">Залізничний</mat-option>
+            <mat-option value="lich">Личаківський</mat-option>
+            <mat-option value="sych">Сихівський</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Вулиця</mat-label>
+          <input required
+                 type="text"
+                 placeholder="Вулиця"
+                 [(ngModel)]="flat.street"
+                 autocomplete="off"
+                 matInput
+          >
+        </mat-form-field>
+        <div fxLayout="row">
+          <mat-form-field style="max-width: 120px" class="example-full-width">
+            <mat-label>Номер будинку</mat-label>
+            <input required
+                   type="text"
+                   placeholder="Номер будинку"
+                   [(ngModel)]="flat.houseNumber"
+                   autocomplete="off"
+                   matInput
+            >
+          </mat-form-field>
+          <mat-form-field style="max-width: 120px" class="example-full-width">
+            <mat-label>Номер квартири</mat-label>
+            <input required
+                   type="text"
+                   placeholder="Номер квартири"
+                   [(ngModel)]="flat.flatNumber"
+                   autocomplete="off"
+                   matInput
+            >
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div style="margin-left: 50px" fxLayout="column">
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Заголовок</mat-label>
+          <textarea required
+                    rows="1"
+                    placeholder="Заголовок"
+                    [(ngModel)]="flat.title"
+                    autocomplete="off"
+                    matInput
+          ></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Детальний опис</mat-label>
+          <textarea required
+                    rows="5"
+                    placeholder="Детальний опис"
+                    [(ngModel)]="flat.description"
+                    autocomplete="off"
+                    matInput
+          ></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-chip-list">
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip
+              *ngFor="let fruit of flat.tags"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(fruit)">
+              {{fruit}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Критерії пошуку..."
+              #tagInput
+              [formControl]="tagCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let fruit of filteredTags | async" [value]="fruit">
+              {{fruit}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayoutAlign="center none">
+      <div fxLayout="column">
+        <div fxLayout="column">
+
+          <p style="margin-bottom:-20px">Додати фотографії</p>
+          <img *ngFor='let url of flat.base64Photos' [src]="url" height="200"> <br/>
+          <input type='file' (change)="onSelectFile($event)" multiple>
+        </div>
+        <button style="margin-top:25px;font-size: 16px" mat-raised-button color="primary" (click)=publicate()>
+          Опублікувати
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>
+
+
