@@ -28,6 +28,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
+  private countOfMessages: Observable<number>;
 
   constructor(private chatService: ChatService, private http: HttpClient) {
   }
@@ -87,7 +88,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
     this.chatService.getChatId(this.username, this.currentUserId)
       .subscribe((data: number) => {
-        this.chatId = data;
+        this.chatId = data
         this.loadMessages();
         this.initializeWebSocketConnection();
         this.scrollToBottom();
@@ -267,7 +268,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     console.log(this.hasFocus);
     if (this.browserNotificationsBootstrapped && message && !this.hasFocus) {
       const notification = new Notification(`${this.username}`, {
-        body: this.chatMessageInfo.content,
+        body: "You have unread messages",
         icon: this.browserNotificationIconSource
       });
       setTimeout(() => {
