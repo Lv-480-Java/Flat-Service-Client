@@ -40,3 +40,11 @@ table {
   margin-top: 10px;
 }
 
+::ng-deep .snackbar{
+  background: white;
+  color: black;
+}
+
+th {
+  width: 80px;
+}

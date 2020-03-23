@@ -4,26 +4,26 @@
     <mdb-card>
       <mdb-card-body>
         <mdb-card-title>
-          <div class="requests-lebel-text">Requests {{label}}</div>
-          <mat-form-field class="status-select">
-            <mat-label>Status</mat-label>
-            <mat-select [(value)]="status">
-              <mat-option value="ALL">All</mat-option>
-              <mat-option value="VERIFYING">Verifying</mat-option>
-              <mat-option value="APPROVED">Approved</mat-option>
-              <mat-option value="DECLINED">Declined</mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="status-select">
-            <mat-label>Type</mat-label>
-            <mat-select [(value)]="type">
-              <mat-option value="FLATS">Flats</mat-option>
-              <mat-option value="RENTERS">Renters</mat-option>
-              <mat-option value="LANDLORDS">Landlords</mat-option>
-              <mat-option value="MODERATORS">Moderators</mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div class="requests-lebel-text">{{status|titlecase}} Requests {{label}}</div>
+          <form [formGroup]="statusForm">
+            <mat-form-field class="status-select">
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="statusForm" (selectionChange)="onChangeStatus($event.value)">
+                <mat-option *ngFor="let status of statuses"
+                            [value]="status">{{status|titlecase}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
 
+          <form [formGroup]="typeForm">
+            <mat-form-field class="status-select">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="typeForm" (selectionChange)="onChangeType($event.value)">
+                <mat-option *ngFor="let labelType of labelsTypes"
+                            [value]="labelType">{{labelType.type|titlecase}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </form>
         </mdb-card-title>
       </mdb-card-body>
     </mdb-card>
@@ -47,14 +47,16 @@
         <td mat-cell *matCellDef="let element"> {{element.creationDate | date:'mediumDate'}} </td>
       </ng-container>
 
+
       <ng-container matColumnDef="review">
         <th mat-header-cell *matHeaderCellDef>Status</th>
         <td mat-cell *matCellDef="let element">
           {{element.approvalDate | date:'mediumDate'}}
-          <button mat-raised-button color="primary" (click)="review(element.flat.id)">Review
+          <button *ngIf="element.status=='NEW' || element.status=='VIEWED'" mat-raised-button color="primary"
+                  (click)="review(element.id)">Review
           </button>
-          <span *ngSwitchCase="'APPROVED'">Approved at {{element.verificationDate | date:'mediumDate'}}</span>
-          <span *ngSwitchCase="'DECLINED'">Declined at {{element.verificationDate | date:'mediumDate'}}</span>
+          <span *ngIf="element.status=='APPROVED'">Approved at {{element.verificationDate | date:'mediumDate'}}</span>
+          <span *ngIf="element.status=='DECLINED'">Declined at {{element.verificationDate | date:'mediumDate'}}</span>
         </td>
       </ng-container>
 

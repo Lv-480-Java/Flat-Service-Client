@@ -4,11 +4,12 @@ import {Observable} from 'rxjs';
 import {RequestsForFlatVerification} from '../admin-panel/requests/entity/requests-for-flat-verification';
 import {RequestsForUserVerification} from '../admin-panel/requests/entity/request-for-user-verification';
 import {BASE_URL} from '../utils/constants';
+import {chunkByNumber} from 'ngx-bootstrap/carousel/utils';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminService {
+export class RequestsService {
 
   constructor(private http: HttpClient) {
   }
@@ -30,6 +31,17 @@ export class AdminService {
     }
   }
 
+  reviewRequest(id: number, type: string) {
+    if (type === 'FLATS') {
+      console.log(BASE_URL + `requests/review/flat/${id}`);
+      return this.http.put<RequestsForFlatVerification>(BASE_URL + `requests/review/flat/${id}`, null);
+    } else {
+      console.log(BASE_URL + `requests/review/user/${id}`);
+      return this.http.put<RequestsForUserVerification>(BASE_URL + `requests/review/user/${id}`, null);
+    }
+  }
+
+
   approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
     const url = BASE_URL + `requests/flats/${id}/approve`;
     return this.http.put<RequestsForFlatVerification>(url, null);
@@ -40,14 +52,18 @@ export class AdminService {
     return this.http.put<RequestsForFlatVerification>(url, null);
   }
 
-  approveUserRequests(id: number): Observable<RequestsForFlatVerification> {
+  approveUserRequests(id: number): Observable<RequestsForUserVerification> {
     const url = BASE_URL + `requests/users/${id}/approve`;
-    return this.http.put<RequestsForFlatVerification>(url, null);
+    return this.http.put<RequestsForUserVerification>(url, null);
   }
 
-  declineUserRequests(id: number): Observable<RequestsForFlatVerification> {
+  declineUserRequests(id: number): Observable<RequestsForUserVerification> {
     const url = BASE_URL + `requests/users/${id}/decline`;
-    return this.http.put<RequestsForFlatVerification>(url, null);
+    return this.http.put<RequestsForUserVerification>(url, null);
   }
 
+  getNewRequests(): Observable<number> {
+    console.log('get requests');
+    return this.http.get<number>(BASE_URL + `requests/new`);
+  }
 }
