@@ -19,11 +19,13 @@ import {StatisticsComponent} from './admin-panel/statistics/statistics.component
 import {AuthGuard} from './guards/auth.guard';
 import {ProfileUserComponent} from './profile-user/profile-user.component';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
+import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
   {path: 'chat', component: ChatComponent},
+  {path: 'addflat', component: AddFlatComponent},
   {
     path: 'admin', component: AdminLayoutComponent, children: [
       {path: 'dashboard', component: DashboardPageComponent},

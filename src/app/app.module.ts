@@ -61,6 +61,8 @@ import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart
 import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 import { ProfileShortComponent } from './profile-short/profile-short.component';
+import { AddFlatComponent } from './flat/add-flat/add-flat.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -103,35 +105,37 @@ import { ProfileShortComponent } from './profile-short/profile-short.component';
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
+    AddFlatComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule,
-    GalleryModule,
-    MatAutocompleteModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatDialogModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        Ng5SliderModule,
+        MatSliderModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        FlexModule,
+        InfiniteScrollModule,
+        MatChipsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        BrowserAnimationsModule,
+        GalleryModule,
+        MatAutocompleteModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatSelectModule,
+    ],
   providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
