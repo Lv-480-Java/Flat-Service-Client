@@ -43,7 +43,6 @@ import { UserCommentComponent } from './comment/user-comment/user-comment.compon
 import { FlatCommentComponent } from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
-import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
@@ -60,6 +59,9 @@ import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart
 import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
 import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
+import { ProfileShortComponent } from './profile-short/profile-short.component';
+import {ChatButtonComponent} from './chatbutton/chatbutton.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -84,7 +86,6 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,
-    NgChatOptionsComponent,
     EmojifyPipe,
     LinkfyPipe,
     SanitizePipe,
@@ -101,7 +102,9 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
     UserChartComponent,
     FlatChartComponent,
     ActiveCountComponent,
+    ProfileShortComponent,
 
+    ChatButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -129,6 +132,7 @@ import {ActiveCountComponent} from './admin-panel/statistics/active-count/active
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatBadgeModule,
   ],
   providers: [RegistrationService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
