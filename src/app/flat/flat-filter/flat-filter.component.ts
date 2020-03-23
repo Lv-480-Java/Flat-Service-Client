@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Options} from 'ng5-slider';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl} from '@angular/forms';
@@ -61,6 +61,8 @@ export class FlatFilterComponent implements OnInit {
 
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
+
+  private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   setRegions(event, value: string) {
     if (event.checked) {
@@ -123,9 +125,17 @@ export class FlatFilterComponent implements OnInit {
     this.parameters.priceHigh = this.maxPrice;
     this.parameters.floorLow = this.minFloor;
     this.parameters.floorHigh = this.maxFloor;
-    // console.log(this.loadFlats)
-    console.log(this.allTags);
+  }
+
+  showByFilter() {
+    this.filterFlats();
     this.loadFlats.emit();
+  }
+
+  subscribeFlats() {
+    this.filterFlats();
+    this.http.post(BASE_URL + 'subscribe', JSON.stringify(this.parameters), this.options)
+      .subscribe();
   }
 }
 
