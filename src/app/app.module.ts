@@ -43,7 +43,6 @@ import {UserCommentComponent} from './comment/user-comment/user-comment.componen
 import {FlatCommentComponent} from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
-import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
@@ -60,6 +59,9 @@ import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart
 import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
 import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
+import { ProfileShortComponent } from './profile-short/profile-short.component';
+import {ChatButtonComponent} from './chatbutton/chatbutton.component';
+import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
 
 
@@ -85,7 +87,6 @@ import {InterceptorService} from './services/intercept.service';
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,
-    NgChatOptionsComponent,
     EmojifyPipe,
     LinkfyPipe,
     SanitizePipe,
@@ -102,7 +103,9 @@ import {InterceptorService} from './services/intercept.service';
     UserChartComponent,
     FlatChartComponent,
     ActiveCountComponent,
+    ProfileShortComponent,
 
+    ChatButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -130,6 +133,7 @@ import {InterceptorService} from './services/intercept.service';
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatBadgeModule,
   ],
   providers: [
     [{

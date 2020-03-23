@@ -1,22 +1,64 @@
-/*
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {ChatButtonService} from './chatbutton.service';
+import {Chat} from '../model/chat.model';
+import {Theme} from './theme.enum';
+
 
 @Component({
   selector: 'app-chatbutton',
   templateUrl: './chatbutton.component.html',
-  styleUrls: ['./chatbutton.component.scss']
+  styleUrls: ['./chatbutton.component.scss'
+  ]
 })
-export class ChatbuttonComponent implements OnInit {
 
-  constructor() { }
+export class ChatButtonComponent implements OnInit {
+  @ViewChild('content') content: ElementRef;
+  chats: Chat[] = [];
+  currentUserId: number;
+  chatIsActive = false;
+  chatListIsActive = false;
+  public username: string;
 
-  @Output() loadChats = new EventEmitter<any>();
+  @Input()
+  public customTheme: string;
 
-  ngOnInit(): void {
+  @Input()
+  public theme: Theme = Theme.Light;
+
+  constructor(private chatButtonService: ChatButtonService) {
   }
 
-  initializeUser() {
-    /!* if button is click, initiallize user, get receiverId from Detailed Info*!/
+  ngOnInit() {
+    this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
+    this.chatButtonService.getCurrentChatsByUserId(this.currentUserId).subscribe(data => this.chats = data);
+    this.initializeTheme();
   }
+
+  isUserSelectedFromFriendsList(username: string) {
+    if (this.chatIsActive === false) {
+      this.chatIsActive = true;
+      this.username = username;
+      console.log(username);
+    } else {
+      this.chatIsActive = false;
+    }
+  }
+
+  isChatListSelected(event: any) {
+    if (this.chatListIsActive === false) {
+      this.chatListIsActive = true;
+    } else {
+    this.chatListIsActive = false;
+    }
+  }
+
+  private initializeTheme(): void {
+    if (this.customTheme) {
+      this.theme = Theme.Custom;
+    } else if (this.theme !== Theme.Light && this.theme !== Theme.Dark) {
+      throw new Error(`Invalid theme configuration for ng-chat. "${this.theme}" is not a valid theme value.`);
+    }
+  }
+
+
 }
-*/

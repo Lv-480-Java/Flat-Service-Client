@@ -6,6 +6,7 @@ export class Message {
   senderId: number;
   private senderUsername: string;
   chatId: number;
+  public dateSeen?: Date;
 
   constructor(id: number, content: string, sendTime: string, senderId: number, senderUsername: string,  chatId: number) {
     this.id = id;

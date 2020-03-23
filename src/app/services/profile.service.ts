@@ -24,21 +24,23 @@ export interface Landlord {
 
 @Injectable({providedIn: 'root'})
 export class ProfileService {
-
+  id = JSON.parse(localStorage.getItem('user')).userId;
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   constructor(private http: HttpClient) {
   }
 
-  addPassport(): Observable<Landlord[]> {
-    return this.http.get<Landlord[]>(BASE_URL + 'passport/1');
+  addPassport(): Observable<Landlord> {
+    return this.http.get<Landlord>(BASE_URL + 'passport/1');
+
   }
 
   addUserInfo(): Observable<User> {
-    return this.http.get<User>(BASE_URL + 'user/1');
+    return this.http.get<User>(BASE_URL + 'users/' + this.id);
   }
 
-  updatePassport(data: Landlord[]): Observable<Landlord[]> {
-    return this.http.post<Landlord[]>(BASE_URL + 'passport', JSON.stringify(data), this.options);
+  updatePassport(data: Landlord): Observable<Landlord> {
+    return this.http.post<Landlord>( BASE_URL + 'passport/1', JSON.stringify(data), this.options);
+
   }
 }
