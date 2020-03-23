@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RegistrationComponent} from './registration/registration.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {LoginComponent} from './login/login.component';
 import {RegistrationService} from './services/registration.service';
 import {HeaderComponent} from './header/header.component';
@@ -43,7 +43,6 @@ import {UserCommentComponent} from './comment/user-comment/user-comment.componen
 import {FlatCommentComponent} from './comment/flat-comment/flat-comment.component';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
-import {NgChatOptionsComponent} from './chat/components/ng-chat-options/ng-chat-options.component';
 import {EmojifyPipe} from './pipes/emojify.pipe';
 import {LinkfyPipe} from './pipes/linkfy.pipe';
 import {SanitizePipe} from './pipes/sanitize.pipe';
@@ -59,12 +58,15 @@ import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 import {MatListModule} from '@angular/material/list';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
-import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ReviewWindowComponent} from './admin-panel/requests/review-window/review-window.component';
-import { FlatRequestDetailComponent } from './admin-panel/requests/review-window/flat-request-detail/flat-request-detail.component';
-import { UserRequestDetailComponent } from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
-
+import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/flat-request-detail/flat-request-detail.component';
+import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
+import {ChatButtonComponent} from './chatbutton/chatbutton.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {InterceptorService} from './services/intercept.service';
+import {AddFlatComponent} from './flat/add-flat/add-flat.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -88,7 +90,6 @@ import { UserRequestDetailComponent } from './admin-panel/requests/review-window
     DialogWindowEditUserComponent,
     UserCommentComponent,
     FlatCommentComponent,
-    NgChatOptionsComponent,
     EmojifyPipe,
     LinkfyPipe,
     SanitizePipe,
@@ -106,6 +107,8 @@ import { UserRequestDetailComponent } from './admin-panel/requests/review-window
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
+    ChatButtonComponent,
+    AddFlatComponent
   ],
   imports: [
     BrowserModule,
@@ -136,7 +139,13 @@ import { UserRequestDetailComponent } from './admin-panel/requests/review-window
     MatListModule,
     MatSelectModule,
   ],
-  providers: [RegistrationService, AuthService, AuthGuard, MatSnackBar],
+  providers: [
+    [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }],
+    RegistrationService, AuthService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {
