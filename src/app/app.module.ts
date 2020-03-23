@@ -64,6 +64,7 @@ import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {MatBadgeModule} from '@angular/material/badge';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,8 +104,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
+    ChatButtonComponent,
 
-    ChatButtonComponent
+
   ],
   imports: [
     BrowserModule,
