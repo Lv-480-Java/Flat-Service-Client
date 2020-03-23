@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(user).subscribe((res) => {
       localStorage.setItem('accesstoken', res.headers.get('accesstoken'));
+      localStorage.setItem('refreshtoken', res.headers.get('refreshtoken'));
       localStorage.setItem('user', JSON.stringify(res.body));
       this.loginForm.reset();
       this.router.navigate(['/flats']);
