@@ -17,8 +17,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           console.log("Interceptor is working...");
           if (error.error.message == "Runtime exception") {
             window.alert("Error code: " + error.status + "\nError message: Internal server error")
+          } else {
+            return throwError(error);
           }
-          return throwError(error);
         })
       )
   }
