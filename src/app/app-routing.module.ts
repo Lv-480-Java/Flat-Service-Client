@@ -12,9 +12,6 @@ import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-p
 import {FlatDetailedComponent} from './flat/flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
 import {RequestsComponent} from './admin-panel/requests/requests.component';
-import {FlatRequestsComponent} from './admin-panel/requests/flat-requests/flat-requests.component';
-import {LandlordRequestsComponent} from './admin-panel/requests/landlord-requests/landlord-requests.component';
-import {ModeratorRequestsComponent} from './admin-panel/requests/moderator-requests/moderator-requests.component';
 import {StatisticsComponent} from './admin-panel/statistics/statistics.component';
 import {AuthGuard} from './guards/auth.guard';
 import {ProfileUserComponent} from './profile-user/profile-user.component';
@@ -34,22 +31,18 @@ const routes: Routes = [
       {path: 'comments', component: ListCommentsPageComponent},
       {path: 'user', component: ListUserPageComponent},
       {path: 'posts', component: ListPostsPageComponent},
-      {
-        path: 'requests', component: RequestsComponent, children: [
-          {path: 'flats', component: FlatRequestsComponent},
-          {path: 'landlords', component: LandlordRequestsComponent},
-          {path: 'moderators', component: ModeratorRequestsComponent}
-        ]
-      },
+      {path: 'requests', component: RequestsComponent},
       {path: 'statistics', component: StatisticsComponent}
     ]
   },
-  { path: 'data', component: ProfileUserComponent},
-  { path: 'short_profile', component: ProfileShortComponent},
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
-  { path: 'flats', component: FlatListComponent },
-  { path: 'detailed/:id', component: FlatDetailedComponent },
-  { path: '',
+
+  {path: 'data', component: ProfileUserComponent},
+  {path: 'short_profile', component: ProfileShortComponent},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'flats', component: FlatListComponent},
+  {path: 'detailed/:id', component: FlatDetailedComponent},
+  {
+    path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
   }

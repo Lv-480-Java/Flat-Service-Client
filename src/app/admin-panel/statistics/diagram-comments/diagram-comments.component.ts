@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminService} from '../../../services/admin.service';
+import {RequestsService} from '../../../services/requests.service';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-diagram-comments',
@@ -9,7 +10,7 @@ import {AdminService} from '../../../services/admin.service';
 export class DiagramCommentsComponent implements OnInit {
 
   public chartType = 'pie';
-  public chartDatasets: Array<any> = [{data: [0, 0, 0]}];
+  public chartDatasets: Array<any> = [{data: [0, 0]}];
   public chartLabels: Array<any> = ['Flats', 'Users'];
   public chartColors: Array<any> = [
     {
@@ -23,11 +24,11 @@ export class DiagramCommentsComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
-    this.adminService.getCommentsData().subscribe(data => {
+    this.statisticsService.getCommentsData().subscribe(data => {
       this.chartDatasets = data;
     });
   }
