@@ -50,68 +50,20 @@ export class InterceptorService implements HttpInterceptor {
     //   this.router.navigate(['login']);
     //   return of<HttpEvent<any>>()
     // }
-    return next.handle(req).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === UNAUTHORIZED) {
-          return this.handle401Error(req, next);
-        }
+    return next.handle(req);
+      // .pipe(
+      // catchError((error: HttpErrorResponse) => {
+      //   if (error.status === UNAUTHORIZED) {
+      //     return this.handle401Error(req, next);
+      //   }
         // if (error.status === NOT_FOUND) {
         //   return this.handle404Error(req);
         // }
         // if (error.status === FORBIDDEN) {
         //   return this.handle403Error(req);
         // }
-      })
-    );
-  }
-
-  /**
-   * Handles 401 response. It tries to get new access/refresh token pair with refresh token.
-   * All of the rest request are put on hold.
-   */
-  private handle401Error(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!this.isRefreshing) {
-      this.isRefreshing = true;
-      this.refreshTokenSubject.next(null);
-      return this.getNewTokenPair(this.localStorageService.getRefreshToken()).pipe(
-        catchError((error: HttpErrorResponse) => this.handleRefreshTokenIsNotValid(error)),
-        switchMap((newTokenPair: NewTokenPair) => {
-          this.localStorageService.setAccessToken(newTokenPair.accessToken);
-          this.localStorageService.setRefreshToken(newTokenPair.refreshToken);
-          this.isRefreshing = false;
-          this.refreshTokenSubject.next(newTokenPair);
-          return next.handle(this.addAccessTokenToHeader(req, newTokenPair.accessToken));
-        })
-      );
-    } else {
-      return this.refreshTokenSubject.pipe(
-        filter((newTokenPair: NewTokenPair) => newTokenPair !== null),
-        take(1),
-        switchMap((newTokenPair: NewTokenPair) => next.handle(this.addAccessTokenToHeader(req, newTokenPair.accessToken))),
-        catchError(() => of<HttpEvent<any>>())
-      );
-    }
-  }
-
-  /**
-   * Handles a situation when refresh token is expired.
-   */
-  private handleRefreshTokenIsNotValid(error: HttpErrorResponse): Observable<HttpEvent<any>> {
-    this.isRefreshing = false;
-    if (error.status === BAD_REQUEST) {
-      this.localStorageService.clear();
-      this.router.navigate(['login']).then(r => r);
-      return of<HttpEvent<any>>();
-    }
-    return throwError(error);
-
-  }
-
-  /**
-   * Send refresh token in order to get new access/refresh token pair.
-   */
-  private getNewTokenPair(refreshToken: string): Observable<NewTokenPair> {
-    return this.http.get<NewTokenPair>(`${this.updateAccessTokenUrl}`);
+  //     })
+  //   );
   }
 
   /**
@@ -122,6 +74,55 @@ export class InterceptorService implements HttpInterceptor {
       headers: req.headers.set('Authorization', `${accessToken}`)
     });
   }
+
+  // /**
+  //  * Handles 401 response. It tries to get new access/refresh token pair with refresh token.
+  //  * All of the rest request are put on hold.
+  //  */
+  // private handle401Error(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  //   if (!this.isRefreshing) {
+  //     this.isRefreshing = true;
+  //     this.refreshTokenSubject.next(null);
+  //     return this.getNewTokenPair(this.localStorageService.getRefreshToken()).pipe(
+  //       catchError((error: HttpErrorResponse) => this.handleRefreshTokenIsNotValid(error)),
+  //       switchMap((newTokenPair: NewTokenPair) => {
+  //         this.localStorageService.setAccessToken(newTokenPair.accessToken);
+  //         this.localStorageService.setRefreshToken(newTokenPair.refreshToken);
+  //         this.isRefreshing = false;
+  //         this.refreshTokenSubject.next(newTokenPair);
+  //         return next.handle(this.addAccessTokenToHeader(req, newTokenPair.accessToken));
+  //       })
+  //     );
+  //   } else {
+  //     return this.refreshTokenSubject.pipe(
+  //       filter((newTokenPair: NewTokenPair) => newTokenPair !== null),
+  //       take(1),
+  //       switchMap((newTokenPair: NewTokenPair) => next.handle(this.addAccessTokenToHeader(req, newTokenPair.accessToken))),
+  //       catchError(() => of<HttpEvent<any>>())
+  //     );
+  //   }
+  // }
+  //
+  // /**
+  //  * Handles a situation when refresh token is expired.
+  //  */
+  // private handleRefreshTokenIsNotValid(error: HttpErrorResponse): Observable<HttpEvent<any>> {
+  //   this.isRefreshing = false;
+  //   if (error.status === BAD_REQUEST) {
+  //     this.localStorageService.clear();
+  //     this.router.navigate(['login']).then(r => r);
+  //     return of<HttpEvent<any>>();
+  //   }
+  //   return throwError(error);
+  //
+  // }
+  //
+  // /**
+  //  * Send refresh token in order to get new access/refresh token pair.
+  //  */
+  // private getNewTokenPair(refreshToken: string): Observable<NewTokenPair> {
+  //   return this.http.get<NewTokenPair>(`${this.updateAccessTokenUrl}`);
+  // }
 
   // /**
   //  * Handles 403 HTTP error response, redirects to sign in page.
