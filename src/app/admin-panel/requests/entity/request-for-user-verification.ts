@@ -1,6 +1,6 @@
 import {User} from '../../component/Users';
 
-export class RequestsForUserVerification {
+export interface RequestsForUserVerification {
   id?: number;
   status: string;
   creationDate: Date;

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminService} from '../../../services/admin.service';
+import {RequestsService} from '../../../services/requests.service';
 import {dashCaseToCamelCase} from '@angular/compiler/src/util';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-diagram-users',
@@ -24,11 +25,11 @@ export class DiagramUsersComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
-    this.adminService.getUsersData().subscribe(data => {
+    this.statisticsService.getUsersData().subscribe(data => {
       this.chartDatasets = data;
     });
   }
