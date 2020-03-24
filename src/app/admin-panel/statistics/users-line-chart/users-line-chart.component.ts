@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminService} from '../../../services/admin.service';
+import {RequestsService} from '../../../services/requests.service';
 import 'rxjs/add/observable/interval';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-users-line-chart',
@@ -34,16 +35,16 @@ export class UsersLineChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   updateDataset() {
     const from = new Date(this.fromMonth).toISOString().substr(0, 7);
     const to = new Date(this.toMonth).toISOString().substr(0, 7);
 
-    this.adminService.getAllUsersCount(from, to).subscribe(userCount => {
-      this.adminService.getAllLandlordsCount(from, to).subscribe(landlordCount => {
-        this.adminService.getMonthNames(from, to).subscribe(months => {
+    this.statisticsService.getAllUsersCount(from, to).subscribe(userCount => {
+      this.statisticsService.getAllLandlordsCount(from, to).subscribe(landlordCount => {
+        this.statisticsService.getMonthNames(from, to).subscribe(months => {
           this.chartDatasets = [
             {data: userCount, label: 'Users'},
             {data: landlordCount, label: 'Landlords'}

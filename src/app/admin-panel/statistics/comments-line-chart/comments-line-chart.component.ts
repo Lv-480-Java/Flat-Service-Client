@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BASE_URL} from 'src/app/utils/constants';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-comments-line-chart',
@@ -13,6 +14,7 @@ export class CommentsLineChartComponent implements OnInit {
   public chartDatasets: Array<any>;
   public chartLabels: Array<any>;
   private days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  private numberOfDays = 7;
   public chartColors: Array<any> = [
     {
       backgroundColor: 'rgba(105, 0, 132, .2)',
@@ -30,7 +32,7 @@ export class CommentsLineChartComponent implements OnInit {
     responsive: true,
   };
 
-  constructor(private http: HttpClient) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   shiftDays() {
@@ -41,8 +43,8 @@ export class CommentsLineChartComponent implements OnInit {
   }
 
   updateData() {
-    this.http.get<Array<number>>(BASE_URL + 'admin/statistics/user-comments-dynamics/7').subscribe(userCommnts => {
-      this.http.get<Array<number>>(BASE_URL + 'admin/statistics/flat-comments-dynamics/7').subscribe(flatCommnet => {
+    this.statisticsService.getCountOfUserCommentsForWeek(this.numberOfDays).subscribe(userCommnts => {
+      this.statisticsService.getCountOfFlatCommentsForWeek(this.numberOfDays).subscribe(flatCommnet => {
         this.chartDatasets = [
           {data: userCommnts, label: 'User Comments'},
           {data: flatCommnet, label: 'Flat Comments'},
