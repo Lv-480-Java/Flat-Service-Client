@@ -50,19 +50,7 @@ export class InterceptorService implements HttpInterceptor {
     //   this.router.navigate(['login']);
     //   return of<HttpEvent<any>>()
     // }
-    return next.handle(req).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === UNAUTHORIZED) {
-          return this.handle401Error(req, next);
-        }
-        // if (error.status === NOT_FOUND) {
-        //   return this.handle404Error(req);
-        // }
-        // if (error.status === FORBIDDEN) {
-        //   return this.handle403Error(req);
-        // }
-      })
-    );
+    return next.handle(req);
   }
 
   /**
