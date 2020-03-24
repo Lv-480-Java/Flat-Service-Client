@@ -1,7 +1,6 @@
 <div class="chat">
   <div class="chat-title">
     <span [innerHtml]="username"></span>
-    <button (click)="onScroll()"></button>
     <h2>Landlord</h2>
     <figure class="avatar">
       <img
@@ -9,13 +8,13 @@
     </figure>
   </div>
   <div class="messages">
-    <div class="messages-content"
-         #scrollMe
-         infiniteScroll
+    <div class="messages-content" #scrollMe>
+        <!-- infiniteScroll
          [infiniteScrollDistance]="4"
          [infiniteScrollThrottle]="500"
-         (scrolled)="onScroll()">
-      <div infiniteScroll *ngFor="let mes of messages">
+         (scrolled)="onScroll()"-->
+      <button  class="message-load" (click)="onScroll()"></button>
+      <div *ngFor="let mes of messages">
         <div class="message-personal message-margins" *ngIf="mes.senderId ==currentUserId">
           <span [innerHtml]="mes.content | linkfy:linkfyEnabled " style="
   white-space: pre-wrap;
