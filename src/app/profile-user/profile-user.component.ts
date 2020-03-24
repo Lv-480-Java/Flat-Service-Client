@@ -2,8 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ProfileUserService} from '../services/profile.user.service';
 import {User} from '../admin-panel/component/Users';
 import {Landlord} from '../services/profile.service';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpEventType, HttpHeaders} from '@angular/common/http';
 import {BASE_URL} from '../utils/constants';
+
 
 @Component({
   selector: 'app-profile-user',
@@ -11,32 +12,32 @@ import {BASE_URL} from '../utils/constants';
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
-  selectedFile: File
+  fileData: File = null;
   userData: User;
   landlordData = true;
   data: Landlord;
   idPassport: number;
+
   constructor(private profileUserService: ProfileUserService, private http: HttpClient) {
+  }
+
+  onFileSelected(event) {
+    this.fileData = event.target.files[0];
+  }
+
+  onUpload() {
+    const fileUpload = new FormData();
+    fileUpload.append('file', this.fileData, this.fileData.name)
+    return this.http.put(BASE_URL + 'users/profile/updatePhoto', fileUpload)
+      .subscribe(res => {
+        console.log(res);
+        this.addUserData();
+      });
   }
 
   ngOnInit(): void {
     this.addUserData();
     this.addPassport();
-  }
-
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-  }
-
-  onUpload() {
-    const uploadData = new FormData();
-    this.http.post(BASE_URL + 'my-backend.com/file-upload', uploadData, {
-      reportProgress: true,
-      observe: 'events'
-    })
-      .subscribe(event => {
-        console.log(event);
-      });
   }
 
   addUserData() {
@@ -64,5 +65,4 @@ export class ProfileUserComponent implements OnInit {
         }
       });
   }
-
 }

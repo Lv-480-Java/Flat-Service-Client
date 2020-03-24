@@ -19,7 +19,6 @@ export interface Landlord {
   expirationDate: string;
   passportNumber: string;
   identificationNumber: number;
-
 }
 
 @Injectable({providedIn: 'root'})
@@ -31,15 +30,15 @@ export class ProfileService {
   }
 
   addPassport(): Observable<Landlord> {
-    return this.http.get<Landlord>(BASE_URL + 'passport/' + this.id);
+    return this.http.get<Landlord>(BASE_URL + 'passport/getPassport');
   }
 
   addUserInfo(): Observable<User> {
-    return this.http.get<User>(BASE_URL + 'users/' + this.id);
+    return this.http.get<User>(BASE_URL + 'users/currentUser');
   }
 
   updatePassport(data: Landlord): Observable<Landlord> {
-    return this.http.post<Landlord>(BASE_URL + 'passport/' + this.id, JSON.stringify(data), this.options);
+    return this.http.post<Landlord>(BASE_URL + 'passport/update' , JSON.stringify(data), this.options);
 
   }
 }

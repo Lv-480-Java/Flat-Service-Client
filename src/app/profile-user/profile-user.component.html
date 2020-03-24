@@ -22,14 +22,10 @@
       </div>
       <br>
       <div class="text-center">
-        <input style="display: none"
-               type="file" (change)="onFileChanged($event)"
-               #fileInput>
-        <button mat-raised-button color="primary" style="margin:15px;" (click)="fileInput.click()">Select File</button>
-        <button mat-raised-button color="primary" (click)="onUpload()">Upload</button>
+      <input style="display: none" type = "file" (change)="onFileSelected($event)" #fileInput>
+      <button mat-raised-button color="primary" (click)="fileInput.click()" >Change</button>
+      <button mat-raised-button color="primary"  style="margin:13px;" (click)="onUpload()">Upload</button>
       </div>
-      <br>
-
     </div><!--/col-3-->
     <div class="col-sm-9">
       <ul class="nav nav-tabs">

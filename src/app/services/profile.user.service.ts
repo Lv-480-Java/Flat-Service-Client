@@ -14,7 +14,7 @@ export class ProfileUserService {
   private id = () => JSON.parse(localStorage.getItem('user')).userId;
 
   addUserData(): Observable<User> {
-    return this.http.get<User>(BASE_URL + 'users/' + this.id());
+    return this.http.get<User>(BASE_URL + 'users/currentUser');
   }
 
   updateUserData(userData: User): Observable<User> {
@@ -22,6 +22,6 @@ export class ProfileUserService {
   }
 
   addPassport(): Observable<Landlord> {
-    return this.http.get<Landlord>(BASE_URL + 'passport/' + this.id());
+    return this.http.get<Landlord>(BASE_URL + 'passport/getPassport');
   }
 }
