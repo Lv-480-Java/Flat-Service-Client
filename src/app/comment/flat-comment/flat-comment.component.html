@@ -1,6 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="center none">
   <div>
     <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
+      <h1>Comments</h1>
+      <p *ngIf="comments.length>0">Кількість коментарів {{comments.length}}</p>
+      <hr>
       <div>
         <input
           type="text"
@@ -26,9 +29,18 @@
                 color="primary">
          Remove
         </button>
+        <button style="margin-top: 10px" style="margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Відповісти</button>
+        <button style="margin-top: 10px" style="margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary" (click)="isList=!isList" (click)="commentId=comment.id" >Відповіді</button>
+        <div *ngIf="isTrue && commentId==comment.id">
+          <app-coments-about-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-coments-about-comment>
+        </div>
+        <div *ngIf="isList && commentId==comment.id">
+          <app-list-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-list-comment>
+        </div>
       </mat-card>
     </div>
-
     <ng-template #noComments>
       <p style="margin:20px; font-size: 20px">No Comments. Be first)</p>
     </ng-template>

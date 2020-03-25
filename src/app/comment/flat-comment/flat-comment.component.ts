@@ -10,7 +10,9 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
 export class FlatCommentComponent implements OnInit {
 
   comments: FlatComment[] = [];
-
+  commentId: number;
+  isTrue = false;
+  isList = false;
   text = '';
   @Input() id: number;
 
@@ -24,7 +26,7 @@ export class FlatCommentComponent implements OnInit {
   loadComments(id: number): void {
     this.flatCommentService.loadComments(id)
       .subscribe(comments => {
-          this.comments = comments.reverse();
+        this.comments = comments.reverse();
       });
     console.log(this.comments);
   }
@@ -54,6 +56,7 @@ export class FlatCommentComponent implements OnInit {
         this.ngOnInit();
       });
   }
+
 }
 
 

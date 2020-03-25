@@ -64,9 +64,12 @@ import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/f
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {InterceptorService} from './services/intercept.service';
+import { ComentsaboutcommentComponent } from './comment/coments-about-comment/comentsaboutcomment.component';
+import { ListCommentComponent } from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
-import {HttpErrorInterceptor} from "./services/interceptors/error.interceptor";
+import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -104,6 +107,9 @@ import {HttpErrorInterceptor} from "./services/interceptors/error.interceptor";
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
+    ChatButtonComponent,
+    ComentsaboutcommentComponent,
+    ListCommentComponent,
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
