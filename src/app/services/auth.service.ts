@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {User} from '../shared/interfaces';
-import {Observable, Subject, throwError} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {BASE_URL} from '../utils/constants';
 
 @Injectable({
@@ -32,20 +32,15 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
+    console.log("Authentication is working...");
     const {message} = error.error;
-    console.log(message);
-    switch (message) {
-      case 'Email is not valid':
-        this.error$.next('Email is not valid');
-        break;
-      case 'Password is not valid':
-        this.error$.next('Password is not valid');
-        break;
-      default:
-        this.error$.next('Email or password is not valid');
+    console.log(error);
+    if (message instanceof Object) {
+      const entries = Object.entries(message);
+      this.error$.next(entries[0][0] + " " + entries[0][1]);
+    } else {
+      this.error$.next(message);
     }
-
-    return throwError(error);
   }
 
   logout() {
