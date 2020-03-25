@@ -29,6 +29,11 @@
                 color="primary">
          Remove
         </button>
+        <button style="margin-top: 10px" style="margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" > rrrr</button>
+        <div *ngIf="isTrue && commentId==comment.id">
+          <app-coments-about-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-coments-about-comment>
+        </div>
       </mat-card>
     </div>
 

@@ -63,6 +63,8 @@ import { ProfileShortComponent } from './profile-short/profile-short.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
+import { ComentsaboutcommentComponent } from './comment/coments-about-comment/comentsaboutcomment.component';
+import { ListCommentComponent } from './comment/list-comment/list-comment.component';
 
 
 @NgModule({
@@ -105,7 +107,11 @@ import {InterceptorService} from './services/intercept.service';
     ActiveCountComponent,
     ProfileShortComponent,
 
-    ChatButtonComponent
+    ChatButtonComponent,
+
+    ComentsaboutcommentComponent,
+
+    ListCommentComponent
   ],
   imports: [
     BrowserModule,
