@@ -1,6 +1,41 @@
-<mat-card-header>
-  <div class="card">
-    <p></p>
-    <button>remove</button>
+<div fxLayout="row" fxLayoutAlign="center none">
+  <div>
+    <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
+      <h1>Comments</h1>
+      <p *ngIf="comments.length>0">Кількість коментарів {{comments.length}}</p>
+      <hr>
+      <div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Text..."
+          [(ngModel)]="text"
+          autocomplete="off"
+          matInput
+          (keyup.enter)="add()"
+        >
+        <button style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary" >
+          Add comment
+        </button>
+      </div>
+    </mat-card>
+
+    <div *ngIf="comments.length; else noComments">
+      <mat-card class="mat-elevation-z5"  style="width: 900px; margin-top: 16px" *ngFor="let comment of comments">
+        <p style="font-size: 16px" *ngIf="comment.text!==null"> {{comment.text}}</p>
+        <mat-card-subtitle>{{comment.publicationDate}}</mat-card-subtitle>
+        <button style="margin-top: 10px" (click)="remove(comment.id)" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary">
+          Remove
+        </button>
+
+      </mat-card>
+    </div>
+
+    <ng-template #noComments>
+      <p style="margin:20px; font-size: 20px">No Comments. Be first)</p>
+    </ng-template>
+
   </div>
-</mat-card-header>
+</div>

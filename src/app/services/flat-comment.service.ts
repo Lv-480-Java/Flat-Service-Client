@@ -10,6 +10,7 @@ export interface FlatComment {
   userAuthor?: User;
   text: string;
   publicationDate?: any;
+  commentAboutComment?: number;
 }
 
 @Injectable({
@@ -34,5 +35,13 @@ export class FlatCommentService {
     return this.http.get<FlatComment[]>(BASE_URL + 'flatcomments/getall/' + id);
   }
 
+  addC(flatComment: FlatComment): Observable<FlatComment> {
+    return this.http.post<FlatComment>(BASE_URL + 'flatcomments/createcommentaboutcomment/', JSON.stringify(flatComment), this.options);
+  }
+
+  loadCommentsC(id: number): Observable<FlatComment[]> {
+    return this.http.get<FlatComment[]>(BASE_URL + 'flatcomments/getallaboutcomment/' + id);
+  }
 
 }
+
