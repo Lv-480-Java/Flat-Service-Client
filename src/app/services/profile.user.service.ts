@@ -20,7 +20,9 @@ export class ProfileUserService {
   updateUserData(userData: User): Observable<User> {
     return this.http.put<User>(BASE_URL + 'users/update/all', JSON.stringify(userData), this.options);
   }
-
+  evaluateToLandlord(dataLand: User): Observable<User> {
+    return this.http.post<User>(BASE_URL + 'passport/landlord', JSON.stringify(dataLand), this.options);
+  }
   addPassport(): Observable<Landlord> {
     return this.http.get<Landlord>(BASE_URL + 'passport/getPassport');
   }

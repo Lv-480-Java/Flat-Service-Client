@@ -79,7 +79,7 @@
                         type="submit"> Save
                 </button>
                 <button mat-raised-button color="warn" type="reset">Reset</button>
-                <button mat-raised-button color="primary" style="margin:20px;" type="submit" [disabled]="!landlordData">
+                <button mat-raised-button color="primary" style="margin:20px;"   (click)="evaluateToLandlord(dataLand)" [disabled]="!landlordData" type="submit">
                   Landlord
                 </button>
               </div>

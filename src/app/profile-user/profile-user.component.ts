@@ -5,7 +5,6 @@ import {Landlord} from '../services/profile.service';
 import {HttpClient, HttpEventType, HttpHeaders} from '@angular/common/http';
 import {BASE_URL} from '../utils/constants';
 
-
 @Component({
   selector: 'app-profile-user',
   templateUrl: './profile-user.component.html',
@@ -17,6 +16,7 @@ export class ProfileUserComponent implements OnInit {
   landlordData = true;
   data: Landlord;
   idPassport: number;
+  dataLand: User;
 
   constructor(private profileUserService: ProfileUserService, private http: HttpClient) {
   }
@@ -51,6 +51,13 @@ export class ProfileUserComponent implements OnInit {
     this.profileUserService.updateUserData(userData)
       .subscribe(userDataResp => {
         this.userData = userDataResp;
+        this.addUserData();
+      });
+  }
+  evaluateToLandlord(dataLand: User) {
+    this.profileUserService.evaluateToLandlord(dataLand)
+      .subscribe(dataLandRes => {
+        this.dataLand = dataLandRes;
         this.addUserData();
       });
   }
