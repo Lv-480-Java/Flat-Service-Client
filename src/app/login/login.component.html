@@ -3,7 +3,8 @@
 
   <p class="h4 mb-4">Sign in</p>
 
-  <div style = "background-color: #ea3455; font-size: 15px" class="alert alert danger" *ngIf="authService.error$ | async as error">
+  <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+       *ngIf="authService.error$ | async as error">
     {{ error }}
   </div>
   <div
