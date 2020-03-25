@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListCommentComponent } from './list-comment.component';
+import { AddFlatComponent } from './add-flat.component';
 
-describe('ListCommentComponent', () => {
-  let component: ListCommentComponent;
-  let fixture: ComponentFixture<ListCommentComponent>;
+describe('AddFlatComponent', () => {
+  let component: AddFlatComponent;
+  let fixture: ComponentFixture<AddFlatComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListCommentComponent ]
+      declarations: [ AddFlatComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListCommentComponent);
+    fixture = TestBed.createComponent(AddFlatComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

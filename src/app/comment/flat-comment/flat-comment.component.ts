@@ -10,8 +10,9 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
 export class FlatCommentComponent implements OnInit {
 
   comments: FlatComment[] = [];
-  commentId = '';
+  commentId: number;
   isTrue = false;
+  isList = false;
   text = '';
   @Input() id: number;
 

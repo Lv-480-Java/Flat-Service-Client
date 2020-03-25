@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {AdminService} from '../../../services/admin.service';
+import {RequestsService} from '../../../services/requests.service';
+import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
   selector: 'app-flat-chart',
@@ -13,6 +14,8 @@ export class FlatChartComponent implements OnInit {
   public totalFlats: number;
   public chartLabels: Array<any>;
   private days: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  numberOfDays = 7;
+
 
   public chartColors: Array<any> = [
     {
@@ -26,7 +29,7 @@ export class FlatChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private adminService: AdminService) {
+  constructor(private statisticsService: StatisticsService) {
   }
 
   shiftDays() {
@@ -37,7 +40,7 @@ export class FlatChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.adminService.getCreatedFlatsForWeek().subscribe(d => {
+    this.statisticsService.getCreatedFlatsForWeek(this.numberOfDays).subscribe(d => {
       this.chartDatasets = [
         {data: d, label: 'Flats posted'}
       ];

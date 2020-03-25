@@ -30,13 +30,17 @@
          Remove
         </button>
         <button style="margin-top: 10px" style="margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
-                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" > rrrr</button>
+                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Відповісти</button>
+        <button style="margin-top: 10px" style="margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
+                color="primary" (click)="isList=!isList" (click)="commentId=comment.id" >Відповіді</button>
         <div *ngIf="isTrue && commentId==comment.id">
           <app-coments-about-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-coments-about-comment>
         </div>
+        <div *ngIf="isList && commentId==comment.id">
+          <app-list-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-list-comment>
+        </div>
       </mat-card>
     </div>
-
     <ng-template #noComments>
       <p style="margin:20px; font-size: 20px">No Comments. Be first)</p>
     </ng-template>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
 
 @Component({
   selector: 'app-list-comment',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListCommentComponent implements OnInit {
 
-  constructor() { }
+  isTrue = false;
+  isList = false;
+  @Input() commentId: number;
+  @Input() flatId: number;
+  comments: FlatComment[] = [];
+  text = '';
+
+  constructor(private flatCommentService: FlatCommentService) {
+  }
 
   ngOnInit(): void {
+    this.loadComments(this.commentId);
+  }
+
+  remove(id: number) {
+    this.flatCommentService.remove(id)
+      .subscribe(() => {
+        this.comments = this.comments.filter(item => item.id !== id);
+      });
+  }
+
+  loadComments(id: number): void {
+    this.flatCommentService.loadCommentsC(id)
+      .subscribe(comments => {
+        this.comments = comments.reverse();
+      });
+    console.log(this.comments);
   }
 
 }
