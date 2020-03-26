@@ -63,11 +63,14 @@ import {ReviewWindowComponent} from './admin-panel/requests/review-window/review
 import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/flat-request-detail/flat-request-detail.component';
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
-import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
+import { ComentsaboutcommentComponent } from './comment/coments-about-comment/comentsaboutcomment.component';
+import { ListCommentComponent } from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import { AutoApproveComponent } from './admin-panel/requests/auto-approve/auto-approve.component';
+import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -105,6 +108,9 @@ import { AutoApproveComponent } from './admin-panel/requests/auto-approve/auto-a
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
+    ChatButtonComponent,
+    ComentsaboutcommentComponent,
+    ListCommentComponent,
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
@@ -146,7 +152,12 @@ import { AutoApproveComponent } from './admin-panel/requests/auto-approve/auto-a
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }],
+    },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpErrorInterceptor,
+        multi: true
+      }],
     RegistrationService, AuthService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })

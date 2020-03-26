@@ -17,7 +17,7 @@ export class UserService {
   }
 
   getAllUserByPage(pageNumber: number, pageSize: number) {
-    return this.http.get(BASE_URL + 'users/all/${pageNumber}/${pageSize}');
+    return this.http.get(BASE_URL + `users/all/${pageNumber}/${pageSize}`);
   }
 
   updateUser(user: User): Observable<User> {
@@ -25,6 +25,11 @@ export class UserService {
   }
 
   removeUser(id: string): Observable<void> {
-    return this.http.delete<void>(BASE_URL + 'users/delete/${id}');
+    return this.http.delete<void>(BASE_URL + `users/delete/${id}`);
+  }
+
+  getUser(id: number): Observable<User> {
+    console.log(id);
+    return this.http.get<User>(BASE_URL + `users/${id}`);
   }
 }
