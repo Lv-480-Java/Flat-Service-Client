@@ -67,6 +67,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
+import { AutoApproveComponent } from './admin-panel/requests/auto-approve/auto-approve.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +109,8 @@ import {MatSelectModule} from '@angular/material/select';
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
     ChatButtonComponent,
-    AddFlatComponent
+    AddFlatComponent,
+    AutoApproveComponent
   ],
   imports: [
     BrowserModule,

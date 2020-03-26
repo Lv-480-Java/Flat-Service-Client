@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RequestsService} from '../../../services/requests.service';
 
@@ -16,6 +16,8 @@ export class ReviewWindowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('data: ');
+    console.log(this.data);
   }
 
   close() {
@@ -33,7 +35,7 @@ export class ReviewWindowComponent implements OnInit {
   }
 
   decline() {
-    console.log(this.data.requestId);
+
     if (this.data.type === 'FLATS') {
       this.requestsService.declineFlatRequests(this.data.requestId).subscribe();
     } else {

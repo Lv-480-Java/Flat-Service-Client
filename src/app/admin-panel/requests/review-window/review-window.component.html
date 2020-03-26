@@ -2,7 +2,7 @@
 
   <div *ngIf="data.type=='FLATS';then flatDetails; else userDetails"></div>
   <ng-template #flatDetails>
-    <app-flat-request-detail></app-flat-request-detail>
+    <app-flat-request-detail [id]="data.flatId"></app-flat-request-detail>
   </ng-template>
   <ng-template #userDetails>
     <app-user-request-detail></app-user-request-detail>
@@ -10,9 +10,9 @@
 
 
   <div class="buttons">
-    <button class="close-button" mat-raised-button color="primary" (click)="close()">Close</button>
+    <button class="close-button" mat-raised-button color="basic" (click)="close()">Close</button>
     <button class="approve-button" mat-raised-button color="primary" (click)="approve()">Approve</button>
-    <button class="decline-button" mat-raised-button color="primary" (click)="decline()">Decline</button>
+    <button class="decline-button" mat-raised-button color="warn" (click)="decline()">Decline</button>
   </div>
 
 </div>

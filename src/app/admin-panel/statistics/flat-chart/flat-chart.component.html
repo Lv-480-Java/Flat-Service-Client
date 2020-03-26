@@ -1,14 +1,16 @@
-<div class="flat-chart">
-  <canvas mdbChart
-          [chartType]="chartType"
-          [datasets]="chartDatasets"
-          [labels]="chartLabels"
-          [colors]="chartColors"
-          [options]="chartOptions"
-          [legend]="true">
-  </canvas>
+<mdb-card class="flat-chart">
+  <div class="chart">
+    <canvas mdbChart
+            [chartType]="chartType"
+            [datasets]="chartDatasets"
+            [labels]="chartLabels"
+            [colors]="chartColors"
+            [options]="chartOptions"
+            [legend]="true">
+    </canvas>
+  </div>
   <div>
-    <mdb-card >
+    <mdb-card>
       <mdb-card-body>
         <mdb-card-title>
           <span class="count-number">{{totalFlats}} </span>
@@ -18,4 +20,4 @@
     </mdb-card>
   </div>
 
-</div>
+</mdb-card>

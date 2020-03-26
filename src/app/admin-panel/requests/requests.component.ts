@@ -92,7 +92,6 @@ export class RequestsComponent implements OnInit {
       .subscribe(data => {
         const totalElements = new Array(data[`totalElements`]);
         this.requests = data[`content`];
-        console.log(data[`content`]);
         this.dataSource = new MatTableDataSource<User>(this.requests);
         this.paginator.length = totalElements.length;
       });
@@ -112,8 +111,10 @@ export class RequestsComponent implements OnInit {
   }
 
   openDialog(id: number): void {
+    console.log('review flat:');
+    console.log({requestId: id, type: this.type, flatId: this.requests.find(x => x.id === id).flat.id});
     const dialogRef = this.dialog.open(ReviewWindowComponent, {
-      data: {requestId: id, type: this.type}
+      data: {requestId: id, type: this.type, flatId: this.requests.find(x => x.id === id).flat.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
