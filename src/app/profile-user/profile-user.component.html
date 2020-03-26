@@ -33,10 +33,7 @@
         <li class="active"><a data-toggle="tab" href="#data">User Data</a></li>
         <li><a data-toggle="tab" href="/profile">Passport Data</a></li>
       </ul>
-      <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
-           *ngIf="profileUserService.error_phone$ | async as error">
-        {{ error }}
-      </div>
+
       <div class="tab-content">
         <div class="tab-pane active" id="data">
           <hr>
@@ -48,6 +45,11 @@
 
                 <input type="text" class="form-control" [(ngModel)]="userData.username"
                        [ngModelOptions]="{standalone:true}">
+                <br>
+                <small style="background-color: #ea3455; font-size: 12px" class="alert alert danger"
+                       *ngIf="profileUserService.ERROR_USERNAME$ | async as error">
+                  {{ error }}
+                </small>
               </div>
             </div>
             <div class="form-group">
@@ -56,6 +58,11 @@
                 <h4>Phone</h4>
                 <input type="text" class="form-control" [(ngModel)]="userData.phoneNumber"
                        [ngModelOptions]="{standalone:true}">
+                <br>
+                <small style="background-color: #ea3455; font-size: 12px" class="alert alert danger"
+                       *ngIf="profileUserService.ERROR_PHONE$ | async as error">
+                  {{ error }}
+                </small>
               </div>
             </div>
 
@@ -72,9 +79,7 @@
               </div>
             </div>
           </form>
-
           <hr>
-
         </div><!--/tab-pane-->
 
       </div><!--/tab-pane-->
