@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {User} from '../shared/interfaces';
 import {Router} from '@angular/router';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-login',
@@ -30,7 +31,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  submit() {
+  submit(): Observable<any> {
     if (this.loginForm.invalid) {
       return;
     }

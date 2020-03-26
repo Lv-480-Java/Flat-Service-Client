@@ -21,7 +21,7 @@
       <button *ngIf="authService.isAuthenticated()" style="height:35px;min-width:80px" mat-raised-button color="warn" [routerLink]="['addflat']">
         Add flat!
       </button>
-      <a id = "username" style="font-size: 15px; vertical-align: center; color: white" *ngIf="authService.isAuthenticated()" class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/profile" routerLinkActive="active">{{displayName()}}</a>
+      <a id = "username" style="font-size: 15px; vertical-align: center; color: white" *ngIf="authService.isAuthenticated()" class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/data" routerLinkActive="active">{{displayName()}}</a>
       <li class="nav-item avatar dropdown" dropdown>
         <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
         </a>
