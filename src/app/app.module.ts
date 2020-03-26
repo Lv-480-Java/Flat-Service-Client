@@ -71,6 +71,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -115,6 +116,7 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
     UserRequestDetailComponent,
     ChatButtonComponent,
     AddFlatComponent
+
   ],
   imports: [
     BrowserModule,
