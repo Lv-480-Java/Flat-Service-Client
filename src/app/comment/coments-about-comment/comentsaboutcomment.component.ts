@@ -9,7 +9,7 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
 export class ComentsaboutcommentComponent implements OnInit {
 
   @Input() commentId: number;
-  @Input() flatId: number;
+  @Input() flatUserId: number;
   comments: FlatComment[] = [];
   text = '';
   constructor(private flatCommentService: FlatCommentService) {
@@ -25,7 +25,7 @@ export class ComentsaboutcommentComponent implements OnInit {
     }
     const newFlatComment: FlatComment = {
       text: this.text,
-      flatId: this.flatId,
+      flatId: this.flatUserId,
       commentAboutComment: this.commentId
     };
     console.log();

@@ -8,7 +8,7 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
   styleUrls: ['./flat-comment.component.scss']
 })
 export class FlatCommentComponent implements OnInit {
-
+  isId: any = JSON.parse(localStorage.getItem('user')).userId;
   comments: FlatComment[] = [];
   commentId: number;
   isTrue = false;
