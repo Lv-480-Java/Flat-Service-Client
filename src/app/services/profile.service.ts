@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 import {User} from '../admin-panel/component/Users';
 import {BASE_URL} from '../utils/constants';
+
 
 export interface Landlord {
   id: number;
@@ -38,7 +39,8 @@ export class ProfileService {
   }
 
   updatePassport(data: Landlord): Observable<Landlord> {
-    return this.http.post<Landlord>(BASE_URL + 'passport/update' , JSON.stringify(data), this.options);
+    return this.http.post<Landlord>(BASE_URL + 'passport/update' , JSON.stringify(data), this.options)
 
   }
+
 }
