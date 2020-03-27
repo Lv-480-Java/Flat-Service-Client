@@ -17,7 +17,21 @@ export class ProfileComponent implements OnInit {
     this.addPassport();
     this.addUserInfo();
   }
-
+resetData() {
+    this.data.firstName = '';
+    this.data.lastName = '';
+    this.data.authority = '';
+    this.data.birthDate = '';
+    this.data.birthPlace = '';
+    this.data.dateOfIssue = '';
+    this.data.expirationDate = '';
+    this.data.gender = '';
+    this.data.identificationNumber = null;
+    this.data.middleName = '';
+    this.data.nationality = '';
+    this.data.passportNumber = '';
+    this.data.passportType = '';
+}
   addPassport() {
     this.landlordService.addPassport()
       .subscribe(data => {

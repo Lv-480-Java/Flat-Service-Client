@@ -49,8 +49,7 @@
 
                 <input type="text" class="form-control" [(ngModel)]="userData.username"
                        [ngModelOptions]="{standalone:true}">
-                <br>
-                <small style="background-color: #ea3455; font-size: 12px" class="alert alert danger"
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
                        *ngIf="profileUserService.ERROR_USERNAME$ | async as error">
                   {{ error }}
                 </small>
@@ -62,8 +61,7 @@
                 <h4>Phone</h4>
                 <input type="text" class="form-control" [(ngModel)]="userData.phoneNumber"
                        [ngModelOptions]="{standalone:true}">
-                <br>
-                <small style="background-color: #ea3455; font-size: 12px" class="alert alert danger"
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
                        *ngIf="profileUserService.ERROR_PHONE$ | async as error">
                   {{ error }}
                 </small>
@@ -76,7 +74,7 @@
                 <button mat-raised-button color="primary" style="margin:20px;" (click)="updateUserData(userData)"
                         type="submit"> Save
                 </button>
-                <button mat-raised-button color="warn" type="reset">Reset</button>
+                <button mat-raised-button color="warn" (click)="resetData()" >Reset</button>
                 <button mat-raised-button color="primary" style="margin:20px;"   (click)="evaluateToLandlord(dataLand)" [disabled]="!landlordData" type="submit">
                   Landlord
                 </button>

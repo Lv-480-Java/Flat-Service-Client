@@ -35,12 +35,14 @@ export class ProfileUserComponent implements OnInit {
         this.addUserData();
       });
   }
-
   ngOnInit(): void {
     this.addUserData();
     this.addPassport();
   }
-
+  resetData() {
+    this.userData.username = '';
+    this.userData.phoneNumber = '';
+  }
   addUserData() {
     this.profileUserService.addUserData()
       .subscribe(userData => {
