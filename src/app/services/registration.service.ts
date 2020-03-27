@@ -26,7 +26,7 @@ export class RegistrationService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.log("Registration is working...");
+    console.log('Registration is working...');
     const {message} = error.error;
     console.log(error);
     if (message instanceof Object) {

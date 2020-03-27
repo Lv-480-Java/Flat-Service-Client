@@ -10,7 +10,7 @@ import {User} from '../admin-panel/component/Users';
 export class ProfileComponent implements OnInit {
   data: Landlord;
   userData: User;
-  constructor(private landlordService: ProfileService) {
+  constructor(public landlordService: ProfileService) {
   }
   ngOnInit()  {
     this.addPassport();
