@@ -64,15 +64,15 @@ import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/f
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {InterceptorService} from './services/intercept.service';
-import { ComentsaboutcommentComponent } from './comment/coments-about-comment/comentsaboutcomment.component';
-import { ListCommentComponent } from './comment/list-comment/list-comment.component';
+import {ComentsaboutcommentComponent} from './comment/coments-about-comment/comentsaboutcomment.component';
+import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
-import { AutoApproveComponent } from './admin-panel/requests/auto-approve/auto-approve.component';
+import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
-import { RequestMessageComponent } from './admin-panel/requests/review-window/request-message/request-message.component';
+import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
-
+import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
 
 @NgModule({
   declarations: [
@@ -119,38 +119,38 @@ import {MatBadgeModule} from '@angular/material/badge';
     ChatButtonComponent,
     AddFlatComponent,
     AutoApproveComponent,
-    RequestMessageComponent
+    RequestMessageComponent,
+    LandlordFlatListComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MDBBootstrapModule.forRoot(),
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        Ng5SliderModule,
-        MatSliderModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        FlexModule,
-        InfiniteScrollModule,
-        MatChipsModule,
-        MatTableModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        BrowserAnimationsModule,
-        GalleryModule,
-        MatAutocompleteModule,
-        MatSidenavModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatListModule,
-        MatSelectModule,
-        MatBadgeModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    Ng5SliderModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    FlexModule,
+    InfiniteScrollModule,
+    MatChipsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    GalleryModule,
+    MatAutocompleteModule,
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatListModule,
+    MatSelectModule, MatBadgeModule
+  ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,

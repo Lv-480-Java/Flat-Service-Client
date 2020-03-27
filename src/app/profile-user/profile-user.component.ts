@@ -18,7 +18,7 @@ export class ProfileUserComponent implements OnInit {
   idPassport: number;
   dataLand: User;
 
-  constructor(private profileUserService: ProfileUserService, private http: HttpClient) {
+  constructor(public profileUserService: ProfileUserService, private http: HttpClient) {
   }
 
   onFileSelected(event) {
