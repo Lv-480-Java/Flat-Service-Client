@@ -17,8 +17,12 @@
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
 
-      <button *ngIf="authService.isAuthenticated()" style="height:35px;min-width:80px" mat-raised-button color="warn" [routerLink]="['addflat']">
+      <button class = "button_h" *ngIf="authService.isAuthenticated()" style="height:35px;min-width:80px" mat-raised-button color="warn" [routerLink]="['addflat']">
         Add flat!
+      </button>
+
+      <button class = "button_h" *ngIf="authService.isAuthenticated()" style="height:35px;min-width:80px" mat-raised-button color="warn" [routerLink]="['favorite-flat']">
+        Favorite
       </button>
       <a id = "username" style="font-size: 15px; vertical-align: center; color: white" *ngIf="authService.isAuthenticated()" class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/data" routerLinkActive="active">{{displayName()}}</a>
       <li class="nav-item avatar dropdown" dropdown>

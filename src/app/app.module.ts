@@ -69,6 +69,8 @@ import { ListCommentComponent } from './comment/list-comment/list-comment.compon
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import {FlatService} from "./services/flat.service";
+import { FavoriteFlatComponent } from './favorite-flat/favorite-flat.component';
 
 
 
@@ -115,7 +117,8 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
     ChatButtonComponent,
-    AddFlatComponent
+    AddFlatComponent,
+    FavoriteFlatComponent
 
   ],
   imports: [
@@ -158,7 +161,7 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {

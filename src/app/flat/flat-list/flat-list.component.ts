@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
 import {BASE_URL} from 'src/app/utils/constants';
+import {FlatService} from "../../services/flat.service";
 
 @Component({
   selector: 'app-flat-list',
@@ -11,7 +12,7 @@ import {BASE_URL} from 'src/app/utils/constants';
 })
 export class FlatListComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private flatService: FlatService) {
   }
 
   pageNumber = 0;
@@ -45,6 +46,12 @@ export class FlatListComponent implements OnInit {
       this.data = data;
       this.flats.content = this.flats.content.concat(this.data.content);
     });
+  }
+
+  addToFavoriteList(id: number) {
+    console.log(id);
+    console.log("Component is running..");
+    this.flatService.addFlatToFavoriteList(id).subscribe();
   }
 }
 
