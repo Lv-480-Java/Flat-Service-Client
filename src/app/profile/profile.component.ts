@@ -8,6 +8,7 @@ import {User} from '../admin-panel/component/Users';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  noPhoto =  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREJEf8sd1jrOUhsma-DECMfCHHH5JVpRdlDt_BabSdGfVSTZhF';
   data: Landlord;
   userData: User;
   constructor(public landlordService: ProfileService) {

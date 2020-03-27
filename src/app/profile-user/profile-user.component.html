@@ -19,10 +19,10 @@
     <div class="col-sm-3"><!--left col-->
 
       <div class="text-center">
-        <img *ngIf="userData.photoUrl !== null; else noData" [src]="userData.photoUrl" class="img-thumbnail">
-      <ng-template #noData>
-       <img [src]="noPhoto" class="img-thumbnail">
-      </ng-template>
+        <img *ngIf="userData.photoUrl !== null; else noData" [src]="userData.photoUrl" class="img-thumbnail" style="width: 200px">
+        <ng-template #noData>
+          <img [src]="noPhoto" class="img-thumbnail" style="width: 200px">
+        </ng-template>
       </div>
       <br>
       <div class="text-center">
