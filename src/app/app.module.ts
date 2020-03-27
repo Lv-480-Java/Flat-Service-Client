@@ -70,6 +70,8 @@ import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import { AutoApproveComponent } from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import { RequestMessageComponent } from './admin-panel/requests/review-window/request-message/request-message.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -116,37 +118,39 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
     UserRequestDetailComponent,
     ChatButtonComponent,
     AddFlatComponent,
-    AutoApproveComponent
+    AutoApproveComponent,
+    RequestMessageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule,
-    GalleryModule,
-    MatAutocompleteModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatListModule,
-    MatSelectModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        Ng5SliderModule,
+        MatSliderModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        FlexModule,
+        InfiniteScrollModule,
+        MatChipsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        BrowserAnimationsModule,
+        GalleryModule,
+        MatAutocompleteModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatListModule,
+        MatSelectModule,
+        MatBadgeModule,
+    ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,

@@ -2,7 +2,7 @@
 
   <div *ngIf="data.type=='FLATS';then flatDetails; else userDetails"></div>
   <ng-template #flatDetails>
-    <app-flat-request-detail [id]="data.flatId"></app-flat-request-detail>
+    <app-flat-request-detail [id]="data.request.flat.id"></app-flat-request-detail>
   </ng-template>
   <ng-template #userDetails>
     <app-user-request-detail></app-user-request-detail>

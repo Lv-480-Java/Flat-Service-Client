@@ -7,6 +7,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ReviewWindowComponent} from './review-window/review-window.component';
+import {RequestMessageComponent} from './review-window/request-message/request-message.component';
 
 @Component({
   selector: 'app-requests',
@@ -112,9 +113,9 @@ export class RequestsComponent implements OnInit {
 
   openDialog(id: number): void {
     console.log('review flat:');
-    console.log({requestId: id, type: this.type, flatId: this.requests.find(x => x.id === id).flat.id});
+    const req = this.requests.find(x => x.id === id);
     const dialogRef = this.dialog.open(ReviewWindowComponent, {
-      data: {requestId: id, type: this.type, flatId: this.requests.find(x => x.id === id).flat.id}
+      data: {requestId: id, type: this.type, request: req}
     });
 
     dialogRef.afterClosed().subscribe(result => {
