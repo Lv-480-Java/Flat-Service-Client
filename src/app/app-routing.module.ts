@@ -39,7 +39,7 @@ const routes: Routes = [
   },
 
   {path: 'data', component: ProfileUserComponent},
-  {path: 'short_profile', component: ProfileShortComponent},
+  {path: 'short_profile/:id', component: ProfileShortComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
   {path: 'flats', component: FlatListComponent},
   {path: 'detailed/:id', component: FlatDetailedComponent},

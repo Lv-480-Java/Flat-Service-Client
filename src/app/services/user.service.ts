@@ -27,6 +27,7 @@ export class UserService {
     return this.http.delete<void>(BASE_URL + `users/delete/${id}`);
   }
 
+
   searchUserByUsername(username: string, page: number, size: number) {
     return this.http.get(BASE_URL + `users/username/${username}/${page}/${size}`);
   }
@@ -37,5 +38,10 @@ export class UserService {
 
   searchUserByPhoneNumber(phoneNumber: string, page: number, size: number) {
     return this.http.get(BASE_URL + `users/phone/${phoneNumber}/${page}/${size}`);
+  }
+
+  getUser(id: number): Observable<User> {
+    console.log(id);
+    return this.http.get<User>(BASE_URL + `users/${id}`);
   }
 }
