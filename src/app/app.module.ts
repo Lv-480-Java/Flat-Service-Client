@@ -64,14 +64,15 @@ import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/f
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {InterceptorService} from './services/intercept.service';
-import { ComentsaboutcommentComponent } from './comment/coments-about-comment/comentsaboutcomment.component';
-import { ListCommentComponent } from './comment/list-comment/list-comment.component';
+import {ComentsaboutcommentComponent} from './comment/coments-about-comment/comentsaboutcomment.component';
+import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
+import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
-import { LandlordFlatListComponent } from './flat/landlord-flat-list/landlord-flat-list.component';
-
-
+import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
 
 @NgModule({
   declarations: [
@@ -117,8 +118,9 @@ import { LandlordFlatListComponent } from './flat/landlord-flat-list/landlord-fl
     UserRequestDetailComponent,
     ChatButtonComponent,
     AddFlatComponent,
+    AutoApproveComponent,
+    RequestMessageComponent,
     LandlordFlatListComponent
-
   ],
   imports: [
     BrowserModule,
@@ -147,7 +149,7 @@ import { LandlordFlatListComponent } from './flat/landlord-flat-list/landlord-fl
     MatPaginatorModule,
     MatDialogModule,
     MatListModule,
-    MatSelectModule,
+    MatSelectModule, MatBadgeModule
   ],
   providers: [
     [{
