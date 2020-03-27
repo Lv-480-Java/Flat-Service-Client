@@ -13,6 +13,7 @@
 </head>
 
 <hr>
+
 <div class="container bootstrap snippet">
   <div class="row">
     <div class="col-sm-3"><!--left col-->
@@ -44,6 +45,11 @@
 
                 <input type="text" class="form-control" [(ngModel)]="userData.username"
                        [ngModelOptions]="{standalone:true}">
+                <br>
+                <small style="background-color: #ea3455; font-size: 12px" class="alert alert danger"
+                       *ngIf="profileUserService.ERROR_USERNAME$ | async as error">
+                  {{ error }}
+                </small>
               </div>
             </div>
             <div class="form-group">
@@ -52,6 +58,11 @@
                 <h4>Phone</h4>
                 <input type="text" class="form-control" [(ngModel)]="userData.phoneNumber"
                        [ngModelOptions]="{standalone:true}">
+                <br>
+                <small style="background-color: #ea3455; font-size: 12px" class="alert alert danger"
+                       *ngIf="profileUserService.ERROR_PHONE$ | async as error">
+                  {{ error }}
+                </small>
               </div>
             </div>
 
@@ -68,9 +79,7 @@
               </div>
             </div>
           </form>
-
           <hr>
-
         </div><!--/tab-pane-->
 
       </div><!--/tab-pane-->
