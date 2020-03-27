@@ -67,6 +67,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -138,6 +139,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     MatListModule,
     MatSelectModule,
+    MatGridListModule,
   ],
   providers: [
     [{
