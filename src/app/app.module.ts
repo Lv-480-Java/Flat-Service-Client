@@ -69,6 +69,7 @@ import { ListCommentComponent } from './comment/list-comment/list-comment.compon
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import { LandlordFlatListComponent } from './flat/landlord-flat-list/landlord-flat-list.component';
 
 
 
@@ -115,7 +116,8 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
     ChatButtonComponent,
-    AddFlatComponent
+    AddFlatComponent,
+    LandlordFlatListComponent
 
   ],
   imports: [
