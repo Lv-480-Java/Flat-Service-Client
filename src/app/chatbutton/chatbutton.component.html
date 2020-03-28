@@ -2,12 +2,12 @@
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <div id="chatbox" [ngClass]="theme">
   <div id="friendslist">
-    <div id="topmenu">
+   <!-- <div id="topmenu">
       <span class="friends"></span>
       <span class="chats"></span>
       <span class="history"></span>
-    </div>
-    <div infinite-scroll *ngFor="let mes of chats">
+    </div>-->
+    <div *ngFor="let mes of chats">
       <div id="friends">
         <div class="friend">
           <div *ngIf="mes.senderId != currentUserId">
@@ -36,11 +36,9 @@
         </div>
       </div>
     </div>
-   <!-- <div id="search">
-      <input type="text" id="searchfield" value="Search contacts..."/>
-    </div>-->
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<app-chat *ngIf="chatIsActive" [username]="username" (onMessagesSeen)="messageSeen($event)" (onClose)="modalClosed($event)">{{unreadMessages}}</app-chat>
+<app-chat *ngIf="chatIsActive" [username]="username" (onMessagesSeen)="messageSeen($event)"
+          (onClose)="modalClosed($event)"></app-chat>
 
