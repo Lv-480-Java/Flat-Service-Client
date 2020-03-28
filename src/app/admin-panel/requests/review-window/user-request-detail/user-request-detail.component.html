@@ -1,1 +1,156 @@
-<!--<p>user details</p>-->
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<hr>
+<div class="container bootstrap snippet">
+
+  <div class="row">
+    <div class="col-sm-3">
+
+      <div class="text-center">
+        <img [src]="userData.photoUrl" class="img-thumbnail">
+        <div class="nickname">{{userData.username}}</div>
+        <div class="phone">{{userData.phoneNumber}}</div>
+        <a class = "button" mat-button routerLink="/short_profile/{{userData.id}}" target="_blank">View Profile</a>
+      </div>
+
+    </div><!--/col-3-->
+    <div class="col-sm-9">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#passport">Passport Data</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="passport">
+          <hr>
+          <form class="form" action="" method="post" enctype="multipart/form-data" id="registrationForm">
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>First name</h4>
+
+                <input type="text" class="form-control" [(ngModel)]="data.firstName"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Last name</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.lastName"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Middle name</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.middleName"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-xs-6">
+                <h4>Gender</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.gender" [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Birth date</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.birthDate"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Birth place</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.birthPlace"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Passport type</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.passportType"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Nationality</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.nationality"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Authority</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.authority"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Date of issue</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.dateOfIssue"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Expiration date</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.expirationDate"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Passport number</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.passportNumber"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+
+              <div class="col-xs-6">
+                <h4>Identification number</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.identificationNumber"
+                       [ngModelOptions]="{standalone:true}">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-xs-12">
+                <br>
+
+              </div>
+            </div>
+          </form>
+          <hr>
+        </div><!--/tab-pane-->
+
+      </div><!--/tab-pane-->
+    </div><!--/tab-content-->
+
+  </div><!--/col-9-->
+</div><!--/row-->
+

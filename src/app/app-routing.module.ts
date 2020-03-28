@@ -27,7 +27,9 @@ const routes: Routes = [
   {path: 'addflat', component: AddFlatComponent},
   {
     path: 'admin', component: AdminLayoutComponent, children: [
-      {path: 'dashboard', component: DashboardPageComponent},
+      {path: '', component: DashboardPageComponent, children: [
+          {path: 'dashboard', component: DashboardPageComponent}
+        ]},
       {path: 'comments', component: ListCommentsPageComponent},
       {path: 'user', component: ListUserPageComponent},
       {path: 'posts', component: ListPostsPageComponent},

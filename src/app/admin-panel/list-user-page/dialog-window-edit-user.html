@@ -1,28 +1,33 @@
 <div class="dialog-window">
-  <form method="post" class="dialog-form">
-    <mat-form-field class="example-full-width">
+  <form [formGroup]="formUser" class="dialog-form">
+    <br>
+    <p class="h4 mb-4">Edit fields</p>
+
+    <!-- Username -->
+    <mat-form-field class="div3-input" appearance="outline">
       <mat-label>Username</mat-label>
-      <input matInput type="text" id="username" value="" placeholder="Field">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input matInput type="text" id="email" value="" placeholder="Field">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" id="password" value="" placeholder="Field">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Phone</mat-label>
-      <span matPrefix>+38 &nbsp;</span>
-      <input matInput type="text" id="phone" value="" placeholder="555-555-1234">
-      <mat-icon matSuffix>mode_edit</mat-icon>
+      <input type="text" matInput formControlName="username">
+      <mat-icon matSuffix>account_circle</mat-icon>
     </mat-form-field>
     <br>
-      <label for="photoUrl" style="margin: 10px">Choose a photo</label><i class="material-icons" style="margin-top: 2px">account_box</i><br>
-      <input type="file" style="margin: 10px 10px; width: 220px" id="photoUrl" value="" placeholder="Field" class="input-file">
+
+    <!-- Email -->
+    <mat-form-field class="div3-input" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input type="email" matInput formControlName="email" formControl disabled>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
     <br>
-    <button class="dialog-button" cdkFocusInitial mat-raised-button color="primary" [mat-dialog-close]="" (click)="put()">Save</button>
+
+    <!-- Phone -->
+    <mat-form-field class="div3-input" appearance="outline">
+      <mat-label>+38 &nbsp;</mat-label>
+      <input type="tel" matInput aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="phoneNumber">
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+    <br>
+
+    <button class="dialog-button" cdkFocusInitial mat-raised-button color="primary" (click)="put()">Save</button>
     <button mat-raised-button color="basic" (click)="closeClick()">Cancel</button>
   </form>
 </div>

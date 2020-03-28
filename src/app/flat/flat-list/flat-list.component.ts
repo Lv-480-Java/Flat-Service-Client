@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
@@ -13,7 +13,7 @@ export class FlatListComponent implements OnInit {
 
   constructor(private http: HttpClient) {
   }
-
+  @Input() userId: number;
   pageNumber = 0;
   data: any;
   flats: FlatResponse;
