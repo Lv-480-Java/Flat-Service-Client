@@ -1,5 +1,46 @@
-<div style="text-align: center">
-  <h1 style="text-align: center; color: red; margin-top: 100px">This page under development</h1>
-  <img src="https://thumbs.dreamstime.com/b/cartoon-figure-oops-sign-25759026.jpg"
-       alt="" width="200px">
+<div class="parent">
+  <div class="div1">
+
+    <!-- All Posts -->
+    <div class="mat-elevation-z8">
+      <br>
+      <h1 class="div2-h1">Posts of Landlords</h1>
+
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Author -->
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef> Author </th>
+          <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+        </ng-container>
+
+        <!-- Date published -->
+        <ng-container matColumnDef="date_published">
+          <th mat-header-cell *matHeaderCellDef> Date published </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <!-- View post button -->
+        <ng-container matColumnDef="view_post">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="action-button" mat-raised-button color="primary" (click)="openDialog(element)">View Post</button>
+          </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator (page)="paginationPage()" [pageSizeOptions] = "[5, 7]" showFirstLastButtons></mat-paginator>
+
+    </div>
+  </div>
 </div>
