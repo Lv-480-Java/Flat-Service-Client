@@ -16,5 +16,10 @@ export class ChatService {
   getChatId(username: string, id: number): Observable<number> {
     return this.http.get<number>(this.url + '?recieverName=' + username + '&senderId=' + id);
   }
+
+  countOfMessages(id: number): Observable<number> {
+    return this.http.get<number>(this.url + 's/' + id + '/count');
+  }
+
 }
 
