@@ -12,7 +12,14 @@ export class FlatService {
   }
 
   addFlatToFavoriteList(id: number): Observable<any> {
-    console.log("FlatService is running...")
     return this.http.post(BASE_URL + `favorite/addToTheList`, id);
+  }
+
+  getFavoriteFlats(): Observable<any> {
+    return this.http.get(BASE_URL + 'favorite/getFlats');
+  }
+
+  removeFlatFromFavoriteList(id: number): Observable<any> {
+    return this.http.post(BASE_URL + 'favorite/deleteFromList', id)
   }
 }

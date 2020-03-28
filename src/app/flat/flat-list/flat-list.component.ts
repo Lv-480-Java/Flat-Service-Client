@@ -14,16 +14,19 @@ export class FlatListComponent implements OnInit {
 
   constructor(private http: HttpClient, private flatService: FlatService) {
   }
+
   @Input() userId: number;
   pageNumber = 0;
   data: any;
   flats: FlatResponse;
+  favoriteFlats: FlatResponse;
   parameters: SearchParameters = new SearchParameters();
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   ngOnInit() {
     this.loadFlats();
+    this.loadFavoriteFlats();
   }
 
   loadFlats() {
@@ -53,6 +56,24 @@ export class FlatListComponent implements OnInit {
     console.log("Component is running..");
     this.flatService.addFlatToFavoriteList(id).subscribe();
   }
+
+  loadFavoriteFlats() {
+    console.log("Pamparam");
+    this.flatService.getFavoriteFlats()
+      .subscribe(data => {
+        this.data = data;
+        console.log(data);
+        this.favoriteFlats.content = this.data;
+      });
+  }
+
+/*  isInFavoriteList(id: number): boolean {
+    console.log("Is in favorite list")
+    console.log(this.favoriteFlats);
+    return this.favoriteFlats.content.filter(value => {
+      id === value.id
+    }).length == 1;
+  }*/
 }
 
 
