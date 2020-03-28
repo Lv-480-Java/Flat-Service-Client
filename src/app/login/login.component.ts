@@ -3,7 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {User} from '../shared/interfaces';
 import {Router} from '@angular/router';
-import {Observable} from "rxjs";
+import {LocalStorageService} from '../services/local-storage.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   constructor(public authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private localStorageService: LocalStorageService) {
   }
 
   ngOnInit() {
@@ -44,8 +46,8 @@ export class LoginComponent implements OnInit {
     };
 
     this.authService.login(user).subscribe((res) => {
-      localStorage.setItem('accesstoken', res.headers.get('accesstoken'));
-      localStorage.setItem('refreshtoken', res.headers.get('refreshtoken'));
+      this.localStorageService.setAccessToken(res.headers.get('accesstoken'));
+      this.localStorageService.setRefreshToken(res.headers.get('refreshtoken'));
       localStorage.setItem('user', JSON.stringify(res.body));
       this.loginForm.reset();
       this.router.navigate(['/flats']);
