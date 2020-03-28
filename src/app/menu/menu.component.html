@@ -22,7 +22,7 @@
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/addflat" routerLinkActive="active">Add flat</a>
       </li>
       <li *ngIf="displayRole()==='ROLE_ADMIN'|| displayRole()==='ROLE_MODERATOR'" class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin" routerLinkActive="active">Admin panel</a>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/admin']">Admin panel</a>
       </li>
     </ul>
     <!-- Links -->
