@@ -8,6 +8,8 @@ import {map, startWith} from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BASE_URL} from 'src/app/utils/constants';
 import {NewFlat} from './entity/new-flat';
+import {FlatService} from '../../services/flat.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-flat',
@@ -27,6 +29,7 @@ export class AddFlatComponent implements OnInit {
   allTags: string[] = [];
   error: any = 0;
   success: any = 0;
+
   @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
@@ -34,7 +37,7 @@ export class AddFlatComponent implements OnInit {
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router, private flatService: FlatService) {
   }
 
   ngOnInit(): void {
@@ -100,11 +103,12 @@ export class AddFlatComponent implements OnInit {
     console.log(JSON.stringify(this.flat));
     this.http.post(BASE_URL + 'flat/create', JSON.stringify(this.flat), this.options)
       .subscribe(success => {
-        console.log(success);
-        this.success = success;
-      }, error => { // second parameter is to listen for error
-        console.log(error);
-        this.error = error;
+        this.flatService.openSnackBar('Success! Flat will be displayed after moderation', 'Flat added!');
+        setTimeout(() => {
+          this.router.navigate(['flats']);
+        }, 2000);
+      }, error => {
+        this.flatService.openSnackBar('Error! Check fields for errors', 'Careful!');
       });
   }
 }

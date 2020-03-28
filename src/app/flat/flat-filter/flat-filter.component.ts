@@ -10,6 +10,7 @@ import {map, startWith} from 'rxjs/operators';
 import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {BASE_URL} from 'src/app/utils/constants';
+import {FlatService} from '../../services/flat.service';
 
 @Component({
   selector: 'app-flat-filter',
@@ -19,7 +20,7 @@ import {BASE_URL} from 'src/app/utils/constants';
 
 export class FlatFilterComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private flatService: FlatService) {
   }
 
   priceOptions: Options = {
@@ -54,7 +55,6 @@ export class FlatFilterComponent implements OnInit {
 
   minFloor = 0;
   maxFloor = 4;
-
 
   @Input() private parameters: SearchParameters = new SearchParameters();
   @Output() loadFlats = new EventEmitter<any>();
@@ -135,7 +135,18 @@ export class FlatFilterComponent implements OnInit {
   subscribeFlats() {
     this.filterFlats();
     this.http.post(BASE_URL + 'subscribe', JSON.stringify(this.parameters), this.options)
-      .subscribe();
+      .subscribe(success => {
+        this.flatService.openSnackBar('Succesfuly subscribed to notifications', 'Subscribed');
+      }, error => {
+        this.flatService.openSnackBar('You can not subscribe', 'Error');
+      });
+  }
+
+  unSubscribe() {
+    this.http.delete(BASE_URL + 'subscribe')
+      .subscribe(success => {
+        this.flatService.openSnackBar('Succesfuly unsubscribed from all notifications', 'Unsubscribed');
+      });
   }
 }
 

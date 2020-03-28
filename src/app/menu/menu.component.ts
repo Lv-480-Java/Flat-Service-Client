@@ -46,8 +46,14 @@ export class MenuComponent implements OnInit {
     this.authService.logout();
   }
 
-  displayName(){
-    return JSON.parse(localStorage.getItem("user")).username;
+  displayName() {
+    return JSON.parse(localStorage.getItem('user')).username;
+  }
+
+  displayRole() {
+    if (JSON.parse(localStorage.getItem('user')) !== null) {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
   }
   activateChat() {
     if (this.chatListIsActive === false) {

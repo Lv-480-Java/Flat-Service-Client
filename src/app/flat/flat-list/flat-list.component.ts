@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
 import {BASE_URL} from 'src/app/utils/constants';
+import {FlatService} from '../../services/flat.service';
 
 @Component({
   selector: 'app-flat-list',
@@ -11,8 +12,9 @@ import {BASE_URL} from 'src/app/utils/constants';
 })
 export class FlatListComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private flatService: FlatService) {
   }
+
   @Input() userId: number;
   pageNumber = 0;
   data: any;
@@ -44,6 +46,18 @@ export class FlatListComponent implements OnInit {
     this.http.put(BASE_URL + 'flat/search/' + this.pageNumber, JSON.stringify(this.parameters), this.options).subscribe(data => {
       this.data = data;
       this.flats.content = this.flats.content.concat(this.data.content);
+    });
+  }
+
+  getUsername() {
+    if (JSON.parse(localStorage.getItem('user')) !== null) {
+      return JSON.parse(localStorage.getItem('user')).username;
+    }
+  }
+
+  removeFlat(flatId: number) {
+    this.http.delete(BASE_URL + 'flat/' + flatId).subscribe(success => {
+      this.flatService.openSnackBar('Succesfuly deactivated', 'Removed');
     });
   }
 }
