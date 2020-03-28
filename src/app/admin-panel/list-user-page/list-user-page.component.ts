@@ -2,10 +2,11 @@ import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {User} from '../component/Users';
-import {MatTableDataSource} from '@angular/material/table';
+import {MatRowDef, MatTableDataSource} from '@angular/material/table';
 import {Subscription} from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogWindowEditUserComponent} from './dialog-window-edit-user';
+import {FormControl, FormGroup, NgModel, Validators} from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
   users: User[];
   pageNumber = 0;
   pageSize = 5;
+  formUser: FormGroup;
   vSub: Subscription;
   dSub: Subscription;
   displayedColumns: string[] = ['id', 'username', 'email', 'phone', 'role', 'edit', 'button'];
@@ -29,27 +31,40 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   ngOnInit(): void {
     this.getAllUserByPage();
+    this.formUser = new FormGroup({
+      username: new FormControl('', [
+        Validators.required,
+      ]),
+      email: new FormControl('', [
+        Validators.email,
+        Validators.required
+      ]),
+      phoneNumber: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^\\+?3?8?(0\\d{9})$')
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6)
+      ])
+    });
   }
 
-  create(): void {
-    const user: User = {
-      username: (document.getElementById('username') as HTMLInputElement).value,
-      email: (document.getElementById('email') as HTMLInputElement).value,
-      password: (document.getElementById('password') as HTMLInputElement).value,
-      phoneNumber: (document.getElementById('phone') as HTMLInputElement).value
-    };
-    this.userService.createUser(user).subscribe(() => {
-      (document.getElementById('username') as HTMLInputElement).value = '';
-      (document.getElementById('email') as HTMLInputElement).value = '';
-      (document.getElementById('password') as HTMLInputElement).value = '';
-      (document.getElementById('phone') as HTMLInputElement).value = '';
-      this.getAllUserByPage();
-    });
-    console.log('Created user');
+  create() {
+    this.userService.createUser(this.formUser.value).subscribe(
+      response => console.log('Created', response),
+      error => console.log('Error!', error),
+      () => this.getAllUserByPage()
+      );
+    this.formUser.reset();
   }
 
   getAllUserByPage() {
@@ -64,24 +79,6 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
     console.log('Get users');
   }
 
-  paginationPage() {
-    this.pageNumber = this.paginator.pageIndex;
-    this.pageSize = this.paginator.pageSize;
-    this.getAllUserByPage();
-  }
-
-  openDialog() {
-    console.log('Opened edit form');
-    const dialogRef = this.dialog.open(DialogWindowEditUserComponent, {
-      width: '280px',
-      data: this.users,
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.users = result;
-    }).unsubscribe();
-  }
-
   remove(id: string) {
     this.dSub = this.userService.removeUser(id).subscribe(() => {
       this.users = this.users.filter(user => user.id !== id);
@@ -89,6 +86,76 @@ export class ListUserPageComponent implements OnInit, OnDestroy {
       this.getAllUserByPage();
     });
     console.log('Deleted user');
+  }
+
+  findUserByUsername(event: Event) {
+    const username = (event.target as HTMLInputElement).value;
+    if (username.trim() === '') {
+      this.getAllUserByPage();
+    } else {
+      this.userService.searchUserByUsername(username, this.pageNumber, this.pageSize).subscribe(
+        data => {
+          const userList: User[] = data[`content`];
+          const totalElements = new Array(data[`totalElements`]);
+          this.dataSource = new MatTableDataSource<User>(userList);
+          this.paginator.length = totalElements.length;
+          console.log('Find users');
+        },
+        error => console.log('Error!', error)
+      );
+    }
+  }
+
+  findUserByEmail(event: Event) {
+    const email = (event.target as HTMLInputElement).value;
+    if (email.trim() === '') {
+      this.getAllUserByPage();
+    } else {
+      this.userService.searchUserByEmail(email, this.pageNumber, this.pageSize).subscribe(
+        data => {
+          const userList: User[] = data[`content`];
+          const totalElements = new Array(data[`totalElements`]);
+          this.dataSource = new MatTableDataSource<User>(userList);
+          this.paginator.length = totalElements.length;
+          console.log('Find users');
+        },
+        error => console.log('Error!', error)
+      );
+    }
+  }
+
+  findUserByPhoneNumber(event: Event) {
+    const phone = (event.target as HTMLInputElement).value;
+    if (phone.trim() === '') {
+      this.getAllUserByPage();
+    } else {
+      this.userService.searchUserByPhoneNumber(phone, this.pageNumber, this.pageSize).subscribe(
+        data => {
+          const userList: User[] = data[`content`];
+          const totalElements = new Array(data[`totalElements`]);
+          this.dataSource = new MatTableDataSource<User>(userList);
+          this.paginator.length = totalElements.length;
+          console.log('Find users');
+        },
+        error => console.log('Error!', error)
+      );
+    }
+  }
+
+  paginationPage() {
+    this.pageNumber = this.paginator.pageIndex;
+    this.pageSize = this.paginator.pageSize;
+    this.getAllUserByPage();
+  }
+
+  openDialog(element) {
+    console.log('Opened edit form');
+    const dialogRef = this.dialog.open(DialogWindowEditUserComponent, {
+      data: element
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    }).unsubscribe();
   }
 
   ngOnDestroy(): void {

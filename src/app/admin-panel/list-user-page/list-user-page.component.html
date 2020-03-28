@@ -1,74 +1,156 @@
-<div class="field-add">
-  <form method="post" class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Username</mat-label>
-      <input type="text" id="username" value="" matInput placeholder="Field" required>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Email</mat-label>
-      <input type="text" id="email" value="" matInput placeholder="Field" required>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Password</mat-label>
-      <input type="password" id="password" value="" matInput placeholder="Field" required>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Phone</mat-label>
-      <span matPrefix>+38 &nbsp;</span>
-      <input type="text" id="phone" value="" matInput placeholder="555-555-1234" required>
-      <mat-icon matSuffix>mode_edit</mat-icon>
-    </mat-form-field>
-    <button (click)="create()" style="margin: 20px 20px 50px; font-size: 13px;" mat-raised-button color="accent">Add User</button>
-  </form>
-</div>
+<div class="parent">
 
-<div class="form-field">
-  <mat-form-field>
-    <mat-label>Search</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
-  </mat-form-field>
-</div>
+  <!-- All Users -->
+  <div class="div2">
+    <div class="mat-elevation-z8 div-1">
+      <br>
+      <h1 class="div2-h1">Registered Users</h1>
 
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
+      <!-- Search -->
+      <div class="form-field">
+        <mat-form-field class="div-1-mat-form">
+          <mat-label>Search username</mat-label>
+          <input matInput (keyup)="findUserByUsername($event)" placeholder="Ex. ium">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="div-1-mat-form">
+          <mat-label>Search email</mat-label>
+          <input matInput (keyup)="findUserByEmail($event)" placeholder="Ex. ium">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="div-1-mat-form">
+          <mat-label>Search phone</mat-label>
+          <input matInput (keyup)="findUserByPhoneNumber($event)" placeholder="Ex. ium">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <table mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef> Username </th>
-      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-    </ng-container>
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-    </ng-container>
+        <!-- Username -->
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Username </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="phone">
-      <th mat-header-cell *matHeaderCellDef> Phone </th>
-      <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
-    </ng-container>
+        <!-- Email -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="role">
-      <th mat-header-cell *matHeaderCellDef> User Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.userRole}} </td>
-    </ng-container>
+        <!-- Phone -->
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Phone </th>
+          <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element"><button (click)="openDialog()" class="action-button" mat-raised-button color="primary">Edit</button></td>
-    </ng-container>
+        <!-- User Status -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef> User Status </th>
+          <td mat-cell *matCellDef="let element"> {{element.userRole}} </td>
+        </ng-container>
 
-    <ng-container matColumnDef="button">
-      <th mat-header-cell *matHeaderCellDef> </th>
-      <td mat-cell *matCellDef="let element"> <button class="action-button" mat-raised-button color="warn" (click)="remove(element.id)">Remove</button> </td>
-    </ng-container>
+        <!-- Edit button -->
+        <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="action-button" mat-raised-button color="primary" (click)="openDialog(element)">Edit</button>
+          </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+        <!-- Remove button -->
+        <ng-container matColumnDef="button">
+          <th mat-header-cell *matHeaderCellDef> </th>
+          <td mat-cell *matCellDef="let element">
+            <button class="action-button" mat-raised-button color="warn" (click)="remove(element.id)">Remove</button>
+          </td>
+        </ng-container>
 
-  <mat-paginator (page)="paginationPage()" [pageSizeOptions] = "[5, 10, 15]" showFirstLastButtons></mat-paginator>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <mat-paginator (page)="paginationPage()" [pageSizeOptions] = "[5, 7]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+
+  <!-- Create User -->
+  <div class="div3">
+
+    <div class="mat-elevation-z8">
+      <form [formGroup]="formUser" (ngSubmit)="create()">
+        <br>
+        <p class="h4 mb-4">Registration form</p>
+
+        <!-- User name -->
+
+        <div
+          *ngIf="formUser.get('username').invalid && formUser.get('username').touched"
+          class="validation">
+          <small *ngIf="formUser.get('username').errors.required">Field username can not be empty</small>
+        </div>
+        <mat-form-field class="div3-input" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput placeholder="Username" formControlName="username">
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+
+        <!-- E-mail -->
+
+        <div
+          *ngIf="formUser.get('email').invalid && formUser.get('email').touched"
+          class="validation">
+          <small *ngIf="formUser.get('email').errors.required">Field e-mail can not be empty</small>
+          <small *ngIf="formUser.get('email').errors.formUser">Enter valid e-mail</small>
+        </div>
+        <mat-form-field class="div3-input" appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput placeholder="Email" formControlName="email">
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <!-- Phone -->
+
+        <div
+          *ngIf="formUser.get('phoneNumber').invalid && formUser.get('phoneNumber').touched"
+          class="validation">
+          <small *ngIf="formUser.get('phoneNumber').errors.required">Field phone can not be empty</small>
+          <small *ngIf="formUser.get('phoneNumber').errors.pattern">Enter valid phone number</small>
+        </div>
+        <mat-form-field class="div3-input" appearance="outline">
+          <mat-label>+38 &nbsp;</mat-label>
+          <input type="tel" matInput placeholder="555-555-1234" aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="phoneNumber">
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+
+        <!-- Password -->
+
+        <div
+          *ngIf="formUser.get('password').invalid && formUser.get('password').touched"
+          class="validation">
+          <small *ngIf="formUser.get('password').errors.required">Field password can not be empty</small>
+          <small *ngIf="formUser.get('password').errors.minlength">Length of password must be at
+            list {{formUser.get('password').errors.minlength}} characters</small>
+        </div>
+        <mat-form-field class="div3-input" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+          <button mat-icon-button matSuffix>
+            <mat-icon matSuffix>vpn_key</mat-icon>
+          </button>
+        </mat-form-field>
+        <br>
+
+        <!-- Sign up button -->
+        <button type="submit" class="button-div3" mat-flat-button color="primary" [disabled]="formUser.invalid">Sign up</button>
+
+      </form>
+    </div>
+  </div>
 </div>

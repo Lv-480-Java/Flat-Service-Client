@@ -17,8 +17,11 @@
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
 
+      <button *ngIf="authService.isAuthenticated()" style="margin-right: 10px;" mat-raised-button color="primary" (click) = activateChat()>
+        Chat!
+      </button>
       <button *ngIf="displayRole()==='ROLE_LANDLORD'" style="height:35px;min-width:80px" mat-raised-button color="warn" [routerLink]="['addflat']">
-        Add flat!
+      Add flat!
       </button>
       <a id = "username" style="font-size: 15px; vertical-align: center; color: white" *ngIf="authService.isAuthenticated()" class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/data" routerLinkActive="active">{{displayName()}}</a>
       <li class="nav-item avatar dropdown" dropdown>

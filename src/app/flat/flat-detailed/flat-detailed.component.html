@@ -61,4 +61,4 @@
 
 <app-flat-comment [id]="id"></app-flat-comment>
 
-<app-chat *ngIf="chatIsActive" [username]="flatDetailed.username" ></app-chat>
+<app-chat *ngIf="chatIsActive" [username]="flatDetailed.username" (onClose)="modalClosed($event)"></app-chat>
