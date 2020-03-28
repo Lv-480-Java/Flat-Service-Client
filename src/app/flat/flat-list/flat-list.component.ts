@@ -26,7 +26,7 @@ export class FlatListComponent implements OnInit {
 
   ngOnInit() {
     this.loadFlats();
-    this.loadFavoriteFlats();
+    // this.loadFavoriteFlats();
   }
 
   loadFlats() {

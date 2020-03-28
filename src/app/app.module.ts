@@ -73,9 +73,9 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
-import {FlatService} from "./services/flat.service";
+import {FlatService} from './services/flat.service';
+import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
-import {FlatFilterComponent} from "./flat/flat-filter/flat-filter.component";
 
 
 @NgModule({
