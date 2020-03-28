@@ -16,8 +16,9 @@
     <!-- Links -->
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
-
-
+      <button *ngIf="authService.isAuthenticated()" style="margin-right: 10px;" mat-raised-button color="primary" (click) = activateChat()>
+        Chat!
+      </button>
       <button *ngIf="authService.isAuthenticated()" style="height:35px;min-width:80px" mat-raised-button color="warn" [routerLink]="['addflat']">
         Add flat!
       </button>
@@ -37,3 +38,5 @@
 
 </mdb-navbar>
 <!--/.Navbar-->
+
+<app-chatbutton *ngIf="chatListIsActive"></app-chatbutton>

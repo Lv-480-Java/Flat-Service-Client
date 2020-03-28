@@ -8,7 +8,7 @@ import {
   ViewChild,
   ViewChildren,
   EventEmitter,
-  Output, AfterViewInit
+  Output, AfterViewInit, OnDestroy
 } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
@@ -16,18 +16,21 @@ import {Message} from '../model/message.model';
 import {ChatMessageInfoDTO} from '../model/chat-message.model';
 import {ChatService} from './chat.service';
 import {DeleteMessageInfoDTO} from '../model/chat-message-delete.model';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { ISubscription } from 'rxjs/Subscription';
+import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
 
 
 (window as any).global = window;
 
+@AutoUnsubscribe()
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
+export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
   private countOfMessages: Observable<number>;
   private myScrollVariable: number | any;
 
@@ -40,6 +43,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
   @Output()
   public onMessagesSeen: EventEmitter<Message[]> = new EventEmitter<Message[]>();
+
+  @Output()
+  onClose: EventEmitter<boolean> = new EventEmitter();
 
   @Input() username: string;
 
@@ -83,18 +89,20 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
   chatMessageInfo: ChatMessageInfoDTO = new ChatMessageInfoDTO(null, null, null);
   windows: Window[] = [];
   private hasFocus: boolean;
+  private notThisUser: boolean;
+  subscriptions: Subscription = new Subscription()
 
   ngOnInit() {
     console.log(this.username);
     this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
-    this.chatService.getChatId(this.username, this.currentUserId)
+    this.subscriptions.add(this.chatService.getChatId(this.username, this.currentUserId)
       .subscribe((data: number) => {
         this.chatId = data;
         this.loadMessages();
         this.initializeWebSocketConnection();
         this.scrollToBottom();
         this.initializeBrowserNotifications();
-      });
+      }));
   }
 
 
@@ -107,21 +115,20 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
 
   ngAfterViewInit() {
     this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
-    /*
-        this.onScroll();
-    */
+  }
+
+  ngOnDestroy() {
   }
 
   loadMessages() {
     this.pageNumber = 0;
-    this.getMessagesByChatId(this.chatId).subscribe(data => {
+    this.subscriptions.add((this.getMessagesByChatId(this.chatId).subscribe(data => {
       this.data = data;
       this.messages = this.data;
-    });
+    })));
   }
 
   onScroll() {
-    this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     const currentPosition = this.myScrollContainer.nativeElement.scrollTop;
     this.pageNumber = this.pageNumber + 1;
     this.loadNextPost();
@@ -138,11 +145,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
   }
 
   loadNextPost() {
-    this.getMessagesByChatId(this.chatId).subscribe(data => {
+    this.subscriptions.add(this.getMessagesByChatId(this.chatId).subscribe(data => {
       this.data = data;
       this.messages = this.data.concat(this.messages);
       console.log(this.data);
-    });
+    }));
   }
 
   scrollToBottom(): void {
@@ -172,10 +179,10 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
   }
 
   openSocket() {
-    this.stompClient.subscribe('/topic/messages/' + this.chatId, (message) => {
+    this.subscriptions.add(this.stompClient.subscribe('/topic/messages/' + this.chatId, (message) => {
       this.handleResult(message);
       this.emitBrowserNotification(message);
-    });
+    }));
   }
 
 
@@ -226,28 +233,28 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
     }
   }
 
-  // Returns the total unread messages from a chat window. TODO: Could use some Angular pipes in the future
-  /*
-    unreadMessagesTotal(window: Window): string {
+    unreadMessagesTotal(): string {
       let totalUnreadMessages = 0;
-
-      if (window) {
-        // tslint:disable-next-line:triple-equals
-        totalUnreadMessages = window.messages.filter(x => x.senderId != this.currentUserId && !x.dateSeen).length;
+      if (this.messages) {
+        totalUnreadMessages = this.messages.filter(x => x.senderId !== this.currentUserId && !x.dateSeen).length;
+        console.log(this.messages.filter(x => !x.dateSeen && x.senderId !== this.currentUserId));
+        console.log(totalUnreadMessages);
       }
+
       return this.formatUnreadMessagesTotal(totalUnreadMessages);
     }
-  */
 
-  public currentUser(): boolean {
-    return this.chatMessageInfo.userId !== this.currentUserId;
+  public currentUser() {
+    this.notThisUser = true;
+    if (this.messages.filter(message => message.senderId !== this.currentUserId )) {
+      return this.notThisUser;
+    } else { return !this.notThisUser; }
   }
 
 
   // Marks all messages provided as read with the current time.
   public markMessagesAsRead(messages: Message[]): void {
     const currentDate = new Date();
-
     messages.forEach((msg) => {
       msg.dateSeen = currentDate;
     });
@@ -259,7 +266,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
       const unreadMessages = this.messages
         .filter(message => message.dateSeen == null
           && (message.senderId !== this.currentUserId));
-
+      console.log(unreadMessages);
       if (unreadMessages && unreadMessages.length > 0) {
         this.markMessagesAsRead(unreadMessages);
         this.onMessagesSeen.emit(unreadMessages);
@@ -276,14 +283,15 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
   }
 
   private emitMessageSound(): void {
-    if (this.audioEnabled && this.audioFile && !this.hasFocus) {
+    if (this.audioEnabled && this.audioFile && !this.hasFocus && this.currentUser()) {
       this.audioFile.play();
     }
   }
 
   private emitBrowserNotification(message: string): void {
     console.log(this.hasFocus);
-    if (this.browserNotificationsBootstrapped && message && !this.hasFocus) {
+    console.log(this.currentUser());
+    if (this.browserNotificationsBootstrapped && message && !this.hasFocus && this.currentUser()) {
       const notification = new Notification(`${this.username}`, {
         body: 'You have unread messages',
         icon: this.browserNotificationIconSource
@@ -293,6 +301,11 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit {
       }, this.chatMessageInfo.content.length <= 50 ? 13000 : 17000); // More time to read longer messages
       console.log(this.chatMessageInfo.content);
     }
+  }
+
+  closeModal() {
+    this.onClose.emit(true);
+    this.ngOnDestroy();
   }
 }
 

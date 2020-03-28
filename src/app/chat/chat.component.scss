@@ -1,3 +1,9 @@
+// COLORS
+$softorange: #ffffff;
+$tomatored: #F25C66;
+$mediumblu: #1E272D;
+
+
 /*-----------------  --- Chat --------------------*/
 .chat {
   position: fixed;
@@ -13,7 +19,7 @@
   /*
   background: rgba(29, 119, 69, 0.5);
   */
-  background-color: rgba(63, 81, 181, 0);
+  background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 30px rgba(34, 149, 255, 0.53);
   border-radius: 20px;
   display: flex;
@@ -81,6 +87,7 @@
   overflow-y: scroll ;
   overflow-scrolling: auto;
 }
+
 .messages .message {
   max-width: 240px;
   clear: both;
@@ -322,6 +329,30 @@
   outline: none !important;
   transition: background 0.2s ease;
 }
+
+.message-load {
+  width: 60%;
+  height: available;
+  margin-top: 10px;
+  margin-left: 65px;
+  z-index: 1;
+  color: #ffffff;
+  border: none;
+  /*
+  background: rgba(0, 0, 0, 0.34);
+  */
+  background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+
+  font-size: 25px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 10px;
+  outline: none !important;
+  transition: background 0.2s ease;
+}
+
 .message-box .message-submit:hover {
   /*
   background: #1d7745;
@@ -391,6 +422,65 @@
   to {
     transform: translateY(-10px);
   }
+}
+
+
+
+.chat-title .close-container{
+  right: -210px;
+  border: none;
+  position: relative;
+  margin-right: -2px;
+  padding: 0px ;
+  cursor: pointer;
+}
+
+.leftright{
+  height: 4px;
+  width: 15px;
+  position: absolute;
+  margin-right: 24px;
+  background-color: $softorange;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all .3s ease-in;
+}
+
+.rightleft{
+  height: 4px;
+  width: 15px;
+  position: absolute;
+  margin-right: 24px;
+  background-color: $softorange;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all .3s ease-in;
+}
+
+label{
+  color: white;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: .6em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all .3s ease-in;
+  opacity: 0;
+}
+.close{
+  margin: 15px 0 0 -10px;
+  position: absolute;
+}
+
+.close-container:hover .leftright{
+  transform: rotate(-45deg);
+  background-color: $tomatored;
+}
+.close-container:hover .rightleft{
+  transform: rotate(45deg);
+  background-color: $tomatored;
+}
+.close-container:hover label{
+  opacity: 1;
 }
 
 
