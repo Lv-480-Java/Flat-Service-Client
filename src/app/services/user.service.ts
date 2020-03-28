@@ -20,7 +20,7 @@ export class UserService {
   }
 
   updateUser(user: User) {
-    return this.http.put<User>(BASE_URL + 'users/update/all', user);
+    return this.http.put<User>(BASE_URL + '/update/admin/panel', user);
   }
 
   removeUser(id: string): Observable<void> {
