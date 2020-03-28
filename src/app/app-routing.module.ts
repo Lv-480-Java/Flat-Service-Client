@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'chatbutton', component: ChatButtonComponent},
   {path: 'addflat', component: AddFlatComponent},
   {
-    path: 'admin', component: AdminLayoutComponent, canActivate: [AuthGuard, LoginGuard],
+    path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [
       {path: '', component: DashboardPageComponent, children: [
           {path: 'dashboard', component: DashboardPageComponent}
@@ -40,7 +40,7 @@ const routes: Routes = [
     ]
   },
 
-  {path: 'data', component: ProfileUserComponent},
+  {path: 'data', component: ProfileUserComponent, canActivate: [LoginGuard]},
   {path: 'short_profile/:id', component: ProfileShortComponent},
   {path: 'profile', component: ProfileComponent, canActivate: [LoginGuard]},
   {path: 'flats', component: FlatListComponent},
