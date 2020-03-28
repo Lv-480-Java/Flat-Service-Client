@@ -18,7 +18,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {Ng5SliderModule} from 'ng5-slider';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -68,10 +67,15 @@ import {ComentsaboutcommentComponent} from './comment/coments-about-comment/come
 import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
+import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
 import {FlatService} from "./services/flat.service";
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import {FlatFilterComponent} from "./flat/flat-filter/flat-filter.component";
 
 
 @NgModule({
@@ -85,7 +89,6 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     ProfileComponent,
     MenuComponent,
     FlatDetailedComponent,
-    MenuComponent,
     AdminLayoutComponent,
     ListUserPageComponent,
     ListPostsPageComponent,
@@ -116,8 +119,9 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
-    ChatButtonComponent,
     AddFlatComponent,
+    AutoApproveComponent,
+    RequestMessageComponent,
     LandlordFlatListComponent,
     FavoriteFlatComponent
 
@@ -142,14 +146,14 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     GalleryModule,
-    MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
     MatListModule,
     MatSelectModule,
+    MatGridListModule,
+    MatBadgeModule
   ],
   providers: [
     [{

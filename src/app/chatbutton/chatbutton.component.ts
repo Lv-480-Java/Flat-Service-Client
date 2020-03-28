@@ -25,6 +25,8 @@ export class ChatButtonComponent implements OnInit {
   @Input()
   public theme: Theme = Theme.Light;
 
+  unreadMessages: [];
+
   constructor(private chatButtonService: ChatButtonService) {
   }
 
@@ -44,6 +46,10 @@ export class ChatButtonComponent implements OnInit {
     }
   }
 
+  public messageSeen(event: any) {
+    console.log(event);
+  }
+
   isChatListSelected(event: any) {
     if (this.chatListIsActive === false) {
       this.chatListIsActive = true;
@@ -60,5 +66,7 @@ export class ChatButtonComponent implements OnInit {
     }
   }
 
-
+  modalClosed(isClosed) {
+    this.chatIsActive = false;
+  }
 }

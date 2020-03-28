@@ -58,4 +58,8 @@ export class FlatDetailedComponent implements OnInit {
       }));
     });
   }
+
+  modalClosed(isClosed) {
+    this.chatIsActive = false;
+  }
 }

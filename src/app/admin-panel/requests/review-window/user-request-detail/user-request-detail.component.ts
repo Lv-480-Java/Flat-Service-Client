@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Landlord, ProfileService} from '../../../../services/profile.service';
+import {User} from '../../../component/Users';
 
 @Component({
   selector: 'app-user-request-detail',
@@ -7,9 +9,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserRequestDetailComponent implements OnInit {
 
-  constructor() { }
+  data: Landlord;
+  userData: User;
 
-  ngOnInit(): void {
+  constructor(private landlordService: ProfileService) {
   }
+
+  ngOnInit() {
+    this.addPassport();
+    this.addUserInfo();
+  }
+
+  addPassport() {
+    this.landlordService.addPassport()
+      .subscribe(data => {
+        this.data = data;
+      });
+  }
+
+  addUserInfo() {
+    this.landlordService.addUserInfo()
+      .subscribe(userData => {
+        this.userData = userData;
+      });
+  }
+
 
 }
