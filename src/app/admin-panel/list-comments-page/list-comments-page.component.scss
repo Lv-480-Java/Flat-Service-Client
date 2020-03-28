@@ -1,21 +1,21 @@
-.parent {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  height: 100%;
+table {
+  width: 100%;
+}
+
+th {
+  width: 100px;
 }
 
 .mat-elevation-z8 {
-  height: 80%;
+  height: 85%;
   width: 100%;
 }
 
 .div1 {
-  grid-area: 1 / 1 / 6 / 6;
-  margin: 10px;
+  margin-left: 150px;
+  margin-top: 10px;
   height: 100%;
+  width: 900px;
 }
 
 .div2-h1 {

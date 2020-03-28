@@ -76,6 +76,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
+      <!-- Pagination -->
       <mat-paginator (page)="paginationPage()" [pageSizeOptions] = "[5, 7]" showFirstLastButtons></mat-paginator>
     </div>
   </div>
@@ -89,7 +90,6 @@
         <p class="h4 mb-4">Registration form</p>
 
         <!-- User name -->
-
         <div
           *ngIf="formUser.get('username').invalid && formUser.get('username').touched"
           class="validation">
@@ -102,7 +102,6 @@
         </mat-form-field>
 
         <!-- E-mail -->
-
         <div
           *ngIf="formUser.get('email').invalid && formUser.get('email').touched"
           class="validation">
@@ -116,7 +115,6 @@
         </mat-form-field>
 
         <!-- Phone -->
-
         <div
           *ngIf="formUser.get('phoneNumber').invalid && formUser.get('phoneNumber').touched"
           class="validation">
@@ -130,7 +128,6 @@
         </mat-form-field>
 
         <!-- Password -->
-
         <div
           *ngIf="formUser.get('password').invalid && formUser.get('password').touched"
           class="validation">

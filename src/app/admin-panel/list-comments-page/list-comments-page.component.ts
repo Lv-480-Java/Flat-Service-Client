@@ -36,11 +36,11 @@ export class ListCommentsPageComponent implements OnInit {
 
   openDialog(element) {
     console.log('Opened edit form');
-    const dialogRef = this.dialog.open(DialogWindowEditUserComponent, {
-      data: element
-    });
-    dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
-    }).unsubscribe();
+    // const dialogRef = this.dialog.open(DialogWindowEditUserComponent, {
+    //   data: element
+    // });
+    // dialogRef.afterClosed().subscribe(() => {
+    //   console.log('The dialog was closed');
+    // }).unsubscribe();
   }
 }

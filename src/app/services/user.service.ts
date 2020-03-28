@@ -27,7 +27,6 @@ export class UserService {
     return this.http.delete<void>(BASE_URL + `users/delete/${id}`);
   }
 
-
   searchUserByUsername(username: string, page: number, size: number) {
     return this.http.get(BASE_URL + `users/username/${username}/${page}/${size}`);
   }
