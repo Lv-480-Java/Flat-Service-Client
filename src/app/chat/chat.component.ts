@@ -18,8 +18,9 @@ import {ChatService} from './chat.service';
 import {DeleteMessageInfoDTO} from '../model/chat-message-delete.model';
 import {Observable, Subscription} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { ISubscription } from 'rxjs/Subscription';
+import {ISubscription} from 'rxjs/Subscription';
 import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
+import {ProfileService} from '../services/profile.service';
 
 
 (window as any).global = window;
@@ -34,7 +35,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   private countOfMessages: Observable<number>;
   private myScrollVariable: number | any;
 
-  constructor(private chatService: ChatService, private http: HttpClient) {
+  constructor(public profileService: ProfileService, private chatService: ChatService, private http: HttpClient) {
   }
 
   serverUrl = 'http://localhost:8080/api/ws/';
@@ -90,11 +91,17 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   windows: Window[] = [];
   private hasFocus: boolean;
   private notThisUser: boolean;
-  subscriptions: Subscription = new Subscription()
+  subscriptions: Subscription = new Subscription();
 
   ngOnInit() {
     console.log(this.username);
-    this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
+    this.subscriptions.add(this.profileService.getUserId().subscribe(data1 => {
+      this.currentUserId = data1;
+      this.subscription();
+    }));
+  }
+
+  subscription() {
     this.subscriptions.add(this.chatService.getChatId(this.username, this.currentUserId)
       .subscribe((data: number) => {
         this.chatId = data;
@@ -104,7 +111,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
         this.initializeBrowserNotifications();
       }));
   }
-
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -233,22 +239,24 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     }
   }
 
-    unreadMessagesTotal(): string {
-      let totalUnreadMessages = 0;
-      if (this.messages) {
-        totalUnreadMessages = this.messages.filter(x => x.senderId !== this.currentUserId && !x.dateSeen).length;
-        console.log(this.messages.filter(x => !x.dateSeen && x.senderId !== this.currentUserId));
-        console.log(totalUnreadMessages);
-      }
-
-      return this.formatUnreadMessagesTotal(totalUnreadMessages);
+  unreadMessagesTotal(): string {
+    let totalUnreadMessages = 0;
+    if (this.messages) {
+      totalUnreadMessages = this.messages.filter(x => x.senderId !== this.currentUserId && !x.dateSeen).length;
+      console.log(this.messages.filter(x => !x.dateSeen && x.senderId !== this.currentUserId));
+      console.log(totalUnreadMessages);
     }
+
+    return this.formatUnreadMessagesTotal(totalUnreadMessages);
+  }
 
   public currentUser() {
     this.notThisUser = true;
-    if (this.messages.filter(message => message.senderId !== this.currentUserId )) {
+    if (this.messages.filter(message => message.senderId !== this.currentUserId)) {
       return this.notThisUser;
-    } else { return !this.notThisUser; }
+    } else {
+      return !this.notThisUser;
+    }
   }
 
 

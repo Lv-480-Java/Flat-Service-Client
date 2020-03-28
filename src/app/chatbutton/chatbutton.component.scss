@@ -1,21 +1,7 @@
-/** { margin: 0px; padding: 0px; }
-body {
-  background: #f0f1f2;
-  font:12px "Open Sans", sans-serif;
-}*/
-#view-code{
-  color:#89a2b5;
-  opacity:0.7;
-  font-size:14px;
-  text-transform:uppercase;
-  font-weight:700;
-  text-decoration:none;
-  position:absolute;top:660px;
-  left:50%;margin-left:-50px;
-  z-index:200;
-}
-#view-code:hover{opacity:1;}
-#chatbox{ position: fixed;
+* { margin: 0px; padding: 0px; }
+
+#chatbox{
+  position: fixed;
   right: 14px;
   bottom: 10px;
   width: 300px;
@@ -23,11 +9,7 @@ body {
   max-height: 500px;
   z-index: 2;
   overflow: hidden;
-  /* box-shadow: 0 5px 30px rgba(0, 0, 0, .2);
-   background: rgba(0, 0, 0, .5);*/
-  /*
-  background: rgba(29, 119, 69, 0.5);
-  */
+  border: none;
   background-color: rgb(255, 255, 255);
   box-shadow: 0 5px 30px rgba(34, 149, 255, 0.53);
   border-radius: 20px;
@@ -35,18 +17,7 @@ body {
   justify-content: space-between;
   flex-direction: column;
 
-
-
-
-
-
-
-
-
-
-
- /* width:290px;
-  background:#fff;
+ /*
   border-radius:6px;
   overflow:hidden;
   height:484px;
