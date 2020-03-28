@@ -4,14 +4,14 @@ import {Observable} from 'rxjs';
 import {RequestsForFlatVerification} from '../admin-panel/requests/entity/requests-for-flat-verification';
 import {RequestsForUserVerification} from '../admin-panel/requests/entity/request-for-user-verification';
 import {BASE_URL} from '../utils/constants';
-import {Flat} from '../flat/flat-filter/entity/Flat';
-import {User} from '../admin-panel/component/Users';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestsService {
+
 
   constructor(private http: HttpClient) {
   }

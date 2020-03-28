@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {FlatDetailed} from './entity/FlatDetailed';
 import {BASE_URL} from 'src/app/utils/constants';
+import {User} from '../../admin-panel/component/Users';
 
 @Component({
   selector: 'app-flat-detailed',
@@ -19,7 +20,7 @@ export class FlatDetailedComponent implements OnInit {
   public id: number;
   data: any;
   public flatDetailed: FlatDetailed = new FlatDetailed();
-
+  userData: User;
   chatIsActive = false;
 
   activateChat() {
@@ -38,14 +39,15 @@ export class FlatDetailedComponent implements OnInit {
   }
 
   loadFlat(): void {
-    const c = BASE_URL + 'flat/' + this.id;
-    this.http.get(c)
+    const url = BASE_URL + 'flat/' + this.id;
+    this.http.get(url)
       .subscribe(data => {
         this.data = data;
         this.flatDetailed = this.data;
         this.loadImages();
       });
   }
+
 
   loadImages(): void {
     this.images = [];
@@ -55,5 +57,9 @@ export class FlatDetailedComponent implements OnInit {
         thumb: value
       }));
     });
+  }
+
+  modalClosed(isClosed) {
+    this.chatIsActive = false;
   }
 }

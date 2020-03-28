@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ProfileUserService} from '../services/profile.user.service';
 import {User} from '../admin-panel/component/Users';
+import {Landlord} from '../services/profile.service';
+import {HttpClient, HttpEventType, HttpHeaders} from '@angular/common/http';
+import {BASE_URL} from '../utils/constants';
 
 @Component({
   selector: 'app-profile-user',
@@ -8,13 +11,33 @@ import {User} from '../admin-panel/component/Users';
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
+  fileData: File = null;
   userData: User;
+  landlordData = true;
+  data: Landlord;
+  idPassport: number;
+  dataLand: User;
 
-  constructor(private profileUserService: ProfileUserService) {
+  constructor(public profileUserService: ProfileUserService, private http: HttpClient) {
+  }
+
+  onFileSelected(event) {
+    this.fileData = event.target.files[0];
+  }
+
+  onUpload() {
+    const fileUpload = new FormData();
+    fileUpload.append('file', this.fileData, this.fileData.name)
+    return this.http.put(BASE_URL + 'users/profile/updatePhoto', fileUpload)
+      .subscribe(res => {
+        console.log(res);
+        this.addUserData();
+      });
   }
 
   ngOnInit(): void {
     this.addUserData();
+    this.addPassport();
   }
 
   addUserData() {
@@ -29,6 +52,24 @@ export class ProfileUserComponent implements OnInit {
       .subscribe(userDataResp => {
         this.userData = userDataResp;
         this.addUserData();
+      });
+  }
+  evaluateToLandlord(dataLand: User) {
+    this.profileUserService.evaluateToLandlord(dataLand)
+      .subscribe(dataLandRes => {
+        this.dataLand = dataLandRes;
+        this.addUserData();
+      });
+  }
+
+  addPassport() {
+    this.profileUserService.addPassport()
+      .subscribe(data => {
+        this.data = data;
+        this.idPassport = this.data.id;
+        if (this.idPassport === null) {
+          this.landlordData = false;
+        }
       });
   }
 }

@@ -6,3 +6,7 @@
   <h1>{{userData.username}}</h1>
 </figure>
 </div>
+
+<app-user-comment [id]="userData.id"></app-user-comment>
+
+<app-landlord-flat-list [userId]="userData.id"></app-landlord-flat-list>

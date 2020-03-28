@@ -7,6 +7,7 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  chatListIsActive: boolean;
 
   constructor(public authService: AuthService) {
   }
@@ -48,4 +49,12 @@ export class MenuComponent implements OnInit {
   displayName(){
     return JSON.parse(localStorage.getItem("user")).username;
   }
+  activateChat() {
+    if (this.chatListIsActive === false) {
+      this.chatListIsActive = true;
+    } else {
+      this.chatListIsActive = false;
+    }
+  }
+
 }

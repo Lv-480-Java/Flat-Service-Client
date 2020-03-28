@@ -63,10 +63,17 @@ import {ReviewWindowComponent} from './admin-panel/requests/review-window/review
 import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/flat-request-detail/flat-request-detail.component';
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
-import {MatBadgeModule} from '@angular/material/badge';
 import {InterceptorService} from './services/intercept.service';
+import {ComentsaboutcommentComponent} from './comment/coments-about-comment/comentsaboutcomment.component';
+import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
+import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
 
 @NgModule({
   declarations: [
@@ -104,11 +111,17 @@ import {MatSelectModule} from '@angular/material/select';
     FlatChartComponent,
     ActiveCountComponent,
     ProfileShortComponent,
+    ChatButtonComponent,
+    ComentsaboutcommentComponent,
+    ListCommentComponent,
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
     ChatButtonComponent,
-    AddFlatComponent
+    AddFlatComponent,
+    AutoApproveComponent,
+    RequestMessageComponent,
+    LandlordFlatListComponent
   ],
   imports: [
     BrowserModule,
@@ -138,13 +151,20 @@ import {MatSelectModule} from '@angular/material/select';
     MatDialogModule,
     MatListModule,
     MatSelectModule,
+    MatGridListModule,
+    MatSelectModule, MatBadgeModule
   ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
       multi: true
-    }],
+    },
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpErrorInterceptor,
+        multi: true
+      }],
     RegistrationService, AuthService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
