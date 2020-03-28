@@ -18,6 +18,7 @@ import {ProfileUserComponent} from './profile-user/profile-user.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
+import {LoginGuard} from './guards/login.guard';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'chatbutton', component: ChatButtonComponent},
   {path: 'addflat', component: AddFlatComponent},
   {
-    path: 'admin', component: AdminLayoutComponent, children: [
+    path: 'admin', component: AdminLayoutComponent, canActivate: [AuthGuard, LoginGuard],
+    data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [
       {path: 'dashboard', component: DashboardPageComponent},
       {path: 'comments', component: ListCommentsPageComponent},
       {path: 'user', component: ListUserPageComponent},
@@ -38,7 +40,7 @@ const routes: Routes = [
 
   {path: 'data', component: ProfileUserComponent},
   {path: 'short_profile', component: ProfileShortComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [LoginGuard]},
   {path: 'flats', component: FlatListComponent},
   {path: 'detailed/:id', component: FlatDetailedComponent},
   {

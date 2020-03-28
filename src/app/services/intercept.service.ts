@@ -1,14 +1,17 @@
-import {BAD_REQUEST, FORBIDDEN, NOT_FOUND, UNAUTHORIZED} from '../http-response-status';
+import {BAD_REQUEST} from '../http-response-status';
 import {Injectable} from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpEvent,
-  HttpHandler, HttpHeaders,
+  HttpHandler,
   HttpInterceptor,
   HttpRequest
 } from '@angular/common/http';
 import {BehaviorSubject, Observable, of, throwError} from 'rxjs';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 import {catchError, filter, switchMap, take} from 'rxjs/operators';
 import {LocalStorageService} from './local-storage.service';
 import {Router} from '@angular/router';
@@ -40,7 +43,7 @@ export class InterceptorService implements HttpInterceptor {
    * intercepts 401, 403, and 404 error responses.
    */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (req.url.includes('signIn') || req.url.includes('Tokens')) {
+    if (req.url.includes('signIn') || req.url.includes('refreshTokens')) {
       return next.handle(req);
     }
     if (this.localStorageService.getAccessToken()) {
@@ -58,9 +61,9 @@ export class InterceptorService implements HttpInterceptor {
   /**
    * Adds access token to authentication header.
    */
-  addAccessTokenToHeader(req: HttpRequest<any>, accessToken: string) {
+  addAccessTokenToHeader(req: HttpRequest<any>, accesstoken: string) {
     return req.clone({
-      headers: req.headers.set('Authorization', `${accessToken}`)
+      headers: req.headers.set('Authorization', `${accesstoken}`)
     });
   }
 
@@ -72,16 +75,19 @@ export class InterceptorService implements HttpInterceptor {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
-      return this.getNewTokenPair(this.localStorageService.getRefreshToken()).pipe(
-        catchError((error: HttpErrorResponse) => this.handleRefreshTokenIsNotValid(error)),
-        switchMap((newTokenPair: NewTokenPair) => {
-          this.localStorageService.setAccessToken(newTokenPair.accesstoken);
-          this.localStorageService.setRefreshToken(newTokenPair.refreshtoken);
-          this.isRefreshing = false;
-          this.refreshTokenSubject.next(newTokenPair);
-          return next.handle(this.addAccessTokenToHeader(req, newTokenPair.accesstoken));
-        })
-      );
+      return this.getNewTokenPair(this.localStorageService.getRefreshToken())
+        .pipe(catchError((error: HttpErrorResponse) => this.handleRefreshTokenIsNotValid(error)),
+          switchMap((res) => {
+            this.localStorageService.setAccessToken(res.headers.get('accesstoken'));
+            this.localStorageService.setRefreshToken(res.headers.get('refreshtoken'));
+            this.isRefreshing = false;
+            this.refreshTokenSubject.next(new class implements NewTokenPair {
+              accesstoken: string = res.headers.get('accesstoken');
+              refreshtoken: string = res.headers.get('refreshtoken');
+            }());
+            return next.handle(this.addAccessTokenToHeader(req, this.localStorageService.getAccessToken()));
+          })
+        );
     } else {
       return this.refreshTokenSubject.pipe(
         filter((newTokenPair: NewTokenPair) => newTokenPair !== null),
@@ -109,7 +115,7 @@ export class InterceptorService implements HttpInterceptor {
   /**
    * Send refresh token in order to get new access/refresh token pair.
    */
-  private getNewTokenPair(refreshToken: string): Observable<NewTokenPair> {
-    return this.http.get<NewTokenPair>(`${this.updateAccessTokenUrl}?refreshToken=${refreshToken}`);
+  private getNewTokenPair(refreshToken: string): Observable<any> {
+    return this.http.get(`${this.updateAccessTokenUrl}?refreshToken=${refreshToken}`, {observe: 'response'});
   }
 }
