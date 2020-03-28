@@ -22,6 +22,8 @@ export class ProfileUserService {
   }
 
   updateUserData(userData: User): Observable<User> {
+    this.ERROR_PHONE$.next('');
+    this.ERROR_USERNAME$.next('');
     return this.http.put<User>(BASE_URL + 'users/update/all', JSON.stringify(userData), this.options)
       .pipe(
         catchError(this.handleError.bind(this))
