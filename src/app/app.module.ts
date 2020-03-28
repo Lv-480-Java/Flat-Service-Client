@@ -68,6 +68,7 @@ import {ComentsaboutcommentComponent} from './comment/coments-about-comment/come
 import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
 import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
@@ -149,6 +150,8 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
     MatPaginatorModule,
     MatDialogModule,
     MatListModule,
+    MatSelectModule,
+    MatGridListModule,
     MatSelectModule, MatBadgeModule
   ],
   providers: [
