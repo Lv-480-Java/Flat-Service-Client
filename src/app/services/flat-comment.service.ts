@@ -8,7 +8,7 @@ export interface FlatComment {
   id?: number;
   flatId?: number;
   userAuthor?: User;
-  text: string;
+  text?: string;
   publicationDate?: any;
   commentAboutComment?: number;
 }

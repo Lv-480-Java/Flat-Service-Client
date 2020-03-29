@@ -2,7 +2,7 @@
   <div>
     <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
       <h1>Коментарі</h1>
-      <p *ngIf="comments.length>0">Кількість коментарів {{comments.length}}</p>
+      <p *ngIf="comments.length>0">Number of comments {{comments.length}}</p>
       <hr>
       <div>
         <input
@@ -16,7 +16,7 @@
         >
         <button style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary" >
-          Додати коментар
+          Add Comment
         </button>
       </div>
     </mat-card>
@@ -28,14 +28,21 @@
         <a href="short_profile/{{comment.userAuthor.id}}" style="font-size: 12px; position: absolute; right: 24px; top: 53px" > {{comment.userAuthor.username}}</a>
         <mat-card-subtitle>{{comment.publicationDate}}</mat-card-subtitle>
         <button *ngIf="comment.userAuthor.id==isId" style="position: absolute; right: 35px; top: 90px" (click)="remove(comment.id)" fxFlexAlign="end end" class="donate" mat-raised-button
-                color="primary">
-          Видалити
+                color="accent">
+          Delete
+        </button>
+        <button style="position: absolute; right: 145px; top: 90px" (click)="isComplain=!isComplain" (click)="commentId=comment.id"
+                fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
+          Complaint
         </button>
 
         <button style="margin-top: 10px" style="margin-bottom: 10px;" fxFlexAlign="end end" class="donate" mat-raised-button
-                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Відповісти</button>
+                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Reply</button>
         <button style="margin-top: 10px; margin-left: 10px; margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
-                color="primary" (click)="isList=!isList" (click)="commentId=comment.id" >Відповіді</button>
+                color="primary" (click)="isList=!isList" (click)="commentId=comment.id" >Answers</button>
+        <div *ngIf="isComplain && commentId==comment.id">
+          <app-complaint-u-c [commentId]="comment.id"></app-complaint-u-c>
+        </div>
         <div *ngIf="isTrue && commentId==comment.id">
           <app-user-comments-about-coment [commentId]="comment.id" [userId]="comment.userId"></app-user-comments-about-coment>
         </div>
@@ -45,7 +52,7 @@
       </mat-card>
     </div>
     <ng-template #noComments>
-      <p style="margin:20px; font-size: 20px">Коментарів немає</p>
+      <p style="margin:20px; font-size: 20px">No comments</p>
     </ng-template>
 
   </div>

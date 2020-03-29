@@ -10,11 +10,11 @@ export class ListCommentComponent implements OnInit {
   isId: any = JSON.parse(localStorage.getItem('user')).userId;
   isTrue = false;
   isList = false;
+  isComplain = false;
   @Input() commentId: number;
   @Input() flatId: number;
   comments: FlatComment[] = [];
   text = '';
-
 
 
   constructor(private flatCommentService: FlatCommentService) {

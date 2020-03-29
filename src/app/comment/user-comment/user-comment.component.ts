@@ -14,6 +14,7 @@ export class UserCommentComponent implements OnInit {
   commentId: number;
   isTrue = false;
   isList = false;
+  isComplain = false;
   text = '';
   @Input() id: number;
 

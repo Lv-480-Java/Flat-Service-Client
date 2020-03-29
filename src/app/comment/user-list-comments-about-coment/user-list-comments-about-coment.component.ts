@@ -10,6 +10,7 @@ export class UserListCommentsAboutComentComponent implements OnInit {
   isId: any = JSON.parse(localStorage.getItem('user')).userId;
   isTrue = false;
   isList = false;
+  isComplain = false;
   @Input() commentId: number;
   @Input() usersId: number;
   comments: UserComment[] = [];

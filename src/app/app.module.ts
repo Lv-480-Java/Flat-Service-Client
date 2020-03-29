@@ -77,6 +77,8 @@ import { LikeComponent } from './comment/like/like.component';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import { ComplaintComponent } from './comment/complaint/complaint.component';
+import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
 
 
 @NgModule({
@@ -128,7 +130,9 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
     LikeComponent,
     AutoApproveComponent,
     RequestMessageComponent,
-    LandlordFlatListComponent
+    LandlordFlatListComponent,
+    ComplaintComponent,
+    ComplaintUCComponent
   ],
   imports: [
     BrowserModule,

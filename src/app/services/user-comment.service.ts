@@ -9,7 +9,7 @@ export interface UserComment {
   id?: number;
   userId?: number;
   userAuthor?: User;
-  text: string;
+  text?: string;
   publicationDate?: any;
   commentAboutComment?: number;
 }

@@ -1,4 +1,3 @@
-
 <div style="margin-top: 10px">
   <input
     type="text"
@@ -7,9 +6,9 @@
     [(ngModel)]="text"
     autocomplete="off"
     matInput
-    (keyup.enter)="addC()"
+    (keyup.enter)="add()"
   >
-  <button style="margin-top: 10px" (click)="addC()" fxFlexAlign="end end" class="donate" mat-raised-button
-          color="primary">
-    Add Comment
+  <button style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
+          color="accent">
+    Add Complaint
   </button> </div>
