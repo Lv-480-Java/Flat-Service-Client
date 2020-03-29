@@ -31,16 +31,14 @@
                   <div class="buttons-container" fxLayout="row" fxFlex>
                     <button *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>edit</mat-icon>
-                    </button >
+                    </button>
                     <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <button style="margin-bottom: -5px; color: red" mat-icon-button (click)="addToFavoriteList(flat.id)">
+                    <button style="margin-bottom: -5px" mat-icon-button
+                            (click)="addToFavoriteList(flat.id)">
                       <mat-icon>favorite</mat-icon>
                     </button>
-              <!--      <button style="margin-bottom: -5px" mat-icon-button *ngIf = "!isInFavoriteList(flat.id)" (click)="addToFavoriteList(flat.id)">
-                      <mat-icon>favorite</mat-icon>
-                    </button>-->
                   </div>
 
                 </div>

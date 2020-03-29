@@ -69,7 +69,7 @@ export class FlatListComponent implements OnInit {
     this.flatService.addFlatToFavoriteList(id).subscribe();
   }
 
-  loadFavoriteFlats() {
+  /*loadFavoriteFlats() {
     console.log("Pamparam");
     this.flatService.getFavoriteFlats()
       .subscribe(data => {
@@ -77,8 +77,7 @@ export class FlatListComponent implements OnInit {
         console.log(data);
         this.favoriteFlats.content = this.data;
       });
-  }
-
+  }*/
 /*  isInFavoriteList(id: number): boolean {
     console.log("Is in favorite list")
     console.log(this.favoriteFlats);
