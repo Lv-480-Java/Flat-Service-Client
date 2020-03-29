@@ -18,7 +18,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {Ng5SliderModule} from 'ng5-slider';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -79,6 +78,10 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
 import { ComplaintComponent } from './comment/complaint/complaint.component';
 import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
+import {FlatService} from './services/flat.service';
+import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
+import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+
 
 
 @NgModule({
@@ -92,7 +95,6 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
     ProfileComponent,
     MenuComponent,
     FlatDetailedComponent,
-    MenuComponent,
     AdminLayoutComponent,
     ListUserPageComponent,
     ListPostsPageComponent,
@@ -123,7 +125,6 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
-    ChatButtonComponent,
     AddFlatComponent,
     UserCommentsAboutComentComponent,
     UserListCommentsAboutComentComponent,
@@ -132,7 +133,8 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
     RequestMessageComponent,
     LandlordFlatListComponent,
     ComplaintComponent,
-    ComplaintUCComponent
+    ComplaintUCComponent,
+    FavoriteFlatComponent
   ],
   imports: [
     BrowserModule,
@@ -154,16 +156,14 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
     MatCheckboxModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     GalleryModule,
-    MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
     MatListModule,
     MatSelectModule,
     MatGridListModule,
-    MatSelectModule, MatBadgeModule
+    MatBadgeModule
   ],
   providers: [
     [{
@@ -176,7 +176,7 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {

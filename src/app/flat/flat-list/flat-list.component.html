@@ -2,11 +2,11 @@
   <div style="font-style: normal;
   font-weight: normal;
   line-height: 1.5;
-  font-size: 16px;margin:40px; " >
+  font-size: 16px;margin:40px; ">
     <app-flat-filter [parameters]="parameters" (loadFlats)="loadFlats()"></app-flat-filter>
   </div>
   <div *ngIf="flats!==undefined">
-    <div infinite-scroll  *ngFor="let flat of flats.content ">
+    <div infinite-scroll *ngFor="let flat of flats.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -31,11 +31,12 @@
                   <div class="buttons-container" fxLayout="row" fxFlex>
                     <button *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>edit</mat-icon>
-                    </button >
+                    </button>
                     <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <button style="margin-bottom: -5px" mat-icon-button>
+                    <button style="margin-bottom: -5px" mat-icon-button
+                            (click)="addToFavoriteList(flat.id)">
                       <mat-icon>favorite</mat-icon>
                     </button>
                   </div>
@@ -59,7 +60,8 @@
               </div>
               <div fxFlex><p class="price">{{flat.monthPrice}} грн</p></div>
               <div class="donate-button" fxFlexAlign="end end" fxFlex="25">
-                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
+                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button
+                        color="accent">
                   Детально
                 </button>
               </div>
@@ -70,7 +72,7 @@
     </div>
   </div>
 
-  <div style="margin:40px; width: 240px" >
+  <div style="margin:40px; width: 240px">
   </div>
 </div>
 <div

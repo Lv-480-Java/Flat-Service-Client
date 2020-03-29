@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center none">
   <div *ngIf="flatResponse!==undefined">
-    <h1 style="margin-bottom:-20px;margin-top:30px;">Flats list</h1>
-    <div infinite-scroll  *ngFor="let flat of flatResponse.content ">
+    <h1 style="margin-bottom:-20px;margin-top:30px;">Favorite flat list</h1>
+    <div infinite-scroll *ngFor="let flat of flatResponse.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -23,15 +23,9 @@
                       style="margin:0">  {{flat.address.street}} {{flat.address.flatNumber}} {{flat.address.houseNumber}}</mat-card-subtitle>
                   </mat-card-header>
 
-                  <div class="buttons-container" fxLayout="row" fxFlex>
-                    <button *ngIf="getUsername()==flat.username" mat-icon-button>
-                      <mat-icon>edit</mat-icon>
-                    </button >
-                    <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
+                  <div class="buttons-container" fxLayout="row" fxFlex (click)="deleteFlat(flat.id)">
+                    <button mat-icon-button>
                       <mat-icon>delete</mat-icon>
-                    </button>
-                    <button style="margin-bottom: -5px" mat-icon-button>
-                      <mat-icon>favorite</mat-icon>
                     </button>
                   </div>
 
@@ -54,7 +48,8 @@
               </div>
               <div fxFlex><p class="price">{{flat.monthPrice}} грн</p></div>
               <div class="donate-button" fxFlexAlign="end end" fxFlex="25">
-                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
+                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button
+                        color="accent">
                   Детально
                 </button>
               </div>
