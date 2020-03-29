@@ -16,7 +16,7 @@ export class ComentsaboutcommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadComments(this.commentId);
+
   }
 
   addC() {
@@ -36,20 +36,6 @@ export class ComentsaboutcommentComponent implements OnInit {
         this.comments = this.comments.concat(newFlatComment);
         this.ngOnInit();
       });
-  }
-
-  remove(id: number) {
-    this.flatCommentService.remove(id)
-      .subscribe(() => {
-        this.comments = this.comments.filter(item => item.id !== id);
-      });
-  }
-  loadComments(id: number): void {
-    this.flatCommentService.loadCommentsC(id)
-      .subscribe(comments => {
-        this.comments = comments.reverse();
-      });
-    console.log(this.comments);
   }
 
 }
