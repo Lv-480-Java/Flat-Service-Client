@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
 import {BASE_URL} from '../utils/constants';
 
 @Injectable({
@@ -8,7 +9,12 @@ import {BASE_URL} from '../utils/constants';
 })
 export class FlatService {
 
-  constructor(private http: HttpClient) {
+  constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   addFlatToFavoriteList(id: number): Observable<any> {

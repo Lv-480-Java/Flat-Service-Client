@@ -11,6 +11,7 @@ import {BASE_URL} from '../utils/constants';
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
+  noPhoto =  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREJEf8sd1jrOUhsma-DECMfCHHH5JVpRdlDt_BabSdGfVSTZhF';
   fileData: File = null;
   userData: User;
   landlordData = true;
@@ -34,12 +35,14 @@ export class ProfileUserComponent implements OnInit {
         this.addUserData();
       });
   }
-
   ngOnInit(): void {
     this.addUserData();
     this.addPassport();
   }
-
+  resetData() {
+    this.userData.username = '';
+    this.userData.phoneNumber = '';
+  }
   addUserData() {
     this.profileUserService.addUserData()
       .subscribe(userData => {
