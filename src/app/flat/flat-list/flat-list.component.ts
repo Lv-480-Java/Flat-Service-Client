@@ -4,6 +4,7 @@ import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
 import {BASE_URL} from 'src/app/utils/constants';
 import {FlatService} from '../../services/flat.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-flat-list',
@@ -12,7 +13,8 @@ import {FlatService} from '../../services/flat.service';
 })
 export class FlatListComponent implements OnInit {
 
-  constructor(private http: HttpClient, private flatService: FlatService) {
+  constructor(private http: HttpClient, public flatService: FlatService,
+              private bar: MatSnackBar) {
   }
 
   @Input() userId: number;
@@ -26,7 +28,6 @@ export class FlatListComponent implements OnInit {
 
   ngOnInit() {
     this.loadFlats();
-    // this.loadFavoriteFlats();
   }
 
   loadFlats() {
@@ -59,32 +60,35 @@ export class FlatListComponent implements OnInit {
 
   removeFlat(flatId: number) {
     this.http.delete(BASE_URL + 'flat/' + flatId).subscribe(success => {
-      this.flatService.openSnackBar('Succesfuly deactivated', 'Removed');
+      this.flatService.openSnackBar('Successfully deactivated', 'Removed');
     });
   }
 
   addToFavoriteList(id: number) {
-    console.log(id);
-    console.log("Component is running..");
     this.flatService.addFlatToFavoriteList(id).subscribe();
+    this.bar.open("Flat was added to Favorite List", "x",
+      {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: ['snackbar']
+      });
   }
 
-  /*loadFavoriteFlats() {
-    console.log("Pamparam");
-    this.flatService.getFavoriteFlats()
-      .subscribe(data => {
-        this.data = data;
-        console.log(data);
-        this.favoriteFlats.content = this.data;
+  deleteFlat(id: number) {
+    this.flatService.removeFlatFromFavoriteList(id).subscribe(success => {
+      this.favoriteFlats.content = this.favoriteFlats.content.filter(function (value) {
+        return value.id !== id;
+      })
+    });
+    this.bar.open("Flat was deleted from Favorite List", "x",
+      {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: ['snackbar']
       });
-  }*/
-/*  isInFavoriteList(id: number): boolean {
-    console.log("Is in favorite list")
-    console.log(this.favoriteFlats);
-    return this.favoriteFlats.content.filter(value => {
-      id === value.id
-    }).length == 1;
-  }*/
+  }
 }
 
 

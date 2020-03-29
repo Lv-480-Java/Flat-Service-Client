@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Observable} from "rxjs";
@@ -9,7 +9,10 @@ import {BASE_URL} from '../utils/constants';
 })
 export class FlatService {
 
-  constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
+  switcher: number = 0;
+
+  constructor(private snackBar: MatSnackBar, private http: HttpClient) {
+  }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -18,6 +21,7 @@ export class FlatService {
   }
 
   addFlatToFavoriteList(id: number): Observable<any> {
+    this.switcher = 1;
     return this.http.post(BASE_URL + `favorite/addToTheList`, id);
   }
 
@@ -26,6 +30,7 @@ export class FlatService {
   }
 
   removeFlatFromFavoriteList(id: number): Observable<any> {
+    this.switcher = 0;
     return this.http.post(BASE_URL + 'favorite/deleteFromList', id)
   }
 }

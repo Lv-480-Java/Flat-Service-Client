@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FlatResponse} from "../flat/flat-filter/entity/Flat";
 import {FlatService} from "../services/flat.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-favorite-flat',
@@ -10,7 +11,8 @@ import {FlatService} from "../services/flat.service";
 })
 export class FavoriteFlatComponent implements OnInit {
 
-  constructor(private http: HttpClient, private flatService: FlatService) {
+  constructor(private http: HttpClient, private flatService: FlatService,
+              private bar: MatSnackBar) {
   }
 
   data: any;
@@ -35,6 +37,12 @@ export class FavoriteFlatComponent implements OnInit {
         return value.id !== id;
       })
     });
+    this.bar.open("Flat was deleted from Favorite List", "x",
+      {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: ['snackbar']
+      });
   }
-
 }
