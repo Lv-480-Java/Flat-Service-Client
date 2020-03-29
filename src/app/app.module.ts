@@ -18,7 +18,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {Ng5SliderModule} from 'ng5-slider';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -74,6 +73,10 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import {FlatService} from './services/flat.service';
+import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
+import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+
 
 @NgModule({
   declarations: [
@@ -86,7 +89,6 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
     ProfileComponent,
     MenuComponent,
     FlatDetailedComponent,
-    MenuComponent,
     AdminLayoutComponent,
     ListUserPageComponent,
     ListPostsPageComponent,
@@ -117,11 +119,12 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
-    ChatButtonComponent,
     AddFlatComponent,
     AutoApproveComponent,
     RequestMessageComponent,
-    LandlordFlatListComponent
+    LandlordFlatListComponent,
+    FavoriteFlatComponent
+
   ],
   imports: [
     BrowserModule,
@@ -143,16 +146,14 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
     MatCheckboxModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     GalleryModule,
-    MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
     MatListModule,
     MatSelectModule,
     MatGridListModule,
-    MatSelectModule, MatBadgeModule
+    MatBadgeModule
   ],
   providers: [
     [{
@@ -165,7 +166,7 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {

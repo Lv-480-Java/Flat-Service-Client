@@ -1,12 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center none">
-  <div style="font-style: normal;
-  font-weight: normal;
-  line-height: 1.5;
-  font-size: 16px;margin:40px; ">
-    <app-flat-filter [parameters]="parameters" (loadFlats)="loadFlats()"></app-flat-filter>
-  </div>
-  <div *ngIf="flats!==undefined">
-    <div infinite-scroll *ngFor="let flat of flats.content ">
+  <div *ngIf="flatResponse!==undefined">
+    <h1 style="margin-bottom:-20px;margin-top:30px;">Favorite flat list</h1>
+    <div infinite-scroll *ngFor="let flat of flatResponse.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -28,16 +23,9 @@
                       style="margin:0">  {{flat.address.street}} {{flat.address.flatNumber}} {{flat.address.houseNumber}}</mat-card-subtitle>
                   </mat-card-header>
 
-                  <div class="buttons-container" fxLayout="row" fxFlex>
-                    <button *ngIf="getUsername()==flat.username" mat-icon-button>
-                      <mat-icon>edit</mat-icon>
-                    </button>
-                    <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
+                  <div class="buttons-container" fxLayout="row" fxFlex (click)="deleteFlat(flat.id)">
+                    <button mat-icon-button>
                       <mat-icon>delete</mat-icon>
-                    </button>
-                    <button style="margin-bottom: -5px" mat-icon-button
-                            (click)="addToFavoriteList(flat.id)">
-                      <mat-icon>favorite</mat-icon>
                     </button>
                   </div>
 
@@ -71,15 +59,5 @@
       </mat-card>
     </div>
   </div>
-
-  <div style="margin:40px; width: 240px">
-  </div>
-</div>
-<div
-  class="search-results"
-  infiniteScroll
-  [infiniteScrollDistance]="2"
-  [infiniteScrollThrottle]="500"
-  (scrolled)="onScroll()">
 </div>
 
