@@ -78,6 +78,10 @@
                 <button mat-raised-button color="primary" style="margin:20px;"   (click)="evaluateToLandlord(dataLand)" [disabled]="!landlordData" type="submit">
                   Landlord
                 </button>
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="profileUserService.error$ | async as error">
+                  {{ error }}
+                </small>
               </div>
             </div>
           </form>
