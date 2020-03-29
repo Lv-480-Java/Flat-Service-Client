@@ -24,10 +24,10 @@
                   </mat-card-header>
 
                   <div class="buttons-container" fxLayout="row" fxFlex>
-                    <button mat-icon-button>
+                    <button *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>edit</mat-icon>
-                    </button>
-                    <button mat-icon-button>
+                    </button >
+                    <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>delete</mat-icon>
                     </button>
                     <button style="margin-bottom: -5px" mat-icon-button>
