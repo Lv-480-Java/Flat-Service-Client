@@ -54,6 +54,14 @@ export class ProfileService {
     return this.http.get<User>(BASE_URL + 'users/currentUser');
   }
 
+  getPassportByUser(id: number): Observable<Landlord> {
+    return this.http.get<Landlord>(BASE_URL + `passport/get-passport/${id}`);
+  }
+
+  getUserInfo(id: number): Observable<User> {
+    return this.http.get<User>(BASE_URL + `users/${id}`);
+  }
+
   updatePassport(data: Landlord): Observable<Landlord> {
     return this.http.post<Landlord>(BASE_URL + 'passport/update', JSON.stringify(data), this.options)
       .pipe(

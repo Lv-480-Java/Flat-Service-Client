@@ -73,6 +73,9 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import { DashboardStatsComponent } from './admin-panel/dashboard-page/dashboard-stats/dashboard-stats.component';
+import { TopLandlordsComponent } from './admin-panel/dashboard-page/top-landlords/top-landlords.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -120,37 +123,39 @@ import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat
     AddFlatComponent,
     AutoApproveComponent,
     RequestMessageComponent,
-    LandlordFlatListComponent
+    LandlordFlatListComponent,
+    DashboardStatsComponent,
+    TopLandlordsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    BrowserAnimationsModule,
-    GalleryModule,
-    MatAutocompleteModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatListModule,
-    MatSelectModule, MatBadgeModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        Ng5SliderModule,
+        MatSliderModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        FlexModule,
+        InfiniteScrollModule,
+        MatChipsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        BrowserAnimationsModule,
+        GalleryModule,
+        MatAutocompleteModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatListModule,
+        MatSelectModule, MatBadgeModule, MatButtonToggleModule
+    ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,

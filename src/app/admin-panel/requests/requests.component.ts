@@ -76,8 +76,8 @@ export class RequestsComponent implements OnInit {
 
   openSnackBar() {
     console.log('snackbar');
-    this.requestsService.getNewRequests().subscribe(data => {
-      this.bar.open(data + ' New Requests', 'close', {
+    this.requestsService.getNewRequests().subscribe(newRequests => {
+      this.bar.open(newRequests + ' New Requests', 'close', {
         duration: 5000,
         verticalPosition: 'bottom',
         horizontalPosition: 'right',
