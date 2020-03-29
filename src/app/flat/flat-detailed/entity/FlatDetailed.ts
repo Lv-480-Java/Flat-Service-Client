@@ -1,6 +1,7 @@
 export class FlatDetailed {
 
   public  username: string;
+  public userId: number;
   public  userPhoto: string;
 
   public description: string;

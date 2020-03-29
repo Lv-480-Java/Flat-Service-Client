@@ -3,11 +3,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
@@ -24,7 +19,10 @@
     <div class="col-sm-3"><!--left col-->
 
       <div class="text-center">
-        <img [src]="userData.photoUrl" class="img-thumbnail">
+        <img *ngIf="userData.photoUrl !== null; else noData" [src]="userData.photoUrl" class="img-thumbnail" style="width: 200px">
+        <ng-template #noData>
+          <img [src]="noPhoto" class="img-thumbnail" style="width: 200px">
+        </ng-template>
       </div>
       <br>
 
@@ -33,113 +31,195 @@
       <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#passport">Passport Data</a></li>
         <li><a data-toggle="tab" href="/data">User Data</a></li>
+        <li><a data-toggle="tab" href="/telegram">Telegram</a></li>
       </ul>
 
       <div class="tab-content">
         <div class="tab-pane active" id="passport">
           <hr>
-          <form class="form" action=""  method="post"  enctype="multipart/form-data" id="registrationForm">
+          <form class="form" action="" method="post" enctype="multipart/form-data" id="registrationForm">
             <div class="form-group">
 
               <div class="col-xs-6">
-               <h4>First name</h4>
-
-                <input type="text" class="form-control"  [(ngModel)]="data.firstName" [ngModelOptions]="{standalone:true}">
+                <h4>First name</h4>
+                <input type="text" class="form-control" [(ngModel)]="data.firstName"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_FIRSTNAME$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Last name</h4>
-                <input type="text" class="form-control"   [(ngModel)]="data.lastName" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.lastName"
+                       [ngModelOptions]="{standalone:true}">
+
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_LASTNAME$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
 
             <div class="form-group">
 
               <div class="col-xs-6">
-                <h4>Middle name</h4>
-                <input type="text" class="form-control"    [(ngModel)]="data.middleName" [ngModelOptions]="{standalone:true}">
+                <h3>Middle name</h3>
+                <input type="text" class="form-control" [(ngModel)]="data.middleName"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_MIDDLENAME$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-xs-6">
-                <h4>Gender</h4>
-                <input type="text" class="form-control"   [(ngModel)]="data.gender" [ngModelOptions]="{standalone:true}">
+                <h3>Gender</h3>
+                <input type="text" class="form-control" [(ngModel)]="data.gender" [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_GENDER$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Birth date</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.birthDate" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.birthDate"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_BIRTHDATE$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Birth place</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.birthPlace" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.birthPlace"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_BIRTHPLACE$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Passport type</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.passportType" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.passportType"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_PASSPORTYPE$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Nationality</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.nationality" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.nationality"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_NATIONALITY$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Authority</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.authority" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.authority"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_AUTHORITY$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Date of issue</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.dateOfIssue" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.dateOfIssue"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_DATEOFISSUE$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Expiration date</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.expirationDate" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.expirationDate"
+                       [ngModelOptions]="{standalone:true}">
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_EXPIRATIONDATE$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Passport number</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.passportNumber" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.passportNumber"
+                       [ngModelOptions]="{standalone:true}">
+
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_PASSPORTNUMBER$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
 
               <div class="col-xs-6">
                 <h4>Identification number</h4>
-                <input type="text" class="form-control"  [(ngModel)]="data.identificationNumber" [ngModelOptions]="{standalone:true}">
+                <input type="text" class="form-control" [(ngModel)]="data.identificationNumber"
+                       [ngModelOptions]="{standalone:true}">
+
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.ERROR_IDENTIFICATIONNUMBER$ | async as error">
+                  {{ error }}
+                </small>
+                <br>
               </div>
             </div>
             <div class="form-group">
               <div class="col-xs-12">
                 <br>
-                <button mat-raised-button color="primary" style="margin:20px;" (click)="updatePassport(data)" type="submit"> Save</button>
-                <button mat-raised-button color="warn" type="reset">Reset</button>
+                <button mat-raised-button color="primary" style="margin:20px;" (click)="updatePassport(data)"
+                        type="submit"> Save
+                </button>
+                <button mat-raised-button color="warn" (click)="resetData()">Reset</button>
 
               </div>
-        </div>
+            </div>
           </form>
           <hr>
         </div><!--/tab-pane-->

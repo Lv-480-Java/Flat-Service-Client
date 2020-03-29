@@ -7,6 +7,7 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  chatListIsActive: boolean;
 
   constructor(public authService: AuthService) {
   }
@@ -45,7 +46,21 @@ export class MenuComponent implements OnInit {
     this.authService.logout();
   }
 
-  displayName(){
-    return JSON.parse(localStorage.getItem("user")).username;
+  displayName() {
+    return JSON.parse(localStorage.getItem('user')).username;
   }
+
+  displayRole() {
+    if (JSON.parse(localStorage.getItem('user')) !== null) {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
+  }
+  activateChat() {
+    if (this.chatListIsActive === false) {
+      this.chatListIsActive = true;
+    } else {
+      this.chatListIsActive = false;
+    }
+  }
+
 }

@@ -2,6 +2,7 @@ import {Component, DoCheck, ElementRef, EventEmitter, Input, OnInit, Output, Vie
 import {ChatButtonService} from './chatbutton.service';
 import {Chat} from '../model/chat.model';
 import {Theme} from './theme.enum';
+import {ProfileService} from '../services/profile.service';
 
 
 @Component({
@@ -25,13 +26,17 @@ export class ChatButtonComponent implements OnInit {
   @Input()
   public theme: Theme = Theme.Light;
 
-  constructor(private chatButtonService: ChatButtonService) {
+  unreadMessages: [];
+
+  constructor(public profileService: ProfileService, private chatButtonService: ChatButtonService) {
   }
 
   ngOnInit() {
-    this.currentUserId = JSON.parse(localStorage.getItem('user')).userId;
-    this.chatButtonService.getCurrentChatsByUserId(this.currentUserId).subscribe(data => this.chats = data);
-    this.initializeTheme();
+    this.profileService.getUserId().subscribe(data1 => {
+      this.currentUserId = data1;
+      this.chatButtonService.getCurrentChatsByUserId(this.currentUserId).subscribe(data => this.chats = data);
+      this.initializeTheme();
+    });
   }
 
   isUserSelectedFromFriendsList(username: string) {
@@ -42,6 +47,10 @@ export class ChatButtonComponent implements OnInit {
     } else {
       this.chatIsActive = false;
     }
+  }
+
+  public messageSeen(event: any) {
+    console.log(event);
   }
 
   isChatListSelected(event: any) {
@@ -60,5 +69,7 @@ export class ChatButtonComponent implements OnInit {
     }
   }
 
-
+  modalClosed(isClosed) {
+    this.chatIsActive = false;
+  }
 }
