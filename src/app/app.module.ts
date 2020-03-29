@@ -64,11 +64,14 @@ import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/f
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {InterceptorService} from './services/intercept.service';
-import { ComentsaboutcommentComponent } from './comment/coments-about-comment/comentsaboutcomment.component';
-import { ListCommentComponent } from './comment/list-comment/list-comment.component';
+import { ComentsaboutcommentComponent } from './comment/flat-coments-about-comment/comentsaboutcomment.component';
+import { ListCommentComponent } from './comment/flat-list-comment-about-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import { UserCommentsAboutComentComponent } from './comment/user-comments-about-coment/user-comments-about-coment.component';
+import { UserListCommentsAboutComentComponent } from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
+import { LikeComponent } from './comment/like/like.component';
 
 
 
@@ -115,7 +118,10 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
     ChatButtonComponent,
-    AddFlatComponent
+    AddFlatComponent,
+    UserCommentsAboutComentComponent,
+    UserListCommentsAboutComentComponent,
+    LikeComponent
 
   ],
   imports: [

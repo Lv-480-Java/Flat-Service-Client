@@ -9,14 +9,14 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
 export class ComentsaboutcommentComponent implements OnInit {
 
   @Input() commentId: number;
-  @Input() flatUserId: number;
+  @Input() flatId: number;
   comments: FlatComment[] = [];
   text = '';
   constructor(private flatCommentService: FlatCommentService) {
   }
 
   ngOnInit(): void {
-    this.loadComments(this.commentId);
+
   }
 
   addC() {
@@ -25,7 +25,7 @@ export class ComentsaboutcommentComponent implements OnInit {
     }
     const newFlatComment: FlatComment = {
       text: this.text,
-      flatId: this.flatUserId,
+      flatId: this.flatId,
       commentAboutComment: this.commentId
     };
     console.log();
@@ -36,20 +36,6 @@ export class ComentsaboutcommentComponent implements OnInit {
         this.comments = this.comments.concat(newFlatComment);
         this.ngOnInit();
       });
-  }
-
-  remove(id: number) {
-    this.flatCommentService.remove(id)
-      .subscribe(() => {
-        this.comments = this.comments.filter(item => item.id !== id);
-      });
-  }
-  loadComments(id: number): void {
-    this.flatCommentService.loadCommentsC(id)
-      .subscribe(comments => {
-        this.comments = comments.reverse();
-      });
-    console.log(this.comments);
   }
 
 }

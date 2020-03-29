@@ -1,0 +1,15 @@
+
+<div style="margin-top: 10px">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Text..."
+    [(ngModel)]="text"
+    autocomplete="off"
+    matInput
+    (keyup.enter)="addC()"
+  >
+  <button style="margin-top: 10px" (click)="addC()" fxFlexAlign="end end" class="donate" mat-raised-button
+          color="primary">
+    Додати коментар
+  </button> </div>

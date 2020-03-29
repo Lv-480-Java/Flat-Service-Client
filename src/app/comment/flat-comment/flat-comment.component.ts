@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
+import {Like, LikeService} from '../../services/like.service';
 
 
 @Component({

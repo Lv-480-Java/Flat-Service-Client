@@ -25,22 +25,21 @@
       <mat-card class="mat-elevation-z5"  style="width: 900px; margin-top: 16px; position: relative" *ngFor="let comment of comments">
         <p style="font-size: 16px; word-wrap: break-word; width: 80%" *ngIf="comment.text!==null"> {{comment.text}}</p>
         <div mat-card-avatar class="example-header-image" style="position: absolute; right: 20px; top: 15px"></div>
-        <a href="/short_profile" style="font-size: 12px; position: absolute; right: 24px; top: 53px" > {{comment.userAuthor.username}}</a>
+        <a href="short_profile/{{comment.userAuthor.id}}" style="font-size: 12px; position: absolute; right: 24px; top: 53px" > {{comment.userAuthor.username}}</a>
         <mat-card-subtitle>{{comment.publicationDate}}</mat-card-subtitle>
         <button *ngIf="comment.userAuthor.id==isId" style="position: absolute; right: 35px; top: 90px" (click)="remove(comment.id)" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary">
          Видалити
         </button>
-
         <button style="margin-top: 10px" style="margin-bottom: 10px;" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Відповісти</button>
         <button style="margin-top: 10px; margin-left: 10px; margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary" (click)="isList=!isList" (click)="commentId=comment.id" >Відповіді</button>
         <div *ngIf="isTrue && commentId==comment.id">
-          <app-coments-about-comment [commentId]="comment.id" [flatUserId]="comment.flatId"></app-coments-about-comment>
+          <app-coments-about-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-coments-about-comment>
         </div>
         <div *ngIf="isList && commentId==comment.id">
-          <app-list-comment [commentId]="comment.id" [flatUserId]="comment.flatId"></app-list-comment>
+          <app-list-comment [commentId]="comment.id" [flatId]="comment.flatId"></app-list-comment>
         </div>
       </mat-card>
     </div>

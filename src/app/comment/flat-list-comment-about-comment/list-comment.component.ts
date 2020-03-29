@@ -11,9 +11,11 @@ export class ListCommentComponent implements OnInit {
   isTrue = false;
   isList = false;
   @Input() commentId: number;
-  @Input() flatUserId: number;
+  @Input() flatId: number;
   comments: FlatComment[] = [];
   text = '';
+
+
 
   constructor(private flatCommentService: FlatCommentService) {
   }
