@@ -10,6 +10,11 @@ import {UserComment, UserCommentService} from '../../services/user-comment.servi
 export class UserCommentComponent implements OnInit {
 
   comments: UserComment[] = [];
+  isId: any = JSON.parse(localStorage.getItem('user')).userId;
+  commentId: number;
+  isTrue = false;
+  isList = false;
+  isComplain = false;
   text = '';
   @Input() id: number;
 

@@ -1,18 +1,18 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
 
-
 @Component({
   selector: 'app-flat-comment',
   templateUrl: './flat-comment.component.html',
   styleUrls: ['./flat-comment.component.scss']
 })
 export class FlatCommentComponent implements OnInit {
-
+  isId: any = JSON.parse(localStorage.getItem('user')).userId;
   comments: FlatComment[] = [];
   commentId: number;
   isTrue = false;
   isList = false;
+  isComplain = false;
   text = '';
   @Input() id: number;
 

@@ -4,11 +4,12 @@ import {Observable} from 'rxjs';
 import {User} from '../admin-panel/component/Users';
 import {BASE_URL} from '../utils/constants';
 
+
 export interface UserComment {
   id?: number;
   userId?: number;
   userAuthor?: User;
-  text: string;
+  text?: string;
   publicationDate?: any;
   commentAboutComment?: number;
 }
@@ -33,6 +34,14 @@ export class UserCommentService {
 
   loadComments(id: number): Observable<UserComment[]> {
     return this.http.get<UserComment[]>(BASE_URL + 'usercomments/getall/' + id);
+  }
+
+  addC(userComment: UserComment): Observable<UserComment> {
+    return this.http.post<UserComment>(BASE_URL + 'usercomments/createcommentaboutcomment/', JSON.stringify(userComment), this.options);
+  }
+
+  loadCommentsC(id: number): Observable<UserComment[]> {
+    return this.http.get<UserComment[]>(BASE_URL + 'usercomments/getallaboutcomment/' + id);
   }
 
 
