@@ -82,7 +82,7 @@ export class ProfileService {
   private handleError(error: HttpErrorResponse) {
     console.log('Registration is working...');
     const {message} = error.error;
-    console.log(error);
+    console.log(message);
     if (message instanceof Object) {
       if (message.firstName !== undefined) {
         this.ERROR_FIRSTNAME$.next('Please input first name');
@@ -122,10 +122,9 @@ export class ProfileService {
       }
       if (message.passportNumber !== undefined) {
         this.ERROR_PASSPORTNUMBER$.next('Please input passport number');
-      } else {
-        this.error$.next(message);
       }
-
+    } else {
+      this.error$.next(message);
     }
   }
 }

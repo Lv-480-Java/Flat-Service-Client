@@ -31,7 +31,10 @@ export class ProfileUserService {
   }
 
   evaluateToLandlord(dataLand: User): Observable<User> {
-    return this.http.post<User>(BASE_URL + 'passport/landlord', JSON.stringify(dataLand), this.options);
+    return this.http.post<User>(BASE_URL + 'passport/landlord', JSON.stringify(dataLand), this.options)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
   }
 
   addPassport(): Observable<Landlord> {
@@ -52,6 +55,5 @@ export class ProfileUserService {
     } else {
       this.error$.next(message);
     }
-
   }
 }
