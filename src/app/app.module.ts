@@ -63,19 +63,25 @@ import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/f
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {InterceptorService} from './services/intercept.service';
-import {ComentsaboutcommentComponent} from './comment/coments-about-comment/comentsaboutcomment.component';
-import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import { ComentsaboutcommentComponent } from './comment/flat-coments-about-comment/comentsaboutcomment.component';
+import { ListCommentComponent } from './comment/flat-list-comment-about-comment/list-comment.component';
+import { UserCommentsAboutComentComponent } from './comment/user-comments-about-coment/user-comments-about-coment.component';
+import { UserListCommentsAboutComentComponent } from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
+import { LikeComponent } from './comment/like/like.component';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import { ComplaintComponent } from './comment/complaint/complaint.component';
+import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
 import {FlatService} from './services/flat.service';
 import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+
 
 
 @NgModule({
@@ -120,11 +126,15 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
     AddFlatComponent,
+    UserCommentsAboutComentComponent,
+    UserListCommentsAboutComentComponent,
+    LikeComponent,
     AutoApproveComponent,
     RequestMessageComponent,
     LandlordFlatListComponent,
+    ComplaintComponent,
+    ComplaintUCComponent,
     FavoriteFlatComponent
-
   ],
   imports: [
     BrowserModule,

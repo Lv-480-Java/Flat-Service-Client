@@ -33,7 +33,6 @@
         <li><a data-toggle="tab" href="/data">User Data</a></li>
         <li><a data-toggle="tab" href="/telegram">Telegram</a></li>
       </ul>
-
       <div class="tab-content">
         <div class="tab-pane active" id="passport">
           <hr>
@@ -217,7 +216,10 @@
                         type="submit"> Save
                 </button>
                 <button mat-raised-button color="warn" (click)="resetData()">Reset</button>
-
+                <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                       *ngIf="landlordService.error$ | async as error">
+                  {{ error }}
+                </small>
               </div>
             </div>
           </form>
