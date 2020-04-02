@@ -74,21 +74,6 @@ export class FlatListComponent implements OnInit {
         panelClass: ['snackbar']
       });
   }
-
-  deleteFlat(id: number) {
-    this.flatService.removeFlatFromFavoriteList(id).subscribe(success => {
-      this.favoriteFlats.content = this.favoriteFlats.content.filter(function (value) {
-        return value.id !== id;
-      })
-    });
-    this.bar.open("Flat was deleted from Favorite List", "x",
-      {
-        duration: 3000,
-        verticalPosition: 'top',
-        horizontalPosition: 'right',
-        panelClass: ['snackbar']
-      });
-  }
 }
 
 

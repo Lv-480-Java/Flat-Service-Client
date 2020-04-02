@@ -36,11 +36,7 @@
                       <mat-icon>delete</mat-icon>
                     </button>
                     <button style="margin-bottom: -5px" mat-icon-button
-                            (click)="addToFavoriteList(flat.id)" *ngIf="flatService.switcher == 0">
-                      <mat-icon>favorite</mat-icon>
-                    </button>
-                    <button style="margin-bottom: -5px; color: red" mat-icon-button
-                            (click)="deleteFlat(flat.id)" *ngIf="flatService.switcher == 1">
+                            (click)="addToFavoriteList(flat.id)">
                       <mat-icon>favorite</mat-icon>
                     </button>
                   </div>

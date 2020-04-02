@@ -9,8 +9,6 @@ import {BASE_URL} from '../utils/constants';
 })
 export class FlatService {
 
-  switcher: number = 0;
-
   constructor(private snackBar: MatSnackBar, private http: HttpClient) {
   }
 
@@ -21,7 +19,6 @@ export class FlatService {
   }
 
   addFlatToFavoriteList(id: number): Observable<any> {
-    this.switcher = 1;
     return this.http.post(BASE_URL + `favorite/addToTheList`, id);
   }
 
@@ -30,7 +27,6 @@ export class FlatService {
   }
 
   removeFlatFromFavoriteList(id: number): Observable<any> {
-    this.switcher = 0;
     return this.http.post(BASE_URL + 'favorite/deleteFromList', id)
   }
 }
