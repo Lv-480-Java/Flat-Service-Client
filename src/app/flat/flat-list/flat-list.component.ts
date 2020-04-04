@@ -4,6 +4,7 @@ import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
 import {BASE_URL} from 'src/app/utils/constants';
 import {FlatService} from '../../services/flat.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-flat-list',
@@ -12,21 +13,23 @@ import {FlatService} from '../../services/flat.service';
 })
 export class FlatListComponent implements OnInit {
 
-  constructor(private http: HttpClient, private flatService: FlatService) {
+  constructor(private http: HttpClient, public flatService: FlatService,
+              private bar: MatSnackBar) {
   }
 
   @Input() userId: number;
   pageNumber = 0;
   data: any;
   flats: FlatResponse;
-  favoriteFlats: FlatResponse;
+  favoriteData: any;
+  favoriteFlats: FlatResponse = new FlatResponse();
   parameters: SearchParameters = new SearchParameters();
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   ngOnInit() {
     this.loadFlats();
-    // this.loadFavoriteFlats();
+    this.loadFavoriteFlats();
   }
 
   loadFlats() {
@@ -59,32 +62,73 @@ export class FlatListComponent implements OnInit {
 
   removeFlat(flatId: number) {
     this.http.delete(BASE_URL + 'flat/' + flatId).subscribe(success => {
-      this.flatService.openSnackBar('Succesfuly deactivated', 'Removed');
+      this.flatService.openSnackBar('Successfully deactivated', 'Removed');
     });
   }
 
-  addToFavoriteList(id: number) {
-    console.log(id);
-    console.log("Component is running..");
-    this.flatService.addFlatToFavoriteList(id).subscribe();
+  loadFavoriteFlats() {
+    this.http.get(BASE_URL + 'favorite/getFlats').subscribe(data => {
+        this.favoriteData = data;
+        this.favoriteFlats.content = this.favoriteData;
+      }
+    )
   }
 
-  /*loadFavoriteFlats() {
-    console.log("Pamparam");
-    this.flatService.getFavoriteFlats()
-      .subscribe(data => {
-        this.data = data;
-        console.log(data);
-        this.favoriteFlats.content = this.data;
-      });
-  }*/
-/*  isInFavoriteList(id: number): boolean {
-    console.log("Is in favorite list")
-    console.log(this.favoriteFlats);
+  addToFavoriteList(id: number) {
+    this.flatService.addFlatToFavoriteList(id).subscribe(success => {
+        this.bar.open("Flat was added to Favorite List", "x",
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar']
+          });
+        this.loadFavoriteFlats();
+      },
+      error => {
+        this.bar.open(error.error.message, "x",
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar']
+          });
+      }
+    );
+
+  }
+
+  isFavorite(id: number) {
+    if (this.favoriteFlats.content === undefined) {
+      return false;
+    }
     return this.favoriteFlats.content.filter(value => {
-      id === value.id
-    }).length == 1;
-  }*/
+      return value.id == id;
+    }).length > 0;
+  }
+
+  deleteFlat(id: number) {
+    this.flatService.removeFlatFromFavoriteList(id).subscribe(success => {
+        this.loadFavoriteFlats();
+        this.bar.open("Flat was deleted from Favorite List", "x",
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar']
+          });
+      },
+      error => {
+        this.bar.open(error.error.message, "x",
+          {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar']
+          });
+      }
+    );
+  }
 }
 
 
