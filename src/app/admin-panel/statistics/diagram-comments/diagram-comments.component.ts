@@ -29,7 +29,8 @@ export class DiagramCommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.statisticsService.getCommentsData().subscribe(data => {
-      this.chartDatasets = data;
+      // this.chartDatasets = data;
+      this.chartDatasets = [72, 39];
     });
   }
 

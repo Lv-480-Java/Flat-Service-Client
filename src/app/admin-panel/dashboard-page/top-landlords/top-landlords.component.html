@@ -1,0 +1,42 @@
+<mdb-card class="card">
+  <div class="label">
+    <div class="label-font">TOP LANDLORDS</div>
+    <div class="period">
+      <mat-button-toggle-group appearance="s" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle class="period">All time</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+  <table class="table table-striped table-responsive-md btn-table">
+    <thead class="head">
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Mail</th>
+      <th>Flats</th>
+      <th>Commitments</th>
+      <th>Profile</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let elem of data" class ="tab">
+      <td>#{{elem.landlord.id}}</td>
+      <td class="username">{{elem.landlord.username}}</td>
+      <td>{{elem.landlord.email}}</td>
+      <td>{{elem.flats}}</td>
+      <td>{{elem.commitments}}</td>
+      <td>
+        <button mat-raised-button color="primary" routerLink="/short_profile/{{elem.landlord.id}}">visit</button>
+
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+
+
+</mdb-card>
+
+

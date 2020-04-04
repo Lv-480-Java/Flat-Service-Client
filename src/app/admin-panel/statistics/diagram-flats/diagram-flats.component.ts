@@ -28,6 +28,7 @@ export class DiagramFlatsComponent implements OnInit {
 
   ngOnInit(): void {
     this.statisticsService.getFlatsData().subscribe(data => {
-      this.chartDatasets = data;
-    });  }
+      this.chartDatasets = [38, 15];
+    });
+  }
 }

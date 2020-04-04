@@ -19,8 +19,8 @@
               <mat-form-field class="status-select">
                 <mat-label>Type</mat-label>
                 <mat-select formControlName="typeForm" (selectionChange)="onChangeType($event.value)">
-                  <mat-option *ngFor="let labelType of labelsTypes"
-                              [value]="labelType">{{labelType.type|titlecase}}</mat-option>
+                  <mat-option *ngFor="let labelType of labelsTypes" [value]="labelType">
+                    {{labelType.type|titlecase}}</mat-option>
                 </mat-select>
               </mat-form-field>
             </form>
@@ -67,5 +67,5 @@
     </div>
   </div>
 
-  <app-auto-approve></app-auto-approve>
+<!--  <app-auto-approve></app-auto-approve>-->
 </div>

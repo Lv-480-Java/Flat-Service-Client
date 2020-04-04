@@ -7,7 +7,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ReviewWindowComponent} from './review-window/review-window.component';
-import {RequestMessageComponent} from './review-window/request-message/request-message.component';
 
 @Component({
   selector: 'app-requests',
@@ -78,7 +77,7 @@ export class RequestsComponent implements OnInit {
     console.log('snackbar');
     this.requestsService.getNewRequests().subscribe(newRequests => {
       this.bar.open(newRequests + ' New Requests', 'close', {
-        duration: 5000,
+        duration: 20000,
         verticalPosition: 'bottom',
         horizontalPosition: 'right',
         panelClass: ['snackbar']

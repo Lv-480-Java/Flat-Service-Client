@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-
+  constructor(private router: Router) {
   }
 
+  ngOnInit(): void {
+  }
 
+  goToStatistics() {
+    this.router.navigateByUrl('admin/statistics');
+  }
 
 }
