@@ -6,6 +6,7 @@
     <app-flat-filter [parameters]="parameters" (loadFlats)="loadFlats()"></app-flat-filter>
   </div>
   <div *ngIf="flats!==undefined">
+    <app-flat-map></app-flat-map>
     <div infinite-scroll *ngFor="let flat of flats.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
