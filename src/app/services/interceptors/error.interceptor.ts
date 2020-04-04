@@ -22,7 +22,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       .pipe(
         retry(1),
         catchError((error: HttpErrorResponse) => {
-          console.log("Interceptor is working...");
           if (error.error.message == "Runtime exception") {
             this.bar.open("Ops! Something went wrong...", "Ok",
               {
