@@ -13,15 +13,18 @@ export class StatisticsService {
   }
 
   countActiveFlats(): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'admin/statistics/active-flats');
+    const url = BASE_URL + 'admin/statistics/count-active-flats';
+    return this.http.get<number>(url);
   }
 
   countActiveUsers(): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'admin/statistics/active-users');
+    const url = BASE_URL + 'admin/statistics/count-active-users';
+    return this.http.get<number>(url);
   }
 
   countActiveLandlords(): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'admin/statistics/active-landlords');
+    const url = BASE_URL + 'admin/statistics/count-active-landlords';
+    return this.http.get<number>(url);
   }
 
   getAllUsersCount(start, end): Observable<Array<number>> {
@@ -65,13 +68,15 @@ export class StatisticsService {
   }
 
   getCountOfFlatsPostedBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + `admin/statistics/count-posted-flats?end=${end.toISOString().substr(0, 10)}&start=${start.toISOString().substr(0, 10)}`;
+    const url = BASE_URL + `admin/statistics/count-posted-flats?end=${end.toISOString()
+      .substr(0, 10)}&start=${start.toISOString().substr(0, 10)}`;
     console.log(url);
     return this.http.get<number>(url);
   }
 
   getCountOfPostedCommentsBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + `admin/statistics/count-posted-comments?end=${end.toISOString().substr(0, 10)}&start=${start.toISOString().substr(0, 10)}`;
+    const url = BASE_URL + `admin/statistics/count-posted-comments?end=${end.toISOString()
+      .substr(0, 10)}&start=${start.toISOString().substr(0, 10)}`;
     console.log(url);
     return this.http.get<number>(url);
   }

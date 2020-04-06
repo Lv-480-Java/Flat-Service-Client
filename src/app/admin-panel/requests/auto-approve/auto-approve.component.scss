@@ -1,16 +1,16 @@
-.label-card {
+.main-card {
   position: relative;
   width: 250px;
   float: right;
   margin: 20px 20px 0px 0px;
-  height: 80px;
-  color: #2d2d2d;
-  align-items: center;
-  justify-content: center;
-  border-spacing: 10px;
+  height: 500px;
 }
+
 
 .label {
   font-size: 25px;
   text-align: center;
+  line-height: 1.2;
+  height: 80px;
+  padding-top: 10px;
 }

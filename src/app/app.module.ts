@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
@@ -73,9 +73,10 @@ import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
-import { DashboardStatsComponent } from './admin-panel/dashboard-page/dashboard-stats/dashboard-stats.component';
-import { TopLandlordsComponent } from './admin-panel/dashboard-page/top-landlords/top-landlords.component';
+import {DashboardStatsComponent} from './admin-panel/dashboard-page/dashboard-stats/dashboard-stats.component';
+import {TopLandlordsComponent} from './admin-panel/dashboard-page/top-landlords/top-landlords.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 
 @NgModule({
   declarations: [
@@ -125,37 +126,37 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     RequestMessageComponent,
     LandlordFlatListComponent,
     DashboardStatsComponent,
-    TopLandlordsComponent
+    TopLandlordsComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MDBBootstrapModule.forRoot(),
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        Ng5SliderModule,
-        MatSliderModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        FlexModule,
-        InfiniteScrollModule,
-        MatChipsModule,
-        MatTableModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        BrowserAnimationsModule,
-        GalleryModule,
-        MatAutocompleteModule,
-        MatSidenavModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatListModule,
-        MatSelectModule, MatBadgeModule, MatButtonToggleModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    Ng5SliderModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    FlexModule,
+    InfiniteScrollModule,
+    MatChipsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    BrowserAnimationsModule,
+    GalleryModule,
+    MatAutocompleteModule,
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatListModule,
+    MatSelectModule, MatBadgeModule, MatButtonToggleModule
+  ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,
@@ -168,7 +169,9 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         multi: true
       }],
     RegistrationService, AuthService, AuthGuard, MatSnackBar],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AppModule {
 }
