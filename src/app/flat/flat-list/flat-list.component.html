@@ -23,7 +23,7 @@
                 <div>
 
                   <mat-card-header class="flat-header" fxFlex="95">
-                    <div mat-card-avatar class="flat-header-image"></div>
+                    <div mat-card-avatar class="flat-header-image" [style.background]="'url(' + flat.userPicture + ')'"></div>
                     <mat-card-title style="margin-bottom: 4px"> {{flat.title}}</mat-card-title>
                     <mat-card-subtitle
                       style="margin:0">  {{flat.address.street}} {{flat.address.flatNumber}} {{flat.address.houseNumber}}</mat-card-subtitle>
