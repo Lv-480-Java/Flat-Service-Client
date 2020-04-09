@@ -83,6 +83,8 @@ import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import { FlatMapComponent } from './flat/flat-map/flat-map.component';
 import { AgmCoreModule } from '@agm/core';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 
 @NgModule({
@@ -136,7 +138,8 @@ import { AgmCoreModule } from '@agm/core';
     ComplaintComponent,
     ComplaintUCComponent,
     FavoriteFlatComponent,
-    FlatMapComponent
+    FlatMapComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
