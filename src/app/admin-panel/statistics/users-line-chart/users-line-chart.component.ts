@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../../services/requests.service';
 import 'rxjs/add/observable/interval';
 import {StatisticsService} from '../../../services/statistics.service';
 

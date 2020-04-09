@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RequestsService} from '../../../services/requests.service';
 import {StatisticsService} from '../../../services/statistics.service';
 import {on} from 'cluster';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-dashboard-stats',
@@ -9,58 +10,56 @@ import {on} from 'cluster';
   styleUrls: ['./dashboard-stats.component.scss']
 })
 export class DashboardStatsComponent implements OnInit {
-  numberOfFlats: number;
-  percentageDifferenceFlats: number;
-  numberOfComments: number;
-  percentageDifferenceComments: number;
-  numberOfOrders: number;
-  percentageDifferenceOrders: number;
+  flatNumber: number;
+  flatRatio: number;
+  commentNumber: number;
+  commentRatio: number;
+  orderNumber: number;
+  orderRatio: number;
+  private today: Date;
+  private weekAgo: Date;
+  private twoWeeksAgo: Date;
 
   constructor(private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
-    this.loadData();
+    this.setDates();
+    this.countFlatPostedForWeek();
+    this.countCommentsPostedForWeek();
+    this.countOrdersForWeek();
   }
 
-  loadData() {
-    const now = new Date();
-    const oneWeekAgo = new Date();
-    oneWeekAgo.setDate(now.getDate() - 7);
-    const twoWeeksAgo = new Date();
-    twoWeeksAgo.setDate(now.getDate() - 14);
-    this.getCountOfFlatsPostedForWeek(now, oneWeekAgo, twoWeeksAgo);
-    this.getCountOfCommentsPostedForWeek(now, oneWeekAgo, twoWeeksAgo);
+  setDates() {
+    this.today = new Date();
+    this.weekAgo = new Date();
+    this.twoWeeksAgo = new Date();
+
+    this.weekAgo.setDate(this.today.getDate() - 7);
+    this.twoWeeksAgo.setDate(this.today.getDate() - 14);
   }
 
-  getCountOfFlatsPostedForWeek(now, oneWeekAgo, twoWeeksAgo) {
-    this.statisticsService.getCountOfFlatsPostedBetween(oneWeekAgo, now).subscribe(flatsForThisWeek => {
-      this.statisticsService.getCountOfFlatsPostedBetween(twoWeeksAgo, oneWeekAgo).subscribe(flatsForPerevWeek => {
-        this.numberOfFlats = flatsForThisWeek;
-        if (flatsForPerevWeek === 0) {
-          this.percentageDifferenceFlats = 100;
-        } else {
-          this.percentageDifferenceFlats = (flatsForThisWeek - flatsForPerevWeek) / flatsForPerevWeek * 100;
-        }
-      });
+  countFlatPostedForWeek() {
+    forkJoin([
+      this.statisticsService.countFlatsPostedBetween(this.weekAgo, this.today),
+      this.statisticsService.countFlatsPostedBetween(this.twoWeeksAgo, this.weekAgo)
+    ]).subscribe((count) => {
+      this.flatNumber = count[0];
+      this.flatRatio = count[1] / count[0];
     });
   }
 
-  getCountOfCommentsPostedForWeek(now, oneWeekAgo, twoWeeksAgo) {
-    this.statisticsService.getCountOfPostedCommentsBetween(oneWeekAgo, now).subscribe(flatsForThisWeek => {
-      this.statisticsService.getCountOfPostedCommentsBetween(twoWeeksAgo, oneWeekAgo).subscribe(flatsForPerevWeek => {
-        this.numberOfComments = flatsForThisWeek;
-        if (flatsForPerevWeek === 0) {
-          this.percentageDifferenceComments = 100;
-        } else {
-          this.percentageDifferenceComments = (flatsForThisWeek - flatsForPerevWeek) / flatsForPerevWeek * 100;
-        }
-        console.log(this.numberOfComments, this.percentageDifferenceComments);
-      });
+  countCommentsPostedForWeek() {
+    forkJoin([
+      this.statisticsService.countCommentsPostedBetween(this.weekAgo, this.today),
+      this.statisticsService.countCommentsPostedBetween(this.twoWeeksAgo, this.weekAgo)
+    ]).subscribe((count) => {
+      this.commentNumber = count[0];
+      this.commentRatio = count[1] / count[0];
     });
+  }
+
+  countOrdersForWeek() {
   }
 
 }
-
-
-

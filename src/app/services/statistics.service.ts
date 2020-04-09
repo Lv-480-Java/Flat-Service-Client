@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {BASE_URL} from '../utils/constants';
 import {User} from '../admin-panel/component/Users';
 
@@ -51,12 +51,18 @@ export class StatisticsService {
     return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/count-comments');
   }
 
-  getRegisteredUsersForWeek(days: number): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + `admin/statistics/user-registration-dynamics/${days}`);
+  countRegisteredUsersByDay(day: Date): Observable<number> {
+    const url = BASE_URL + 'admin/statistics/count-registered-users';
+    let params = new HttpParams();
+    params = params.append('day', day.toLocaleDateString());
+    return this.http.get<number>(url, {params});
   }
 
-  getCreatedFlatsForWeek(days: number): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + `admin/statistics/flat-creation-dynamics/${days}`);
+  countPostedFlatsByDay(day: Date): Observable<number> {
+    const url = BASE_URL + 'admin/statistics/count-posted-flats';
+    let params = new HttpParams();
+    params = params.append('day', day.toLocaleDateString());
+    return this.http.get<number>(url, {params});
   }
 
   getCountOfUserCommentsForWeek(days: number): Observable<Array<number>> {
@@ -67,18 +73,24 @@ export class StatisticsService {
     return this.http.get<Array<number>>(BASE_URL + `admin/statistics/flat-comments-dynamics/${days}`);
   }
 
-  getCountOfFlatsPostedBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + `admin/statistics/count-posted-flats?end=${end.toISOString()
-      .substr(0, 10)}&start=${start.toISOString().substr(0, 10)}`;
-    console.log(url);
-    return this.http.get<number>(url);
+  countFlatsPostedBetween(start: Date, end: Date): Observable<number> {
+    const url = BASE_URL + 'admin/statistics/count-posted-flats';
+
+    let params = new HttpParams();
+    params = params.append('start', start.toLocaleDateString());
+    params = params.append('end', end.toLocaleDateString());
+
+    return this.http.get<number>(url, {params});
   }
 
-  getCountOfPostedCommentsBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + `admin/statistics/count-posted-comments?end=${end.toISOString()
-      .substr(0, 10)}&start=${start.toISOString().substr(0, 10)}`;
-    console.log(url);
-    return this.http.get<number>(url);
+  countCommentsPostedBetween(start: Date, end: Date): Observable<number> {
+    const url = BASE_URL + 'admin/statistics/count-posted-comments';
+
+    let params = new HttpParams();
+    params = params.append('start', start.toLocaleDateString());
+    params = params.append('end', end.toLocaleDateString());
+
+    return this.http.get<number>(url, {params});
   }
 
   getTopLandlords(num: number): Observable<Array<User>> {
@@ -92,6 +104,4 @@ export class StatisticsService {
     console.log(url);
     return this.http.get<number>(url);
   }
-
-
 }

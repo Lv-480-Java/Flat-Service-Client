@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../../services/requests.service';
-import {dashCaseToCamelCase} from '@angular/compiler/src/util';
 import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({

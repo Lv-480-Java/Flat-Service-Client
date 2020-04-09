@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../../services/requests.service';
 import {StatisticsService} from '../../../services/statistics.service';
 
 @Component({
@@ -8,14 +7,13 @@ import {StatisticsService} from '../../../services/statistics.service';
   styleUrls: ['./user-chart.component.scss']
 })
 export class UserChartComponent implements OnInit {
+  private dayNames: Array<any> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  private dates = [];
+  public totalUsers: number;
 
   public chartType = 'bar';
-
-  public chartDatasets: Array<any>;
-  public totalUsers: number;
-  public chartLabels: Array<any>;
-  private days: Array<any> = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  numberOfDays = 7;
+  public chartDatasets = [{data: [], label: ''}];
+  public chartLabels = [];
   public chartColors: Array<any> = [
     {
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -23,7 +21,6 @@ export class UserChartComponent implements OnInit {
       borderWidth: 2,
     }
   ];
-
   public chartOptions: any = {
     responsive: true
   };
@@ -31,28 +28,39 @@ export class UserChartComponent implements OnInit {
   constructor(private statisticsService: StatisticsService) {
   }
 
-
-  shiftDays() {
-    for (let i = 1; i < new Date().getDay() + 1; i++) {
-      this.days.push(this.days.shift());
-    }
-    this.chartLabels = this.days;
-  }
-
-  updateDataset() {
-    this.statisticsService.getRegisteredUsersForWeek(this.numberOfDays).subscribe(usersRegistered => {
-      this.chartDatasets = [
-        {data: usersRegistered, label: 'Users registered'}
-      ];
-      this.totalUsers = usersRegistered.reduce((a, b) => a + b);
-      this.shiftDays();
-      console.log('hello');
-    });
-  }
-
   ngOnInit(): void {
+    this.initializeDates();
+    this.updateDates();
     this.updateDataset();
   }
 
+  initializeDates() {
+    const day = new Date();
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(day);
+      this.dates.push(date);
+      day.setDate(day.getDate() - 1);
+    }
+  }
+
+  updateDates() {
+    for (let i = 0; i < 7; i++) {
+      const day = this.dates[i];
+      this.chartLabels[i] = this.dayNames[day.getDay()];
+    }
+    this.chartLabels.reverse();
+  }
+
+  updateDataset() {
+    const numbers = [];
+    for (let i = 0; i < 7; i++) {
+      const day = this.dates[i];
+      this.statisticsService.countRegisteredUsersByDay(day).subscribe(countOfRegisteredUsers => {
+        numbers.unshift(countOfRegisteredUsers);
+        this.chartDatasets = [{data: numbers, label: 'Users registered'}];
+        this.totalUsers = numbers.reduce((x, y) => x + y);
+      });
+    }
+  }
 
 }
