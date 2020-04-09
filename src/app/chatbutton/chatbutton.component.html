@@ -1,25 +1,19 @@
-<mat-icon matBadge="200">
-  notifications
-</mat-icon>
 <link *ngIf="customTheme" rel="stylesheet" [href]='customTheme | sanitize'>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
 <div id="chatbox" [ngClass]="theme">
   <div id="friendslist">
-    <div id="topmenu">
+   <!-- <div id="topmenu">
       <span class="friends"></span>
       <span class="chats"></span>
       <span class="history"></span>
-    </div>
-    <div infinite-scroll *ngFor="let mes of chats">
+    </div>-->
+    <div *ngFor="let mes of chats">
       <div id="friends">
         <div class="friend">
           <div *ngIf="mes.senderId != currentUserId">
             <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
             <p>
               <strong> {{mes.senderUsername}}</strong>
-              <mat-icon matBadge="200">
-                notifications
-              </mat-icon>
             </p>
             <button fxFlex="30" class="btn draw-border"
                     [class.selected]="mes.senderUsername === username"
@@ -42,10 +36,9 @@
         </div>
       </div>
     </div>
-    <div id="search">
-      <input type="text" id="searchfield" value="Search contacts..."/>
-    </div>
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<app-chat *ngIf="chatIsActive" [username]="username"></app-chat>
+<app-chat *ngIf="chatIsActive" [username]="username" (onMessagesSeen)="messageSeen($event)"
+          (onClose)="modalClosed($event)"></app-chat>
+

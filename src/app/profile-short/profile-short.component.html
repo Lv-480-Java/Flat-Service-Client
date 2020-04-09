@@ -1,8 +1,10 @@
 
 <div class="text-center">
 <figure class="figure">
-  <img [src]="userData.photoUrl" class="img-thumbnail"
-       alt="..." style="width: 200px">
+  <img *ngIf="userData.photoUrl !== null; else noData" [src]="userData.photoUrl" class="img-thumbnail" style="width: 200px">
+  <ng-template #noData>
+    <img [src]="noPhoto" class="img-thumbnail" style="width: 200px">
+  </ng-template>
   <h1>{{userData.username}}</h1>
 </figure>
 </div>
@@ -10,3 +12,4 @@
 <app-user-comment [id]="userData.id"></app-user-comment>
 
 <app-landlord-flat-list [userId]="userData.id"></app-landlord-flat-list>
+

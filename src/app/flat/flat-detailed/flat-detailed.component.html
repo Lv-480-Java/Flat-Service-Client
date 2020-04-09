@@ -19,7 +19,7 @@
         <div fxLayout="row">
           <mat-card-header fxFlex="70">
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title [routerLink]="['/short_profile/', flatDetailed.userId]" style="font-size: 16px">{{flatDetailed.username}}</mat-card-title>
+            <mat-card-title [routerLink]="['/short_profile/', flatDetailed.userId]" style="cursor: pointer;font-size: 16px">{{flatDetailed.username}}</mat-card-title>
           </mat-card-header>
           <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click) = activateChat()>Початитись</button>
         </div>
@@ -61,4 +61,4 @@
 
 <app-flat-comment [id]="id"></app-flat-comment>
 
-<app-chat *ngIf="chatIsActive" [username]="flatDetailed.username" ></app-chat>
+<app-chat *ngIf="chatIsActive" [username]="flatDetailed.username" (onClose)="modalClosed($event)"></app-chat>

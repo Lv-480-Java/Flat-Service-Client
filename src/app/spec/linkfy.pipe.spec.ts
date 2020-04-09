@@ -8,7 +8,7 @@ describe('LinkfyPipe', () => {
     });
 
     it('Must work on empty messages', () => {
-        let result = subject.transform('', true);
+        const result = subject.transform('', true);
 
         expect(result).toBe('');
     });
@@ -50,7 +50,7 @@ describe('LinkfyPipe', () => {
     });
 
     it('Must replace http://{0} text with link', () => {
-        let result = subject.transform('http://github.com/rpaschoal/ng-chat', true);
+        let result = subject.transform('http://github.com', true);
 
         expect(result).toBe('<a href="http://github.com" target="_blank">http://github.com</a>');
     });

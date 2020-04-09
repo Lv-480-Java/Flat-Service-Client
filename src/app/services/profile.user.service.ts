@@ -22,6 +22,8 @@ export class ProfileUserService {
   }
 
   updateUserData(userData: User): Observable<User> {
+    this.ERROR_PHONE$.next('');
+    this.ERROR_USERNAME$.next('');
     return this.http.put<User>(BASE_URL + 'users/update/all', JSON.stringify(userData), this.options)
       .pipe(
         catchError(this.handleError.bind(this))
@@ -29,7 +31,10 @@ export class ProfileUserService {
   }
 
   evaluateToLandlord(dataLand: User): Observable<User> {
-    return this.http.post<User>(BASE_URL + 'passport/landlord', JSON.stringify(dataLand), this.options);
+    return this.http.post<User>(BASE_URL + 'passport/landlord', JSON.stringify(dataLand), this.options)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
   }
 
   addPassport(): Observable<Landlord> {
@@ -50,6 +55,5 @@ export class ProfileUserService {
     } else {
       this.error$.next(message);
     }
-
   }
 }

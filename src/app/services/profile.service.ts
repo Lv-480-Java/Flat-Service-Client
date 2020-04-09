@@ -62,7 +62,25 @@ export class ProfileService {
     return this.http.get<User>(BASE_URL + `users/${id}`);
   }
 
+  getUserId(): Observable<any> {
+    return this.http.get<any>(BASE_URL + 'users/currentUserId');
+  }
+
   updatePassport(data: Landlord): Observable<Landlord> {
+    this.ERROR_FIRSTNAME$.next('');
+    this.ERROR_LASTNAME$.next('');
+    this.ERROR_MIDDLENAME$.next('');
+    this.ERROR_GENDER$.next('');
+    this.ERROR_BIRTHDATE$.next('');
+    this.ERROR_BIRTHPLACE$.next('');
+    this.ERROR_PASSPORTYPE$.next('');
+    this.ERROR_NATIONALITY$.next('');
+    this.ERROR_AUTHORITY$.next('');
+    this.ERROR_DATEOFISSUE$.next('');
+    this.ERROR_EXPIRATIONDATE$.next('');
+    this.ERROR_PASSPORTNUMBER$.next('');
+    this.ERROR_IDENTIFICATIONNUMBER$.next('');
+
     return this.http.post<Landlord>(BASE_URL + 'passport/update', JSON.stringify(data), this.options)
       .pipe(
         catchError(this.handleError.bind(this))
@@ -72,7 +90,7 @@ export class ProfileService {
   private handleError(error: HttpErrorResponse) {
     console.log('Registration is working...');
     const {message} = error.error;
-    console.log(error);
+    console.log(message);
     if (message instanceof Object) {
       if (message.firstName !== undefined) {
         this.ERROR_FIRSTNAME$.next('Please input first name');
@@ -112,10 +130,9 @@ export class ProfileService {
       }
       if (message.passportNumber !== undefined) {
         this.ERROR_PASSPORTNUMBER$.next('Please input passport number');
-      } else {
-        this.error$.next(message);
       }
-
+    } else {
+      this.error$.next(message);
     }
   }
 }

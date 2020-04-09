@@ -7,13 +7,15 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
   styleUrls: ['./list-comment.component.scss']
 })
 export class ListCommentComponent implements OnInit {
-
+  isId: any = JSON.parse(localStorage.getItem('user')).userId;
   isTrue = false;
   isList = false;
+  isComplain = false;
   @Input() commentId: number;
   @Input() flatId: number;
   comments: FlatComment[] = [];
   text = '';
+
 
   constructor(private flatCommentService: FlatCommentService) {
   }
@@ -34,7 +36,7 @@ export class ListCommentComponent implements OnInit {
       .subscribe(comments => {
         this.comments = comments.reverse();
       });
-    console.log(this.comments);
+
   }
 
 }

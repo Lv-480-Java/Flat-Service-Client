@@ -1,0 +1,32 @@
+<mat-card class="home-card mat-elevation-z5">
+  <agm-map
+    [latitude]="lat"
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="false"
+    [zoomControl]="false">
+
+    <agm-marker
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.description, i)"
+      [latitude]="m.latitude"
+      [longitude]="m.longitude"
+      [label]="m.description"
+      [markerDraggable]="m.draggable"
+      (dragEnd)="markerDragEnd(m, $event)">
+
+      <agm-info-window>
+        <strong>InfoWindow content</strong>
+      </agm-info-window>
+
+    </agm-marker>
+
+    <agm-circle [latitude]="lat + 0.3" [longitude]="lng"
+                [radius]="5000"
+                [fillColor]="'red'"
+                [circleDraggable]="true"
+                [editable]="true">
+    </agm-circle>
+
+  </agm-map>
+</mat-card>
