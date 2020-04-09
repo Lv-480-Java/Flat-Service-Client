@@ -16,4 +16,9 @@ export class ChatButtonService {
   getCurrentChatsByUserId(id: number): Observable<Chat[]> {
     return this.http.get<Chat[]>(this.baseUrl + id);
   }
+
+
+  countOfUnreadMessages(id: number): Observable<number> {
+    return this.http.get<number>(this.baseUrl +  + id + '/countUnread');
+  }
 }

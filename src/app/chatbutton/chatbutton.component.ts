@@ -15,6 +15,7 @@ import {ProfileService} from '../services/profile.service';
 export class ChatButtonComponent implements OnInit {
   @ViewChild('content') content: ElementRef;
   chats: Chat[] = [];
+  countOfUnreadMessages: number;
   currentUserId: number;
   chatIsActive = false;
   chatListIsActive = false;
@@ -34,7 +35,10 @@ export class ChatButtonComponent implements OnInit {
   ngOnInit() {
     this.profileService.getUserId().subscribe(data1 => {
       this.currentUserId = data1;
-      this.chatButtonService.getCurrentChatsByUserId(this.currentUserId).subscribe(data => this.chats = data);
+      this.chatButtonService.getCurrentChatsByUserId(this.currentUserId).subscribe(data => {
+        this.chats = data;
+        console.log(this.chats);
+      });
       this.initializeTheme();
     });
   }
@@ -61,6 +65,7 @@ export class ChatButtonComponent implements OnInit {
     }
   }
 
+  // TODO
   private initializeTheme(): void {
     if (this.customTheme) {
       this.theme = Theme.Custom;
