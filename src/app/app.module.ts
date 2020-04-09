@@ -81,7 +81,8 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
 import {FlatService} from './services/flat.service';
 import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
-
+import { FlatMapComponent } from './flat/flat-map/flat-map.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -134,7 +135,8 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     LandlordFlatListComponent,
     ComplaintComponent,
     ComplaintUCComponent,
-    FavoriteFlatComponent
+    FavoriteFlatComponent,
+    FlatMapComponent
   ],
   imports: [
     BrowserModule,
@@ -163,7 +165,10 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     MatListModule,
     MatSelectModule,
     MatGridListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [
     [{
