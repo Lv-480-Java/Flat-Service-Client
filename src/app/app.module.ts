@@ -83,6 +83,10 @@ import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {FlatBookingService} from "./services/flat-booking.service";
 import { FlatRequestsComponent } from './landlord/flat-requests/flat-requests.component';
+import { FlatMapComponent } from './flat/flat-map/flat-map.component';
+import { AgmCoreModule } from '@agm/core';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 
 @NgModule({
@@ -136,6 +140,8 @@ import { FlatRequestsComponent } from './landlord/flat-requests/flat-requests.co
     ComplaintComponent,
     ComplaintUCComponent,
     FavoriteFlatComponent,
+    FlatMapComponent,
+    ChangePasswordComponent,
     FlatRequestsComponent
   ],
   imports: [
@@ -165,7 +171,10 @@ import { FlatRequestsComponent } from './landlord/flat-requests/flat-requests.co
     MatListModule,
     MatSelectModule,
     MatGridListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [
     [{

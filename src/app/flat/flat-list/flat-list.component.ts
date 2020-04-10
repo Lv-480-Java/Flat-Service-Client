@@ -4,7 +4,7 @@ import {SearchParameters} from '../flat-filter/entity/SearchParameters';
 import {FlatResponse} from '../flat-filter/entity/Flat';
 import {BASE_URL} from 'src/app/utils/constants';
 import {FlatService} from '../../services/flat.service';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-flat-list',

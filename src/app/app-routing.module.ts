@@ -19,12 +19,14 @@ import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {LoginGuard} from './guards/login.guard';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 import {FavoriteFlatComponent} from "./favorite-flat/favorite-flat.component";
 import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'changePassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'chat', component: ChatComponent},
   {path: 'chatbutton', component: ChatButtonComponent},
   {path: 'addflat', component: AddFlatComponent},
