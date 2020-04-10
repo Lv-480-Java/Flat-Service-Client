@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserComment, UserCommentService} from '../../services/user-comment.service';
+import {ProfileService} from '../../services/profile.service';
 
 @Component({
   selector: 'app-user-list-comments-about-coment',
@@ -7,7 +8,7 @@ import {UserComment, UserCommentService} from '../../services/user-comment.servi
   styleUrls: ['./user-list-comments-about-coment.component.scss']
 })
 export class UserListCommentsAboutComentComponent implements OnInit {
-  isId: any = JSON.parse(localStorage.getItem('user')).userId;
+  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
   isTrue = false;
   isList = false;
   isComplain = false;
@@ -16,7 +17,8 @@ export class UserListCommentsAboutComentComponent implements OnInit {
   comments: UserComment[] = [];
   text = '';
 
-  constructor(private userCommentService: UserCommentService) {
+  constructor(private userCommentService: UserCommentService,
+              private profileService: ProfileService) {
   }
 
   ngOnInit(): void {

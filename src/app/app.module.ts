@@ -81,6 +81,8 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
 import {FlatService} from './services/flat.service';
 import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 
@@ -163,7 +165,10 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
     MatListModule,
     MatSelectModule,
     MatGridListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
+    MatRadioModule
   ],
   providers: [
     [{

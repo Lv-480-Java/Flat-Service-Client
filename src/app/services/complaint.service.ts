@@ -25,7 +25,7 @@ export class ComplaintService {
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   addComplaint(complaint: Complaint): Observable<void> {
-    return this.http.put<void>(BASE_URL + 'complaints/', JSON.stringify(complaint), this.options);
+    return this.http.post<void>(BASE_URL + 'complaints/', JSON.stringify(complaint), this.options);
   }
 
   loadComplaints(): Observable<Complaint[]> {

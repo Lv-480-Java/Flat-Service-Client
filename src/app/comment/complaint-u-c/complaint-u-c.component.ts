@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Complaint, ComplaintService} from '../../services/complaint.service';
 import {UserComment} from '../../services/user-comment.service';
 
@@ -8,9 +8,12 @@ import {UserComment} from '../../services/user-comment.service';
   styleUrls: ['./complaint-u-c.component.scss']
 })
 export class ComplaintUCComponent implements OnInit {
-  text = '';
+  complaint: string;
+  complaints: string[] = ['Unwanted commercial content', 'Harassment or bullying', 'Hate speech or violence', 'Spam'];
 
   @Input() commentId: number;
+  // tslint:disable-next-line:no-output-native
+  @Output() close = new EventEmitter<void>();
 
   constructor(private complaintService: ComplaintService) {
   }
@@ -20,19 +23,16 @@ export class ComplaintUCComponent implements OnInit {
 
 
   add() {
-    if (!this.text.trim()) {
-      return;
-    }
     const userComments: UserComment = {
       id: this.commentId
     };
     const complaint: Complaint = {
-      text: this.text,
+      text: this.complaint,
       userComment: userComments
     };
     this.complaintService.addComplaint(complaint)
       .subscribe(complain => {
-        this.text = '';
+        this.complaint = null;
       });
   }
 

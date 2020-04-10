@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserComment, UserCommentService} from '../../services/user-comment.service';
+import {ProfileService} from '../../services/profile.service';
 
 
 @Component({
@@ -10,7 +11,7 @@ import {UserComment, UserCommentService} from '../../services/user-comment.servi
 export class UserCommentComponent implements OnInit {
 
   comments: UserComment[] = [];
-  isId: any = JSON.parse(localStorage.getItem('user')).userId;
+  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
   commentId: number;
   isTrue = false;
   isList = false;
@@ -18,7 +19,8 @@ export class UserCommentComponent implements OnInit {
   text = '';
   @Input() id: number;
 
-  constructor(private userCommentService: UserCommentService) {
+  constructor(private userCommentService: UserCommentService,
+              private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
