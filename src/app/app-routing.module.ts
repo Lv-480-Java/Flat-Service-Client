@@ -20,6 +20,7 @@ import {ProfileShortComponent} from './profile-short/profile-short.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {LoginGuard} from './guards/login.guard';
 import {FavoriteFlatComponent} from "./favorite-flat/favorite-flat.component";
+import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
   {path: 'chatbutton', component: ChatButtonComponent},
   {path: 'addflat', component: AddFlatComponent},
   {path: 'favorite-flat', component: FavoriteFlatComponent},
+  {path: 'flat-requests', component: FlatRequestsComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [

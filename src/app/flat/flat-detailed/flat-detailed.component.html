@@ -10,7 +10,7 @@
         <mat-card-title>{{flatDetailed.monthPrice}}</mat-card-title>
         <mat-card-subtitle>ціна</mat-card-subtitle>
       </mat-card-header>
-      <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent">Бронювати</button>
+      <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent" (click)="bookApartment(id)">Book</button>
     </div>
 
     <div fxLayout="row">

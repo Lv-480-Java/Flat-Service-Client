@@ -22,10 +22,15 @@
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/data" routerLinkActive="active">Profile</a>
       </li>
       <li *ngIf="displayRole()==='ROLE_LANDLORD'" class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/addflat" routerLinkActive="active">Add flat</a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/addflat" routerLinkActive="active">Add Flat</a>
       </li>
+
+      <li *ngIf="displayRole()==='ROLE_LANDLORD'" class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/flat-requests" routerLinkActive="active">Flat Requests</a>
+      </li>
+
       <li *ngIf="displayRole()==='ROLE_ADMIN'|| displayRole()==='ROLE_MODERATOR'" class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/admin']">Admin panel</a>
+        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/admin']">Admin Panel</a>
       </li>
     </ul>
     <!-- Links -->
