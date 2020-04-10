@@ -14,6 +14,12 @@ export interface Complaint {
   text: string;
 }
 
+export interface ComplaintId {
+  flatCommentId?: number;
+  userCommentId?: number;
+  text: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,8 +30,8 @@ export class ComplaintService {
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
-  addComplaint(complaint: Complaint): Observable<void> {
-    return this.http.post<void>(BASE_URL + 'complaints/', JSON.stringify(complaint), this.options);
+  addComplaint(complaintId: ComplaintId): Observable<void> {
+    return this.http.post<void>(BASE_URL + 'complaints/', JSON.stringify(complaintId), this.options);
   }
 
   loadComplaints(): Observable<Complaint[]> {

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
-import {Complaint, ComplaintService} from '../../services/complaint.service';
+import { ComplaintId, ComplaintService} from '../../services/complaint.service';
 
 @Component({
   selector: 'app-complaint',
@@ -23,14 +23,11 @@ export class ComplaintComponent implements OnInit {
 
 
   add() {
-    const flatComments: FlatComment = {
-      id: this.commentId
-    };
-    const complaint: Complaint = {
+    const complaintId: ComplaintId = {
       text: this.complaint,
-      flatComment: flatComments
+      flatCommentId: this.commentId
     };
-    this.complaintService.addComplaint(complaint)
+    this.complaintService.addComplaint(complaintId)
       .subscribe(complain => {
         this.complaint = null;
       });

@@ -148,6 +148,13 @@ export class FlatFilterComponent implements OnInit {
         this.flatService.openSnackBar('Succesfuly unsubscribed from all notifications', 'Unsubscribed');
       });
   }
+
+  turnTelegramOn() {
+    this.http.get(BASE_URL + 'subscribe')
+      .subscribe(success => {
+        this.flatService.openSnackBar('Succesfuly unsubscribed from all notifications', 'Unsubscribed');
+      });
+  }
 }
 
 

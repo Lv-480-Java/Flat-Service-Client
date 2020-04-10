@@ -81,8 +81,12 @@ import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.comp
 import {FlatService} from './services/flat.service';
 import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
-import {_MatMenuDirectivesModule, MatMenuModule} from "@angular/material/menu";
-import {MatRadioModule} from "@angular/material/radio";
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
+import { FlatMapComponent } from './flat/flat-map/flat-map.component';
+import { AgmCoreModule } from '@agm/core';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 
 
@@ -136,7 +140,9 @@ import {MatRadioModule} from "@angular/material/radio";
     LandlordFlatListComponent,
     ComplaintComponent,
     ComplaintUCComponent,
-    FavoriteFlatComponent
+    FavoriteFlatComponent,
+    FlatMapComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -168,7 +174,11 @@ import {MatRadioModule} from "@angular/material/radio";
     MatBadgeModule,
     _MatMenuDirectivesModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
+
   ],
   providers: [
     [{
