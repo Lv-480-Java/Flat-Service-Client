@@ -29,7 +29,7 @@ export class ProfileUserComponent implements OnInit {
   onUpload() {
     const fileUpload = new FormData();
     fileUpload.append('file', this.fileData, this.fileData.name)
-    return this.http.put(BASE_URL + 'users/profile/updatePhoto', fileUpload)
+    return this.http.put(BASE_URL + 'users/profile/update/photo', fileUpload)
       .subscribe(res => {
         console.log(res);
         this.addUserData();

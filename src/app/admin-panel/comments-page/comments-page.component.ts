@@ -2,17 +2,15 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {User} from '../component/Users';
 import {MatPaginator} from '@angular/material/paginator';
-import {DialogWindowEditUserComponent} from '../list-user-page/dialog-window-edit-user';
 import {MatDialog} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-list-comments-page',
-  templateUrl: './list-comments-page.component.html',
-  styleUrls: ['./list-comments-page.component.scss']
+  selector: 'app-comments-page',
+  templateUrl: './comments-page.component.html',
+  styleUrls: ['./comments-page.component.scss']
 })
-export class ListCommentsPageComponent implements OnInit {
+export class CommentsPageComponent implements OnInit {
   pageNumber = 0;
   pageSize = 5;
   formUser: FormGroup;

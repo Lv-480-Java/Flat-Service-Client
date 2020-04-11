@@ -3,6 +3,7 @@
   <!-- All Users -->
   <div class="div2">
     <div class="mat-elevation-z8 div-1">
+
       <br>
       <h1 class="div2-h1">Registered Users</h1>
 
@@ -60,7 +61,7 @@
         <ng-container matColumnDef="edit">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button class="action-button" mat-raised-button color="primary" (click)="openDialog(element)">Edit</button>
+            <button class="action-button" mat-raised-button color="primary" (click)="openDialogEdit(element)">Edit</button>
           </td>
         </ng-container>
 
@@ -68,7 +69,7 @@
         <ng-container matColumnDef="button">
           <th mat-header-cell *matHeaderCellDef> </th>
           <td mat-cell *matCellDef="let element">
-            <button class="action-button" mat-raised-button color="warn" (click)="remove(element.id)">Remove</button>
+            <button class="action-button" mat-raised-button color="warn" (click)="openDialogRemove(element)">Remove</button>
           </td>
         </ng-container>
 
@@ -89,12 +90,20 @@
         <br>
         <p class="h4 mb-4">Registration form</p>
 
-        <!-- User name -->
+        <!-- Username -->
+
+        <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+             *ngIf="userService.errorUsername$ | async as error">
+          Field 'Username' {{ error }}
+        </div>
         <div
-          *ngIf="formUser.get('username').invalid && formUser.get('username').touched"
+          *ngIf="(formUser.get('username').invalid && formUser.get('username').dirty)"
           class="validation">
           <small *ngIf="formUser.get('username').errors.required">Field username can not be empty</small>
+          <small *ngIf="formUser.get('username').errors.minlength">Length of username must be at
+            list {{formUser.get('username').errors.minlength.requiredLength}} characters</small>
         </div>
+
         <mat-form-field class="div3-input" appearance="outline">
           <mat-label>Username</mat-label>
           <input type="text" matInput placeholder="Username" formControlName="username">
@@ -102,12 +111,18 @@
         </mat-form-field>
 
         <!-- E-mail -->
+
+        <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+             *ngIf="userService.errorEmail$ | async as error">
+          Field 'E-mail' {{ error }}
+        </div>
         <div
-          *ngIf="formUser.get('email').invalid && formUser.get('email').touched"
+          *ngIf="(formUser.get('email').invalid && formUser.get('email').dirty)"
           class="validation">
           <small *ngIf="formUser.get('email').errors.required">Field e-mail can not be empty</small>
-          <small *ngIf="formUser.get('email').errors.formUser">Enter valid e-mail</small>
+          <small *ngIf="formUser.get('email').errors.email">Enter valid e-mail</small>
         </div>
+
         <mat-form-field class="div3-input" appearance="outline">
           <mat-label>E-mail</mat-label>
           <input type="email" matInput placeholder="Email" formControlName="email">
@@ -115,12 +130,18 @@
         </mat-form-field>
 
         <!-- Phone -->
+
+        <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+             *ngIf="userService.errorPhone$ | async as error">
+          Field 'Phone' {{ error }}
+        </div>
         <div
-          *ngIf="formUser.get('phoneNumber').invalid && formUser.get('phoneNumber').touched"
+          *ngIf="(formUser.get('phoneNumber').invalid && formUser.get('phoneNumber').dirty)"
           class="validation">
           <small *ngIf="formUser.get('phoneNumber').errors.required">Field phone can not be empty</small>
           <small *ngIf="formUser.get('phoneNumber').errors.pattern">Enter valid phone number</small>
         </div>
+
         <mat-form-field class="div3-input" appearance="outline">
           <mat-label>+38 &nbsp;</mat-label>
           <input type="tel" matInput placeholder="555-555-1234" aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="phoneNumber">
@@ -128,13 +149,19 @@
         </mat-form-field>
 
         <!-- Password -->
+
+        <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+             *ngIf="userService.errorPassword$ | async as error">
+          Field 'Password' {{ error }}
+        </div>
         <div
-          *ngIf="formUser.get('password').invalid && formUser.get('password').touched"
+          *ngIf="(formUser.get('password').invalid && formUser.get('password').dirty)"
           class="validation">
           <small *ngIf="formUser.get('password').errors.required">Field password can not be empty</small>
           <small *ngIf="formUser.get('password').errors.minlength">Length of password must be at
-            list {{formUser.get('password').errors.minlength}} characters</small>
+            list {{formUser.get('password').errors.minlength.requiredLength}} characters</small>
         </div>
+
         <mat-form-field class="div3-input" appearance="outline">
           <mat-label>Password</mat-label>
           <input type="password" matInput placeholder="Password" formControlName="password">
@@ -146,6 +173,7 @@
 
         <!-- Sign up button -->
         <button type="submit" class="button-div3" mat-flat-button color="primary" [disabled]="formUser.invalid">Sign up</button>
+        <button type="reset" class="button-div3" mat-flat-button color="primary" (click)="reset()">Reset</button>
 
       </form>
     </div>
