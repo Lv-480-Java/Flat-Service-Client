@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
-
+import {ProfileService} from '../../services/profile.service';
 
 @Component({
   selector: 'app-flat-comment',
@@ -8,15 +8,17 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
   styleUrls: ['./flat-comment.component.scss']
 })
 export class FlatCommentComponent implements OnInit {
-
+  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
   comments: FlatComment[] = [];
   commentId: number;
   isTrue = false;
   isList = false;
+  isComplain = false;
   text = '';
   @Input() id: number;
 
-  constructor(private flatCommentService: FlatCommentService) {
+  constructor(private flatCommentService: FlatCommentService,
+              private profileService: ProfileService) {
   }
 
   ngOnInit(): void {

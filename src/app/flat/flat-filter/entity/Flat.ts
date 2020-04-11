@@ -4,6 +4,7 @@ export class FlatResponse {
 
 export class Flat {
   public username: string;
+  public userPicture: string;
   public id: number;
   public address: any;
   public creationDate: string;

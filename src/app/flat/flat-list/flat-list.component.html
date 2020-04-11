@@ -2,11 +2,12 @@
   <div style="font-style: normal;
   font-weight: normal;
   line-height: 1.5;
-  font-size: 16px;margin:40px; " >
+  font-size: 16px;margin:40px; ">
     <app-flat-filter [parameters]="parameters" (loadFlats)="loadFlats()"></app-flat-filter>
   </div>
   <div *ngIf="flats!==undefined">
-    <div infinite-scroll  *ngFor="let flat of flats.content ">
+    <app-flat-map></app-flat-map>
+    <div infinite-scroll *ngFor="let flat of flats.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -22,7 +23,7 @@
                 <div>
 
                   <mat-card-header class="flat-header" fxFlex="95">
-                    <div mat-card-avatar class="flat-header-image"></div>
+                    <div mat-card-avatar class="flat-header-image" [style.background]="'url(' + flat.userPicture + ')'"></div>
                     <mat-card-title style="margin-bottom: 4px"> {{flat.title}}</mat-card-title>
                     <mat-card-subtitle
                       style="margin:0">  {{flat.address.street}} {{flat.address.flatNumber}} {{flat.address.houseNumber}}</mat-card-subtitle>
@@ -31,11 +32,16 @@
                   <div class="buttons-container" fxLayout="row" fxFlex>
                     <button *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>edit</mat-icon>
-                    </button >
+                    </button>
                     <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <button style="margin-bottom: -5px" mat-icon-button>
+                    <button style="margin-bottom: -5px" mat-icon-button *ngIf="!isFavorite(flat.id)"
+                            (click)="addToFavoriteList(flat.id)">
+                      <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button style="margin-bottom: -5px; color: red" mat-icon-button *ngIf="isFavorite(flat.id)"
+                            (click)="deleteFlat(flat.id)">
                       <mat-icon>favorite</mat-icon>
                     </button>
                   </div>
@@ -59,7 +65,8 @@
               </div>
               <div fxFlex><p class="price">{{flat.monthPrice}} грн</p></div>
               <div class="donate-button" fxFlexAlign="end end" fxFlex="25">
-                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
+                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button
+                        color="accent">
                   Детально
                 </button>
               </div>
@@ -70,7 +77,7 @@
     </div>
   </div>
 
-  <div style="margin:40px; width: 240px" >
+  <div style="margin:40px; width: 240px">
   </div>
 </div>
 <div

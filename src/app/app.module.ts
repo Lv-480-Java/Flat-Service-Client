@@ -18,7 +18,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {InfiniteScrollModule} from 'ngx-infinite-scroll';
 import {MatChipsModule} from '@angular/material/chips';
-import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {Ng5SliderModule} from 'ng5-slider';
 import {FlexModule} from '@angular/flex-layout';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -60,13 +59,16 @@ import {FlatRequestDetailComponent} from './admin-panel/requests/review-window/f
 import {UserRequestDetailComponent} from './admin-panel/requests/review-window/user-request-detail/user-request-detail.component';
 import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {InterceptorService} from './services/intercept.service';
-import {ComentsaboutcommentComponent} from './comment/coments-about-comment/comentsaboutcomment.component';
-import {ListCommentComponent} from './comment/list-comment/list-comment.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
+import { ComentsaboutcommentComponent } from './comment/flat-coments-about-comment/comentsaboutcomment.component';
+import { ListCommentComponent } from './comment/flat-list-comment-about-comment/list-comment.component';
+import { UserCommentsAboutComentComponent } from './comment/user-comments-about-coment/user-comments-about-coment.component';
+import { UserListCommentsAboutComentComponent } from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
+import { LikeComponent } from './comment/like/like.component';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
@@ -77,6 +79,15 @@ import {DialogWindowEditUserComponent} from './admin-panel/user-page/edit-user-w
 import {ReviewPostWindowComponent} from './admin-panel/posts-page/review-post-window/review-post-window.component';
 import {RemoveUserWindowComponent} from './admin-panel/user-page/remove-user-window/remove-user-window.component';
 import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
+import { ComplaintComponent } from './comment/complaint/complaint.component';
+import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
+import {FlatService} from './services/flat.service';
+import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
+import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import { FlatMapComponent } from './flat/flat-map/flat-map.component';
+import { AgmCoreModule } from '@agm/core';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
 
 @NgModule({
   declarations: [
@@ -89,7 +100,6 @@ import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-
     ProfileComponent,
     MenuComponent,
     FlatDetailedComponent,
-    MenuComponent,
     AdminLayoutComponent,
     UserPageComponent,
     PostsPageComponent,
@@ -120,14 +130,21 @@ import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-
     ReviewWindowComponent,
     FlatRequestDetailComponent,
     UserRequestDetailComponent,
-    ChatButtonComponent,
     AddFlatComponent,
+    UserCommentsAboutComentComponent,
+    UserListCommentsAboutComentComponent,
+    LikeComponent,
     AutoApproveComponent,
     RequestMessageComponent,
     LandlordFlatListComponent,
     ReviewPostWindowComponent,
     RemoveUserWindowComponent,
-    RemovePostWindowComponent
+    RemovePostWindowComponent,
+    ComplaintComponent,
+    ComplaintUCComponent,
+    FavoriteFlatComponent,
+    FlatMapComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -149,16 +166,17 @@ import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-
     MatCheckboxModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    BrowserAnimationsModule,
     GalleryModule,
-    MatAutocompleteModule,
     MatSidenavModule,
     MatPaginatorModule,
     MatDialogModule,
     MatListModule,
     MatSelectModule,
     MatGridListModule,
-    MatSelectModule, MatBadgeModule
+    MatBadgeModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [
     [{
@@ -171,7 +189,7 @@ import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {

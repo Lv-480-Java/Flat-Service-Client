@@ -40,6 +40,7 @@ export class ProfileUserComponent implements OnInit {
     this.addPassport();
   }
   resetData() {
+    this.profileUserService.error$.next('');
     this.userData.username = '';
     this.userData.phoneNumber = '';
   }

@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
     this.addUserInfo();
   }
 resetData() {
+    this.landlordService.error$.next('');
     this.data.firstName = '';
     this.data.lastName = '';
     this.data.authority = '';

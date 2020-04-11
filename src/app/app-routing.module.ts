@@ -19,13 +19,17 @@ import {LoginGuard} from './guards/login.guard';
 import {CommentsPageComponent} from './admin-panel/comments-page/comments-page.component';
 import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
+import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'changePassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'chat', component: ChatComponent},
   {path: 'chatbutton', component: ChatButtonComponent},
   {path: 'addflat', component: AddFlatComponent},
+  {path: 'favorite-flat', component: FavoriteFlatComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [
