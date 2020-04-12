@@ -1,7 +1,7 @@
-<div class="parent">
-  <div class="div1">
+<div class="div1">
 
     <!-- All Comments -->
+
     <div class="mat-elevation-z8">
       <br>
       <h1 class="div2-h1">Comments of Users</h1>
@@ -50,9 +50,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
-      <mat-paginator (page)="paginationPage()" [pageSizeOptions] = "[5, 7]" showFirstLastButtons></mat-paginator>
-
-    </div>
   </div>
+
 </div>

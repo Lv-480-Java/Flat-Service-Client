@@ -24,14 +24,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
-import {DialogWindowEditUserComponent} from './admin-panel/list-user-page/dialog-window-edit-user';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MenuComponent} from './menu/menu.component';
 import {FlatDetailedComponent} from './flat/flat-detailed/flat-detailed.component';
 import {GalleryModule} from '@ngx-gallery/core';
-import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
-import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
-import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
 import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-page.component';
 import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -76,6 +72,13 @@ import { LikeComponent } from './comment/like/like.component';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import {UserPageComponent} from './admin-panel/user-page/user-page.component';
+import {CommentsPageComponent} from './admin-panel/comments-page/comments-page.component';
+import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
+import {DialogWindowEditUserComponent} from './admin-panel/user-page/edit-user-window/dialog-window-edit-user';
+import {ReviewPostWindowComponent} from './admin-panel/posts-page/review-post-window/review-post-window.component';
+import {RemoveUserWindowComponent} from './admin-panel/user-page/remove-user-window/remove-user-window.component';
+import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
 import { ComplaintComponent } from './comment/complaint/complaint.component';
 import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
 import {FlatService} from './services/flat.service';
@@ -84,7 +87,6 @@ import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import { FlatMapComponent } from './flat/flat-map/flat-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
 
 
 @NgModule({
@@ -99,9 +101,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     MenuComponent,
     FlatDetailedComponent,
     AdminLayoutComponent,
-    ListUserPageComponent,
-    ListPostsPageComponent,
-    ListCommentsPageComponent,
+    UserPageComponent,
+    PostsPageComponent,
+    CommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
     ProfileUserComponent,
@@ -135,6 +137,9 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     AutoApproveComponent,
     RequestMessageComponent,
     LandlordFlatListComponent,
+    ReviewPostWindowComponent,
+    RemoveUserWindowComponent,
+    RemovePostWindowComponent,
     ComplaintComponent,
     ComplaintUCComponent,
     FavoriteFlatComponent,

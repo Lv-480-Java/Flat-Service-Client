@@ -43,7 +43,6 @@ export class RequestsService {
     }
   }
 
-
   approveFlatRequests(id: number): Observable<RequestsForFlatVerification> {
     const url = BASE_URL + `requests/flats/${id}/approve`;
     console.log(url);

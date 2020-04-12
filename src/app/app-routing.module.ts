@@ -6,9 +6,6 @@ import {ProfileComponent} from './profile/profile.component';
 import {FlatListComponent} from './flat/flat-list/flat-list.component';
 import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
 import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-page.component';
-import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
-import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
-import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
 import {FlatDetailedComponent} from './flat/flat-detailed/flat-detailed.component';
 import {ChatComponent} from './chat/chat.component';
 import {RequestsComponent} from './admin-panel/requests/requests.component';
@@ -19,6 +16,9 @@ import {ChatButtonComponent} from './chatbutton/chatbutton.component';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {LoginGuard} from './guards/login.guard';
+import {CommentsPageComponent} from './admin-panel/comments-page/comments-page.component';
+import {UserPageComponent} from './admin-panel/user-page/user-page.component';
+import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 
@@ -36,9 +36,9 @@ const routes: Routes = [
       {path: '', component: DashboardPageComponent, children: [
           {path: 'dashboard', component: DashboardPageComponent}
         ]},
-      {path: 'comments', component: ListCommentsPageComponent},
-      {path: 'user', component: ListUserPageComponent},
-      {path: 'posts', component: ListPostsPageComponent},
+      {path: 'comments', component: CommentsPageComponent},
+      {path: 'user', component: UserPageComponent},
+      {path: 'posts', component: PostsPageComponent},
       {path: 'requests', component: RequestsComponent},
       {path: 'statistics', component: StatisticsComponent}
     ]
