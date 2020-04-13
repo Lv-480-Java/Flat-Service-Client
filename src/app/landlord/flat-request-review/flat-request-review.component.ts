@@ -1,19 +1,17 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import {GalleryItem, ImageItem} from '@ngx-gallery/core';
-import {FlatDetailed} from '../../../../flat/flat-detailed/entity/FlatDetailed';
+import {GalleryItem, ImageItem} from "@ngx-gallery/core";
+import {FlatDetailed} from "../../flat/flat-detailed/entity/FlatDetailed";
 import {BASE_URL} from 'src/app/utils/constants';
-
+import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-flat-request-detail',
-  templateUrl: './flat-request-detail.component.html',
-  styleUrls: ['./flat-request-detail.component.scss']
+  selector: 'app-flat-request-review',
+  templateUrl: './flat-request-review.component.html',
+  styleUrls: ['./flat-request-review.component.scss']
 })
-export class FlatRequestDetailComponent implements OnInit {
+export class FlatRequestReviewComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   images: GalleryItem[];
@@ -23,15 +21,14 @@ export class FlatRequestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFlat();
-    console.log(this.loadFlat());
   }
 
   loadFlat(): void {
     const c = BASE_URL + 'flat/' + this.id;
-    console.log(c);
     this.http.get(c)
       .subscribe(data => {
         this.data = data;
+        console.log(this.data);
         this.flatDetailed = this.data;
         this.loadImages();
       });
@@ -46,5 +43,4 @@ export class FlatRequestDetailComponent implements OnInit {
       }));
     });
   }
-
 }

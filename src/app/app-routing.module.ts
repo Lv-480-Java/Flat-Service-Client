@@ -22,6 +22,8 @@ import {LoginGuard} from './guards/login.guard';
 import {ChangePasswordComponent} from './change-password/change-password.component';
 import {FavoriteFlatComponent} from "./favorite-flat/favorite-flat.component";
 import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
+import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
+import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -32,6 +34,8 @@ const routes: Routes = [
   {path: 'addflat', component: AddFlatComponent},
   {path: 'favorite-flat', component: FavoriteFlatComponent},
   {path: 'flat-requests', component: FlatRequestsComponent},
+  {path: 'flat-requests-review', component: FlatRequestReviewComponent},
+  {path: 'booking-requests', component: BookingRequestsComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [
