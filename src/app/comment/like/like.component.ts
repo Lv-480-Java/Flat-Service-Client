@@ -8,25 +8,22 @@ import {Like, LikeService} from '../../services/like.service';
 })
 export class LikeComponent implements OnInit {
 
-  @Input() flatCommentId: number;
-  like: Like[] = [];
-  amount: number;
-
   constructor(private likeService: LikeService) {
   }
 
   ngOnInit(): void {
-    this.loadComments(this.flatCommentId);
   }
 
-  add() {
+  addFlat(id: number) {
     const like: Like = {
-      flatCommentId: this.flatCommentId
+      flatCommentId: id
     };
-    this.likeService.add(like);
+    this.likeService.addFlat(like);
   }
-
-  loadComments(id: number): void {
-    this.likeService.loadCommentsLike(id);
+  addUser(id: number) {
+    const like: Like = {
+      userCommentId: id
+    };
+    this.likeService.addUser(like);
   }
 }

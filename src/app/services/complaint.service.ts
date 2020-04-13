@@ -1,10 +1,12 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {Observable, Subject} from 'rxjs';
 import {User} from '../admin-panel/component/Users';
 import {BASE_URL} from '../utils/constants';
 import {FlatComment} from './flat-comment.service';
 import {UserComment} from './user-comment.service';
+import {catchError} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface Complaint {
   id?: number;
@@ -24,18 +26,38 @@ export interface ComplaintId {
   providedIn: 'root'
 })
 export class ComplaintService {
+  public error$: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
   }
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
-  addComplaint(complaintId: ComplaintId): Observable<void> {
-    return this.http.post<void>(BASE_URL + 'complaints/', JSON.stringify(complaintId), this.options);
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  addComplaintFlatComment(complaintId: ComplaintId): Observable<Complaint> {
+    return this.http.post<Complaint>(BASE_URL + 'complaints/createflatcommentcomplaint/', JSON.stringify(complaintId), this.options)
+      .pipe(
+        catchError(this.handleError.bind(this))
+      );
+  }
+
+  addComplaintUserComment(complaintId: ComplaintId): Observable<Complaint> {
+    return this.http.post<Complaint>(BASE_URL + 'complaints/createusercommentcomplaint/', JSON.stringify(complaintId), this.options);
   }
 
   loadComplaints(): Observable<Complaint[]> {
-    return this.http.get<Complaint[]>(BASE_URL + 'complaints/');
+    return this.http.get<Complaint[]>(BASE_URL + 'complaints/getall/');
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    const message = error.error;
+    console.log(error);
+    this.error$ = message;
   }
 
 }

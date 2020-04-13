@@ -4,32 +4,36 @@
   right: 0;
   left: 0;
   background: rgba(0, 0, 0, .4);">
-<mat-card  style="background: white;
+  <mat-card style="background: white;
  position: absolute; left: 50%;
  transform: translate(-50%, 50%); padding: 20px; width: 280px">
-  <label id="example-radio-group-label">Pick your complaint</label>
-  <mat-radio-group
-    aria-labelledby="example-radio-group-label"
-    class="example-radio-group"
-    [(ngModel)]="complaint"><br/>
-    <mat-radio-button style="margin: 10px"  class="example-radio-button" *ngFor="let c of complaints" [value]="c">
-      {{c}}
-    </mat-radio-button>
-  </mat-radio-group><br/>
-  <div>Your complaint is: <br> {{complaint}}</div>
-  <button *ngIf="complaint!=null; else disabled" style="margin: 10px;  margin-left: 80px" (click)="add()" (click)="close.emit()" fxFlexAlign="end end" class="donate" mat-raised-button
-          color="primary">
-    Report
-  </button>
-  <ng-template #disabled>
-    <button disabled  style="margin: 10px;  margin-left: 80px;" (click)="add()" (click)="close.emit()" fxFlexAlign="end end" class="donate" mat-raised-button
+    <label id="example-radio-group-label">Pick your complaint</label>
+    <mat-radio-group
+      aria-labelledby="example-radio-group-label"
+      class="example-radio-group"
+      [(ngModel)]="complaint"><br/>
+      <mat-radio-button style="margin: 10px" class="example-radio-button" *ngFor="let c of complaints" [value]="c">
+        {{c}}
+      </mat-radio-button>
+    </mat-radio-group>
+    <br/>
+    <div>Your complaint is: <br> {{complaint}}</div>
+    <button *ngIf="complaint!=null; else disabled" style="margin: 10px;  margin-left: 80px" (click)="add()"
+            (click)="close.emit()" fxFlexAlign="end end" class="donate" mat-raised-button
             color="primary">
       Report
     </button>
-  </ng-template>
-  <button (click)="close.emit()" fxFlexAlign="end end" class="donate" mat-raised-button
-          color="accent">
-    Close
-  </button>
-</mat-card>
+    <ng-template #disabled>
+      <button disabled style="margin: 10px;  margin-left: 80px;" (click)="add()" (click)="close.emit()"
+              fxFlexAlign="end end" class="donate" mat-raised-button
+              color="primary">
+        Report
+      </button>
+    </ng-template>
+    <button (click)="close.emit()" fxFlexAlign="end end" class="donate" mat-raised-button
+            color="accent">
+      Close
+    </button>
+  </mat-card>
 </div>
+

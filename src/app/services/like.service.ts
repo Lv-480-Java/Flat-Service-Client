@@ -5,8 +5,6 @@ import {User} from '../admin-panel/component/Users';
 import {BASE_URL} from '../utils/constants';
 
 export interface Like {
-  id?: number;
-  userId?: number;
   flatCommentId?: number;
   userCommentId?: number;
 }
@@ -21,12 +19,13 @@ export class LikeService {
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
-  add(like: Like): Observable<Like> {
+  addFlat(like: Like): Observable<Like> {
     return this.http.put<Like>(BASE_URL + 'likes/flatcommentlikecreate/', JSON.stringify(like), this.options);
   }
 
-  loadCommentsLike(id: number): Observable<number> {
-    return this.http.get<number>(BASE_URL + 'likes/getfcommentlike/' + id);
+  addUser(like: Like): Observable<Like> {
+    return this.http.put<Like>(BASE_URL + 'likes/usercommentlikecreate/', JSON.stringify(like), this.options);
   }
+
 
 }

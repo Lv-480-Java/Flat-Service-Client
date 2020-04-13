@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
 import { ComplaintId, ComplaintService} from '../../services/complaint.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-complaint',
@@ -15,7 +16,7 @@ export class ComplaintComponent implements OnInit {
   // tslint:disable-next-line:no-output-native
   @Output() close = new EventEmitter<void>()
 
-  constructor(private complaintService: ComplaintService) {
+  constructor(public complaintService: ComplaintService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -27,10 +28,15 @@ export class ComplaintComponent implements OnInit {
       text: this.complaint,
       flatCommentId: this.commentId
     };
-    this.complaintService.addComplaint(complaintId)
-      .subscribe(complain => {
-        this.complaint = null;
-      });
+    this.complaintService.addComplaintFlatComment(complaintId)
+      .subscribe(success => {
+      this.complaintService.openSnackBar('Complaint sent', '');
+      setTimeout(() => {
+        this.router.navigate(['detailed/:id']);
+      }, 4000);
+    }, error => {
+      this.complaintService.openSnackBar(this.complaintService.error$, '');
+    });
   }
 
 }

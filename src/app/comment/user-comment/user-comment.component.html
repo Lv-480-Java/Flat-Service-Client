@@ -1,8 +1,23 @@
 <div fxLayout="row" fxLayoutAlign="center none">
   <div>
     <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
-      <h1>Коментарі</h1>
+      <h1>Comments</h1>
       <p *ngIf="comments.length>0">Number of comments {{comments.length}}</p>
+      <button style="position: absolute; left: 160px; top: 12px; font-size: 16px"
+              mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>sort</mat-icon> Sort
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="loadComments(id)" (click)="load = 'new'" mat-menu-item>
+          <span>Newer at first</span>
+        </button>
+        <button (click)="loadCommentsOlder(id)" (click)="load = 'old'"  mat-menu-item>
+          <span>First older</span>
+        </button>
+        <button (click)="loadCommentsByLikes(id)" (click)="load = 'like'" mat-menu-item>
+          <span>By likes</span>
+        </button>
+      </mat-menu>
       <hr>
       <div>
         <input
@@ -24,8 +39,13 @@
     <div *ngIf="comments.length; else noComments">
       <mat-card class="mat-elevation-z5"  style="width: 900px; margin-top: 16px; position: relative" *ngFor="let comment of comments">
         <p style="font-size: 16px; word-wrap: break-word; width: 80%" *ngIf="comment.text!==null"> {{comment.text}}</p>
-        <div mat-card-avatar class="example-header-image" style="position: absolute; right: 20px; top: 15px"></div>
-        <a href="short_profile/{{comment.userAuthor.id}}" style="font-size: 12px; position: absolute; right: 24px; top: 53px" > {{comment.userAuthor.username}}</a>
+        <div *ngIf="comment.userAuthor.photoUrl==null" mat-card-avatar
+             class="example-header-image" style="position: absolute; right: 20px; top: 15px"></div>
+        <img *ngIf="comment.userAuthor.photoUrl!=null" mat-card-avatar
+             style="position: absolute; right: 20px; top: 15px; background-size: cover;"
+             [src]="comment.userAuthor.photoUrl">
+        <a href="short_profile/{{comment.userAuthor.id}}"
+           style="font-size: 12px; position: absolute; right: 24px; top: 53px" > {{comment.userAuthor.username}}</a>
         <mat-card-subtitle>{{comment.publicationDate}}</mat-card-subtitle>
         <button style="position: absolute; right: 10px; top: 85px"
                 mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
@@ -42,6 +62,11 @@
             <span>Complaint</span>
           </button>
         </mat-menu>
+        <button (click)="addUser(comment.id)" style="margin-bottom: -5px"  mat-icon-button>
+          <mat-icon *ngIf="comment.commentLikes>0" matBadge="{{comment.commentLikes}}" matBadgeColor="warn">thumb_up</mat-icon>
+          <mat-icon *ngIf="comment.commentLikes==0">thumb_up</mat-icon>
+        </button>
+        <br>
         <button style="margin-top: 10px" style="margin-bottom: 10px;" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Reply</button>
         <button style="margin-top: 10px; margin-left: 10px; margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserComment, UserCommentService} from '../../services/user-comment.service';
 import {ProfileService} from '../../services/profile.service';
+import {Like, LikeService} from '../../services/like.service';
 
 @Component({
   selector: 'app-user-list-comments-about-coment',
@@ -18,7 +19,8 @@ export class UserListCommentsAboutComentComponent implements OnInit {
   text = '';
 
   constructor(private userCommentService: UserCommentService,
-              private profileService: ProfileService) {
+              private profileService: ProfileService,
+              private likeService: LikeService) {
   }
 
   ngOnInit(): void {
@@ -38,6 +40,16 @@ export class UserListCommentsAboutComentComponent implements OnInit {
         this.comments = comments.reverse();
       });
 
+  }
+
+  addUser(id: number) {
+    const like: Like = {
+      userCommentId: id
+    };
+    this.likeService.addUser(like)
+      .subscribe(comments => {
+        this.ngOnInit();
+      });
   }
 
 }

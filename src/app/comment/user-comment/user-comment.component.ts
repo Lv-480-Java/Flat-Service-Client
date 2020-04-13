@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {UserComment, UserCommentService} from '../../services/user-comment.service';
 import {ProfileService} from '../../services/profile.service';
+import {Like, LikeService} from '../../services/like.service';
 
 
 @Component({
@@ -18,13 +19,23 @@ export class UserCommentComponent implements OnInit {
   isComplain = false;
   text = '';
   @Input() id: number;
+  load = 'new';
 
   constructor(private userCommentService: UserCommentService,
-              private profileService: ProfileService) {
+              private profileService: ProfileService,
+              private likeService: LikeService) {
   }
 
   ngOnInit(): void {
-    this.loadComments(this.id);
+    if (this.load === 'new') {
+      this.loadComments(this.id);
+    }
+    if (this.load === 'old') {
+      this.loadCommentsOlder(this.id);
+    }
+    if (this.load === 'like') {
+      this.loadCommentsByLikes(this.id);
+    }
   }
 
   loadComments(id: number): void {
@@ -33,6 +44,25 @@ export class UserCommentComponent implements OnInit {
         this.comments = comments.reverse();
       });
     console.log(this.comments);
+
+  }
+
+  loadCommentsByLikes(id: number): void {
+    this.userCommentService.loadCommentsByLikes(id)
+      .subscribe(comments => {
+        this.comments = comments;
+      });
+    console.log(this.comments);
+
+  }
+
+  loadCommentsOlder(id: number): void {
+    this.userCommentService.loadComments(id)
+      .subscribe(comments => {
+        this.comments = comments;
+      });
+    console.log(this.comments);
+
   }
 
 
@@ -61,4 +91,13 @@ export class UserCommentComponent implements OnInit {
       });
   }
 
+  addUser(id: number) {
+    const like: Like = {
+      userCommentId: id
+    };
+    this.likeService.addUser(like)
+      .subscribe(comments => {
+        this.ngOnInit();
+      });
+  }
 }

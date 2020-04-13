@@ -30,7 +30,7 @@ export class ComplaintUCComponent implements OnInit {
       text: this.complaint,
       userComment: userComments
     };
-    this.complaintService.addComplaint(complaint)
+    this.complaintService.addComplaintUserComment(complaint)
       .subscribe(complain => {
         this.complaint = null;
       });
