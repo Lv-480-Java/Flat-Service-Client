@@ -16,7 +16,7 @@ exports.config = {
     browserName: 'chrome'
   },
   directConnect: true,
-  baseUrl: 'https://maklertaboo.herokuapp.com/',
+  baseUrl: 'https://maklertaboo.herokuapp.com',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
