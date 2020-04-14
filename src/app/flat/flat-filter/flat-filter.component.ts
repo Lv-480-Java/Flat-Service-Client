@@ -150,10 +150,27 @@ export class FlatFilterComponent implements OnInit {
   }
 
   turnTelegramOn() {
-    this.http.get(BASE_URL + 'subscribe')
-      .subscribe(success => {
-        this.flatService.openSnackBar('Succesfuly unsubscribed from all notifications', 'Unsubscribed');
+    let isConnected;
+    this.http.get(BASE_URL + 'telegram/check')
+      .subscribe(data => {
+        isConnected = data;
+        this.subscribeTelegram(isConnected);
       });
+  }
+  subscribeTelegram(isConnected) {
+    if ( isConnected === false) {
+      this.http.get(BASE_URL + 'telegram')
+        .subscribe(succes => {},  error => {
+          console.log(error.error.text)
+          this.flatService.openSnackBar('Please send code to our Telegram bot @MaklerTaboo, ' +
+            'Your auth code is :' + error.error.text, 'I sent auth');
+        });
+    } else {
+      this.http.get(BASE_URL + 'subscribe/telegram')
+        .subscribe(data => {
+          this.flatService.openSnackBar('Success wait for notifications in telegram!', 'I sent auth');
+        });
+    }
   }
 }
 
