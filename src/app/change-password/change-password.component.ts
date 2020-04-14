@@ -35,20 +35,6 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  // public changePassword(userChangePassword: UserChangePassword) {
-  //   //   this.setNullAllMessage();
-  //   //   this.loadingAnim = true;
-  //   //   this.userChangePasswordService.changePassword(userChangePassword).subscribe(
-  //   //     () => {
-  //   //       this.router.navigateByUrl('').then(r => r);
-  //   //     },
-  //   //     (errors: HttpErrorResponse) => {
-  //   //       this.passwordErrorMessageBackEnd = 'Incorrect Data';
-  //   //       this.loadingAnim = false;
-  //   //     });
-  //   //
-  //   //   this.loadingAnim = false;
-  //   // }
   changePassword(): Observable<any> {
     if (this.form.invalid) {
       return;

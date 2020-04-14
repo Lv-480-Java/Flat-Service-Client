@@ -10,7 +10,7 @@
         <mat-card-title>{{flatDetailed.monthPrice}}</mat-card-title>
         <mat-card-subtitle>ціна</mat-card-subtitle>
       </mat-card-header>
-      <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent">Бронювати</button>
+      <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent">Book</button>
     </div>
 
     <div fxLayout="row">
@@ -21,7 +21,7 @@
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title [routerLink]="['/short_profile/', flatDetailed.userId]" style="cursor: pointer;font-size: 16px">{{flatDetailed.username}}</mat-card-title>
           </mat-card-header>
-          <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click) = activateChat()>Початитись</button>
+          <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click) = activateChat()>Contact</button>
         </div>
 
         <mat-chip-list style="margin-top: 20px">
@@ -31,10 +31,10 @@
 
         <div style="margin-top:20px" fxLayout="row">
           <ul>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">дата</li>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">кількість кімнат</li>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">поверх</li>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">район</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">date</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">number of rooms</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">floor</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">district</li>
           </ul>
 
           <ul>
