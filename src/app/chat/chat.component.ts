@@ -23,7 +23,7 @@ import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
 import {ProfileService} from '../services/profile.service';
 import {UpdateMessageDTO} from '../model/chat-message-dateSeen.model';
 import {CounterOfUnreadMessagesDTO} from '../model/chat-message-count';
-
+import {BASE_URL} from '../utils/constants';
 
 (window as any).global = window;
 
@@ -41,9 +41,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   private countOfMessages: Observable<number>;
   private myScrollVariable: number | any;
 
-  serverUrl = 'http://localhost:8080/api/ws/';
-  baseUrl = 'http://localhost:8080/api/messages/';
-  url = 'http://localhost:8080/api/chat';
+  serverUrl = BASE_URL + 'wss/';
+  baseUrl = BASE_URL + 'messages/';
+  url = BASE_URL + 'chat';
 
   @Output()
   public onMessagesSeen: EventEmitter<Message[]> = new EventEmitter<Message[]>();
@@ -119,9 +119,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
 
   ngAfterViewChecked() {
     this.scrollToBottom();
-    /*
-            this.onScroll();
-    */
   }
 
   ngAfterViewInit() {
@@ -156,7 +153,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     this.subscriptions.add(this.getMessagesByChatId(this.chatId).subscribe(data => {
       this.data = data;
       this.messages = this.data.concat(this.messages);
-      console.log(this.data);
     }));
   }
 
@@ -177,8 +173,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   }
 
   initializeWebSocketConnection() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
+    const wss = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(wss);
     const that = this;
     // tslint:disable-next-line:only-arrow-functions
     this.stompClient.connect({}, function(frame) {
@@ -205,9 +201,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
         this.messages.findIndex(mes => mes.id === updatedMessage.messageId);
       } else if ('unread' === message.body.toString().substr(11, 6)) {
         const updatedMessage: UpdateMessageDTO = JSON.parse(message.body);
-        /*
-                this.messages.findIndex(mes => mes.id === updatedMessage.chatId);
-        */
       } else {
         const messageResult: Message = JSON.parse(message.body);
         this.messages.push(messageResult);
@@ -226,8 +219,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
       console.log(message);
       this.stompClient.send('/chat/send/message', {}, JSON.stringify(this.chatMessageInfo));
       this.countOfUnreadMessages(this.chatId);
-      console.log(this.countOfUnreadMessages(this.chatId));
-      console.log(this.unreadMessagesTotal());
     }
   }
 
@@ -241,7 +232,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   }
 
   updateDataSeen(messages: Message[]) {
-    /*JSON.stringify(messages);*/
     const currentDate = new Date();
     messages.forEach((msg) => {
       this.stompClient.send('/chat/updateDate/message', {}, JSON.stringify(new UpdateMessageDTO(msg.id, msg.chatId, msg.senderId)));
@@ -252,7 +242,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
 
   countOfUnreadMessages(id: number) {
     this.stompClient.send('/chat/countUnread/message', {}, JSON.stringify(new CounterOfUnreadMessagesDTO(id)));
-    console.log('CountOfUnreadMessage');
   }
 
   private formatUnreadMessagesTotal(totalUnreadMessages: number): string {
@@ -269,7 +258,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     let totalUnreadMessages = 0;
     if (this.messages) {
       totalUnreadMessages = this.messages.filter(x => x.senderId !== this.currentUserId && !x.dateSeen).length;
-      console.log(totalUnreadMessages);
     }
     return this.formatUnreadMessagesTotal(totalUnreadMessages);
   }
