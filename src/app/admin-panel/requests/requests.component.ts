@@ -87,7 +87,6 @@ export class RequestsComponent implements OnInit {
 
   getRequestsByPage() {
     console.log('Get Requests');
-    console.log(this.pageNumber, this.pageSize, this.type, this.status);
     this.requestsService.getRequests(this.pageNumber, this.pageSize, this.type, this.status)
       .subscribe(data => {
         const totalElements = new Array(data[`totalElements`]);

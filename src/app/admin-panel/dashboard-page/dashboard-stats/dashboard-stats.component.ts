@@ -3,6 +3,9 @@ import {RequestsService} from '../../../services/requests.service';
 import {StatisticsService} from '../../../services/statistics.service';
 import {on} from 'cluster';
 import {forkJoin} from 'rxjs';
+import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
+import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
+import {CommentStatitsticsService} from '../../../services/statistics/comment-statitstics.service';
 
 @Component({
   selector: 'app-dashboard-stats',
@@ -20,7 +23,9 @@ export class DashboardStatsComponent implements OnInit {
   private weekAgo: Date;
   private twoWeeksAgo: Date;
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private userStatisticsService: UserStatisticsService,
+              private flatStatisticsService: FlatStatisticsService,
+              private commentStatisticsService: CommentStatitsticsService) {
   }
 
   ngOnInit(): void {
@@ -41,8 +46,8 @@ export class DashboardStatsComponent implements OnInit {
 
   countFlatPostedForWeek() {
     forkJoin([
-      this.statisticsService.countFlatsPostedBetween(this.weekAgo, this.today),
-      this.statisticsService.countFlatsPostedBetween(this.twoWeeksAgo, this.weekAgo)
+      this.flatStatisticsService.countFlatsPostedBetween(this.weekAgo, this.today),
+      this.flatStatisticsService.countFlatsPostedBetween(this.twoWeeksAgo, this.weekAgo)
     ]).subscribe((count) => {
       this.flatNumber = count[0];
       this.flatRatio = count[1] / count[0];
@@ -51,8 +56,8 @@ export class DashboardStatsComponent implements OnInit {
 
   countCommentsPostedForWeek() {
     forkJoin([
-      this.statisticsService.countCommentsPostedBetween(this.weekAgo, this.today),
-      this.statisticsService.countCommentsPostedBetween(this.twoWeeksAgo, this.weekAgo)
+      this.commentStatisticsService.countCommentsPostedBetween(this.weekAgo, this.today),
+      this.commentStatisticsService.countCommentsPostedBetween(this.twoWeeksAgo, this.weekAgo)
     ]).subscribe((count) => {
       this.commentNumber = count[0];
       this.commentRatio = count[1] / count[0];

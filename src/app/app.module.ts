@@ -86,6 +86,10 @@ import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {FlatMapComponent} from './flat/flat-map/flat-map.component';
 import {AgmCoreModule} from '@agm/core';
+import {ActiveUsersCountComponent} from './admin-panel/statistics/active-count/active-users-count/active-users-count.component';
+import {ActiveFlatsCountComponent} from './admin-panel/statistics/active-count/active-flats-count/active-flats-count.component';
+import {ActiveLandlordsCountComponent} from './admin-panel/statistics/active-count/active-landlords-count/active-landlords-count.component';
+import { ActiveCountsComponent } from './admin-panel/dashboard-page/active-counts/active-counts.component';
 
 
 @NgModule({
@@ -141,7 +145,11 @@ import {AgmCoreModule} from '@agm/core';
     ComplaintComponent,
     ComplaintUCComponent,
     FavoriteFlatComponent,
-    FlatMapComponent
+    FlatMapComponent,
+    ActiveUsersCountComponent,
+    ActiveFlatsCountComponent,
+    ActiveLandlordsCountComponent,
+    ActiveCountsComponent,
   ],
   imports: [
     BrowserModule,
@@ -191,7 +199,6 @@ import {AgmCoreModule} from '@agm/core';
     RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
-
 })
 
 export class AppModule {

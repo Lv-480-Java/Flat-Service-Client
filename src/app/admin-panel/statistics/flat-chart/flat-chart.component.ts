@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StatisticsService} from '../../../services/statistics.service';
+import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
 
 @Component({
   selector: 'app-flat-chart',
@@ -26,7 +27,7 @@ export class FlatChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private statisticsService: FlatStatisticsService) {
   }
 
   ngOnInit(): void {

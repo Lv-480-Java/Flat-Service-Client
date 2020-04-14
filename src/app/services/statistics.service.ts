@@ -27,6 +27,7 @@ export class StatisticsService {
     return this.http.get<number>(url);
   }
 
+
   getAllUsersCount(start, end): Observable<Array<number>> {
     return this.http.get<Array<number>>(BASE_URL + `admin/statistics/users-dynamics/${end}/${start}`);
   }
@@ -65,6 +66,8 @@ export class StatisticsService {
     return this.http.get<number>(url, {params});
   }
 
+  /////
+
   getCountOfUserCommentsForWeek(days: number): Observable<Array<number>> {
     return this.http.get<Array<number>>(BASE_URL + `admin/statistics/user-comments-dynamics/${days}`);
   }
@@ -73,35 +76,9 @@ export class StatisticsService {
     return this.http.get<Array<number>>(BASE_URL + `admin/statistics/flat-comments-dynamics/${days}`);
   }
 
-  countFlatsPostedBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + 'admin/statistics/count-posted-flats';
 
-    let params = new HttpParams();
-    params = params.append('start', start.toLocaleDateString());
-    params = params.append('end', end.toLocaleDateString());
 
-    return this.http.get<number>(url, {params});
-  }
 
-  countCommentsPostedBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + 'admin/statistics/count-posted-comments';
 
-    let params = new HttpParams();
-    params = params.append('start', start.toLocaleDateString());
-    params = params.append('end', end.toLocaleDateString());
 
-    return this.http.get<number>(url, {params});
-  }
-
-  getTopLandlords(num: number): Observable<Array<User>> {
-    const url = BASE_URL + `admin/statistics/get-top-landlords?number=${num}`;
-    console.log(url);
-    return this.http.get<Array<User>>(url);
-  }
-
-  getFlatsOfLandlord(id: string): Observable<number> {
-    const url = BASE_URL + `admin/statistics/get-flat-count-of-user?id=${id}`;
-    console.log(url);
-    return this.http.get<number>(url);
-  }
 }

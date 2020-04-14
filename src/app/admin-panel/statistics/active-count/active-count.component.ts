@@ -26,4 +26,5 @@ export class ActiveCountComponent implements OnInit {
       this.countLandlord = count;
     });
   }
+
 }

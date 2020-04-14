@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RequestsService} from '../../services/requests.service';
-import {ActivatedRoute, Router} from '@angular/router';
-
 
 @Component({
   selector: 'app-admin-layout',

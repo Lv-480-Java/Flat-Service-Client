@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {StatisticsService} from '../../../services/statistics.service';
+import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 
 @Component({
   selector: 'app-user-chart',
@@ -25,7 +26,7 @@ export class UserChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private statisticsService: UserStatisticsService) {
   }
 
   ngOnInit(): void {
