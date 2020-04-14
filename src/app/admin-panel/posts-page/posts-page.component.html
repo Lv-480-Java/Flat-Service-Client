@@ -1,0 +1,60 @@
+<div class="body-table">
+  <div class="posts-table">
+    <div class="posts-label">
+      <mdb-card>
+        <mdb-card-body>
+          <mdb-card-title>
+            <div class="posts-label-text">{{status|titlecase}} Flats Publication {{label}}</div>
+            <form [formGroup]="statusForm">
+              <mat-form-field class="status-select">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="statusForm" (selectionChange)="onChangeStatus($event.value)">
+                  <mat-option *ngFor="let status of statuses"
+                              [value]="status">{{status|titlecase}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+          </mdb-card-title>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+
+    <div class="mat-elevation-z8 pos-table">
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID. </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+
+        <!-- Author -->
+        <ng-container matColumnDef="author">
+          <th mat-header-cell *matHeaderCellDef> Author </th>
+          <td mat-cell *matCellDef="let element"> {{element.author.username}} </td>
+        </ng-container>
+
+        <!-- Date published -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date published </th>
+          <td mat-cell *matCellDef="let element"> {{element.creationDate | date:'mediumDate'}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="review">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            {{element.approvalDate | date:'mediumDate'}}
+            <button mat-raised-button color="primary"
+                    (click)="review(element.id)">Review
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator (page)="paginationPage()" [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

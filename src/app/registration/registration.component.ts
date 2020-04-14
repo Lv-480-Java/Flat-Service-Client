@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RegistrationService} from '../services/registration.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-registration',

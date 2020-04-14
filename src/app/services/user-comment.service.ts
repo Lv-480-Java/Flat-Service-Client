@@ -10,6 +10,7 @@ export interface UserComment {
   userId?: number;
   userAuthor?: User;
   text?: string;
+  commentLikes?: number;
   publicationDate?: any;
   commentAboutComment?: number;
 }
@@ -34,6 +35,10 @@ export class UserCommentService {
 
   loadComments(id: number): Observable<UserComment[]> {
     return this.http.get<UserComment[]>(BASE_URL + 'usercomments/getall/' + id);
+  }
+
+  loadCommentsByLikes(id: number): Observable<UserComment[]> {
+    return this.http.get<UserComment[]>(BASE_URL + 'usercomments/getallbylikes/' + id);
   }
 
   addC(userComment: UserComment): Observable<UserComment> {
