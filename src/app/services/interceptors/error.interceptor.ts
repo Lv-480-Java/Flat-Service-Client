@@ -1,12 +1,6 @@
-import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest,
-  HttpErrorResponse
-} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
-import {retry, catchError} from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Injectable} from "@angular/core";
 
@@ -17,6 +11,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
 
   constructor(private bar: MatSnackBar) {
   }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request)
       .pipe(

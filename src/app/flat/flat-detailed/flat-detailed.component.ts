@@ -5,6 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {FlatDetailed} from './entity/FlatDetailed';
 import {BASE_URL} from 'src/app/utils/constants';
 import {User} from '../../admin-panel/component/Users';
+import {FlatBookingService} from "../../services/flat-booking.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-flat-detailed',
@@ -13,7 +15,9 @@ import {User} from '../../admin-panel/component/Users';
 })
 export class FlatDetailedComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, private http: HttpClient,
+              private flatBookingService: FlatBookingService,
+              private bar: MatSnackBar) {
   }
 
   images: GalleryItem[];
@@ -61,5 +65,28 @@ export class FlatDetailedComponent implements OnInit {
 
   modalClosed(isClosed) {
     this.chatIsActive = false;
+  }
+
+  bookApartment(id: number) {
+    this.flatBookingService.bookApartment(id).subscribe(
+      success => {
+        this.bar.open("Your request was successfully sent to Landlord!", "x",
+          {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar']
+          });
+      },
+      error => {
+        this.bar.open(error.error.message, "x",
+          {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: ['snackbar']
+          });
+      }
+    );
   }
 }
