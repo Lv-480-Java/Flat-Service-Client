@@ -1,0 +1,66 @@
+<div class="dialog-window">
+  <form [formGroup]="formUser" class="dialog-form">
+    <br>
+    <p class="h4 mb-4">Edit fields</p>
+
+    <!-- Username -->
+
+    <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+         *ngIf="userService.error$ | async as error">
+      {{ error }}
+    </div>
+    <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+         *ngIf="userService.errorUsername$ | async as error">
+      Field 'Username' {{ error }}
+    </div>
+    <div
+      *ngIf="(formUser.get('username').invalid && formUser.get('username').dirty)"
+      class="validation">
+      <small *ngIf="formUser.get('username').errors.required">Field username can not be empty</small>
+      <small *ngIf="formUser.get('username').errors.minlength">Length of username must be at
+        list {{formUser.get('username').errors.minlength.requiredLength}} characters</small>
+    </div>
+    <mat-form-field class="div3-input" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input type="text" matInput formControlName="username">
+      <mat-icon matSuffix>account_circle</mat-icon>
+    </mat-form-field>
+    <br>
+
+    <!-- Email -->
+
+    <div
+      *ngIf="(formUser.get('email').invalid && formUser.get('email').dirty)">
+      <small *ngIf="formUser.get('email').errors.required">Field e-mail can not be empty</small>
+      <small *ngIf="formUser.get('email').errors.email">Enter valid e-mail</small>
+    </div>
+    <mat-form-field class="div3-input" appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input type="email" matInput formControlName="email" formControl disabled>
+      <mat-icon matSuffix>email</mat-icon>
+    </mat-form-field>
+    <br>
+
+    <!-- Phone -->
+
+    <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+         *ngIf="userService.errorPhone$ | async as error">
+      Field 'Phone' {{ error }}
+    </div>
+    <div
+      *ngIf="(formUser.get('phoneNumber').invalid && formUser.get('phoneNumber').dirty)"
+      class="validation">
+      <small *ngIf="formUser.get('phoneNumber').errors.required">Field phone can not be empty</small>
+      <small *ngIf="formUser.get('phoneNumber').errors.pattern">Enter valid phone number</small>
+    </div>
+    <mat-form-field class="div3-input" appearance="outline">
+      <mat-label>+38 </mat-label>
+      <input type="tel" matInput aria-describedby="defaultRegisterFormPasswordHelpBlock" formControlName="phoneNumber">
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+    <br>
+
+    <button type="submit" class="dialog-button" cdkFocusInitial mat-raised-button color="primary"  (click)="put()"  [disabled]="formUser.invalid">Save</button>
+    <button type="submit" mat-raised-button color="basic" (click)="closeClick()">Cancel</button>
+  </form>
+</div>
