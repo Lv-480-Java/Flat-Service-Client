@@ -56,8 +56,10 @@
   <button mat-raised-button color="primary" (click)="showByFilter()">Find</button>
 
 </mat-card>
+
 <mat-card style="width: 240px; margin-top: 20px">
   <div><p>Subscribe to recieve flat updates by parameter you set</p></div>
   <button mat-raised-button color="primary" (click)="subscribeFlats()">Subscribe</button>
+  <mat-card-subtitle style="cursor: pointer; margin-top:10px" (click)="turnTelegramOn()">Telegram subscription</mat-card-subtitle>
   <mat-card-subtitle style="cursor: pointer; margin-top:10px" (click)="unSubscribe()">Unsubscribe</mat-card-subtitle>
 </mat-card>
