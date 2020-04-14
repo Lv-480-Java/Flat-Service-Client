@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
-import {Complaint, ComplaintService} from '../../services/complaint.service';
+import { ComplaintId, ComplaintService} from '../../services/complaint.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-complaint',
@@ -8,11 +9,14 @@ import {Complaint, ComplaintService} from '../../services/complaint.service';
   styleUrls: ['./complaint.component.scss']
 })
 export class ComplaintComponent implements OnInit {
-  text = '';
+  complaint: string;
+  complaints: string[] = ['Unwanted commercial content', 'Harassment or bullying', 'Hate speech or violence', 'Spam'];
 
   @Input() commentId: number;
+  // tslint:disable-next-line:no-output-native
+  @Output() close = new EventEmitter<void>()
 
-  constructor(private complaintService: ComplaintService) {
+  constructor(public complaintService: ComplaintService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,20 +24,19 @@ export class ComplaintComponent implements OnInit {
 
 
   add() {
-    if (!this.text.trim()) {
-      return;
-    }
-    const flatComments: FlatComment = {
-      id: this.commentId
+    const complaintId: ComplaintId = {
+      text: this.complaint,
+      flatCommentId: this.commentId
     };
-    const complaint: Complaint = {
-      text: this.text,
-      flatComment: flatComments
-    };
-    this.complaintService.addComplaint(complaint)
-      .subscribe(complain => {
-        this.text = '';
-      });
+    this.complaintService.addComplaintFlatComment(complaintId)
+      .subscribe(success => {
+      this.complaintService.openSnackBar('Complaint sent', '');
+      setTimeout(() => {
+        this.router.navigate(['detailed/:id']);
+      }, 4000);
+    }, error => {
+      this.complaintService.openSnackBar(this.complaintService.error$, '');
+    });
   }
 
 }
