@@ -21,14 +21,14 @@ export class FlatStatisticsService {
   }
 
   countPostedFlatsByDay(day: Date): Observable<number> {
-    const url = BASE_URL + 'admin/flat-statistics/count-posted-flats';
+    const url = BASE_URL + 'admin/flat-statistics/count-posted-flats-on-day';
     let params = new HttpParams();
     params = params.append('day', day.toLocaleDateString());
     return this.http.get<number>(url, {params});
   }
 
   countFlatsPostedBetween(start: Date, end: Date): Observable<number> {
-    const url = BASE_URL + 'admin/flat-statistics/count-posted-flats';
+    const url = BASE_URL + 'admin/flat-statistics/count-posted-flats-between-dates';
 
     let params = new HttpParams();
     params = params.append('start', start.toLocaleDateString());
@@ -42,5 +42,4 @@ export class FlatStatisticsService {
     console.log(url);
     return this.http.get<number>(url);
   }
-
 }

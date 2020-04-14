@@ -52,8 +52,8 @@ import {DiagramCommentsComponent} from './admin-panel/statistics/diagram-comment
 import {DiagramFlatsComponent} from './admin-panel/statistics/diagram-flats/diagram-flats.component';
 import {DiagramUsersComponent} from './admin-panel/statistics/diagram-users/diagram-users.component';
 import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart/users-line-chart.component';
-import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
-import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
+import {UserChartComponent} from './admin-panel/dashboard-page/user-chart/user-chart.component';
+import {FlatChartComponent} from './admin-panel/dashboard-page/flat-chart/flat-chart.component';
 import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 import {MatListModule} from '@angular/material/list';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
@@ -66,7 +66,6 @@ import {InterceptorService} from './services/intercept.service';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
 import {ComentsaboutcommentComponent} from './comment/flat-coments-about-comment/comentsaboutcomment.component';
 import {ListCommentComponent} from './comment/flat-list-comment-about-comment/list-comment.component';
@@ -90,6 +89,12 @@ import {ActiveUsersCountComponent} from './admin-panel/statistics/active-count/a
 import {ActiveFlatsCountComponent} from './admin-panel/statistics/active-count/active-flats-count/active-flats-count.component';
 import {ActiveLandlordsCountComponent} from './admin-panel/statistics/active-count/active-landlords-count/active-landlords-count.component';
 import { ActiveCountsComponent } from './admin-panel/dashboard-page/active-counts/active-counts.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import { FlatStatistiscsComponent } from './admin-panel/statistics/flat-statistiscs/flat-statistiscs.component';
+import { UserStatisticsComponent } from './admin-panel/statistics/user-statistics/user-statistics.component';
+import { CommentStatisticsComponent } from './admin-panel/statistics/comment-statistics/comment-statistics.component';
+import { FlatStatsChartComponent } from './admin-panel/statistics/flat-stats-chart/flat-stats-chart.component';
+import { FlatCountRatioComponent } from './admin-panel/statistics/flat-count-ratio/flat-count-ratio.component';
 
 
 @NgModule({
@@ -137,7 +142,6 @@ import { ActiveCountsComponent } from './admin-panel/dashboard-page/active-count
     UserCommentsAboutComentComponent,
     UserListCommentsAboutComentComponent,
     LikeComponent,
-    AutoApproveComponent,
     RequestMessageComponent,
     LandlordFlatListComponent,
     DashboardStatsComponent,
@@ -150,41 +154,47 @@ import { ActiveCountsComponent } from './admin-panel/dashboard-page/active-count
     ActiveFlatsCountComponent,
     ActiveLandlordsCountComponent,
     ActiveCountsComponent,
+    FlatStatistiscsComponent,
+    UserStatisticsComponent,
+    CommentStatisticsComponent,
+    FlatStatsChartComponent,
+    FlatCountRatioComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    GalleryModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatListModule,
-    MatBadgeModule,
-    MatButtonToggleModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatBadgeModule,
-    AgmCoreModule.forRoot({
-      apiKey: ''
-    })
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MDBBootstrapModule.forRoot(),
+        BrowserAnimationsModule,
+        HttpClientModule,
+        FormsModule,
+        Ng5SliderModule,
+        MatSliderModule,
+        MatCardModule,
+        MatButtonModule,
+        MatIconModule,
+        MatInputModule,
+        FlexModule,
+        InfiniteScrollModule,
+        MatChipsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule,
+        GalleryModule,
+        MatSidenavModule,
+        MatPaginatorModule,
+        MatDialogModule,
+        MatListModule,
+        MatBadgeModule,
+        MatButtonToggleModule,
+        MatSelectModule,
+        MatGridListModule,
+        MatBadgeModule,
+        AgmCoreModule.forRoot({
+            apiKey: ''
+        }),
+        MatTabsModule
+    ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,

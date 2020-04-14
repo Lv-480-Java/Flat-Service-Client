@@ -1,24 +1,33 @@
-<div class="statistics">
+<mat-tab-group class="menu">
+  <mat-tab label="Flats"><app-flat-statistiscs></app-flat-statistiscs></mat-tab>
+  <mat-tab label="Users"><app-user-statistics></app-user-statistics></mat-tab>
+  <mat-tab label="Comments"><app-comment-statistics></app-comment-statistics></mat-tab>
+</mat-tab-group>
 
-  <app-active-counts></app-active-counts>
 
-  <div class="bar-chart-card">
-    <mdb-card>
-      <mdb-card-body>
-        <mdb-card-title>
-          <span class="bar-chart-label">Weekly Statistics</span>
-        </mdb-card-title>
-      </mdb-card-body>
-    </mdb-card>
-  </div>
-  <div>
-    <app-user-chart></app-user-chart>
-    <app-flat-chart></app-flat-chart>
-  </div>
 
-  <div class="line-chart-user">
-    <app-users-line-chart></app-users-line-chart>
-  </div>
+
+<!--<div class="statistics">-->
+<!--  -->
+<!--  <app-active-counts></app-active-counts>-->
+
+<!--  <div class="bar-chart-card">-->
+<!--    <mdb-card>-->
+<!--      <mdb-card-body>-->
+<!--        <mdb-card-title>-->
+<!--          <span class="bar-chart-label">Weekly Statistics</span>-->
+<!--        </mdb-card-title>-->
+<!--      </mdb-card-body>-->
+<!--    </mdb-card>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <app-user-chart></app-user-chart>-->
+<!--    <app-flat-chart></app-flat-chart>-->
+<!--  </div>-->
+
+<!--  <div class="line-chart-user">-->
+<!--    <app-users-line-chart></app-users-line-chart>-->
+<!--  </div>-->
 
 
 <!--  <div class="pie-charts">-->
@@ -42,7 +51,4 @@
 <!--    <app-comments-line-chart></app-comments-line-chart>-->
 <!--  </div>-->
 
-</div>
-
-
-<app-active-counts></app-active-counts>
+<!--</div>-->
