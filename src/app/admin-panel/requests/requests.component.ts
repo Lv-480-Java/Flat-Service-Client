@@ -7,7 +7,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ReviewWindowComponent} from './review-window/review-window.component';
-import {RequestMessageComponent} from './review-window/request-message/request-message.component';
 
 @Component({
   selector: 'app-requests',

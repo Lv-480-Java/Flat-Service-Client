@@ -64,31 +64,36 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
-import { ComentsaboutcommentComponent } from './comment/flat-coments-about-comment/comentsaboutcomment.component';
-import { ListCommentComponent } from './comment/flat-list-comment-about-comment/list-comment.component';
-import { UserCommentsAboutComentComponent } from './comment/user-comments-about-coment/user-comments-about-coment.component';
-import { UserListCommentsAboutComentComponent } from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
-import { LikeComponent } from './comment/like/like.component';
+import {ComentsaboutcommentComponent} from './comment/flat-coments-about-comment/comentsaboutcomment.component';
+import {ListCommentComponent} from './comment/flat-list-comment-about-comment/list-comment.component';
+import {UserCommentsAboutComentComponent} from './comment/user-comments-about-coment/user-comments-about-coment.component';
+import {UserListCommentsAboutComentComponent} from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
+import {LikeComponent} from './comment/like/like.component';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import {ComplaintComponent} from './comment/complaint/complaint.component';
+import {ComplaintUCComponent} from './comment/complaint-u-c/complaint-u-c.component';
 import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {CommentsPageComponent} from './admin-panel/comments-page/comments-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {DialogWindowEditUserComponent} from './admin-panel/user-page/edit-user-window/dialog-window-edit-user';
 import {ReviewPostWindowComponent} from './admin-panel/posts-page/review-post-window/review-post-window.component';
 import {RemoveUserWindowComponent} from './admin-panel/user-page/remove-user-window/remove-user-window.component';
-import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
-import { ComplaintComponent } from './comment/complaint/complaint.component';
-import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
+import {RemovePostWindowComponent} from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
 import {FlatService} from './services/flat.service';
 import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import {FlatBookingService} from "./services/flat-booking.service";
+import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
+import {FlatMapComponent} from './flat/flat-map/flat-map.component';
+import {AgmCoreModule} from '@agm/core';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
+import {ReviewAreaComponent} from './landlord/review-area/review-area.component';
+import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
-import { FlatMapComponent } from './flat/flat-map/flat-map.component';
-import { AgmCoreModule } from '@agm/core';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -146,7 +151,11 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ComplaintUCComponent,
     FavoriteFlatComponent,
     FlatMapComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    FlatRequestsComponent,
+    FlatRequestReviewComponent,
+    ReviewAreaComponent,
+    BookingRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -195,7 +204,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, FlatBookingService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {
