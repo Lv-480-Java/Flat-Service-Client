@@ -9,6 +9,7 @@ export interface FlatComment {
   flatId?: number;
   userAuthor?: User;
   text?: string;
+  commentLikes?: number;
   publicationDate?: any;
   commentAboutComment?: number;
 }
@@ -33,6 +34,10 @@ export class FlatCommentService {
 
   loadComments(id: number): Observable<FlatComment[]> {
     return this.http.get<FlatComment[]>(BASE_URL + 'flatcomments/getall/' + id);
+  }
+
+  loadCommentsByLikes(id: number): Observable<FlatComment[]> {
+    return this.http.get<FlatComment[]>(BASE_URL + 'flatcomments/getallbylikes/' + id);
   }
 
   addC(flatComment: FlatComment): Observable<FlatComment> {
