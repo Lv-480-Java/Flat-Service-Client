@@ -15,7 +15,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.bookingService.getNewRequests().subscribe(data => {
+    this.bookingService.getNewLandlordRequests().subscribe(data => {
       this.newRequests = data;
     });
   }

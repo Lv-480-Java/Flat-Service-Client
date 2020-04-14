@@ -105,12 +105,11 @@ export class FlatRequestsComponent implements OnInit {
           });
       }
     );
-    this.ngOnInit();
   }
 
   openSnackBar() {
     console.log('snackbar');
-    this.bookingService.getNewRequests().subscribe(data => {
+    this.bookingService.getNewLandlordRequests().subscribe(data => {
       this.bar.open(data + ' New Requests', 'close', {
         duration: 5000,
         verticalPosition: 'bottom',

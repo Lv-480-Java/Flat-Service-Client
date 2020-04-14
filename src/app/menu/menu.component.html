@@ -29,15 +29,15 @@
         >Flat Requests</a>
       </li>
 
-      <li *ngIf="displayRole()==='ROLE_RENTER'" class="nav-item" id="renter_requests" matBadge="{{newRequests}}"
-          matBadgePosition="above after" matBadgeSize="small">
+      <li *ngIf="displayRole()==='ROLE_RENTER' || displayRole()==='ROLE_MODERATOR' || displayRole()==='ROLE_ADMIN'"
+          class="nav-item" id="renter_requests">
         <a id="ar_requests" class="nav-link waves-light" mdbWavesEffect routerLink="/booking-requests"
            routerLinkActive="active"
         >Booking Requests</a>
       </li>
 
       <li *ngIf="displayRole()==='ROLE_ADMIN'|| displayRole()==='ROLE_MODERATOR'" class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/admin']">Admin Panel</a>
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin" routerLinkActive="active">Admin Panel</a>
       </li>
 
       <li *ngIf="authService.isAuthenticated()" class="nav-item">

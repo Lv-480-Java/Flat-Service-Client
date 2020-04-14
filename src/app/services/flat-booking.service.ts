@@ -21,7 +21,7 @@ export class FlatBookingService {
     return this.http.get(BASE_URL + `booking/get-requests/landlord?page=${pageNumber}&size=${pageSize}&status=${status}`);
   }
 
-  getRenterRequests() {
+  getRenterRequests(): Observable<any> {
     return this.http.get<RequestsForFlatVerification[]>(BASE_URL + `booking/get-requests/renter`)
   }
 
@@ -37,7 +37,7 @@ export class FlatBookingService {
     return this.http.put<RequestsForFlatVerification>(BASE_URL + `booking/flat/${id}/review`, null);
   }
 
-  getNewRequests(): Observable<number> {
+  getNewLandlordRequests(): Observable<number> {
     return this.http.get<number>(BASE_URL + `booking/new-requests`);
   }
 }
