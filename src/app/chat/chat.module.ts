@@ -13,7 +13,7 @@ import { NgChatOptionsComponent } from './components/ng-chat-options/ng-chat-opt
 
 @NgModule({
   imports: [CommonModule, FormsModule, HttpClientModule],
-  declarations: [ChatComponent, EmojifyPipe, LinkfyPipe, SanitizePipe, GroupMessageDisplayNamePipe, NgChatOptionsComponent],
+  declarations: [ChatComponent, EmojifyPipe, LinkfyPipe, SanitizePipe],
   exports: [ChatComponent]
 })
 
