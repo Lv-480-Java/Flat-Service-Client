@@ -1,26 +1,30 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatDialog} from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
-import {RequestsService} from '../../services/requests.service';
-import {User} from '../component/Users';
 import {ReviewPostWindowComponent} from './review-post-window/review-post-window.component';
 import {FlatService} from '../../services/flat.service';
+import {Subscription} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {RemovePostWindowComponent} from './remove-post-window/remove-post-window.component';
+import {RequestForBanFlat} from '../component/RequestForBanFlat';
 
 @Component({
   selector: 'app-posts-page',
   templateUrl: './posts-page.component.html',
   styleUrls: ['./posts-page.component.scss']
 })
-export class PostsPageComponent implements OnInit {
+export class PostsPageComponent implements OnInit, OnDestroy {
 
   @ViewChild(ReviewPostWindowComponent) userReviewWindowComponent;
 
-  displayedColumns: string[] = ['id', 'author', 'date', 'review'];
-  dataSource;
+  vSub: Subscription;
 
-  statuses = ['ACTIVE', 'DEACTIVATED'];
+  displayedColumns: string[] = ['id', 'author', 'date', 'review', 'remove'];
+  dataSource = new MatTableDataSource<RequestForBanFlat>();
+
+  statuses = ['ACTIVATED', 'DEACTIVATED'];
   label: string;
   status: string;
   statusForm: FormGroup;
@@ -31,14 +35,13 @@ export class PostsPageComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private flatService: FlatService, private formBuilder: FormBuilder,
+  constructor(private snackBar: MatSnackBar, private flatService: FlatService, private formBuilder: FormBuilder,
               public dialog: MatDialog) {
   }
 
   onChangeStatus(value) {
     this.status = value;
-    console.log(this.status);
-    this.getRequestsByPage();
+    this.getPostsByPage();
   }
 
   ngOnInit(): void {
@@ -49,16 +52,16 @@ export class PostsPageComponent implements OnInit {
     this.status = status;
     this.statusForm = this.formBuilder.group({statusForm: [null]});
     this.statusForm.get('statusForm').setValue(status);
-    this.getRequestsByPage();
+    this.getPostsByPage();
   }
 
-  getRequestsByPage() {
+  getPostsByPage() {
     console.log('Operation Posts');
-    this.flatService.getAllPosts(this.pageNumber, this.pageSize)
+    this.vSub = this.flatService.getAllPosts(this.pageNumber, this.pageSize, this.status)
       .subscribe(data => {
         const totalElements = new Array(data[`totalElements`]);
         this.posts = data[`content`];
-        this.dataSource = new MatTableDataSource<User>(this.posts);
+        this.dataSource = new MatTableDataSource<RequestForBanFlat>(this.posts);
         this.paginator.length = totalElements.length;
       });
     console.log('Get Request');
@@ -67,23 +70,41 @@ export class PostsPageComponent implements OnInit {
   paginationPage() {
     this.pageNumber = this.paginator.pageIndex;
     this.pageSize = this.paginator.pageSize;
-    this.getRequestsByPage();
+    this.getPostsByPage();
   }
 
-  review(id: any) {
-    console.log('reviewed ' + id);
-    this.openDialog(id);
+  review(element) {
+    this.openDialogReview(element);
   }
 
-  openDialog(id: number): void {
-    console.log('review flat:');
-    const pos = this.posts.find(x => x.id === id);
+  openDialogReview(element): void {
+    console.log('Open dialog for review');
     const dialogRef = this.dialog.open(ReviewPostWindowComponent, {
-      data: {requestId: id,  post: pos}
+      width: '900px',
+      height: '700px',
+      data: element
     });
-    dialogRef.afterClosed().subscribe(result => {
-      this.loadPage(this.status);
+    this.vSub = dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+      this.getPostsByPage();
     });
   }
 
+  openDialogRemoveFlat(element) {
+    console.log('Opened remove operation');
+    const dialogRef = this.dialog.open(RemovePostWindowComponent, {
+      data: element
+    });
+    this.vSub = dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+      this.getPostsByPage();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.vSub) {
+      this.vSub.unsubscribe();
+    }
+    console.log('Finished destroy');
+  }
 }
