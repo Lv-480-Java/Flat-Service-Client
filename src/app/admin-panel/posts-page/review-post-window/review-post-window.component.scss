@@ -1,22 +1,18 @@
 .flat-review {
   height:100%;
   width: 100%;
+  margin-left: 8px;
 }
 
 .close-button {
 
 }
 
-.approve-button {
-  margin-left: 800px;
-}
-
-.decline-button {
+button {
+  width: 100px;
   margin-left: 30px;
 }
 
 .buttons {
-  position: absolute;
-  bottom: 50px;
-  background: white;
+  text-align: center;
 }
