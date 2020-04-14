@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
+import {ProfileService} from '../../services/profile.service';
+import {Like, LikeService} from "../../services/like.service";
 
 @Component({
   selector: 'app-list-comment',
@@ -7,7 +9,7 @@ import {FlatComment, FlatCommentService} from '../../services/flat-comment.servi
   styleUrls: ['./list-comment.component.scss']
 })
 export class ListCommentComponent implements OnInit {
-  isId: any = JSON.parse(localStorage.getItem('user')).userId;
+  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
   isTrue = false;
   isList = false;
   isComplain = false;
@@ -17,7 +19,9 @@ export class ListCommentComponent implements OnInit {
   text = '';
 
 
-  constructor(private flatCommentService: FlatCommentService) {
+  constructor(private flatCommentService: FlatCommentService,
+              private profileService: ProfileService,
+              private likeService: LikeService) {
   }
 
   ngOnInit(): void {
@@ -37,6 +41,16 @@ export class ListCommentComponent implements OnInit {
         this.comments = comments.reverse();
       });
 
+  }
+
+  addFlat(id: number) {
+    const like: Like = {
+      flatCommentId: id
+    };
+    this.likeService.addFlat(like)
+        .subscribe(flatComment => {
+          this.ngOnInit();
+        });
   }
 
 }
