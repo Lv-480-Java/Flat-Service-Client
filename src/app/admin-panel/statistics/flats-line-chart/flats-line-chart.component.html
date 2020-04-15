@@ -1,0 +1,40 @@
+<mdb-card class="line-chart">
+
+  <div>
+    <div class="label">
+      <span>Flats Statistics</span>
+    </div>
+
+    <div class="date-input">
+
+      <div class="input-month">
+        <mat-form-field class="example-full-width">
+          <mat-label>To</mat-label>
+          <input type="month" matInput max="{{maxDate | date:'yyyy-MM' }}" [ngModel]="toMonth | date:'yyyy-MM' "
+                 (ngModelChange)="toMonth = $event; this.loadData()">
+        </mat-form-field>
+      </div>
+
+      <div class="input-month">
+        <mat-form-field class="example-full-width">
+          <mat-label>From</mat-label>
+          <input type="month" matInput max="{{maxDate | date:'yyyy-MM' }}" [ngModel]="fromMonth | date:'yyyy-MM' "
+                 (ngModelChange)="fromMonth = $event; this.loadData()">
+        </mat-form-field>
+      </div>
+    </div>
+
+  </div>
+
+
+  <canvas mdbChart class="chart"
+          [chartType]="chartType"
+          [datasets]="chartDatasets"
+          [labels]="chartLabels"
+          [colors]="chartColors"
+          [options]="chartOptions"
+          [legend]="true">
+  </canvas>
+
+
+</mdb-card>

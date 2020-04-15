@@ -1,5 +1,5 @@
-.active-cards {
-  margin: 20px 20px 0px 20px;
+.card {
+  width: 388px;
 }
 
 .count-number {
@@ -21,9 +21,10 @@
   text-align: center;
   font-weight: bold;
   position: relative;
+  color: #d92550;
 }
 
-.card-body{
+.card-body {
   height: 230px;
 }
 
@@ -34,18 +35,6 @@ svg {
   position: absolute;
   opacity: 25%;
   transform: scale(1.12);
-}
-
-.count-label.flat {
-  color: #f7b924;
-}
-
-.count-label.user {
-  color: #d92550;
-}
-
-.count-label.landlord {
-  color: #16aaff;
 }
 
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Landlord, ProfileService} from '../../../../services/profile.service';
 import {User} from '../../../component/Users';
 
@@ -11,6 +11,7 @@ export class UserRequestDetailComponent implements OnInit {
 
   data: Landlord;
   userData: User;
+  @Input() id: number;
 
   constructor(private landlordService: ProfileService) {
   }
@@ -21,14 +22,14 @@ export class UserRequestDetailComponent implements OnInit {
   }
 
   addPassport() {
-    this.landlordService.addPassport()
+    this.landlordService.getPassportByUser(this.id)
       .subscribe(data => {
         this.data = data;
       });
   }
 
   addUserInfo() {
-    this.landlordService.addUserInfo()
+    this.landlordService.getUserInfo(this.id)
       .subscribe(userData => {
         this.userData = userData;
       });

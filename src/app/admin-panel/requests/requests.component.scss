@@ -1,17 +1,18 @@
-.request-type-button{
+.request-type-button {
   margin: 20px 20px 50px
 }
-.request-table{
+
+.request-table {
   position: relative;
-  margin: 20px 10px 0px 20px;
+  margin: 20px 10px 0 140px;
   width: 1000px;
   float: left;
   color: #2d2d2d;
 }
-.requests-lebel{
+
+.requests-lebel {
   font-size: 25px;
 }
-
 
 table {
   width: 100%;
@@ -37,12 +38,12 @@ table {
   margin-right: 30px;
 }
 
-.requests-lebel-text{
+.requests-lebel-text {
   float: left;
   margin-top: 10px;
 }
 
-::ng-deep .snackbar{
+::ng-deep .snackbar {
   background: white;
   color: black;
 }

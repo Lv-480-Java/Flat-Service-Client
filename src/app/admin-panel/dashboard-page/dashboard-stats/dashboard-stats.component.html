@@ -1,0 +1,32 @@
+<mdb-card class="card">
+
+  <div class="flats">
+    <div class="label">New Flats</div>
+    <div class="number">{{flatNumber}}</div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{flatRatio | percent}}"
+           aria-valuemax="100"></div>
+    </div>
+    <div class="result">Better than last week({{flatRatio | percent}})</div>
+  </div>
+
+  <div class="orders">
+    <div class="label">New Commitments</div>
+    <div class="number">{{orderNumber}}</div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{orderRatio | percent}}" aria-valuemax="100"></div>
+    </div>
+    <div class="result">Better than last week({{orderRatio | percent}})</div>
+  </div>
+
+  <div class="comments">
+    <div class="label">New Comments</div>
+    <div class="number">{{commentNumber}}</div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{commentRatio | percent}}"
+           aria-valuemax="100"></div>
+    </div>
+    <div class="result">Better than last week({{commentRatio | percent}})</div>
+  </div>
+
+</mdb-card>

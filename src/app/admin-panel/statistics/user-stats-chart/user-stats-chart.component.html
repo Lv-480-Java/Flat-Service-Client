@@ -1,0 +1,22 @@
+<mdb-card class="user-chart">
+  <div class="chart">
+    <canvas mdbChart
+            [chartType]="chartType"
+            [datasets]="chartDatasets"
+            [labels]="chartLabels"
+            [colors]="chartColors"
+            [options]="chartOptions"
+            [legend]="true">
+    </canvas>
+  </div>
+  <div>
+    <mdb-card>
+      <mdb-card-body>
+        <mdb-card-title>
+          <span class="count-number">{{totalUsers}} </span>
+          <span class="count-label">Users Registered During Last Week</span>
+        </mdb-card-title>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</mdb-card>

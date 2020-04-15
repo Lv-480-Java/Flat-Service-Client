@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../../services/requests.service';
-import {StatisticsService} from '../../../services/statistics.service';
+import {forkJoin} from 'rxjs';
+import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
 
 @Component({
   selector: 'app-diagram-flats',
@@ -23,11 +23,19 @@ export class DiagramFlatsComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private statisticsService: FlatStatisticsService) {
   }
 
   ngOnInit(): void {
-    this.statisticsService.getFlatsData().subscribe(data => {
-      this.chartDatasets = data;
-    });  }
+    this.loadDataset();
+  }
+
+  loadDataset() {
+    forkJoin([
+      this.statisticsService.countActiveFlats(),
+      this.statisticsService.countUnactiveFlats()
+    ]).subscribe((count) => {
+      this.chartDatasets = [{data: count}];
+    });
+  }
 }

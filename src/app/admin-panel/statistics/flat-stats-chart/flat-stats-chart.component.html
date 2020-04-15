@@ -1,0 +1,23 @@
+<mdb-card class="flat-chart">
+  <div class="chart">
+    <canvas mdbChart
+            [chartType]="chartType"
+            [datasets]="chartDatasets"
+            [labels]="chartLabels"
+            [colors]="chartColors"
+            [options]="chartOptions"
+            [legend]="true">
+    </canvas>
+  </div>
+  <div>
+    <mdb-card>
+      <mdb-card-body>
+        <mdb-card-title>
+          <span class="count-number">{{totalFlats}} </span>
+          <span class="count-label">Flats Posted During Last Week</span>
+        </mdb-card-title>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+
+</mdb-card>
