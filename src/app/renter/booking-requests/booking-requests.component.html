@@ -1,0 +1,68 @@
+<div fxLayout="row" fxLayoutAlign="center none">
+  <div *ngIf="requests!==undefined">
+    <h1 style="margin-bottom:-20px;margin-top:30px;">Booking Requests</h1>
+    <div infinite-scroll *ngFor="let request of requests.content ">
+      <mat-card class="home-card mat-elevation-z5">
+        <mat-card-content class="home-card-content" fxLayout="row">
+
+          <div class="image-container">
+            <img alt="Johny"
+                 src="{{request.flat.photoUrl}}"
+                 class="project-image"/>
+          </div>
+
+          <div class="main-container" fxLayout="column">
+            <div class="content-container" fxLayout="row" fxFlex="100">
+              <div style="margin:0" class="text-conteiner" fxLayout="column" fxFlex="100">
+                <div>
+
+                  <mat-card-header class="flat-header" fxFlex="95">
+                    <div mat-card-avatar class="flat-header-image"></div>
+                    <mat-card-title style="margin-bottom: 4px"> {{request.flat.title}}</mat-card-title>
+                    <mat-card-subtitle
+                      style="margin:0">  {{request.flat.address.street}} {{request.flat.address.flatNumber}}
+                      {{request.flat.address.houseNumber}}</mat-card-subtitle>
+                  </mat-card-header>
+
+                  <button id="agreement_btn" mat-raised-button color="primary"
+                         [disabled]="request.status != 'APPROVED'"  (click)="createAgreement($event)">Create Agreement
+                  </button>
+
+                  <button id="cancel_btn" class="decline-button" mat-raised-button color="primary"
+                          (click)="cancelBooking(request.id)">Cancel
+                  </button>
+
+
+                </div>
+                <div class="project-description" fxFlex="100">
+                  <p>{{request.flat.description}}</p>
+                  <mat-chip-list aria-label="Fish selection">
+                    <mat-chip selected color="primary">{{request.flat.tags[0]}}</mat-chip>
+                    <mat-chip selected color="primary">{{request.flat.tags[1]}}</mat-chip>
+                    <mat-chip selected color="primary">{{request.flat.tags[2]}}</mat-chip>
+                    <mat-chip>others</mat-chip>
+                  </mat-chip-list>
+                </div>
+              </div>
+            </div>
+
+            <div fxFlex class="actions-container" fxLayout="row">
+              <div fxFlex="60">
+                <p class="date">{{request.flat.creationDate}}</p>
+              </div>
+              <div fxFlex><p class="price">{{request.flat.monthPrice}} uah</p></div>
+              <div class="donate-button" fxFlexAlign="end end" fxFlex="25">
+                <button [routerLink]="['/detailed/', request.flat.id]" fxFlexAlign="end end" class="donate"
+                        mat-raised-button
+                        color="accent">
+                  Detailed
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+

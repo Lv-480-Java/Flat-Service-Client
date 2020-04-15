@@ -23,6 +23,7 @@ export class FlatRequestDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadFlat();
+    console.log(this.loadFlat());
   }
 
   loadFlat(): void {

@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {MDBBootstrapModule} from 'angular-bootstrap-md';
@@ -48,9 +48,8 @@ import {DiagramCommentsComponent} from './admin-panel/statistics/diagram-comment
 import {DiagramFlatsComponent} from './admin-panel/statistics/diagram-flats/diagram-flats.component';
 import {DiagramUsersComponent} from './admin-panel/statistics/diagram-users/diagram-users.component';
 import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart/users-line-chart.component';
-import {UserChartComponent} from './admin-panel/statistics/user-chart/user-chart.component';
-import {FlatChartComponent} from './admin-panel/statistics/flat-chart/flat-chart.component';
-import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
+import {UserChartComponent} from './admin-panel/dashboard-page/user-chart/user-chart.component';
+import {FlatChartComponent} from './admin-panel/dashboard-page/flat-chart/flat-chart.component';
 import {MatListModule} from '@angular/material/list';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -62,33 +61,53 @@ import {InterceptorService} from './services/intercept.service';
 import {AddFlatComponent} from './flat/add-flat/add-flat.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {AutoApproveComponent} from './admin-panel/requests/auto-approve/auto-approve.component';
 import {HttpErrorInterceptor} from './services/interceptors/error.interceptor';
-import { ComentsaboutcommentComponent } from './comment/flat-coments-about-comment/comentsaboutcomment.component';
-import { ListCommentComponent } from './comment/flat-list-comment-about-comment/list-comment.component';
-import { UserCommentsAboutComentComponent } from './comment/user-comments-about-coment/user-comments-about-coment.component';
-import { UserListCommentsAboutComentComponent } from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
-import { LikeComponent } from './comment/like/like.component';
+import {ComentsaboutcommentComponent} from './comment/flat-coments-about-comment/comentsaboutcomment.component';
+import {ListCommentComponent} from './comment/flat-list-comment-about-comment/list-comment.component';
+import {UserCommentsAboutComentComponent} from './comment/user-comments-about-coment/user-comments-about-coment.component';
+import {UserListCommentsAboutComentComponent} from './comment/user-list-comments-about-coment/user-list-comments-about-coment.component';
+import {LikeComponent} from './comment/like/like.component';
 import {RequestMessageComponent} from './admin-panel/requests/review-window/request-message/request-message.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {LandlordFlatListComponent} from './flat/landlord-flat-list/landlord-flat-list.component';
+import {DashboardStatsComponent} from './admin-panel/dashboard-page/dashboard-stats/dashboard-stats.component';
+import {TopLandlordsComponent} from './admin-panel/dashboard-page/top-landlords/top-landlords.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {ComplaintComponent} from './comment/complaint/complaint.component';
+import {ComplaintUCComponent} from './comment/complaint-u-c/complaint-u-c.component';
+import {FlatService} from './services/flat.service';
+import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
+import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import {FlatMapComponent} from './flat/flat-map/flat-map.component';
+import {AgmCoreModule} from '@agm/core';
+import {ActiveUsersCountComponent} from './admin-panel/statistics/active-count/active-users-count/active-users-count.component';
+import {ActiveFlatsCountComponent} from './admin-panel/statistics/active-count/active-flats-count/active-flats-count.component';
+import {ActiveLandlordsCountComponent} from './admin-panel/statistics/active-count/active-landlords-count/active-landlords-count.component';
+import {ActiveCountsComponent} from './admin-panel/dashboard-page/active-counts/active-counts.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {FlatStatistiscsComponent} from './admin-panel/statistics/flat-statistiscs/flat-statistiscs.component';
+import {UserStatisticsComponent} from './admin-panel/statistics/user-statistics/user-statistics.component';
+import {CommentStatisticsComponent} from './admin-panel/statistics/comment-statistics/comment-statistics.component';
+import {FlatStatsChartComponent} from './admin-panel/statistics/flat-stats-chart/flat-stats-chart.component';
+import {FlatCountRatioComponent} from './admin-panel/statistics/flat-count-ratio/flat-count-ratio.component';
+import {UserStatsChartComponent} from './admin-panel/statistics/user-stats-chart/user-stats-chart.component';
+import {UserCountRatioComponent} from './admin-panel/statistics/user-count-ratio/user-count-ratio.component';
+import {FlatsLineChartComponent} from './admin-panel/statistics/flats-line-chart/flats-line-chart.component';
 import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {CommentsPageComponent} from './admin-panel/comments-page/comments-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {DialogWindowEditUserComponent} from './admin-panel/user-page/edit-user-window/dialog-window-edit-user';
 import {ReviewPostWindowComponent} from './admin-panel/posts-page/review-post-window/review-post-window.component';
 import {RemoveUserWindowComponent} from './admin-panel/user-page/remove-user-window/remove-user-window.component';
-import { RemovePostWindowComponent } from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
-import { ComplaintComponent } from './comment/complaint/complaint.component';
-import { ComplaintUCComponent } from './comment/complaint-u-c/complaint-u-c.component';
-import {FlatService} from './services/flat.service';
-import {FlatFilterComponent} from './flat/flat-filter/flat-filter.component';
-import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
+import {RemovePostWindowComponent} from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
+import {FlatBookingService} from './services/flat-booking.service';
+import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
+import {ReviewAreaComponent} from './landlord/review-area/review-area.component';
+import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
-import { FlatMapComponent } from './flat/flat-map/flat-map.component';
-import { AgmCoreModule } from '@agm/core';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -124,7 +143,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     UsersLineChartComponent,
     UserChartComponent,
     FlatChartComponent,
-    ActiveCountComponent,
     ProfileShortComponent,
     ChatButtonComponent,
     ComentsaboutcommentComponent,
@@ -136,9 +154,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     UserCommentsAboutComentComponent,
     UserListCommentsAboutComentComponent,
     LikeComponent,
-    AutoApproveComponent,
     RequestMessageComponent,
     LandlordFlatListComponent,
+    DashboardStatsComponent,
+    TopLandlordsComponent,
     ReviewPostWindowComponent,
     RemoveUserWindowComponent,
     RemovePostWindowComponent,
@@ -146,7 +165,23 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ComplaintUCComponent,
     FavoriteFlatComponent,
     FlatMapComponent,
-    ChangePasswordComponent
+    ActiveUsersCountComponent,
+    ActiveFlatsCountComponent,
+    ActiveLandlordsCountComponent,
+    ActiveCountsComponent,
+    FlatStatistiscsComponent,
+    UserStatisticsComponent,
+    CommentStatisticsComponent,
+    FlatStatsChartComponent,
+    FlatCountRatioComponent,
+    UserStatsChartComponent,
+    UserCountRatioComponent,
+    FlatsLineChartComponent,
+    ChangePasswordComponent,
+    FlatRequestsComponent,
+    FlatRequestReviewComponent,
+    ReviewAreaComponent,
+    BookingRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -179,10 +214,39 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatRadioModule,
+    BrowserModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    Ng5SliderModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    FlexModule,
+    InfiniteScrollModule,
+    MatChipsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    GalleryModule,
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatListModule,
+    MatBadgeModule,
+    MatButtonToggleModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatBadgeModule,
     AgmCoreModule.forRoot({
       apiKey: ''
-    })
-
+    }),
+    MatTabsModule
   ],
   providers: [
     [{
@@ -195,8 +259,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
-  bootstrap: [AppComponent]
+    RegistrationService, AuthService, FlatService, FlatBookingService, AuthGuard, MatSnackBar],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
+
 export class AppModule {
 }

@@ -31,7 +31,7 @@ export class ReviewWindowComponent implements OnInit {
       this.requestsService.approveUserRequests(this.data.requestId).subscribe();
     }
     this.close();
-    this.openMessageDialog('Requests was successfully approved!');
+    this.openMessageDialog('Request was successfully approved!');
   }
 
   decline() {
@@ -41,7 +41,7 @@ export class ReviewWindowComponent implements OnInit {
       this.requestsService.declineUserRequests(this.data.requestId).subscribe();
     }
     this.close();
-    this.openMessageDialog('Requests was declined!');
+    this.openMessageDialog('Request was declined!');
   }
 
   openMessageDialog(msg) {

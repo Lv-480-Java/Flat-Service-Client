@@ -38,10 +38,6 @@ export class InterceptorService implements HttpInterceptor {
     this.updateAccessTokenUrl = BASE_URL + 'users/refreshTokens';
   }
 
-  /**
-   * Intercepts all HTTP requests, adds access token to authentication header (except authentication requests),
-   * intercepts 401, 403, and 404 error responses.
-   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.includes('signIn') || req.url.includes('refreshTokens')) {
       return next.handle(req);
@@ -50,7 +46,7 @@ export class InterceptorService implements HttpInterceptor {
       req = this.addAccessTokenToHeader(req, this.localStorageService.getAccessToken());
     }
     return next.handle(req).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
+      if (error instanceof HttpErrorResponse && error.status === 401 && this.localStorageService.getCurrentUser != null) {
         return this.handle401Error(req, next);
       } else {
         return throwError(error);
@@ -58,19 +54,12 @@ export class InterceptorService implements HttpInterceptor {
     }));
   }
 
-  /**
-   * Adds access token to authentication header.
-   */
   addAccessTokenToHeader(req: HttpRequest<any>, accesstoken: string) {
     return req.clone({
       headers: req.headers.set('Authorization', `${accesstoken}`)
     });
   }
 
-  /**
-   * Handles 401 response. It tries to get new access/refresh token pair with refresh token.
-   * All of the rest request are put on hold.
-   */
   private handle401Error(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
@@ -98,9 +87,6 @@ export class InterceptorService implements HttpInterceptor {
     }
   }
 
-  /**
-   * Handles a situation when refresh token is expired.
-   */
   private handleRefreshTokenIsNotValid(error: HttpErrorResponse): Observable<HttpEvent<any>> {
     this.isRefreshing = false;
     if (error.status === BAD_REQUEST) {
@@ -112,9 +98,6 @@ export class InterceptorService implements HttpInterceptor {
 
   }
 
-  /**
-   * Send refresh token in order to get new access/refresh token pair.
-   */
   private getNewTokenPair(refreshToken: string): Observable<any> {
     return this.http.get(`${this.updateAccessTokenUrl}?refreshToken=${refreshToken}`, {observe: 'response'});
   }

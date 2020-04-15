@@ -1,0 +1,11 @@
+<div class="flat-review">
+
+  <div class="buttons">
+    <button class="close-button" mat-raised-button color="basic" (click)="close()">Close</button>
+    <button class="decline-button" mat-raised-button color="warn" (click)="decline()">Decline</button>
+    <button class="approve-button" mat-raised-button color="primary" (click)="approve()">Approve</button>
+  </div>
+
+  <app-flat-request-review [id]="data.request.flat.id"></app-flat-request-review>
+
+</div>

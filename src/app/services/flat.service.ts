@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {RequestsForFlatVerification} from '../admin-panel/requests/entity/requests-for-flat-verification';
 import {Observable} from 'rxjs';
 import {BASE_URL} from '../utils/constants';
+import {RequestForBanFlat} from '../admin-panel/component/RequestForBanFlat';
 
 @Injectable({
   providedIn: 'root'
@@ -17,33 +17,25 @@ export class FlatService {
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 10000,
     });
   }
 
-  getAllPosts(pageNumber: number, pageSize: number) {
-    return this.http.get<RequestsForFlatVerification[]>(
-      BASE_URL + `requests/posts/flats?page=${pageNumber}&size=${pageSize}`);
+  getAllPosts(pageNumber: number, pageSize: number, status: string) {
+    return this.http.get<RequestForBanFlat[]>(
+      BASE_URL + `admin/all/posts?page=${pageNumber}&size=${pageSize}&status=${status}`);
   }
 
-  reviewPost(id: number) {
-    return this.http.put<RequestsForFlatVerification>(BASE_URL + `requests/review/flat/${id}`, null);
+  activatedPost(requestForBan: RequestForBanFlat): Observable<any> {
+    return this.http.put<any>(BASE_URL + `admin/flat/activate`, requestForBan);
   }
 
-  activatedPost(id: number): Observable<RequestsForFlatVerification> {
-    const url = BASE_URL + `requests/flats/${id}/deactivate`;
-    console.log(url);
-    return this.http.put<RequestsForFlatVerification>(url, null);
+  deactivatedPost(requestForBan: RequestForBanFlat): Observable<any> {
+    return this.http.put<any>(BASE_URL + `admin/flat/deactivate`, requestForBan);
   }
 
-  deactivatedPost(id: number): Observable<RequestsForFlatVerification> {
-    const url = BASE_URL + `requests/flats/${id}/deactivate`;
-    console.log(url);
-    return this.http.put<RequestsForFlatVerification>(url, null);
-  }
-
-  removePost(id: string): Observable<any> {
-    return this.http.delete<any>(BASE_URL + `users/delete/${id}`);
+  removePost(id: number): Observable<any> {
+    return this.http.delete<any>(BASE_URL + `admin/flat/${id}`);
   }
 
   addFlatToFavoriteList(id: number): Observable<any> {

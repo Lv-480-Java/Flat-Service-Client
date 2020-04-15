@@ -1,0 +1,43 @@
+.card {
+  width: 388px;
+}
+
+.count-number {
+  margin-top: 50px;
+  font-size: 70px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+  Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  color: #495057;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+
+.count-label {
+  margin: 40px 0px 15px 0px;
+  font-size: 30px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+  Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  text-align: center;
+  font-weight: bold;
+  position: relative;
+  color: #16aaff;
+}
+
+.card-body {
+  height: 230px;
+}
+
+svg {
+  margin-top: 80px;
+  overflow: hidden;
+  vertical-align: middle;
+  position: absolute;
+  opacity: 25%;
+  transform: scale(1.12);
+}
+
+
+
+
+

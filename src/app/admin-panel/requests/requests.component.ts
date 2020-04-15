@@ -7,7 +7,6 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {MatDialog} from '@angular/material/dialog';
 import {ReviewWindowComponent} from './review-window/review-window.component';
-import {RequestMessageComponent} from './review-window/request-message/request-message.component';
 
 @Component({
   selector: 'app-requests',
@@ -75,10 +74,9 @@ export class RequestsComponent implements OnInit {
 
 
   openSnackBar() {
-    console.log('snackbar');
-    this.requestsService.getNewRequests().subscribe(data => {
-      this.bar.open(data + ' New Requests', 'close', {
-        duration: 5000,
+    this.requestsService.getNewRequests().subscribe(newRequests => {
+      this.bar.open(newRequests + ' New Requests', 'close', {
+        duration: 20000,
         verticalPosition: 'bottom',
         horizontalPosition: 'right',
         panelClass: ['snackbar']
@@ -87,8 +85,6 @@ export class RequestsComponent implements OnInit {
   }
 
   getRequestsByPage() {
-    console.log('Get Requests');
-    console.log(this.pageNumber, this.pageSize, this.type, this.status);
     this.requestsService.getRequests(this.pageNumber, this.pageSize, this.type, this.status)
       .subscribe(data => {
         const totalElements = new Array(data[`totalElements`]);
@@ -96,7 +92,6 @@ export class RequestsComponent implements OnInit {
         this.dataSource = new MatTableDataSource<User>(this.requests);
         this.paginator.length = totalElements.length;
       });
-    console.log('Get Requests');
   }
 
   paginationPage() {
@@ -106,13 +101,11 @@ export class RequestsComponent implements OnInit {
   }
 
   review(id: any) {
-    console.log('reviewed ' + id + ' ' + this.type);
     this.requestsService.reviewRequest(id, this.type).subscribe();
     this.openDialog(id);
   }
 
   openDialog(id: number): void {
-    console.log('review flat:');
     const req = this.requests.find(x => x.id === id);
     const dialogRef = this.dialog.open(ReviewWindowComponent, {
       data: {requestId: id, type: this.type, request: req}

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {RegistrationComponent} from './registration/registration.component';
 import {LoginComponent} from './login/login.component';
 import {ProfileComponent} from './profile/profile.component';
@@ -21,6 +21,9 @@ import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
+import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
+import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
+import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -30,12 +33,17 @@ const routes: Routes = [
   {path: 'chatbutton', component: ChatButtonComponent},
   {path: 'addflat', component: AddFlatComponent},
   {path: 'favorite-flat', component: FavoriteFlatComponent},
+  {path: 'flat-requests', component: FlatRequestsComponent},
+  {path: 'flat-requests-review', component: FlatRequestReviewComponent},
+  {path: 'booking-requests', component: BookingRequestsComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [
-      {path: '', component: DashboardPageComponent, children: [
+      {
+        path: '', component: DashboardPageComponent, children: [
           {path: 'dashboard', component: DashboardPageComponent}
-        ]},
+        ]
+      },
       {path: 'comments', component: CommentsPageComponent},
       {path: 'user', component: UserPageComponent},
       {path: 'posts', component: PostsPageComponent},
