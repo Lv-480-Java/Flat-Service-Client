@@ -26,7 +26,6 @@ export interface ComplaintId {
   providedIn: 'root'
 })
 export class ComplaintService {
-  public error$: string;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {
   }
@@ -41,9 +40,6 @@ export class ComplaintService {
 
   addComplaintFlatComment(complaintId: ComplaintId): Observable<Complaint> {
     return this.http.post<Complaint>(BASE_URL + 'complaints/createflatcommentcomplaint/', JSON.stringify(complaintId), this.options)
-      .pipe(
-        catchError(this.handleError.bind(this))
-      );
   }
 
   addComplaintUserComment(complaintId: ComplaintId): Observable<Complaint> {
@@ -54,11 +50,6 @@ export class ComplaintService {
     return this.http.get<Complaint[]>(BASE_URL + 'complaints/getall/');
   }
 
-  private handleError(error: HttpErrorResponse) {
-    const message = error.error;
-    console.log(error);
-    this.error$ = message;
-  }
 
 }
 
