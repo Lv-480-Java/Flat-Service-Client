@@ -1,31 +1,27 @@
-<div class="users-line-chart">
+<mdb-card class="users-line-chart">
 
-  <div class="users-line-chart-label">
-    <mdb-card>
-      <mdb-card-body>
-        <mdb-card-title>
-          <span class="count-label">Users/Landlords Statistics</span>
-        </mdb-card-title>
-      </mdb-card-body>
-    </mdb-card>
-  </div>
-
-  <div class="date-input">
-    <div class="input-month">
-      <mat-form-field class="example-full-width">
-        <mat-label>From</mat-label>
-        <input type="month" matInput max="{{maxDate | date:'yyyy-MM' }}" [ngModel]="toMonth | date:'yyyy-MM' "
-               (ngModelChange)="toMonth = $event; updateDataset()">
-      </mat-form-field>
+  <div>
+    <div class="label">
+      <span>Users/Landlords Statistics</span>
     </div>
 
+    <div class="date-input">
 
-    <div class="input-month">
-      <mat-form-field class="example-full-width">
-        <mat-label>To</mat-label>
-        <input type="month" matInput max="{{maxDate | date:'yyyy-MM' }}" [ngModel]="fromMonth | date:'yyyy-MM' "
-               (ngModelChange)="fromMonth = $event; updateDataset()">
-      </mat-form-field>
+      <div class="input-month">
+        <mat-form-field class="example-full-width">
+          <mat-label>To</mat-label>
+          <input type="month" matInput max="{{maxDate | date:'yyyy-MM' }}" [ngModel]="toMonth | date:'yyyy-MM' "
+                 (ngModelChange)="toMonth = $event; this.loadData()">
+        </mat-form-field>
+      </div>
+
+      <div class="input-month">
+        <mat-form-field class="example-full-width">
+          <mat-label>From</mat-label>
+          <input type="month" matInput max="{{maxDate | date:'yyyy-MM' }}" [ngModel]="fromMonth | date:'yyyy-MM' "
+                 (ngModelChange)="fromMonth = $event; this.loadData()">
+        </mat-form-field>
+      </div>
     </div>
 
   </div>
@@ -41,4 +37,4 @@
   </canvas>
 
 
-</div>
+</mdb-card>

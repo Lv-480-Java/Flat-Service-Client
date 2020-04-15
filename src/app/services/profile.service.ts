@@ -54,6 +54,14 @@ export class ProfileService {
     return this.http.get<User>(BASE_URL + 'users/currentUser');
   }
 
+  getPassportByUser(id: number): Observable<Landlord> {
+    return this.http.get<Landlord>(BASE_URL + `passport/get-passport/${id}`);
+  }
+
+  getUserInfo(id: number): Observable<User> {
+    return this.http.get<User>(BASE_URL + `users/${id}`);
+  }
+
   getUserId(): Observable<any> {
     return this.http.get<any>(BASE_URL + 'users/currentUserId');
   }
