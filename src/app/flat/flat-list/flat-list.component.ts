@@ -28,8 +28,10 @@ export class FlatListComponent implements OnInit {
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
 
   ngOnInit() {
+    if (this.getUsername() != null) {
+      this.loadFavoriteFlats();
+    }
     this.loadFlats();
-    this.loadFavoriteFlats();
   }
 
   loadFlats() {

@@ -3,6 +3,7 @@ import {User} from '../../component/Users';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-top-landlords',
@@ -11,7 +12,7 @@ import {FlatStatisticsService} from '../../../services/statistics/flat-statistic
 })
 export class TopLandlordsComponent implements OnInit {
 
-  commtments = [8, 7, 4, 4, 3, 2];
+  commitments = [];
   topLandlords: Array<User>;
   data = new Array();
   periods = ['All time', 'Year', '3 Months'];
@@ -32,15 +33,19 @@ export class TopLandlordsComponent implements OnInit {
 
       this.topLandlords = landlords;
       for (let i = 0; i < 6; i++) {
-        this.data.push({landlord: this.topLandlords[i], flats: 0, commitments: this.commtments[i]});
+        this.data.push({landlord: this.topLandlords[i], flats: 0, commitments: 0});
       }
       for (let i = 0; i < 6; i++) {
         const id = this.topLandlords[i].id;
-        this.flatStatisticsService.getFlatsOfLandlord(id).subscribe(count => {
-          this.data[i].flats = count;
+        forkJoin([
+          this.flatStatisticsService.getFlatsOfLandlord(id),
+          this.userStatisticsService.getCommitmentsOfLandlord(id)
+        ]).subscribe(count => {
+          this.data[i].flats = count[0];
+          this.data[i].commitments = count[1];
         });
       }
-      console.log('data', this.data);
+      console.log('commitments', this.commitments);
     });
   }
 

@@ -1,0 +1,17 @@
+<div class="flat-review">
+
+  <div *ngIf="data;then flatDetails;">
+
+  </div>
+  <ng-template #flatDetails>
+    <app-flat-request-detail [id]="data.flat.id"></app-flat-request-detail>
+  </ng-template>
+
+  <div class="buttons">
+    <button *ngIf="data.status !== 'ACTIVATED'" class="activate-button" mat-raised-button color="warn" (click)="activated()">Activate</button>
+    <button *ngIf="data.status !== 'DEACTIVATED'" class="deactivate-button" mat-raised-button color="warn" (click)="deactivated()">Deactivate</button>
+    <button class="decline-button" mat-raised-button color="primary" (click)="cancel()">Cancel</button>
+  </div>
+
+</div>
+

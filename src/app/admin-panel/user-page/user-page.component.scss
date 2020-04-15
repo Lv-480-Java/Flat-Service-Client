@@ -2,6 +2,10 @@ table {
   width: 100%;
 }
 
+th {
+  width: 250px;
+}
+
 .example-full-width {
   width: 150px;
   margin-left: 10px;
@@ -27,8 +31,8 @@ table {
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 350px;
-  width: 450px;
+  height: 400px;
+  width: 400px;
   text-align: center;
   font-family: Literata, serif;
 }
@@ -88,6 +92,12 @@ label {
 }
 
 .button-div3 {
+  width: 80px;
   margin-bottom: 10px;
+  margin-left: 10px;
 }
 
+small {
+  color: red;
+  font-size: 14px;
+}

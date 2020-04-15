@@ -62,6 +62,13 @@ export class DashboardStatsComponent implements OnInit {
   }
 
   countOrdersForWeek() {
+    forkJoin([
+      this.userStatisticsService.countCommentsPostedBetween(this.weekAgo, this.today),
+      this.userStatisticsService.countCommentsPostedBetween(this.twoWeeksAgo, this.weekAgo)
+    ]).subscribe((count) => {
+      this.orderNumber = count[0];
+      this.orderRatio = count[1] / count[0];
+    });
   }
 
 }

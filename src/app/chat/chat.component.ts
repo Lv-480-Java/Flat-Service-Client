@@ -21,7 +21,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ISubscription} from 'rxjs/Subscription';
 import {AutoUnsubscribe} from 'ngx-auto-unsubscribe';
 import {ProfileService} from '../services/profile.service';
-
+import {UpdateMessageDTO} from '../model/chat-message-dateSeen.model';
+import {CounterOfUnreadMessagesDTO} from '../model/chat-message-count';
+import {BASE_URL} from '../utils/constants';
 
 (window as any).global = window;
 
@@ -32,15 +34,16 @@ import {ProfileService} from '../services/profile.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, OnDestroy {
-  private countOfMessages: Observable<number>;
-  private myScrollVariable: number | any;
 
   constructor(public profileService: ProfileService, private chatService: ChatService, private http: HttpClient) {
   }
 
-  serverUrl = 'http://localhost:8080/api/ws/';
-  baseUrl = 'http://localhost:8080/api/messages/';
-  url = 'http://localhost:8080/api/chat';
+  private countOfMessages: Observable<number>;
+  private myScrollVariable: number | any;
+
+  serverUrl = BASE_URL + 'wss/';
+  baseUrl = BASE_URL + 'messages/';
+  url = BASE_URL + 'chat';
 
   @Output()
   public onMessagesSeen: EventEmitter<Message[]> = new EventEmitter<Message[]>();
@@ -84,6 +87,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   messages: Message[] = [];
   chatId: number;
   data: any;
+  number: number;
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
@@ -92,6 +96,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   private hasFocus: boolean;
   private notThisUser: boolean;
   subscriptions: Subscription = new Subscription();
+
 
   ngOnInit() {
     console.log(this.username);
@@ -114,9 +119,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
 
   ngAfterViewChecked() {
     this.scrollToBottom();
-    /*
-            this.onScroll();
-    */
   }
 
   ngAfterViewInit() {
@@ -140,9 +142,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     this.loadNextPost();
     console.log(this.pageNumber);
     this.myScrollContainer.nativeElement.scrollTop = currentPosition;
-    /*
-        this.myScrollVariable = currentPosition;
-    */
   }
 
   getMessagesByChatId(id: number): Observable<Message[]> {
@@ -154,7 +153,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     this.subscriptions.add(this.getMessagesByChatId(this.chatId).subscribe(data => {
       this.data = data;
       this.messages = this.data.concat(this.messages);
-      console.log(this.data);
     }));
   }
 
@@ -175,8 +173,8 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   }
 
   initializeWebSocketConnection() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
+    const wss = new SockJS(this.serverUrl);
+    this.stompClient = Stomp.over(wss);
     const that = this;
     // tslint:disable-next-line:only-arrow-functions
     this.stompClient.connect({}, function(frame) {
@@ -198,11 +196,14 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
       if ('deleted' === message.body.toString().substr(11, 7)) {
         const deletedMessage: DeleteMessageInfoDTO = JSON.parse(message.body);
         this.messages.splice(this.messages.findIndex(mes => mes.id === deletedMessage.messageId), 1);
+      } else if ('updated' === message.body.toString().substr(11, 7)) {
+        const updatedMessage: UpdateMessageDTO = JSON.parse(message.body);
+        this.messages.findIndex(mes => mes.id === updatedMessage.messageId);
+      } else if ('unread' === message.body.toString().substr(11, 6)) {
+        const updatedMessage: UpdateMessageDTO = JSON.parse(message.body);
       } else {
         const messageResult: Message = JSON.parse(message.body);
         this.messages.push(messageResult);
-        console.log(this.currentUser());
-        console.log(this.chatMessageInfo.userId);
         this.bufferAudioFile();
         this.emitMessageSound();
       }
@@ -217,6 +218,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
       this.chatMessageInfo.content = message;
       console.log(message);
       this.stompClient.send('/chat/send/message', {}, JSON.stringify(this.chatMessageInfo));
+      this.countOfUnreadMessages(this.chatId);
     }
   }
 
@@ -229,10 +231,23 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     console.log('delete message');
   }
 
+  updateDataSeen(messages: Message[]) {
+    const currentDate = new Date();
+    messages.forEach((msg) => {
+      this.stompClient.send('/chat/updateDate/message', {}, JSON.stringify(new UpdateMessageDTO(msg.id, msg.chatId, msg.senderId)));
+      msg.dateSeen = currentDate;
+    });
+    console.log('UPDATEUPDATEUPDATE');
+  }
+
+  countOfUnreadMessages(id: number) {
+    this.stompClient.send('/chat/countUnread/message', {}, JSON.stringify(new CounterOfUnreadMessagesDTO(id)));
+  }
+
   private formatUnreadMessagesTotal(totalUnreadMessages: number): string {
-    if (totalUnreadMessages > 0) {
-      if (totalUnreadMessages > 99) {
-        return '99+';
+    if (totalUnreadMessages >= 0) {
+      if (totalUnreadMessages > 24) {
+        return '24+';
       } else {
         return String(totalUnreadMessages);
       }
@@ -243,10 +258,7 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
     let totalUnreadMessages = 0;
     if (this.messages) {
       totalUnreadMessages = this.messages.filter(x => x.senderId !== this.currentUserId && !x.dateSeen).length;
-      console.log(this.messages.filter(x => !x.dateSeen && x.senderId !== this.currentUserId));
-      console.log(totalUnreadMessages);
     }
-
     return this.formatUnreadMessagesTotal(totalUnreadMessages);
   }
 
@@ -258,7 +270,6 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
       return !this.notThisUser;
     }
   }
-
 
   // Marks all messages provided as read with the current time.
   public markMessagesAsRead(messages: Message[]): void {
@@ -274,9 +285,9 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
       const unreadMessages = this.messages
         .filter(message => message.dateSeen == null
           && (message.senderId !== this.currentUserId));
-      console.log(unreadMessages);
       if (unreadMessages && unreadMessages.length > 0) {
-        this.markMessagesAsRead(unreadMessages);
+        /*this.markMessagesAsRead(unreadMessages);*/
+        this.updateDataSeen(unreadMessages);
         this.onMessagesSeen.emit(unreadMessages);
       }
     }
@@ -297,17 +308,15 @@ export class ChatComponent implements OnInit, AfterViewChecked, AfterViewInit, O
   }
 
   private emitBrowserNotification(message: string): void {
-    console.log(this.hasFocus);
-    console.log(this.currentUser());
     if (this.browserNotificationsBootstrapped && message && !this.hasFocus && this.currentUser()) {
       const notification = new Notification(`${this.username}`, {
         body: 'You have unread messages',
         icon: this.browserNotificationIconSource
       });
-      setTimeout(() => {
-        notification.close();
-      }, this.chatMessageInfo.content.length <= 50 ? 13000 : 17000); // More time to read longer messages
-      console.log(this.chatMessageInfo.content);
+      /*   setTimeout(() => {
+           notification.close();
+         }, this.chatMessageInfo.content.length <= 50 ? 13000 : 17000); // More time to read longer messages
+         console.log(this.chatMessageInfo.content);*/
     }
   }
 

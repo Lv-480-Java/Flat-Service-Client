@@ -33,7 +33,7 @@ export class DiagramUsersComponent implements OnInit {
 
   loadDataset() {
     forkJoin([
-      this.statisticsService.countActiveUsers(),
+      this.statisticsService.countActiveRenters(),
       this.statisticsService.countActiveLandlords(),
       this.statisticsService.countActiveModerators()
     ]).subscribe((count) => {

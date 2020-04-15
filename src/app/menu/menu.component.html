@@ -18,14 +18,30 @@
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/favorite-flat">Favorite</a>
       </li>
+      <li *ngIf="displayRole()==='ROLE_LANDLORD'" class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/addflat" routerLinkActive="active">Add Flat</a>
+      </li>
+
+      <li *ngIf="displayRole()==='ROLE_LANDLORD'" class="nav-item" id="landlord_requests" matBadge="{{newRequests}}"
+          matBadgePosition="above after" matBadgeSize="small">
+        <a id="al_requests" class="nav-link waves-light" mdbWavesEffect routerLink="/flat-requests"
+           routerLinkActive="active"
+        >Flat Requests</a>
+      </li>
+
+      <li *ngIf="displayRole()==='ROLE_RENTER' || displayRole()==='ROLE_MODERATOR' || displayRole()==='ROLE_ADMIN'"
+          class="nav-item" id="renter_requests">
+        <a id="ar_requests" class="nav-link waves-light" mdbWavesEffect routerLink="/booking-requests"
+           routerLinkActive="active"
+        >Booking Requests</a>
+      </li>
+
+      <li *ngIf="displayRole()==='ROLE_ADMIN'|| displayRole()==='ROLE_MODERATOR'" class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/admin" routerLinkActive="active">Admin Panel</a>
+      </li>
+
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/data" routerLinkActive="active">Profile</a>
-      </li>
-      <li *ngIf="displayRole()==='ROLE_LANDLORD'" class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect routerLink="/addflat" routerLinkActive="active">Add flat</a>
-      </li>
-      <li *ngIf="displayRole()==='ROLE_ADMIN'|| displayRole()==='ROLE_MODERATOR'" class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect [routerLink]="['/admin']">Admin panel</a>
       </li>
     </ul>
     <!-- Links -->

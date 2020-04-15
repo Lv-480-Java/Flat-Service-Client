@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FlatResponse} from "../flat/flat-filter/entity/Flat";
 import {FlatService} from "../services/flat.service";

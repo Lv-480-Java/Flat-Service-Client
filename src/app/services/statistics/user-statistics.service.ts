@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BASE_URL} from '../../utils/constants';
 import {User} from '../../admin-panel/component/Users';
+import {url} from 'inspector';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,11 @@ export class UserStatisticsService {
     return this.http.get<number>(url);
   }
 
+  countActiveRenters(): Observable<number> {
+    const url = BASE_URL + 'admin/user-statistics/count-active-renters';
+    return this.http.get<number>(url);
+  }
+
   countActiveLandlords(): Observable<number> {
     const url = BASE_URL + 'admin/user-statistics/count-active-landlords';
     return this.http.get<number>(url);
@@ -26,18 +32,6 @@ export class UserStatisticsService {
   countActiveModerators(): Observable<number> {
     const url = BASE_URL + 'admin/user-statistics/count-active-moderators';
     return this.http.get<number>(url);
-  }
-
-  getAllUsersCount(start, end): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + `admin/statistics/users-dynamics/${end}/${start}`);
-  }
-
-  getAllLandlordsCount(start, end): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + `admin/statistics/landlords-dynamics/${end}/${start}`);
-  }
-
-  getUsersData(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/statistics/users-landlords');
   }
 
   countRegisteredRentersBeforeMonth(day: Date): Observable<number> {
@@ -68,13 +62,27 @@ export class UserStatisticsService {
   }
 
   countUsersRegisteredBetween(start, end) {
-
     const url = BASE_URL + 'admin/user-statistics/count-users-registered-between-dates';
+    let params = new HttpParams();
+    params = params.append('start', start.toLocaleDateString());
+    params = params.append('end', end.toLocaleDateString());
+    return this.http.get<number>(url, {params});
+  }
 
+  countCommentsPostedBetween(start: Date, end: Date): Observable<number> {
+    const url = BASE_URL + 'admin/user-statistics/count-all-commitments-between-dates';
     let params = new HttpParams();
     params = params.append('start', start.toLocaleDateString());
     params = params.append('end', end.toLocaleDateString());
 
     return this.http.get<number>(url, {params});
+  }
+
+  getCommitmentsOfLandlord(id): Observable<number> {
+    const url = BASE_URL + 'admin/user-statistics/count-commitments-of-landlord';
+    let params = new HttpParams();
+    params = params.append('userId', id);
+    return this.http.get<number>(url, {params});
+
   }
 }

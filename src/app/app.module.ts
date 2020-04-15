@@ -24,14 +24,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTableModule} from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {ProfileComponent} from './profile/profile.component';
-import {DialogWindowEditUserComponent} from './admin-panel/list-user-page/dialog-window-edit-user';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MenuComponent} from './menu/menu.component';
 import {FlatDetailedComponent} from './flat/flat-detailed/flat-detailed.component';
 import {GalleryModule} from '@ngx-gallery/core';
-import {ListUserPageComponent} from './admin-panel/list-user-page/list-user-page.component';
-import {ListPostsPageComponent} from './admin-panel/list-posts-page/list-posts-page.component';
-import {ListCommentsPageComponent} from './admin-panel/list-comments-page/list-comments-page.component';
 import {DashboardPageComponent} from './admin-panel/dashboard-page/dashboard-page.component';
 import {AdminLayoutComponent} from './admin-panel/admin-layout/admin-layout.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -87,16 +83,31 @@ import {AgmCoreModule} from '@agm/core';
 import {ActiveUsersCountComponent} from './admin-panel/statistics/active-count/active-users-count/active-users-count.component';
 import {ActiveFlatsCountComponent} from './admin-panel/statistics/active-count/active-flats-count/active-flats-count.component';
 import {ActiveLandlordsCountComponent} from './admin-panel/statistics/active-count/active-landlords-count/active-landlords-count.component';
-import { ActiveCountsComponent } from './admin-panel/dashboard-page/active-counts/active-counts.component';
+import {ActiveCountsComponent} from './admin-panel/dashboard-page/active-counts/active-counts.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import { FlatStatistiscsComponent } from './admin-panel/statistics/flat-statistiscs/flat-statistiscs.component';
-import { UserStatisticsComponent } from './admin-panel/statistics/user-statistics/user-statistics.component';
-import { CommentStatisticsComponent } from './admin-panel/statistics/comment-statistics/comment-statistics.component';
-import { FlatStatsChartComponent } from './admin-panel/statistics/flat-stats-chart/flat-stats-chart.component';
-import { FlatCountRatioComponent } from './admin-panel/statistics/flat-count-ratio/flat-count-ratio.component';
-import { UserStatsChartComponent } from './admin-panel/statistics/user-stats-chart/user-stats-chart.component';
-import { UserCountRatioComponent } from './admin-panel/statistics/user-count-ratio/user-count-ratio.component';
-import { FlatsLineChartComponent } from './admin-panel/statistics/flats-line-chart/flats-line-chart.component';
+import {FlatStatistiscsComponent} from './admin-panel/statistics/flat-statistiscs/flat-statistiscs.component';
+import {UserStatisticsComponent} from './admin-panel/statistics/user-statistics/user-statistics.component';
+import {CommentStatisticsComponent} from './admin-panel/statistics/comment-statistics/comment-statistics.component';
+import {FlatStatsChartComponent} from './admin-panel/statistics/flat-stats-chart/flat-stats-chart.component';
+import {FlatCountRatioComponent} from './admin-panel/statistics/flat-count-ratio/flat-count-ratio.component';
+import {UserStatsChartComponent} from './admin-panel/statistics/user-stats-chart/user-stats-chart.component';
+import {UserCountRatioComponent} from './admin-panel/statistics/user-count-ratio/user-count-ratio.component';
+import {FlatsLineChartComponent} from './admin-panel/statistics/flats-line-chart/flats-line-chart.component';
+import {UserPageComponent} from './admin-panel/user-page/user-page.component';
+import {CommentsPageComponent} from './admin-panel/comments-page/comments-page.component';
+import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
+import {DialogWindowEditUserComponent} from './admin-panel/user-page/edit-user-window/dialog-window-edit-user';
+import {ReviewPostWindowComponent} from './admin-panel/posts-page/review-post-window/review-post-window.component';
+import {RemoveUserWindowComponent} from './admin-panel/user-page/remove-user-window/remove-user-window.component';
+import {RemovePostWindowComponent} from './admin-panel/posts-page/remove-post-window/remove-post-window.component';
+import {FlatBookingService} from './services/flat-booking.service';
+import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
+import {ChangePasswordComponent} from './change-password/change-password.component';
+import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
+import {ReviewAreaComponent} from './landlord/review-area/review-area.component';
+import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -111,9 +122,9 @@ import { FlatsLineChartComponent } from './admin-panel/statistics/flats-line-cha
     MenuComponent,
     FlatDetailedComponent,
     AdminLayoutComponent,
-    ListUserPageComponent,
-    ListPostsPageComponent,
-    ListCommentsPageComponent,
+    UserPageComponent,
+    PostsPageComponent,
+    CommentsPageComponent,
     DashboardPageComponent,
     ChatComponent,
     ProfileUserComponent,
@@ -147,6 +158,9 @@ import { FlatsLineChartComponent } from './admin-panel/statistics/flats-line-cha
     LandlordFlatListComponent,
     DashboardStatsComponent,
     TopLandlordsComponent,
+    ReviewPostWindowComponent,
+    RemoveUserWindowComponent,
+    RemovePostWindowComponent,
     ComplaintComponent,
     ComplaintUCComponent,
     FavoriteFlatComponent,
@@ -163,42 +177,77 @@ import { FlatsLineChartComponent } from './admin-panel/statistics/flats-line-cha
     UserStatsChartComponent,
     UserCountRatioComponent,
     FlatsLineChartComponent,
+    ChangePasswordComponent,
+    FlatRequestsComponent,
+    FlatRequestReviewComponent,
+    ReviewAreaComponent,
+    BookingRequestsComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MDBBootstrapModule.forRoot(),
-        BrowserAnimationsModule,
-        HttpClientModule,
-        FormsModule,
-        Ng5SliderModule,
-        MatSliderModule,
-        MatCardModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        FlexModule,
-        InfiniteScrollModule,
-        MatChipsModule,
-        MatTableModule,
-        MatCheckboxModule,
-        ReactiveFormsModule,
-        MatAutocompleteModule,
-        GalleryModule,
-        MatSidenavModule,
-        MatPaginatorModule,
-        MatDialogModule,
-        MatListModule,
-        MatBadgeModule,
-        MatButtonToggleModule,
-        MatSelectModule,
-        MatGridListModule,
-        MatBadgeModule,
-        AgmCoreModule.forRoot({
-            apiKey: ''
-        }),
-        MatTabsModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    Ng5SliderModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    FlexModule,
+    InfiniteScrollModule,
+    MatChipsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    GalleryModule,
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatListModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatBadgeModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
+    MatRadioModule,
+    BrowserModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    Ng5SliderModule,
+    MatSliderModule,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    FlexModule,
+    InfiniteScrollModule,
+    MatChipsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    GalleryModule,
+    MatSidenavModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    MatListModule,
+    MatBadgeModule,
+    MatButtonToggleModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatBadgeModule,
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    }),
+    MatTabsModule
+  ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,
@@ -210,7 +259,7 @@ import { FlatsLineChartComponent } from './admin-panel/statistics/flats-line-cha
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, FlatService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, FlatBookingService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
