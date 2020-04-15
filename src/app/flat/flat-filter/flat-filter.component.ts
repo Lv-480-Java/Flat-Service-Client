@@ -162,7 +162,7 @@ export class FlatFilterComponent implements OnInit {
       this.http.get(BASE_URL + 'telegram')
         .subscribe(succes => {},  error => {
           console.log(error.error.text)
-          this.flatService.openSnackBar('Please send code to our Telegram bot @MaklerTaboo, ' +
+          this.flatService.openSnackBar('Please send code to our Telegram bot @makler_taboo_bot, ' +
             'Your auth code is :' + error.error.text, 'I sent auth');
         });
     } else {
