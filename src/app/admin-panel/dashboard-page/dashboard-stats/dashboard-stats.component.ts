@@ -1,7 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../../services/requests.service';
-import {StatisticsService} from '../../../services/statistics.service';
-import {on} from 'cluster';
 import {forkJoin} from 'rxjs';
 import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';

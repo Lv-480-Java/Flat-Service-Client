@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
+import {Component, OnInit} from '@angular/core';
 import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
-import {CommentStatitsticsService} from '../../../services/statistics/comment-statitstics.service';
 import {forkJoin} from 'rxjs';
 
 @Component({
@@ -31,8 +29,9 @@ export class FlatCountRatioComponent implements OnInit {
     this.weekAgo = new Date();
     this.twoWeeksAgo = new Date();
 
-    this.weekAgo.setDate(this.today.getDate() - 7);
-    this.twoWeeksAgo.setDate(this.today.getDate() - 14);
+    this.weekAgo.setDate(this.today.getDate() - 6);
+    this.twoWeeksAgo.setDate(this.today.getDate() - 13);
+    this.today.setDate(this.today.getDate() + 1);
   }
 
   countFlatPostedForWeek() {

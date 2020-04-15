@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {StatisticsService} from '../../../services/statistics.service';
+import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'app-diagram-users',
@@ -23,12 +24,20 @@ export class DiagramUsersComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private statisticsService: UserStatisticsService) {
   }
 
   ngOnInit(): void {
-    this.statisticsService.getUsersData().subscribe(data => {
-      this.chartDatasets = data;
+    this.loadDataset();
+  }
+
+  loadDataset() {
+    forkJoin([
+      this.statisticsService.countActiveUsers(),
+      this.statisticsService.countActiveLandlords(),
+      this.statisticsService.countActiveModerators()
+    ]).subscribe((count) => {
+      this.chartDatasets = [{data: count}];
     });
   }
 }

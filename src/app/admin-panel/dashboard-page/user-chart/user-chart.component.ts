@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {StatisticsService} from '../../../services/statistics.service';
 import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 
 @Component({

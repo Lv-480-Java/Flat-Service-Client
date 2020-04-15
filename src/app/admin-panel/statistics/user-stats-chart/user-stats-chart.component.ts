@@ -1,32 +1,32 @@
 import {Component, OnInit} from '@angular/core';
-import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
+import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 
 @Component({
-  selector: 'app-flat-chart',
-  templateUrl: './flat-chart.component.html',
-  styleUrls: ['./flat-chart.component.scss']
+  selector: 'app-user-stats-chart',
+  templateUrl: './user-stats-chart.component.html',
+  styleUrls: ['./user-stats-chart.component.scss']
 })
-export class FlatChartComponent implements OnInit {
+export class UserStatsChartComponent implements OnInit {
+
   private dayNames: Array<any> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   private dates = [];
+  public totalUsers: number;
 
   public chartType = 'bar';
   public chartDatasets = [{data: [], label: ''}];
   public chartLabels = [];
-  public totalFlats: number;
   public chartColors: Array<any> = [
     {
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-      borderColor: 'rgba(255,99,132,1)',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 2,
     }
   ];
-
   public chartOptions: any = {
     responsive: true
   };
 
-  constructor(private statisticsService: FlatStatisticsService) {
+  constructor(private statisticsService: UserStatisticsService) {
   }
 
   ngOnInit(): void {
@@ -56,10 +56,10 @@ export class FlatChartComponent implements OnInit {
     const numbers = [];
     for (let i = 0; i < 7; i++) {
       const day = this.dates[i];
-      this.statisticsService.countPostedFlatsByDay(day).subscribe(countOfRegisteredUsers => {
+      this.statisticsService.countRegisteredUsersByDay(day).subscribe(countOfRegisteredUsers => {
         numbers.unshift(countOfRegisteredUsers);
-        this.chartDatasets = [{data: numbers, label: 'Flats posted'}];
-        this.totalFlats = numbers.reduce((x, y) => x + y);
+        this.chartDatasets = [{data: numbers, label: 'Users registered'}];
+        this.totalUsers = numbers.reduce((x, y) => x + y);
       });
     }
   }

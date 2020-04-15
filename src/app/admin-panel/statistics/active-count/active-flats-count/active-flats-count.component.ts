@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {StatisticsService} from '../../../../services/statistics.service';
 import {FlatStatisticsService} from '../../../../services/statistics/flat-statistics.service';
 
 @Component({

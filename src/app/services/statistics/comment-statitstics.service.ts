@@ -23,9 +23,28 @@ export class CommentStatitsticsService {
     return this.http.get<number>(url, {params});
   }
 
-  getCommentsData(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/comment-statistics/count-comments');
+  countUserCommentsPostedBeforeMonth(day: Date): Observable<number> {
+    const url = BASE_URL + 'admin/comment-statistics/count-user-comments-posted-before-month';
+    let params = new HttpParams();
+    params = params.append('month', day.toLocaleDateString());
+    return this.http.get<number>(url, {params});
   }
 
+  countFLatCommentsPostedBeforeMonth(day: Date): Observable<number> {
+    const url = BASE_URL + 'admin/comment-statistics/count-flat-comments-posted-before-month';
+    let params = new HttpParams();
+    params = params.append('month', day.toLocaleDateString());
+    return this.http.get<number>(url, {params});
+  }
+
+  countUserCommnets(): Observable<number> {
+    const url = BASE_URL + 'admin/comment-statistics/count-user-comments';
+    return this.http.get<number>(url);
+  }
+
+  countFlatCommnets(): Observable<number> {
+    const url = BASE_URL + 'admin/comment-statistics/count-flat-comments';
+    return this.http.get<number>(url);
+  }
 
 }

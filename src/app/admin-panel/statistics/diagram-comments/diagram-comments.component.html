@@ -1,5 +1,5 @@
-<div class="user-diagram">
-  <div class="diagram-title">
+<mdb-card class="diagram">
+  <div class="title">
     <p>Comments
     <p>
   </div>
@@ -9,20 +9,7 @@
           [labels]="chartLabels"
           [colors]="chartColors"
           [options]="chartOptions"
-          [legend]="true"
-  >
+          [legend]="true">
   </canvas>
 
-  <div class="card stats first">
-    <div class="card-body">
-      <p><b>{{chartDatasets[0]}}</b> Comments about Flats</p>
-    </div>
-  </div>
-  <div class="card stats">
-    <div class="card-body">
-      <p><b>{{chartDatasets[1]}}</b> Comments about Users</p>
-    </div>
-  </div>
-
-
-</div>
+</mdb-card>

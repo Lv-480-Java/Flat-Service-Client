@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {forkJoin} from 'rxjs';
-import {CommentStatitsticsService} from '../../../services/statistics/comment-statitstics.service';
+import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';
 
 @Component({
-  selector: 'app-comments-line-chart',
-  templateUrl: './comments-line-chart.component.html',
-  styleUrls: ['./comments-line-chart.component.scss']
+  selector: 'app-flats-line-chart',
+  templateUrl: './flats-line-chart.component.html',
+  styleUrls: ['./flats-line-chart.component.scss']
 })
-export class CommentsLineChartComponent implements OnInit {
+export class FlatsLineChartComponent implements OnInit {
+
   public chartType = 'line';
 
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -17,8 +17,7 @@ export class CommentsLineChartComponent implements OnInit {
   dates = [];
 
   public chartDatasets = [
-    {data: [], label: 'User Comments'},
-    {data: [], label: 'Flat Comments'},
+    {data: [], label: 'Flats'},
   ];
 
   public chartLabels = [];
@@ -40,7 +39,7 @@ export class CommentsLineChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: CommentStatitsticsService) {
+  constructor(private statisticsService: FlatStatisticsService) {
   }
 
   ngOnInit(): void {
@@ -55,27 +54,25 @@ export class CommentsLineChartComponent implements OnInit {
   }
 
   updateDataset() {
-    const userComments = [];
-    const flatComments = [];
+    console.log('update dataset');
+    console.log('dates', this.dates);
+    console.log('labels', this.chartLabels);
+    console.log('dataset', this.chartDatasets);
+    const flats = [];
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.dates.length; i++) {
       const month = this.dates[i];
-      forkJoin([
-        this.statisticsService.countFLatCommentsPostedBeforeMonth(month),
-        this.statisticsService.countUserCommentsPostedBeforeMonth(month)
-      ]).subscribe((count) => {
-        userComments.unshift(count[1]);
-        flatComments.unshift(count[0]);
+
+      this.statisticsService.countFlatsPostedBeforeMonth(month).subscribe(count => {
+        flats.unshift(count);
         this.chartDatasets = [
-          {data: userComments, label: 'User Comments'},
-          {data: flatComments, label: 'Flat Comments'}
+          {data: flats, label: 'Flats'},
         ];
-        console.log('tesrgfs', this.chartDatasets);
-
       });
-    }
-  }
 
+    }
+    console.log(this.chartDatasets);
+  }
 
   initializeDates() {
     this.toMonth = new Date();
@@ -88,9 +85,7 @@ export class CommentsLineChartComponent implements OnInit {
     this.dates = [];
     this.fromMonth = new Date(this.fromMonth);
     this.toMonth = new Date(this.toMonth);
-    for (const i = new Date(this.toMonth);
-         this.monthDiff(this.fromMonth, i) !== -2;
-         i.setMonth(i.getMonth() - 1)) {
+    for (const i = new Date(this.toMonth); this.monthDiff(this.fromMonth, i) !== -2; i.setMonth(i.getMonth() - 1)) {
       this.dates.push(new Date(i));
     }
   }

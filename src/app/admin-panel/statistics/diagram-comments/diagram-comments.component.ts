@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {StatisticsService} from '../../../services/statistics.service';
+import {forkJoin} from 'rxjs';
+import {CommentStatitsticsService} from '../../../services/statistics/comment-statitstics.service';
 
 @Component({
   selector: 'app-diagram-comments',
@@ -7,14 +8,13 @@ import {StatisticsService} from '../../../services/statistics.service';
   styleUrls: ['./diagram-comments.component.scss']
 })
 export class DiagramCommentsComponent implements OnInit {
-
   public chartType = 'pie';
   public chartDatasets: Array<any> = [{data: [0, 0]}];
-  public chartLabels: Array<any> = ['Flats', 'Users'];
+  public chartLabels: Array<any> = ['Active', 'Unactive'];
   public chartColors: Array<any> = [
     {
-      backgroundColor: ['#2d5569', '#bccb6e'],
-      hoverBackgroundColor: ['#3a859d', '#e6f595'],
+      backgroundColor: ['#4183fa', '#9c9595'],
+      hoverBackgroundColor: ['#65a0fa', '#dcd9d7'],
       borderWidth: 1,
     }
   ];
@@ -23,15 +23,21 @@ export class DiagramCommentsComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private statisticsService: CommentStatitsticsService) {
   }
 
   ngOnInit(): void {
-    this.statisticsService.getCommentsData().subscribe(data => {
-      // this.chartDatasets = data;
-      this.chartDatasets = [72, 39];
-    });
+    this.loadDataset();
   }
 
+  loadDataset() {
+    forkJoin([
+      this.statisticsService.countFlatCommnets(),
+      this.statisticsService.countUserCommnets()
+    ]).subscribe((count) => {
+      console.log('comments', count);
+      this.chartDatasets = [{data: count}];
+    });
+  }
 
 }

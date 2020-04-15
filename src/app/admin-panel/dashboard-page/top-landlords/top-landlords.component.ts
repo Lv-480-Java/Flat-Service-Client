@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../component/Users';
-import {StatisticsService} from '../../../services/statistics.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 import {FlatStatisticsService} from '../../../services/statistics/flat-statistics.service';

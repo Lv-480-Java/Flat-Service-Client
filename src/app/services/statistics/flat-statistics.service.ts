@@ -16,14 +16,21 @@ export class FlatStatisticsService {
     return this.http.get<number>(url);
   }
 
-  getFlatsData(): Observable<Array<number>> {
-    return this.http.get<Array<number>>(BASE_URL + 'admin/flat-statistics/active-unactive-flats');
+  countUnactiveFlats(): Observable<number> {
+    return this.http.get<number>(BASE_URL + 'admin/flat-statistics/count-unactive-flats');
   }
 
   countPostedFlatsByDay(day: Date): Observable<number> {
     const url = BASE_URL + 'admin/flat-statistics/count-posted-flats-on-day';
     let params = new HttpParams();
     params = params.append('day', day.toLocaleDateString());
+    return this.http.get<number>(url, {params});
+  }
+
+  countFlatsPostedBeforeMonth(day: Date): Observable<number> {
+    const url = BASE_URL + 'admin/flat-statistics/count-flats-posted-before-month';
+    let params = new HttpParams();
+    params = params.append('month', day.toLocaleDateString());
     return this.http.get<number>(url, {params});
   }
 
@@ -42,4 +49,5 @@ export class FlatStatisticsService {
     console.log(url);
     return this.http.get<number>(url);
   }
+
 }

@@ -54,7 +54,6 @@ import {DiagramUsersComponent} from './admin-panel/statistics/diagram-users/diag
 import {UsersLineChartComponent} from './admin-panel/statistics/users-line-chart/users-line-chart.component';
 import {UserChartComponent} from './admin-panel/dashboard-page/user-chart/user-chart.component';
 import {FlatChartComponent} from './admin-panel/dashboard-page/flat-chart/flat-chart.component';
-import {ActiveCountComponent} from './admin-panel/statistics/active-count/active-count.component';
 import {MatListModule} from '@angular/material/list';
 import {ProfileShortComponent} from './profile-short/profile-short.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -95,6 +94,9 @@ import { UserStatisticsComponent } from './admin-panel/statistics/user-statistic
 import { CommentStatisticsComponent } from './admin-panel/statistics/comment-statistics/comment-statistics.component';
 import { FlatStatsChartComponent } from './admin-panel/statistics/flat-stats-chart/flat-stats-chart.component';
 import { FlatCountRatioComponent } from './admin-panel/statistics/flat-count-ratio/flat-count-ratio.component';
+import { UserStatsChartComponent } from './admin-panel/statistics/user-stats-chart/user-stats-chart.component';
+import { UserCountRatioComponent } from './admin-panel/statistics/user-count-ratio/user-count-ratio.component';
+import { FlatsLineChartComponent } from './admin-panel/statistics/flats-line-chart/flats-line-chart.component';
 
 
 @NgModule({
@@ -130,7 +132,6 @@ import { FlatCountRatioComponent } from './admin-panel/statistics/flat-count-rat
     UsersLineChartComponent,
     UserChartComponent,
     FlatChartComponent,
-    ActiveCountComponent,
     ProfileShortComponent,
     ChatButtonComponent,
     ComentsaboutcommentComponent,
@@ -159,6 +160,9 @@ import { FlatCountRatioComponent } from './admin-panel/statistics/flat-count-rat
     CommentStatisticsComponent,
     FlatStatsChartComponent,
     FlatCountRatioComponent,
+    UserStatsChartComponent,
+    UserCountRatioComponent,
+    FlatsLineChartComponent,
   ],
     imports: [
         BrowserModule,
