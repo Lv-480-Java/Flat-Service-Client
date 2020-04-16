@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Complaint, ComplaintService} from '../../services/complaint.service';
+import {Complaint, ComplaintId, ComplaintService} from '../../services/complaint.service';
 import {UserComment} from '../../services/user-comment.service';
 
 @Component({
@@ -23,14 +23,11 @@ export class ComplaintUCComponent implements OnInit {
 
 
   add() {
-    const userComments: UserComment = {
-      id: this.commentId
-    };
-    const complaint: Complaint = {
+    const complaintId: ComplaintId = {
       text: this.complaint,
-      userComment: userComments
+      userCommentId: this.commentId
     };
-    this.complaintService.addComplaintUserComment(complaint)
+    this.complaintService.addComplaintUserComment(complaintId)
       .subscribe(success => {
         this.complaintService.openSnackBar('Complaint sent', '');
       }, error => {
