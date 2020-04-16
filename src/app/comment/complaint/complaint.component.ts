@@ -16,7 +16,7 @@ export class ComplaintComponent implements OnInit {
   // tslint:disable-next-line:no-output-native
   @Output() close = new EventEmitter<void>()
 
-  constructor(public complaintService: ComplaintService, private router: Router) {
+  constructor(public complaintService: ComplaintService) {
   }
 
   ngOnInit(): void {
@@ -31,11 +31,8 @@ export class ComplaintComponent implements OnInit {
     this.complaintService.addComplaintFlatComment(complaintId)
       .subscribe(success => {
       this.complaintService.openSnackBar('Complaint sent', '');
-      setTimeout(() => {
-        this.router.navigate(['detailed/:id']);
-      }, 4000);
     }, error => {
-      this.complaintService.openSnackBar(this.complaintService.error$, '');
+      this.complaintService.openSnackBar('The complaint has already been submitted', '');
     });
   }
 
