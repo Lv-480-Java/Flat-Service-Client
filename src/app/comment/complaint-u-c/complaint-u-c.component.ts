@@ -31,8 +31,10 @@ export class ComplaintUCComponent implements OnInit {
       userComment: userComments
     };
     this.complaintService.addComplaintUserComment(complaint)
-      .subscribe(complain => {
-        this.complaint = null;
+      .subscribe(success => {
+        this.complaintService.openSnackBar('Complaint sent', '');
+      }, error => {
+        this.complaintService.openSnackBar('The complaint has already been submitted', '');
       });
   }
 
