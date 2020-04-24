@@ -25,6 +25,14 @@ export class FlatBookingService {
     return this.http.get<RequestsForFlatVerification[]>(BASE_URL + `booking/get-requests/renter`)
   }
 
+  getActiveRenterRequests(): Observable<any> {
+    return this.http.get<RequestsForFlatVerification[]>(BASE_URL + `booking/get-active-requests/renter`)
+  }
+
+  getDeclinedRenterRequests(): Observable<any> {
+    return this.http.get<RequestsForFlatVerification[]>(BASE_URL + `booking/get-declined-requests/renter`)
+  }
+
   approveRequestForFlatBooking(id: number): Observable<RequestsForFlatVerification> {
     return this.http.put<RequestsForFlatVerification>(BASE_URL + `booking/flat/${id}/approve`, null);
   }
