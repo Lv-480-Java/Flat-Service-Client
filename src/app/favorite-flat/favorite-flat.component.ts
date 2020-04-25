@@ -30,7 +30,6 @@ export class FavoriteFlatComponent implements OnInit {
         if (this.flatResponse.content.length < 1) {
           this.bar.open("Your favorite list is empty", "x",
             {
-              duration: 3000,
               verticalPosition: 'top',
               horizontalPosition: 'center',
               panelClass: ['snackbar']
