@@ -108,6 +108,8 @@ import {ReviewAreaComponent} from './landlord/review-area/review-area.component'
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 @NgModule({
@@ -242,7 +244,9 @@ import {MatRadioModule} from '@angular/material/radio';
     MatButtonToggleModule,
     MatSelectModule,
     MatGridListModule,
+    MatDatepickerModule,
     MatBadgeModule,
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: ''
     }),

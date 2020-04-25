@@ -1,18 +1,3 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
-<hr>
 
 <div class="container bootstrap snippet">
   <div class="row">
@@ -32,46 +17,37 @@
       </div>
     </div><!--/col-3-->
     <div class="col-sm-9">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#data">User Data</a></li>
-        <li><a data-toggle="tab" href="/profile">Passport Data</a></li>
-        <li><a data-toggle="tab" href="/telegram">Telegram</a></li>
+      <ul id="navlist">
+        <li><a href="/data">User data</a></li>
+        <li><a href="/profile">Passport data</a></li>
+        <li><a href="/telegram">Telegram</a></li>
       </ul>
 
-      <div class="tab-content">
-        <div class="tab-pane active" id="data">
-          <hr>
           <form class="form" action="" method="post" enctype="multipart/form-data" id="registrationForm">
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Nick name</h4>
-
-                <input type="text" class="form-control" [(ngModel)]="userData.username"
-                       [ngModelOptions]="{standalone:true}">
-                <small style="color: #d92550; font-size: 12px" class="align-baseline"
-                       *ngIf="profileUserService.ERROR_USERNAME$ | async as error">
-                  {{ error }}
-                </small>
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Phone</h4>
-                <input type="text" class="form-control" [(ngModel)]="userData.phoneNumber"
-                       [ngModelOptions]="{standalone:true}">
-                <small style="color: #d92550; font-size: 12px" class="align-baseline"
-                       *ngIf="profileUserService.ERROR_PHONE$ | async as error">
-                  {{ error }}
-                </small>
-              </div>
-            </div>
+                <mat-form-field appearance="outline">
+                  <mat-label>User name</mat-label>
+                  <input matInput  [(ngModel)]="userData.username"
+                         [ngModelOptions]="{standalone:true}">
+                  <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                         *ngIf="profileUserService.ERROR_USERNAME$ | async as error">
+                    {{ error }}
+                  </small>
+                </mat-form-field>
+                 <br>
+                <mat-form-field appearance="outline">
+                  <mat-label>Phone number</mat-label>
+                  <input matInput [(ngModel)]="userData.phoneNumber"
+                         [ngModelOptions]="{standalone:true}" >
+                  <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                         *ngIf="profileUserService.ERROR_PHONE$ | async as error">
+                    {{ error }}
+                  </small>
+                </mat-form-field>
 
             <div class="form-group">
               <div class="col-xs-12">
-                <br>
-                <button mat-raised-button color="primary" style="margin:20px;" (click)="updateUserData(userData)"
+
+                <button mat-raised-button color="primary"  (click)="updateUserData(userData)"
                         type="submit"> Save
                 </button>
                 <a routerLink="/changePassword">
@@ -89,13 +65,7 @@
               </div>
             </div>
           </form>
-          <hr>
-        </div><!--/tab-pane-->
-
       </div><!--/tab-pane-->
     </div><!--/tab-content-->
-
-  </div><!--/col-9-->
-</div><!--/row-->
-
+    </div>
 

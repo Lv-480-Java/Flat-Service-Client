@@ -1,1 +1,13 @@
+#navlist li
+{
+  display: inline;
+  list-style-type: none;
+  padding-right: 20px;
+}
 
+div.horizontalgap {
+  float: left;
+  overflow: hidden;
+  height: 1px;
+  width: 0px;
+}
