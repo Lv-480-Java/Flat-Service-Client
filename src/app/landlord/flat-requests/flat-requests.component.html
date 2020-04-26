@@ -41,7 +41,6 @@
         <ng-container matColumnDef="review">
           <th mat-header-cell *matHeaderCellDef>Status</th>
           <td mat-cell *matCellDef="let element">
-            {{element.approvalDate | date:'mediumDate'}}
             <button *ngIf="element.status=='NEW' || element.status=='VIEWED'" mat-raised-button color="primary"
                     (click)="review(element.id)">Review
             </button>
@@ -54,7 +53,7 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
             <button class="cancel-button" *ngIf="element.status=='APPROVED'" mat-raised-button color="primary"
-                    (click)="$event">Create Agreement
+                    (click)="$event" disabled="disabled">Accept Agreement
             </button>
           </td>
         </ng-container>

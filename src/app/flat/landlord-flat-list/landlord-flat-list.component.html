@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="center none">
   <div *ngIf="flatResponse!==undefined">
-    <h1 style="margin-bottom:-20px;margin-top:30px;">Flats list</h1>
-    <div infinite-scroll  *ngFor="let flat of flatResponse.content ">
+    <h1 *ngIf="flatResponse.content.length>0" style="margin-bottom:-20px;margin-top:30px;">Flats list</h1>
+    <div infinite-scroll *ngFor="let flat of flatResponse.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -26,11 +26,23 @@
                   <div class="buttons-container" fxLayout="row" fxFlex>
                     <button *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>edit</mat-icon>
-                    </button >
+                    </button>
                     <button (click)="removeFlat(flat.id)" *ngIf="getUsername()==flat.username" mat-icon-button>
                       <mat-icon>delete</mat-icon>
                     </button>
-                    <button style="margin-bottom: -5px" mat-icon-button>
+                    <button style="margin-bottom: -5px" mat-icon-button
+                            *ngIf="!isFavorite(flat.id) && (getUsername() !== flat.username)
+                            && (getUserRole() == 'ROLE_USER' || getUserRole() == 'ROLE_RENTER'
+                            || getUserRole() == 'ROLE_LANDLORD' || getUserRole() == 'ROLE_ADMIN'
+                            || getUserRole() == 'ROLE_MODERATOR')"
+                            (click)="addToFavoriteList(flat.id)">
+                      <mat-icon>favorite</mat-icon>
+                    </button>
+                    <button style="margin-bottom: -5px; color: red" mat-icon-button
+                            *ngIf="isFavorite(flat.id) && (getUserRole() == 'ROLE_USER' || getUserRole() == 'ROLE_RENTER'
+                            || getUserRole() == 'ROLE_LANDLORD' || getUserRole() == 'ROLE_ADMIN'
+                            || getUserRole() == 'ROLE_MODERATOR')"
+                            (click)="deleteFlat(flat.id)">
                       <mat-icon>favorite</mat-icon>
                     </button>
                   </div>
@@ -42,7 +54,7 @@
                     <mat-chip selected color="primary">{{flat.tags[0]}}</mat-chip>
                     <mat-chip selected color="primary">{{flat.tags[1]}}</mat-chip>
                     <mat-chip selected color="primary">{{flat.tags[2]}}</mat-chip>
-                    <mat-chip>інші</mat-chip>
+                    <mat-chip>others</mat-chip>
                   </mat-chip-list>
                 </div>
               </div>
@@ -52,10 +64,11 @@
               <div fxFlex="60">
                 <p class="date">{{flat.creationDate}}</p>
               </div>
-              <div fxFlex><p class="price">{{flat.monthPrice}} грн</p></div>
+              <div fxFlex><p class="price">{{flat.monthPrice}} uah</p></div>
               <div class="donate-button" fxFlexAlign="end end" fxFlex="25">
-                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button color="accent">
-                  Детально
+                <button [routerLink]="['/detailed/', flat.id]" fxFlexAlign="end end" class="donate" mat-raised-button
+                        color="accent">
+                  Detailed
                 </button>
               </div>
             </div>
