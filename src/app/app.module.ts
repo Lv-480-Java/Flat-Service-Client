@@ -114,6 +114,11 @@ import {AgreementReviewAreaComponent} from './renter/agreement-review-area/agree
 import {LandlordAgreementReviewComponent} from './landlord/landlord-agreement-review/landlord-agreement-review.component';
 import {LandlordAgreementReviewAreaComponent} from './landlord/landlord-agreement-review-area/landlord-agreement-review-area.component';
 import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirmation-dialog.component';
+import {AboutComponent} from './about/about.component';
+import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
+import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -192,7 +197,11 @@ import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirma
     AgreementReviewAreaComponent,
     LandlordAgreementReviewComponent,
     LandlordAgreementReviewAreaComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    BookingRequestsComponent,
+    AboutComponent,
+    ConfirmRegistrationComponent,
+    ResendRegistrationTokenComponent
   ],
   imports: [
     BrowserModule,
@@ -253,7 +262,9 @@ import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirma
     MatButtonToggleModule,
     MatSelectModule,
     MatGridListModule,
+    MatDatepickerModule,
     MatBadgeModule,
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: ''
     }),

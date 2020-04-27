@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {BASE_URL} from '../utils/constants';
 import {Observable, Subject} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class RegistrationService {
   public error_phone$: Subject<string> = new Subject<string>();
   public error_password$: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private snackBar: MatSnackBar) {
   }
 
   register(userData): Observable<any> {
@@ -23,6 +25,12 @@ export class RegistrationService {
       .pipe(
         catchError(this.handleError.bind(this))
       );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 20000,
+    });
   }
 
   private handleError(error: HttpErrorResponse) {

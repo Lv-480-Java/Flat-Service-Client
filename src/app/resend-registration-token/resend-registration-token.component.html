@@ -1,0 +1,19 @@
+<form class="text-center border border-light p-5" [formGroup]="resendTokenForm" (ngSubmit)="resend()">
+
+  <p class="h4 mb-4">Write your email</p>
+
+  <div style="background-color: #ea3455; font-size: 15px" class="alert alert danger"
+       *ngIf="resendRegistrationTokenService.error$ | async as error">
+    {{ error }}
+  </div>
+  <div
+    *ngIf="resendTokenForm.get('email').invalid && resendTokenForm.get('email').touched"
+    class="validation1">
+    <small *ngIf="resendTokenForm.get('email').errors.required">Field e-mail can not be empty</small>
+    <small *ngIf="resendTokenForm.get('email').errors.email">Enter valid e-mail</small>
+  </div>
+  <input type="email" id="defaultResendTokenFormEmail" class="form-control mb-4" placeholder="E-mail" formControlName="email">
+
+  <button class="btn btn-info btn-block my-4" type="submit" [disabled]="resendTokenForm.invalid">Send</button>
+
+</form>

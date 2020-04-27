@@ -2,7 +2,11 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark aqua-gradient lighten-1" [containerInside]="false">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">MaklerTaboo</a></mdb-navbar-brand>
+  <!--    <img src="/src/assets/logo.svg" alt="logo">-->
+  <mdb-navbar-brand>
+    <mat-icon class="logo"></mat-icon>
+    <a class="navbar-brand" href="#">
+    MaklerTaboo</a></mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -45,6 +49,10 @@
 
       <li *ngIf="authService.isAuthenticated()" class="nav-item">
         <a class="nav-link waves-light" mdbWavesEffect routerLink="/data" routerLinkActive="active">Profile</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect routerLink="/about" routerLinkActive="active">About Us</a>
       </li>
     </ul>
     <!-- Links -->

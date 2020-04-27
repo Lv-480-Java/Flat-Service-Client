@@ -3,16 +3,18 @@
     <mat-card class="mat-elevation-z5" style="width: 900px; margin-right: 16px">
       <h1>Comments</h1>
       <p *ngIf="comments.length>0">Number of comments {{comments.length}}</p>
+
+      <!-- Sorting -->
       <button style="position: absolute; left: 160px; top: 12px; font-size: 16px"
               mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>sort</mat-icon> Sort
       </button>
       <mat-menu #menu="matMenu">
         <button (click)="loadComments(id)" (click)="load = 'new'" mat-menu-item>
-          <span>Newer at first</span>
+          <span>Newest first</span>
         </button>
         <button (click)="loadCommentsOlder(id)" (click)="load = 'old'"  mat-menu-item>
-          <span>First older</span>
+          <span>Older first</span>
         </button>
         <button (click)="loadCommentsByLikes(id)" (click)="load = 'like'" mat-menu-item>
           <span>By likes</span>
@@ -20,7 +22,11 @@
       </mat-menu>
       <hr>
       <div>
+
+        <!-- Input -->
         <input
+          *ngIf="role == 'ROLE_RENTER' || role == 'ROLE_LANDLORD'
+          || role == 'ROLE_ADMIN' || role == 'ROLE_MODERATOR'"
           type="text"
           class="form-control"
           placeholder="Text..."
@@ -29,13 +35,19 @@
           matInput
           (keyup.enter)="add()"
         >
-        <button style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
+
+        <!-- Add comment -->
+        <button
+          *ngIf="role == 'ROLE_RENTER' || role == 'ROLE_LANDLORD'
+          || role == 'ROLE_ADMIN' || role == 'ROLE_MODERATOR'"
+          style="margin-top: 10px" (click)="add()" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary" >
           Add Comment
         </button>
       </div>
     </mat-card>
 
+    <!-- List of comments -->
     <div *ngIf="comments.length; else noComments">
       <mat-card class="mat-elevation-z5"  style="width: 900px; margin-top: 16px; position: relative" *ngFor="let comment of comments">
         <p style="font-size: 16px; word-wrap: break-word; width: 80%" *ngIf="comment.text!==null"> {{comment.text}}</p>
@@ -47,7 +59,12 @@
         <a href="short_profile/{{comment.userAuthor.id}}"
            style="font-size: 12px; position: absolute; right: 24px; top: 53px" > {{comment.userAuthor.username}}</a>
         <mat-card-subtitle>{{comment.publicationDate}}</mat-card-subtitle>
-        <button style="position: absolute; right: 10px; top: 85px"
+
+        <!-- Delete/Complain button -->
+        <button
+          *ngIf="role == 'ROLE_RENTER' || role == 'ROLE_LANDLORD'
+          || role == 'ROLE_ADMIN' || role == 'ROLE_MODERATOR'"
+          style="position: absolute; right: 10px; top: 85px"
                 mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
           <mat-icon>more_vert</mat-icon>
         </button>
@@ -59,21 +76,35 @@
           <button *ngIf="comment.userAuthor.id!=isId"
                   (click)="isComplain=!isComplain"
                   (click)="commentId=comment.id" mat-menu-item>
-            <span>Complaint</span>
+            <span>Complain</span>
           </button>
         </mat-menu>
-        <button (click)="addUser(comment.id)" style="margin-bottom: -5px"  mat-icon-button>
+
+        <!-- Like -->
+        <button
+          [disabled]="(role != 'ROLE_RENTER' || role != 'ROLE_LANDLORD'
+          || role != 'ROLE_ADMIN' || role != 'ROLE_MODERATOR')"
+          (click)="addUser(comment.id)" style="margin-bottom: -5px"  mat-icon-button>
           <mat-icon *ngIf="comment.commentLikes>0" matBadge="{{comment.commentLikes}}" matBadgeColor="warn">thumb_up</mat-icon>
           <mat-icon *ngIf="comment.commentLikes==0">thumb_up</mat-icon>
         </button>
         <br>
-        <button style="margin-top: 10px" style="margin-bottom: 10px;" fxFlexAlign="end end" class="donate" mat-raised-button
-                color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Reply</button>
+
+        <!-- Reply/Answers -->
+        <button
+          *ngIf="role == 'ROLE_RENTER' || role == 'ROLE_LANDLORD'
+          || role == 'ROLE_ADMIN' || role == 'ROLE_MODERATOR'"
+          style="margin-top: 10px; margin-bottom: 10px;" fxFlexAlign="end end" class="donate" mat-raised-button
+          color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Reply</button>
         <button style="margin-top: 10px; margin-left: 10px; margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
                 color="primary" (click)="isList=!isList" (click)="commentId=comment.id" >Answers</button>
+
+        <!-- Reply component -->
         <div *ngIf="isTrue && commentId==comment.id">
           <app-user-comments-about-coment [commentId]="comment.id" [userId]="comment.userId"></app-user-comments-about-coment>
         </div>
+
+        <!-- Answers component -->
         <div *ngIf="isList && commentId==comment.id">
           <app-user-list-comments-about-coment [commentId]="comment.id" [usersId]="comment.userId"></app-user-list-comments-about-coment>
         </div>
@@ -83,6 +114,8 @@
       <p style="margin:20px; font-size: 20px">No comments</p>
     </ng-template>
   </div>
+
+  <!-- Complaint component -->
   <app-complaint-u-c
     *ngIf="isComplain && commentId==commentId"
     [commentId]="commentId"

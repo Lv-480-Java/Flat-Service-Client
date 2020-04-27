@@ -10,6 +10,7 @@ import {Like, LikeService} from '../../services/like.service';
 })
 export class FlatCommentComponent implements OnInit {
   isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  role = JSON.parse(localStorage.getItem('user')).role;
   comments: FlatComment[] = [];
   commentId: number;
   isTrue = false;
