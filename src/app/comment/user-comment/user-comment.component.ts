@@ -13,6 +13,7 @@ export class UserCommentComponent implements OnInit {
 
   comments: UserComment[] = [];
   isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  role = JSON.parse(localStorage.getItem('user')).role;
   commentId: number;
   isTrue = false;
   isList = false;
@@ -44,7 +45,7 @@ export class UserCommentComponent implements OnInit {
         this.comments = comments.reverse();
       });
     console.log(this.comments);
-
+    console.log(this.role);
   }
 
   loadCommentsByLikes(id: number): void {

@@ -10,6 +10,7 @@ import {Like, LikeService} from '../../services/like.service';
 })
 export class UserListCommentsAboutComentComponent implements OnInit {
   isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  role = JSON.parse(localStorage.getItem('user')).role;
   isTrue = false;
   isList = false;
   isComplain = false;
