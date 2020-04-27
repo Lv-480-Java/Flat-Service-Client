@@ -6,6 +6,7 @@
 
 .flat-header {
   margin-bottom: 10px;
+  width: 300px;
 }
 
 .flat-header-image {
@@ -133,12 +134,37 @@
 
 #cancel_btn {
   height: 30px;
+  width: 98px;
   line-height: normal;
 }
 
 #agreement_btn {
   height: 30px;
-  width: 200px;
+  width: 210px;
   line-height: normal;
   margin-right: 10px;
+}
+
+.filter_btn {
+  float: right;
+  margin-right: 15px;
+}
+
+#status {
+  height: 30px;
+  width: 120px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #ff3440;
+  color: white;
+  border-radius: 4px;
+  font-size: small;
+}
+
+
+.form-select {
+  padding: 0;
+  width: 100px;
+  height: 32px;
+  border: 0;
 }

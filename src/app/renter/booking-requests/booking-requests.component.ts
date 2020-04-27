@@ -17,6 +17,7 @@ export class BookingRequestsComponent implements OnInit {
 
   data: any;
   requests: RequestsForFlatBooking = new RequestsForFlatBooking();
+  status = 'all';
 
   ngOnInit() {
     this.loadFlats();
@@ -27,8 +28,44 @@ export class BookingRequestsComponent implements OnInit {
       .subscribe(data => {
         this.data = data;
         this.requests.content = this.data;
+        this.status = 'all';
         if (this.requests.content.length < 1) {
           this.bar.open("You haven't made any requests yet!", "x",
+            {
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+              panelClass: ['snackbar']
+            });
+        }
+      });
+  }
+
+  loadDeclinedFlats() {
+    this.bookingService.getDeclinedRenterRequests()
+      .subscribe(data => {
+        this.data = data;
+        this.requests.content = this.data;
+        this.status = 'declined';
+        if (this.requests.content.length < 1) {
+          this.bar.open("You don't have any declined requests!", "x",
+            {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+              panelClass: ['snackbar']
+            });
+        }
+      });
+  }
+
+  loadActiveFlats() {
+    this.bookingService.getActiveRenterRequests()
+      .subscribe(data => {
+        this.data = data;
+        this.requests.content = this.data;
+        this.status = 'active';
+        if (this.requests.content.length < 1) {
+          this.bar.open("You don't have any active requests!", "x",
             {
               duration: 5000,
               verticalPosition: 'top',
@@ -49,6 +86,7 @@ export class BookingRequestsComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['snackbar']
           });
+        this.ngOnInit();
       },
       error => {
         this.bar.open(error.error.message, "x",
@@ -64,4 +102,5 @@ export class BookingRequestsComponent implements OnInit {
 
   createAgreement($event: MouseEvent) {
   }
+
 }
