@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
 import {ProfileService} from '../../services/profile.service';
-import {Like, LikeService} from "../../services/like.service";
+import {Like, LikeService} from '../../services/like.service';
 
 @Component({
   selector: 'app-list-comment',
@@ -10,6 +10,7 @@ import {Like, LikeService} from "../../services/like.service";
 })
 export class ListCommentComponent implements OnInit {
   isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  role = JSON.parse(localStorage.getItem('user')).role;
   isTrue = false;
   isList = false;
   isComplain = false;
