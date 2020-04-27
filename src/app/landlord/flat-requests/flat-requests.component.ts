@@ -94,6 +94,7 @@ export class FlatRequestsComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['snackbar']
           });
+        this.ngOnInit();
       },
       error => {
         this.bar.open(error.error.message, "x",
