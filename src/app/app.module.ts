@@ -108,6 +108,12 @@ import {ReviewAreaComponent} from './landlord/review-area/review-area.component'
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import {AgreementService} from "./services/agreement.service";
+import {AgreementReviewComponent} from './renter/agreement-review/agreement-review.component';
+import {AgreementReviewAreaComponent} from './renter/agreement-review-area/agreement-review-area.component';
+import {LandlordAgreementReviewComponent} from './landlord/landlord-agreement-review/landlord-agreement-review.component';
+import {LandlordAgreementReviewAreaComponent} from './landlord/landlord-agreement-review-area/landlord-agreement-review-area.component';
+import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirmation-dialog.component';
 
 
 @NgModule({
@@ -181,7 +187,12 @@ import {MatRadioModule} from '@angular/material/radio';
     FlatRequestsComponent,
     FlatRequestReviewComponent,
     ReviewAreaComponent,
-    BookingRequestsComponent
+    BookingRequestsComponent,
+    AgreementReviewComponent,
+    AgreementReviewAreaComponent,
+    LandlordAgreementReviewComponent,
+    LandlordAgreementReviewAreaComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -248,6 +259,9 @@ import {MatRadioModule} from '@angular/material/radio';
     }),
     MatTabsModule
   ],
+  entryComponents: [
+    ConfirmationDialogComponent
+  ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,
@@ -259,7 +273,7 @@ import {MatRadioModule} from '@angular/material/radio';
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, FlatService, FlatBookingService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, FlatBookingService, AgreementService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

@@ -24,6 +24,7 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
 import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
 import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
+import {AgreementReviewComponent} from "./renter/agreement-review/agreement-review.component";
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'flat-requests', component: FlatRequestsComponent},
   {path: 'flat-requests-review', component: FlatRequestReviewComponent},
   {path: 'booking-requests', component: BookingRequestsComponent},
+  {path: 'agreement-review', component: AgreementReviewComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [

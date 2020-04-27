@@ -5,8 +5,11 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {FlatBookingService} from "../../services/flat-booking.service";
 import {MatTableDataSource} from "@angular/material/table";
-import {RequestsForFlatVerification} from "../../admin-panel/requests/entity/requests-for-flat-verification";
 import {ReviewAreaComponent} from "../review-area/review-area.component";
+import {LandlordAgreementReviewAreaComponent} from "../landlord-agreement-review-area/landlord-agreement-review-area.component";
+import {RequestForFlatBooking} from "../../renter/entity/request-for-flat-booking";
+import {ConfirmationDialogComponent} from "../../shared/confirmation-dialog/confirmation-dialog.component";
+import {LandlordAgreementReviewComponent} from "../landlord-agreement-review/landlord-agreement-review.component";
 
 @Component({
   selector: 'app-flat-requests',
@@ -15,6 +18,8 @@ import {ReviewAreaComponent} from "../review-area/review-area.component";
 })
 export class FlatRequestsComponent implements OnInit {
   @ViewChild(ReviewAreaComponent) flatReviewAreaComponent;
+  @ViewChild(LandlordAgreementReviewAreaComponent) agreementReviewAreaComponent;
+  @ViewChild(LandlordAgreementReviewComponent) agreementReviewComponent;
 
   displayedColumns: string[] = ['id', 'author', 'date', 'review', 'agreement', 'cancel'];
   dataSource;
@@ -45,7 +50,7 @@ export class FlatRequestsComponent implements OnInit {
       data => {
         const totalElements = new Array(data[`totalElements`]);
         this.requests = data[`content`];
-        this.dataSource = new MatTableDataSource<RequestsForFlatVerification>(this.requests);
+        this.dataSource = new MatTableDataSource<RequestForFlatBooking>(this.requests);
         this.paginator.length = totalElements.length;
       });
   }
@@ -84,30 +89,6 @@ export class FlatRequestsComponent implements OnInit {
     this.getLandlordRequests();
   }
 
-  decline(id: number) {
-    this.bookingService.declineRequestForFlatBooking(id).subscribe(
-      success => {
-        this.bar.open("Request was declined!", "x",
-          {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            panelClass: ['snackbar']
-          });
-        this.ngOnInit();
-      },
-      error => {
-        this.bar.open(error.error.message, "x",
-          {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            panelClass: ['snackbar']
-          });
-      }
-    );
-  }
-
   openSnackBar() {
     console.log('snackbar');
     this.bookingService.getNewLandlordRequests().subscribe(data => {
@@ -118,5 +99,54 @@ export class FlatRequestsComponent implements OnInit {
         panelClass: ['snackbar']
       });
     });
+  }
+
+  reviewAgreement(id: number) {
+    this.openAgreementDialog(id);
+  }
+
+  openAgreementDialog(id: number): void {
+    const dialogRef = this.dialog.open(LandlordAgreementReviewAreaComponent, {data: {requestId: id}});
+    dialogRef.afterClosed().subscribe(
+      success=>{
+        this.ngOnInit();
+      }
+    );
+  }
+
+  openCancelDialog(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: "Do you confirm canceling the request?"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.bookingService.declineRequestForFlatBooking(id).subscribe(
+          success => {
+            this.bar.open("Request was canceled!", "x",
+              {
+                duration: 5000,
+                verticalPosition: 'top',
+                horizontalPosition: 'right',
+                panelClass: ['snackbar']
+              });
+            this.ngOnInit();
+          },
+          error => {
+            this.bar.open(error.error.message, "x",
+              {
+                duration: 5000,
+                verticalPosition: 'top',
+                horizontalPosition: 'right',
+                panelClass: ['snackbar']
+              });
+          }
+        );
+      }
+    });
+  }
+
+  checkPayment() {
+
   }
 }
