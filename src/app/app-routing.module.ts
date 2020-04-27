@@ -24,6 +24,7 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
 import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
+import {AboutComponent} from './about/about.component';
 import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
 import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 
@@ -65,7 +66,8 @@ const routes: Routes = [
     path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
-  }
+  },
+  {path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
