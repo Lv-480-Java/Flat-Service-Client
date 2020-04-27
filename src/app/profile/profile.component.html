@@ -59,8 +59,8 @@
             <mat-form-field appearance="outline">
               <mat-label>Gender</mat-label>
               <mat-select [(ngModel)]="data.gender" [ngModelOptions]="{standalone:true}">
-                <mat-option value="Woman">Woman</mat-option>
-                <mat-option value="Men">Men</mat-option>
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
               </mat-select>
               <small style="color: #d92550; font-size: 12px" class="align-baseline"
                      *ngIf="landlordService.ERROR_GENDER$ | async as error">
