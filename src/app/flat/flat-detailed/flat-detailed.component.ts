@@ -142,7 +142,7 @@ export class FlatDetailedComponent implements OnInit {
       }
     })
 
-    if (this.request === null) {
+    if (this.request === null || this.request === undefined) {
       return false;
     }
 
