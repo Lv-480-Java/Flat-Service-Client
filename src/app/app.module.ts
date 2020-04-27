@@ -108,6 +108,7 @@ import {ReviewAreaComponent} from './landlord/review-area/review-area.component'
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -181,7 +182,8 @@ import {MatRadioModule} from '@angular/material/radio';
     FlatRequestsComponent,
     FlatRequestReviewComponent,
     ReviewAreaComponent,
-    BookingRequestsComponent
+    BookingRequestsComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

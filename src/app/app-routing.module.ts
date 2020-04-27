@@ -21,9 +21,10 @@ import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
-import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
-import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
-import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
+import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
+import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
+import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
+import {AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
@@ -61,7 +62,8 @@ const routes: Routes = [
     path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
-  }
+  },
+  {path: 'about', component: AboutComponent}
 ];
 
 @NgModule({
