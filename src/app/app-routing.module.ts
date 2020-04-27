@@ -21,12 +21,16 @@ import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
-import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
-import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
-import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
+import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
+import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
+import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
+import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
+import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
+  {path: 'confirmRegistration/:token', component: ConfirmRegistrationComponent},
+  {path: 'resendRegistrationToken', component: ResendRegistrationTokenComponent},
   {path: 'login', component: LoginComponent},
   {path: 'changePassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'chat', component: ChatComponent},
