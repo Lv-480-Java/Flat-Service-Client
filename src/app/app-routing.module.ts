@@ -25,9 +25,13 @@ import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.comp
 import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {AboutComponent} from './about/about.component';
+import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
+import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
+  {path: 'confirmRegistration/:token', component: ConfirmRegistrationComponent},
+  {path: 'resendRegistrationToken', component: ResendRegistrationTokenComponent},
   {path: 'login', component: LoginComponent},
   {path: 'changePassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'chat', component: ChatComponent},

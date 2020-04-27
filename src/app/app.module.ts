@@ -109,6 +109,10 @@ import {BookingRequestsComponent} from './renter/booking-requests/booking-reques
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
 import { AboutComponent } from './about/about.component';
+import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
+import { ResendRegistrationTokenComponent } from './resend-registration-token/resend-registration-token.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -184,6 +188,8 @@ import { AboutComponent } from './about/about.component';
     ReviewAreaComponent,
     BookingRequestsComponent,
     AboutComponent
+    ConfirmRegistrationComponent,
+    ResendRegistrationTokenComponent
   ],
   imports: [
     BrowserModule,
@@ -244,7 +250,9 @@ import { AboutComponent } from './about/about.component';
     MatButtonToggleModule,
     MatSelectModule,
     MatGridListModule,
+    MatDatepickerModule,
     MatBadgeModule,
+    MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: ''
     }),
