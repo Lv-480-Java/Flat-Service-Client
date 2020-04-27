@@ -19,11 +19,6 @@ export class UserChangePasswordService {
   }
 
   public changePassword(userChangePassword): Observable<any> {
-    // const body = {
-    //   currentPassword: model.currentPassword,
-    //   newPassword: model.newPassword,
-    //   confirmNewPassword: model.confirmNewPassword
-    // };
     return this.http.post(this.constant + 'users/changePassword', userChangePassword, {observe: 'response'})
       .pipe(catchError(this.handleError.bind(this)));
   }
