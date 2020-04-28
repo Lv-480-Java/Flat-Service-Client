@@ -13,7 +13,8 @@ export class LandlordAgreementReviewAreaComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<LandlordAgreementReviewAreaComponent>,
               @Inject(MAT_DIALOG_DATA) public data, public message: MatDialog,
-              private bar: MatSnackBar, private agreementService: AgreementService) { }
+              private bar: MatSnackBar, private agreementService: AgreementService) {
+  }
 
   ngOnInit(): void {
   }
@@ -26,6 +27,7 @@ export class LandlordAgreementReviewAreaComponent implements OnInit {
     this.agreementService.acceptRenterAgreement(this.data.requestId).subscribe(
       success => {
         this.openMessageDialog('Agreement was successfully sent to your e-mail!');
+        this.close();
       },
       error => {
         this.bar.open(error.error.message, "x",
@@ -35,9 +37,9 @@ export class LandlordAgreementReviewAreaComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: ['snackbar']
           });
+        this.close();
       }
     );
-    this.close();
   }
 
   openMessageDialog(msg) {

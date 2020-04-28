@@ -27,7 +27,7 @@ export class FlatRequestsComponent implements OnInit {
   statuses = ['NEW', 'VIEWED', 'APPROVED', 'DECLINED'];
   label: string;
   type: string;
-  status: string;
+  status: string = 'NEW';
   statusForm: FormGroup;
 
   requests;
@@ -41,8 +41,23 @@ export class FlatRequestsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadPage(this.statuses[0]);
+    this.loadData();
     this.openSnackBar();
+  }
+
+  loadData() {
+    if (this.status == 'NEW') {
+      this.loadPage(this.statuses[0]);
+    }
+    if (this.status == 'VIEWED') {
+      this.loadPage(this.statuses[1]);
+    }
+    if (this.status == 'APPROVED') {
+      this.loadPage(this.statuses[2]);
+    }
+    if (this.status == 'DECLINED') {
+      this.loadPage(this.statuses[3]);
+    }
   }
 
   getLandlordRequests() {
@@ -108,8 +123,8 @@ export class FlatRequestsComponent implements OnInit {
   openAgreementDialog(id: number): void {
     const dialogRef = this.dialog.open(LandlordAgreementReviewAreaComponent, {data: {requestId: id}});
     dialogRef.afterClosed().subscribe(
-      success=>{
-        this.ngOnInit();
+      success => {
+        this.loadData();
       }
     );
   }
@@ -130,7 +145,7 @@ export class FlatRequestsComponent implements OnInit {
                 horizontalPosition: 'right',
                 panelClass: ['snackbar']
               });
-            this.ngOnInit();
+            this.loadData();
           },
           error => {
             this.bar.open(error.error.message, "x",
@@ -140,6 +155,7 @@ export class FlatRequestsComponent implements OnInit {
                 horizontalPosition: 'right',
                 panelClass: ['snackbar']
               });
+            this.loadData();
           }
         );
       }

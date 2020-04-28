@@ -59,7 +59,7 @@
                     || (element.isAgreementCreated == null)">Review Agreement
             </button>
 
-            <button *ngIf="element.isAgreementAccepted == true"
+            <button *ngIf="(element.isAgreementAccepted == true) && (element.status !== 'DECLINED')"
                     class="cancel-button" mat-raised-button color="primary"
                     (click)="checkPayment()" disabled="disabled">Check Payment
             </button>

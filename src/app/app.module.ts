@@ -119,6 +119,7 @@ import {ConfirmRegistrationComponent} from './confirm-registration/confirm-regis
 import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 
 @NgModule({
@@ -201,7 +202,8 @@ import {MatNativeDateModule} from '@angular/material/core';
     BookingRequestsComponent,
     AboutComponent,
     ConfirmRegistrationComponent,
-    ResendRegistrationTokenComponent
+    ResendRegistrationTokenComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
