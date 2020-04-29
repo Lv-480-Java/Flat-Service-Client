@@ -1,8 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FlatBookingService} from "../../services/flat-booking.service";
 import {RequestsForFlatBooking} from "../entity/request-for-flat-booking";
+import {MatDialog} from "@angular/material/dialog";
+import {AgreementReviewAreaComponent} from "../agreement-review-area/agreement-review-area.component";
+import {ConfirmationDialogComponent} from "../../shared/confirmation-dialog/confirmation-dialog.component";
+import {AgreementReviewComponent} from "../agreement-review/agreement-review.component";
 
 @Component({
   selector: 'app-booking-requests',
@@ -10,9 +14,11 @@ import {RequestsForFlatBooking} from "../entity/request-for-flat-booking";
   styleUrls: ['./booking-requests.component.scss']
 })
 export class BookingRequestsComponent implements OnInit {
+  @ViewChild(AgreementReviewAreaComponent) agreementReviewAreaComponent;
+  @ViewChild(AgreementReviewComponent) agreementReviewComponent;
 
   constructor(private http: HttpClient, private bookingService: FlatBookingService,
-              private bar: MatSnackBar) {
+              private bar: MatSnackBar, public dialog: MatDialog) {
   }
 
   data: any;
@@ -76,31 +82,52 @@ export class BookingRequestsComponent implements OnInit {
       });
   }
 
-  cancelBooking(id: number) {
-    this.bookingService.declineRequestForFlatBooking(id).subscribe(
+  openCancelDialog(id: number): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: "Do you confirm canceling the request?"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.bookingService.declineRequestForFlatBooking(id).subscribe(
+          success => {
+            this.bar.open("Request was canceled!", "x",
+              {
+                duration: 5000,
+                verticalPosition: 'top',
+                horizontalPosition: 'right',
+                panelClass: ['snackbar']
+              });
+            this.ngOnInit();
+          },
+          error => {
+            this.bar.open(error.error.message, "x",
+              {
+                duration: 5000,
+                verticalPosition: 'top',
+                horizontalPosition: 'right',
+                panelClass: ['snackbar']
+              });
+          }
+        );
+      }
+    });
+  }
+
+  createAgreement(id: number) {
+    this.openDialog(id);
+  }
+
+  openDialog(id: number): void {
+    const dialogRef = this.dialog.open(AgreementReviewAreaComponent, {data: {requestId: id}});
+    dialogRef.afterClosed().subscribe(
       success => {
-        this.bar.open("Request was canceled!", "x",
-          {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            panelClass: ['snackbar']
-          });
         this.ngOnInit();
-      },
-      error => {
-        this.bar.open(error.error.message, "x",
-          {
-            duration: 5000,
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            panelClass: ['snackbar']
-          });
       }
     );
   }
 
-  createAgreement($event: MouseEvent) {
+  payForApartment() {
+    
   }
-
 }

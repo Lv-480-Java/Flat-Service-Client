@@ -14,8 +14,8 @@
 
     <!-- Delete/Complain button -->
     <button
-      *ngIf="role == 'ROLE_RENTER' || role == 'ROLE_LANDLORD'
-          || role == 'ROLE_ADMIN' || role == 'ROLE_MODERATOR'"
+      *ngIf="getUserRole() == 'ROLE_RENTER' || getUserRole() == 'ROLE_LANDLORD'
+          || getUserRole() == 'ROLE_ADMIN' || getUserRole() == 'ROLE_MODERATOR'"
       style="position: absolute; right: 10px; top: 75px"
       mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
       <mat-icon>more_vert</mat-icon>
@@ -34,8 +34,8 @@
 
     <!-- Like -->
     <button
-      [disabled]="(role != 'ROLE_RENTER' || role != 'ROLE_LANDLORD'
-          || role != 'ROLE_ADMIN' || role != 'ROLE_MODERATOR')"
+      [disabled]="(getUserRole() != 'ROLE_RENTER' && getUserRole() != 'ROLE_LANDLORD'
+          && getUserRole() != 'ROLE_ADMIN' && getUserRole() != 'ROLE_MODERATOR')"
       (click)="addUser(comment.id)" style="margin-bottom: -5px"  mat-icon-button>
       <mat-icon *ngIf="comment.commentLikes>0" matBadge="{{comment.commentLikes}}" matBadgeColor="warn">thumb_up</mat-icon>
       <mat-icon *ngIf="comment.commentLikes==0">thumb_up</mat-icon>
@@ -44,8 +44,8 @@
 
     <!-- Reply/Answers -->
     <button
-      *ngIf="role == 'ROLE_RENTER' || role == 'ROLE_LANDLORD'
-          || role == 'ROLE_ADMIN' || role == 'ROLE_MODERATOR'"
+      *ngIf="getUserRole() == 'ROLE_RENTER' || getUserRole() == 'ROLE_LANDLORD'
+          || getUserRole() == 'ROLE_ADMIN' || getUserRole() == 'ROLE_MODERATOR'"
       style="margin-top: 10px" style="margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button
       color="primary" (click)="isTrue=!isTrue" (click)="commentId=comment.id" >Reply</button>
     <button style="margin-top: 10px; margin-left: 10px; margin-bottom: 10px" fxFlexAlign="end end" class="donate" mat-raised-button

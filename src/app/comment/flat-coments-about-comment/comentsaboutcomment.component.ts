@@ -34,7 +34,6 @@ export class ComentsaboutcommentComponent implements OnInit {
       .subscribe(flatComment => {
         this.text = '';
         this.comments = this.comments.concat(newFlatComment);
-        this.ngOnInit();
       });
   }
 

@@ -96,7 +96,6 @@ export class UsersLineChartComponent implements OnInit {
     this.chartLabels = [];
     for (let i = 0; i < this.dates.length; i++) {
       const day = this.dates[i];
-      console.log('day', day);
       this.chartLabels[i] = this.monthNames[day.getMonth()];
     }
     this.chartLabels.reverse();
