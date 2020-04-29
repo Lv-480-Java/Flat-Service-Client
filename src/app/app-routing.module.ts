@@ -21,9 +21,10 @@ import {UserPageComponent} from './admin-panel/user-page/user-page.component';
 import {PostsPageComponent} from './admin-panel/posts-page/posts-page.component';
 import {FavoriteFlatComponent} from './favorite-flat/favorite-flat.component';
 import {ChangePasswordComponent} from './change-password/change-password.component';
-import {FlatRequestsComponent} from './landlord/flat-requests/flat-requests.component';
-import {FlatRequestReviewComponent} from './landlord/flat-request-review/flat-request-review.component';
-import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
+import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
+import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
+import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
+import {AgreementReviewComponent} from "./renter/agreement-review/agreement-review.component";
 import {AboutComponent} from './about/about.component';
 import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
 import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path: 'flat-requests', component: FlatRequestsComponent},
   {path: 'flat-requests-review', component: FlatRequestReviewComponent},
   {path: 'booking-requests', component: BookingRequestsComponent},
+  {path: 'agreement-review', component: AgreementReviewComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [

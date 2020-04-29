@@ -108,11 +108,18 @@ import {ReviewAreaComponent} from './landlord/review-area/review-area.component'
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
-import { AboutComponent } from './about/about.component';
-import { ConfirmRegistrationComponent } from './confirm-registration/confirm-registration.component';
-import { ResendRegistrationTokenComponent } from './resend-registration-token/resend-registration-token.component';
+import {AgreementService} from "./services/agreement.service";
+import {AgreementReviewComponent} from './renter/agreement-review/agreement-review.component';
+import {AgreementReviewAreaComponent} from './renter/agreement-review-area/agreement-review-area.component';
+import {LandlordAgreementReviewComponent} from './landlord/landlord-agreement-review/landlord-agreement-review.component';
+import {LandlordAgreementReviewAreaComponent} from './landlord/landlord-agreement-review-area/landlord-agreement-review-area.component';
+import {ConfirmationDialogComponent} from './shared/confirmation-dialog/confirmation-dialog.component';
+import {AboutComponent} from './about/about.component';
+import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
+import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 
 @NgModule({
@@ -187,9 +194,16 @@ import {MatNativeDateModule} from '@angular/material/core';
     FlatRequestReviewComponent,
     ReviewAreaComponent,
     BookingRequestsComponent,
-    AboutComponent
+    AgreementReviewComponent,
+    AgreementReviewAreaComponent,
+    LandlordAgreementReviewComponent,
+    LandlordAgreementReviewAreaComponent,
+    ConfirmationDialogComponent,
+    BookingRequestsComponent,
+    AboutComponent,
     ConfirmRegistrationComponent,
-    ResendRegistrationTokenComponent
+    ResendRegistrationTokenComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -258,6 +272,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     }),
     MatTabsModule
   ],
+  entryComponents: [
+    ConfirmationDialogComponent
+  ],
   providers: [
     [{
       provide: HTTP_INTERCEPTORS,
@@ -269,7 +286,7 @@ import {MatNativeDateModule} from '@angular/material/core';
         useClass: HttpErrorInterceptor,
         multi: true
       }],
-    RegistrationService, AuthService, FlatService, FlatBookingService, AuthGuard, MatSnackBar],
+    RegistrationService, AuthService, FlatService, FlatBookingService, AgreementService, AuthGuard, MatSnackBar],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
