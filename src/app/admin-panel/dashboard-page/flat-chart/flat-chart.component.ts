@@ -8,6 +8,7 @@ import {FlatStatisticsService} from '../../../services/statistics/flat-statistic
 })
 export class FlatChartComponent implements OnInit {
   private dayNames: Array<any> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  private numberOfDays = 7;
   private dates = [];
 
   public chartType = 'bar';
@@ -37,7 +38,7 @@ export class FlatChartComponent implements OnInit {
 
   initializeDates() {
     const day = new Date();
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < this.numberOfDays; i++) {
       const date = new Date(day);
       this.dates.push(date);
       day.setDate(day.getDate() - 1);
@@ -51,6 +52,7 @@ export class FlatChartComponent implements OnInit {
     }
     this.chartLabels.reverse();
   }
+
 
   updateDataset() {
     const numbers = [];

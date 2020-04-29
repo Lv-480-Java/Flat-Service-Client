@@ -40,12 +40,21 @@
 
                   <div id="status" *ngIf="request.status == 'DECLINED'"> {{request.status}} </div>
 
-                  <button *ngIf="request.status !== 'DECLINED'" id="agreement_btn" mat-raised-button color="primary"
-                          [disabled]="request.status !== 'APPROVED'" (click)="createAgreement($event)">Create Agreement
+                  <button *ngIf="(request.status !== 'DECLINED') && (request.isAgreementCreated == false
+                  || request.isAgreementCreated == null)"
+                          id="agreement_btn" mat-raised-button color="primary"
+                          [disabled]="(request.status !== 'APPROVED') || (request.isAgreementCreated == true)"
+                          (click)="createAgreement(request.id)">Create
+                    Agreement
+                  </button>
+
+                  <button *ngIf="(request.isAgreementCreated == true) && (request.status !== 'DECLINED')"
+                          id="payment_btn" mat-raised-button color="accent"
+                          (click)="payForApartment()" [disabled]="!request.isAgreementAccepted">Payment
                   </button>
 
                   <button *ngIf="request.status !== 'DECLINED'" id="cancel_btn" mat-raised-button color="primary"
-                          (click)="cancelBooking(request.id)">Cancel
+                          (click)="openCancelDialog(request.id)">Cancel
                   </button>
 
 
