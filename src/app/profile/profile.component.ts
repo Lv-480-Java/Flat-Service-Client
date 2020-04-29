@@ -47,6 +47,9 @@ resetData() {
   }
 
   updatePassport(data: Landlord) {
+    data.birthDate = new Date(data.birthDate).toISOString();
+    data.expirationDate = new Date(data.expirationDate).toISOString();
+    data.dateOfIssue = new Date(data.dateOfIssue).toISOString();
     this.landlordService.updatePassport(data)
       .subscribe(dataResp => {
         this.data = dataResp;
