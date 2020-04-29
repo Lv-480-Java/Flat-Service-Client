@@ -13,4 +13,6 @@ export class RequestForFlatBooking {
   verificationDate: Date;
   author: User;
   flat: Flat;
+  isAgreementCreated: boolean;
+  isAgreementAccepted: boolean;
 }
