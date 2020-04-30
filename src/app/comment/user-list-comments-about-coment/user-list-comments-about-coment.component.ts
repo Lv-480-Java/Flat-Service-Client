@@ -52,4 +52,12 @@ export class UserListCommentsAboutComentComponent implements OnInit {
       });
   }
 
+  getUserRole() {
+    if (JSON.parse(localStorage.getItem('user')) === null) {
+      return 'UNDERFINED';
+    } else {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
+  }
+
 }

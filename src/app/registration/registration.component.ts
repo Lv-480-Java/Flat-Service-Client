@@ -23,6 +23,7 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.register(this.form.value)
       .subscribe(
         (response) => {
+          this.registrationService.openSnackBar('Please, check your email to confirm registration', 'X')
           this.form.reset();
           this.router.navigate(['/login']);
         }

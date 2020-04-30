@@ -1,12 +1,14 @@
 .users-line-chart {
-  width: 80%;
-  margin: 500px 130px 130px 130px;
+  width: 835px;
+  height: 510px;
+  margin: 30px 0 30px 0;
 }
 
-.count-label {
-  margin: 10px 0px 15px 0px;
+.title {
+  float: left;
+  margin: 30px 20px 20px 20px;
   font-size: 25px;
-
+  width: 300px;
 }
 
 .users-line-chart-label {
@@ -16,8 +18,15 @@
   padding-bottom: 50px;
 }
 
-.input-month{
-  float: left;
-  margin-left: 200px;
+.input-month {
+  float: right;
+  margin: 20px 10px 10px 10px;
+}
+.date-input{
+  float: right;
+  width: 400px;
 }
 
+.chart{
+  width: 50%;
+}

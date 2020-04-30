@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
 import {ProfileService} from '../../services/profile.service';
-import {Like, LikeService} from "../../services/like.service";
+import {Like, LikeService} from '../../services/like.service';
 
 @Component({
   selector: 'app-list-comment',
@@ -53,4 +53,11 @@ export class ListCommentComponent implements OnInit {
         });
   }
 
+  getUserRole() {
+    if (JSON.parse(localStorage.getItem('user')) === null) {
+      return 'UNDERFINED';
+    } else {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
+  }
 }

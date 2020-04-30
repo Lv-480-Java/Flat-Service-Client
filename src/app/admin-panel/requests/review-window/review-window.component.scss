@@ -1,6 +1,7 @@
 .flat-review {
   height: 670px;
   width: 1100px;
+  position: relative;
 }
 
 .close-button {
@@ -16,7 +17,7 @@
 }
 
 .buttons {
-  position: absolute;
-  bottom: 50px;
   background: white;
+  bottom: 0;
+  position: absolute;
 }

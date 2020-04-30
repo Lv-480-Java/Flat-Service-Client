@@ -1,12 +1,13 @@
-.user-diagram{
+.diagram{
   width: 30%;
-  float: left;
-  margin: 0px 0px 50px 35px;
-
+  margin: 0px 30px 50px 0;
+  float: right;
+  height: 510px;
 }
-.diagram-title{
+.title{
   text-align: center;
   font-size: 25px;
+  margin: 25px 10px 30px 10px;
 }
 
 .stats{
@@ -15,4 +16,8 @@
 
 .first{
   margin-top: 30px;
+}
+
+.info{
+  margin: 20px 20px 20px 20px;
 }

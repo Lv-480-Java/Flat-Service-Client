@@ -27,6 +27,10 @@ export class UserCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
     if (this.load === 'new') {
       this.loadComments(this.id);
     }
@@ -44,7 +48,6 @@ export class UserCommentComponent implements OnInit {
         this.comments = comments.reverse();
       });
     console.log(this.comments);
-
   }
 
   loadCommentsByLikes(id: number): void {
@@ -86,8 +89,7 @@ export class UserCommentComponent implements OnInit {
     this.userCommentService.add(newUserComment)
       .subscribe(userComment => {
         this.text = '';
-        this.comments = this.comments.concat(newUserComment);
-        this.ngOnInit();
+        this.loadData();
       });
   }
 
@@ -97,7 +99,15 @@ export class UserCommentComponent implements OnInit {
     };
     this.likeService.addUser(like)
       .subscribe(comments => {
-        this.ngOnInit();
+        this.loadData();
       });
+  }
+
+  getUserRole() {
+    if (JSON.parse(localStorage.getItem('user')) === null) {
+      return 'UNDERFINED';
+    } else {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
   }
 }

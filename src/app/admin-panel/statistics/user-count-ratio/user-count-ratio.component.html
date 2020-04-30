@@ -1,0 +1,11 @@
+<div class="card">
+  <div class="flats">
+    <div class="label">New Users</div>
+    <div class="number">{{userNumber}}</div>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: {{userRatio | percent}}"
+           aria-valuemax="100"></div>
+    </div>
+    <div class="result">Better than last week({{userRatio | percent}})</div>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import {BASE_URL} from 'src/app/utils/constants';
 import {User} from '../../admin-panel/component/Users';
 import {FlatBookingService} from "../../services/flat-booking.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {RequestForFlatBooking, RequestsForFlatBooking} from "../../renter/entity/request-for-flat-booking";
 
 @Component({
   selector: 'app-flat-detailed',
@@ -26,6 +27,19 @@ export class FlatDetailedComponent implements OnInit {
   public flatDetailed: FlatDetailed = new FlatDetailed();
   userData: User;
   chatIsActive = false;
+  data_r: any;
+  status: string;
+  requests: RequestsForFlatBooking = new RequestsForFlatBooking();
+  request: RequestForFlatBooking = new RequestForFlatBooking();
+  private flag: boolean;
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.id = Number(params.get('id'));
+    });
+    this.loadFlat();
+    this.loadRenterRequests();
+  }
 
   activateChat() {
     if (this.chatIsActive === false) {
@@ -33,13 +47,6 @@ export class FlatDetailedComponent implements OnInit {
     } else {
       this.chatIsActive = false;
     }
-  }
-
-  ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.id = Number(params.get('id'));
-    });
-    this.loadFlat();
   }
 
   loadFlat(): void {
@@ -51,7 +58,6 @@ export class FlatDetailedComponent implements OnInit {
         this.loadImages();
       });
   }
-
 
   loadImages(): void {
     this.images = [];
@@ -89,4 +95,62 @@ export class FlatDetailedComponent implements OnInit {
       }
     );
   }
+
+  getUserRole() {
+    if (JSON.parse(localStorage.getItem('user')) !== null) {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
+  }
+
+  getUserName() {
+    if (JSON.parse(localStorage.getItem('user')) !== null) {
+      return JSON.parse(localStorage.getItem('user')).username;
+    }
+  }
+
+  loadRenterRequests() {
+    this.flatBookingService.getRenterRequests()
+      .subscribe(data => {
+        this.data_r = data;
+        this.requests.content = this.data_r;
+      });
+  }
+
+  getStatusOfRequest() {
+    if (this.requests.content === undefined) {
+      return false;
+    }
+    this.request = this.requests.content.find(value => {
+      if (value.flat.id === this.id) {
+        this.status = value.status;
+        return value;
+      } else {
+        return null;
+      }
+    })
+  }
+
+  isRequestApproved() {
+    if (this.requests.content === undefined) {
+      return false;
+    }
+    this.request = this.requests.content.find(value => {
+      if (value.flat.id === this.id) {
+        return value;
+      } else {
+        return null;
+      }
+    })
+
+    if (this.request === null || this.request === undefined) {
+      return false;
+    }
+
+    if ((this.getUserName() === this.request.author.username) && (this.request.status === 'APPROVED')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

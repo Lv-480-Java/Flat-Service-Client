@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../../services/requests.service';
 import 'rxjs/add/observable/interval';
-import {StatisticsService} from '../../../services/statistics.service';
+import {forkJoin} from 'rxjs';
+import {UserStatisticsService} from '../../../services/statistics/user-statistics.service';
 
 @Component({
   selector: 'app-users-line-chart',
@@ -11,12 +11,18 @@ import {StatisticsService} from '../../../services/statistics.service';
 export class UsersLineChartComponent implements OnInit {
   public chartType = 'line';
 
+  monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   fromMonth: Date;
   toMonth: Date;
   maxDate: Date;
+  dates = [];
 
-  public chartDatasets: Array<any>;
-  public chartLabels: Array<any>;
+  public chartDatasets = [
+    {data: [], label: 'Renters'},
+    {data: [], label: 'Landlords'}
+  ];
+
+  public chartLabels = [];
 
   public chartColors: Array<any> = [
     {
@@ -35,31 +41,72 @@ export class UsersLineChartComponent implements OnInit {
     responsive: true
   };
 
-  constructor(private statisticsService: StatisticsService) {
+  constructor(private statisticsService: UserStatisticsService) {
+  }
+
+  ngOnInit(): void {
+    this.initializeDates();
+    this.loadData();
+  }
+
+  loadData() {
+    this.createDates();
+    this.updateDates();
+    this.updateDataset();
   }
 
   updateDataset() {
-    const from = new Date(this.fromMonth).toISOString().substr(0, 7);
-    const to = new Date(this.toMonth).toISOString().substr(0, 7);
-
-    this.statisticsService.getAllUsersCount(from, to).subscribe(userCount => {
-      this.statisticsService.getAllLandlordsCount(from, to).subscribe(landlordCount => {
-        this.statisticsService.getMonthNames(from, to).subscribe(months => {
-          this.chartDatasets = [
-            {data: userCount, label: 'Users'},
-            {data: landlordCount, label: 'Landlords'}
-          ];
-          this.chartLabels = months;
-        });
+    const renters = [];
+    const landlords = [];
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.dates.length; i++) {
+      const month = this.dates[i];
+      forkJoin([
+        this.statisticsService.countRegisteredRentersBeforeMonth(month),
+        this.statisticsService.countRegisteredLandlordsBeforeMonth(month)
+      ]).subscribe((count) => {
+        renters.unshift(count[0]);
+        landlords.unshift(count[1]);
+        this.chartDatasets = [
+          {data: renters, label: 'Renters'},
+          {data: landlords, label: 'Landlords'}
+        ];
       });
-    });
+    }
+    console.log(this.chartDatasets);
   }
 
-
-  ngOnInit(): void {
+  initializeDates() {
+    this.toMonth = new Date();
     this.fromMonth = new Date();
-    this.toMonth = new Date(new Date().setMonth(new Date().getMonth() - 6));
+    this.fromMonth.setMonth(this.toMonth.getMonth() - 6);
     this.maxDate = new Date();
-    this.updateDataset();
+  }
+
+  createDates() {
+    this.dates = [];
+    this.fromMonth = new Date(this.fromMonth);
+    this.toMonth = new Date(this.toMonth);
+    for (const i = new Date(this.toMonth); this.monthDiff(this.fromMonth, i) !== -2; i.setMonth(i.getMonth() - 1)) {
+      this.dates.push(new Date(i));
+    }
+  }
+
+  updateDates() {
+    this.chartLabels = [];
+    for (let i = 0; i < this.dates.length; i++) {
+      const day = this.dates[i];
+      this.chartLabels[i] = this.monthNames[day.getMonth()];
+    }
+    this.chartLabels.reverse();
+  }
+
+  monthDiff(d1, d2) {
+    let months;
+    months = (d2.getFullYear() - d1.getFullYear()) * 12;
+    months -= d1.getMonth() + 1;
+    months += d2.getMonth();
+    return months;
   }
 }
+

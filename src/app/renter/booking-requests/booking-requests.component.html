@@ -1,7 +1,21 @@
 <div fxLayout="row" fxLayoutAlign="center none">
-  <div *ngIf="requests!==undefined">
-    <h1 style="margin-bottom:-20px;margin-top:30px;">Booking Requests</h1>
-    <div infinite-scroll *ngFor="let request of requests.content ">
+  <div style="margin-top: 30px" *ngIf="requests!==undefined">
+    <h1 style="margin-bottom: -30px; width: 200px; float: left">Booking Requests</h1>
+
+    <div *ngIf="requests.content.length < 1" style="float: left; width: 600px"></div>
+
+    <div style="float: right">
+      <mat-form-field class="form-select">
+        <mat-label class="labels">Filter parameters</mat-label>
+        <mat-select class="try" [(value)]="status" style="height: 20px; padding: 0px; border:0">
+          <mat-option value="all" (click)="loadFlats()">All</mat-option>
+          <mat-option value="active" (click)="loadActiveFlats()">Active</mat-option>
+          <mat-option value="declined" (click)="loadDeclinedFlats()">Declined</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div style="margin-top: 50px" infinite-scroll *ngFor="let request of requests.content ">
       <mat-card class="home-card mat-elevation-z5">
         <mat-card-content class="home-card-content" fxLayout="row">
 
@@ -24,12 +38,22 @@
                       {{request.flat.address.houseNumber}}</mat-card-subtitle>
                   </mat-card-header>
 
-                  <button id="agreement_btn" mat-raised-button color="primary"
-                         [disabled]="request.status != 'APPROVED'"  (click)="createAgreement($event)">Create Agreement
+                  <div id="status" *ngIf="request.status == 'DECLINED'"> {{request.status}} </div>
+
+                  <button *ngIf="(request.status !== 'DECLINED') && (request.isAgreementCreated == false
+                  || request.isAgreementCreated == null)"
+                          id="agreement_btn" mat-raised-button color="primary"
+                          [disabled]="(request.status !== 'APPROVED') || (request.isAgreementCreated == true)"
+                          (click)="createAgreement(request.id)">Create
+                    Agreement
                   </button>
 
-                  <button id="cancel_btn" class="decline-button" mat-raised-button color="primary"
-                          (click)="cancelBooking(request.id)">Cancel
+                  <button *ngIf="(request.isAgreementCreated == true) && (request.status !== 'DECLINED')"
+                          id="payment_btn" mat-raised-button color="accent"
+                          (click)="payForApartment()" [disabled]="!request.isAgreementAccepted">Payment
+                  </button>
+                  <button *ngIf="request.status !== 'DECLINED'" id="cancel_btn" mat-raised-button color="primary"
+                          (click)="openCancelDialog(request.id)">Cancel
                   </button>
 
 

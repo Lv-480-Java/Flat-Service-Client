@@ -24,9 +24,15 @@ import {ChangePasswordComponent} from './change-password/change-password.compone
 import {FlatRequestsComponent} from "./landlord/flat-requests/flat-requests.component";
 import {FlatRequestReviewComponent} from "./landlord/flat-request-review/flat-request-review.component";
 import {BookingRequestsComponent} from "./renter/booking-requests/booking-requests.component";
+import {AgreementReviewComponent} from "./renter/agreement-review/agreement-review.component";
+import {AboutComponent} from './about/about.component';
+import {ConfirmRegistrationComponent} from './confirm-registration/confirm-registration.component';
+import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 
 const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
+  {path: 'confirmRegistration/:token', component: ConfirmRegistrationComponent},
+  {path: 'resendRegistrationToken', component: ResendRegistrationTokenComponent},
   {path: 'login', component: LoginComponent},
   {path: 'changePassword', component: ChangePasswordComponent, canActivate: [LoginGuard]},
   {path: 'chat', component: ChatComponent},
@@ -36,6 +42,7 @@ const routes: Routes = [
   {path: 'flat-requests', component: FlatRequestsComponent},
   {path: 'flat-requests-review', component: FlatRequestReviewComponent},
   {path: 'booking-requests', component: BookingRequestsComponent},
+  {path: 'agreement-review', component: AgreementReviewComponent},
   {
     path: 'admin', component: AdminLayoutComponent, canActivate: [LoginGuard, AuthGuard],
     data: {roles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}, children: [
@@ -61,7 +68,8 @@ const routes: Routes = [
     path: '',
     redirectTo: '/flats',
     pathMatch: 'full'
-  }
+  },
+  {path: 'about', component: AboutComponent}
 ];
 
 @NgModule({

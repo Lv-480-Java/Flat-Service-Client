@@ -7,11 +7,13 @@
       </mat-card-header>
 
       <mat-card-header fxLayoutAlign="end" fxFlex="15">
-        <mat-card-title>{{flatDetailed.monthPrice}}</mat-card-title>
-        <mat-card-subtitle>ціна</mat-card-subtitle>
+        <mat-card-title>{{flatDetailed.monthPrice}} uah</mat-card-title>
       </mat-card-header>
       <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent"
-              (click)="bookApartment(id)">Book
+              (click)="bookApartment(id)" *ngIf="!isRequestApproved() && (getUserRole() == 'ROLE_USER'
+              || getUserRole() == 'ROLE_RENTER' || getUserRole() == 'ROLE_LANDLORD' || getUserRole() == 'ROLE_ADMIN'
+              || getUserRole() == 'ROLE_MODERATOR')"
+              [disabled]="(getUserRole() == 'ROLE_USER') || (getUserName() == flatDetailed.username)">Book
       </button>
     </div>
 
@@ -24,7 +26,12 @@
             <mat-card-title [routerLink]="['/short_profile/', flatDetailed.userId]"
                             style="cursor: pointer;font-size: 16px">{{flatDetailed.username}}</mat-card-title>
           </mat-card-header>
-          <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click)=activateChat()>Contact
+          <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click)=activateChat()
+                  *ngIf="getUserRole() == 'ROLE_USER' || getUserRole() == 'ROLE_RENTER'
+                  || getUserRole() == 'ROLE_LANDLORD' || getUserRole() == 'ROLE_ADMIN'
+                  || getUserRole() == 'ROLE_MODERATOR'"
+                  [disabled]="(getUserRole() == 'ROLE_USER') || (getUserName() == flatDetailed.username)
+                             || !isRequestApproved()">Contact
           </button>
         </div>
 
@@ -34,22 +41,22 @@
         </mat-chip-list>
 
         <div style="margin-top:20px" fxLayout="row">
-          <ul>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">date</li>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">number of rooms</li>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">floor</li>
-            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">district</li>
+          <ul id="ul_dec">
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">Date:</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">Number of rooms:</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">Floor:</li>
+            <li style="font-weight:500; font-size: 16px; list-style-type: none;margin: 10px">District:</li>
           </ul>
 
-          <ul>
+          <ul id="ul_info">
             <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">
-              : {{flatDetailed.creationDate}}</li>
+              {{flatDetailed.creationDate}}</li>
             <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">
-              : {{flatDetailed.numberOfRooms}}</li>
+              {{flatDetailed.numberOfRooms}}</li>
             <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">
-              : {{flatDetailed.floor}}</li>
+              {{flatDetailed.floor}}</li>
             <li style="font-weight:300; font-size: 16px; list-style-type: none;margin: 10px">
-              : {{flatDetailed.region}}</li>
+              {{flatDetailed.region}}</li>
           </ul>
         </div>
       </div>

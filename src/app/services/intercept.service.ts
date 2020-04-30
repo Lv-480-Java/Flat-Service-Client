@@ -46,7 +46,7 @@ export class InterceptorService implements HttpInterceptor {
       req = this.addAccessTokenToHeader(req, this.localStorageService.getAccessToken());
     }
     return next.handle(req).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && error.status === 401) {
+      if (error instanceof HttpErrorResponse && error.status === 401 && this.localStorageService.getCurrentUser != null) {
         return this.handle401Error(req, next);
       } else {
         return throwError(error);

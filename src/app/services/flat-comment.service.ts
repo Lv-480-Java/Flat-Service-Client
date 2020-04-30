@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../admin-panel/component/Users';
 import {BASE_URL} from '../utils/constants';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface FlatComment {
   id?: number;
@@ -19,10 +20,16 @@ export interface FlatComment {
 })
 export class FlatCommentService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {
   }
 
   private options = {headers: new HttpHeaders().set('Content-Type', 'application/json')};
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
   add(flatComment: FlatComment): Observable<FlatComment> {
     return this.http.post<FlatComment>(BASE_URL + 'flatcomments/create/', JSON.stringify(flatComment), this.options);

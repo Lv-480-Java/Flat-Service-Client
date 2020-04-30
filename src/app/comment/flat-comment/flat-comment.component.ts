@@ -25,6 +25,10 @@ export class FlatCommentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  loadData() {
     if (this.load === 'new') {
       this.loadComments(this.id);
     }
@@ -80,8 +84,7 @@ export class FlatCommentComponent implements OnInit {
     this.flatCommentService.add(newFlatComment)
       .subscribe(flatComment => {
         this.text = '';
-        this.comments = this.comments.concat(newFlatComment);
-        this.ngOnInit();
+        this.loadData();
       });
   }
 
@@ -92,8 +95,16 @@ export class FlatCommentComponent implements OnInit {
     };
     this.likeService.addFlat(like)
       .subscribe(flatComment => {
-        this.ngOnInit();
+        this.loadData();
       });
+  }
+
+  getUserRole() {
+    if (JSON.parse(localStorage.getItem('user')) === null) {
+      return 'UNDERFINED';
+    } else {
+      return JSON.parse(localStorage.getItem('user')).role;
+    }
   }
 }
 
