@@ -1,0 +1,70 @@
+<form [formGroup]="paymentForm">
+    <br>
+    <div class="div3">
+      <br>
+      <p class="h4 mb-4">Amount to pay: 10000 UAH</p>
+
+      <div class="all-element">
+        <!-- Number card -->
+        <mat-form-field class="input-card" appearance="outline">
+          <mat-label>Card number</mat-label>
+          <input type="text" (keyup)="keyUpCustom($event)" matInput placeholder="●●●● ●●●● ●●●● ●●●●" maxlength="19"  formControlName="card">
+        </mat-form-field>
+        <br>
+
+        <!-- Month -->
+        <mat-form-field class="form-select">
+          <mat-label class="labels">Select month</mat-label>
+          <mat-select [(value)]="month">
+            <mat-option value="01">01</mat-option>
+            <mat-option value="02">02</mat-option>
+            <mat-option value="03">03</mat-option>
+            <mat-option value="04">04</mat-option>
+            <mat-option value="05">05</mat-option>
+            <mat-option value="06">06</mat-option>
+            <mat-option value="07">07</mat-option>
+            <mat-option value="08">08</mat-option>
+            <mat-option value="09">09</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="11">11</mat-option>
+            <mat-option value="12">12</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- Year -->
+        <mat-form-field class="form-select">
+          <mat-label class="labels">Select year</mat-label>
+          <mat-select [(value)]="year">
+            <mat-option value="20">20</mat-option>
+            <mat-option value="21">21</mat-option>
+            <mat-option value="22">22</mat-option>
+            <mat-option value="23">23</mat-option>
+            <mat-option value="24">24</mat-option>
+            <mat-option value="25">25</mat-option>
+            <mat-option value="26">26</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- CVV -->
+        <mat-form-field class="input-cvv" appearance="outline">
+          <mat-label>CVV</mat-label>
+          <input type="password" matInput placeholder="●●●" maxlength="3" pattern="\d*"  formControlName="cvv">
+          <button mat-icon-button matSuffix>
+            <mat-icon matSuffix>lock</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <br>
+
+      <!-- Payment button -->
+      <div>
+        <!-- Remove button -->
+        <button class="button-div3" mat-raised-button color="primary" (click)="pay()" [disabled]="paymentForm.invalid">Pay</button>
+        <button class="button-div3" mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+      </div>
+
+    </div>
+</form>
+<script src="cleave.js/dist/cleave-angular.min.js"></script>
+<script src="cleave.js/dist/addons/cleave-phone.{country}.js"></script>
+

@@ -108,7 +108,8 @@ import {ReviewAreaComponent} from './landlord/review-area/review-area.component'
 import {BookingRequestsComponent} from './renter/booking-requests/booking-requests.component';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
-import {AgreementService} from "./services/agreement.service";
+import {PaymentPageComponent} from './renter/booking-requests/payment-page/payment-page.component';
+import {AgreementService} from './services/agreement.service';
 import {AgreementReviewComponent} from './renter/agreement-review/agreement-review.component';
 import {AgreementReviewAreaComponent} from './renter/agreement-review-area/agreement-review-area.component';
 import {LandlordAgreementReviewComponent} from './landlord/landlord-agreement-review/landlord-agreement-review.component';
@@ -119,7 +120,7 @@ import {ConfirmRegistrationComponent} from './confirm-registration/confirm-regis
 import {ResendRegistrationTokenComponent} from './resend-registration-token/resend-registration-token.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import { SafeHtmlPipe } from './safe-html.pipe';
+import {SafeHtmlPipe} from './safe-html.pipe';
 
 
 @NgModule({
@@ -193,7 +194,6 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     FlatRequestsComponent,
     FlatRequestReviewComponent,
     ReviewAreaComponent,
-    BookingRequestsComponent,
     AgreementReviewComponent,
     AgreementReviewAreaComponent,
     LandlordAgreementReviewComponent,
@@ -203,7 +203,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     AboutComponent,
     ConfirmRegistrationComponent,
     ResendRegistrationTokenComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    PaymentPageComponent
   ],
   imports: [
     BrowserModule,
@@ -236,36 +237,8 @@ import { SafeHtmlPipe } from './safe-html.pipe';
     _MatMenuDirectivesModule,
     MatMenuModule,
     MatRadioModule,
-    BrowserModule,
-    AppRoutingModule,
-    MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    Ng5SliderModule,
-    MatSliderModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatInputModule,
-    FlexModule,
-    InfiniteScrollModule,
-    MatChipsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    MatAutocompleteModule,
-    GalleryModule,
-    MatSidenavModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatListModule,
-    MatBadgeModule,
     MatButtonToggleModule,
-    MatSelectModule,
-    MatGridListModule,
     MatDatepickerModule,
-    MatBadgeModule,
     MatNativeDateModule,
     AgmCoreModule.forRoot({
       apiKey: ''

@@ -52,7 +52,6 @@
                           id="payment_btn" mat-raised-button color="accent"
                           (click)="payForApartment()" [disabled]="!request.isAgreementAccepted">Payment
                   </button>
-
                   <button *ngIf="request.status !== 'DECLINED'" id="cancel_btn" mat-raised-button color="primary"
                           (click)="openCancelDialog(request.id)">Cancel
                   </button>
