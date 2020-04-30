@@ -11,7 +11,7 @@ import {BASE_URL} from '../utils/constants';
   styleUrls: ['./profile-user.component.scss']
 })
 export class ProfileUserComponent implements OnInit {
-  noPhoto =  'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREJEf8sd1jrOUhsma-DECMfCHHH5JVpRdlDt_BabSdGfVSTZhF';
+  noPhoto =  'https://s3.eu-central-1.amazonaws.com/makler.tabbo/photo_2020-04-28_20-46-46.jpg';
   fileData: File = null;
   userData: User;
   landlordData = true;
