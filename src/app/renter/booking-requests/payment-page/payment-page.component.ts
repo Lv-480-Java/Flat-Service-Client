@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subscription} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {UserService} from '../../../services/user.service';
+import {PaymentService} from "../../../services/payment.service";
 
 @Component({
   selector: 'app-payment-page',
@@ -18,9 +18,11 @@ export class PaymentPageComponent implements OnInit, OnDestroy {
   vSub: Subscription;
   paymentForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<PaymentPageComponent>,
-              private userService: UserService,
-              private snackBar: MatSnackBar) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data,
+              public dialogRef: MatDialogRef<PaymentPageComponent>,
+              private paymentService: PaymentService,
+              private snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     this.paymentForm = new FormGroup({
@@ -50,19 +52,33 @@ export class PaymentPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  pay() {
+  pay(id: number) {
     if (this.paymentForm.invalid) {
       console.log('Date is invalid');
       return;
     }
-    this.userService.doPay();
-    this.snackBar.open('Payment is successful!', 'close', {
-      duration: 5000,
-      verticalPosition: 'top',
-      horizontalPosition: 'center',
-      panelClass: ['snackbar']
-    });
-    this.dialogRef.close();
+    this.paymentService.payForApartment(id).subscribe(
+      success => {
+        this.snackBar.open('Payment was successful!', 'x',
+          {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snackbar']
+          });
+        this.dialogRef.close();
+      },
+      error => {
+        this.snackBar.open(error.error.message, 'x',
+          {
+            duration: 5000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snackbar']
+          });
+        this.dialogRef.close();
+      }
+    );
   }
 
   cancel() {

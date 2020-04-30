@@ -61,7 +61,7 @@
 
             <button *ngIf="(element.isAgreementAccepted == true) && (element.status !== 'DECLINED')"
                     class="cancel-button" mat-raised-button color="primary"
-                    (click)="checkPayment()" disabled="disabled">Check Payment
+                    (click)="checkPayment()" [disabled]="element.isPaid !== true">Check Payment
             </button>
           </td>
         </ng-container>
