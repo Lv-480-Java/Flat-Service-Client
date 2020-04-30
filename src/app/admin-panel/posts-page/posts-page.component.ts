@@ -9,6 +9,7 @@ import {Subscription} from 'rxjs';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RemovePostWindowComponent} from './remove-post-window/remove-post-window.component';
 import {RequestForBanFlat} from '../component/RequestForBanFlat';
+import {PaymentPageComponent} from './payment-page/payment-page.component';
 
 @Component({
   selector: 'app-posts-page',
@@ -75,6 +76,22 @@ export class PostsPageComponent implements OnInit, OnDestroy {
 
   review(element) {
     this.openDialogReview(element);
+  }
+
+  payment() {
+    this.openDialogPayment();
+  }
+
+  openDialogPayment(): void {
+    console.log('Open dialog for review');
+    const dialogRef = this.dialog.open(PaymentPageComponent, {
+      panelClass: 'customOpenDialog',
+      width: '600px',
+      height: '450px'
+    });
+    this.vSub = dialogRef.afterClosed().subscribe(() => {
+      console.log('The dialog was closed');
+    });
   }
 
   openDialogReview(element): void {
