@@ -4,6 +4,8 @@ import {Observable, Subject} from 'rxjs';
 import {User} from '../admin-panel/component/Users';
 import {BASE_URL} from '../utils/constants';
 import {catchError} from 'rxjs/operators';
+import {PaymentDto} from '../admin-panel/component/PaymentDto';
+import {FormGroup} from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +60,10 @@ export class UserService {
   getUser(id: number): Observable<User> {
     console.log(id);
     return this.http.get<User>(BASE_URL + `users/${id}`);
+  }
+
+  doPay(): void {
+    console.log('Ok');
   }
 
   private handleError(error: HttpErrorResponse) {
