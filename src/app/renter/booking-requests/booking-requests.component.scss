@@ -150,7 +150,7 @@
   margin-right: 15px;
 }
 
-#status {
+.status {
   height: 30px;
   width: 120px;
   line-height: 30px;
@@ -161,6 +161,16 @@
   font-size: small;
 }
 
+.paid {
+  height: 30px;
+  width: 120px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 4px;
+  font-size: small;
+}
 
 .form-select {
   padding: 0;

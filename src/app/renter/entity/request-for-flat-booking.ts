@@ -15,4 +15,5 @@ export class RequestForFlatBooking {
   flat: Flat;
   isAgreementCreated: boolean;
   isAgreementAccepted: boolean;
+  isPaid: boolean;
 }
