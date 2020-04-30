@@ -1,26 +1,30 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {FlatBookingService} from "../../services/flat-booking.service";
-import {RequestsForFlatBooking} from "../entity/request-for-flat-booking";
-import {MatDialog} from "@angular/material/dialog";
-import {AgreementReviewAreaComponent} from "../agreement-review-area/agreement-review-area.component";
-import {ConfirmationDialogComponent} from "../../shared/confirmation-dialog/confirmation-dialog.component";
-import {AgreementReviewComponent} from "../agreement-review/agreement-review.component";
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {FlatBookingService} from '../../services/flat-booking.service';
+import {RequestsForFlatBooking} from '../entity/request-for-flat-booking';
+import {MatDialog} from '@angular/material/dialog';
+import {AgreementReviewAreaComponent} from '../agreement-review-area/agreement-review-area.component';
+import {ConfirmationDialogComponent} from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import {AgreementReviewComponent} from '../agreement-review/agreement-review.component';
+import {PaymentPageComponent} from './payment-page/payment-page.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-booking-requests',
   templateUrl: './booking-requests.component.html',
   styleUrls: ['./booking-requests.component.scss']
 })
-export class BookingRequestsComponent implements OnInit {
+export class BookingRequestsComponent implements OnInit, OnDestroy {
   @ViewChild(AgreementReviewAreaComponent) agreementReviewAreaComponent;
   @ViewChild(AgreementReviewComponent) agreementReviewComponent;
+  @ViewChild(PaymentPageComponent) paymentPageComponent;
 
   constructor(private http: HttpClient, private bookingService: FlatBookingService,
               private bar: MatSnackBar, public dialog: MatDialog) {
   }
 
+  vSub: Subscription;
   data: any;
   requests: RequestsForFlatBooking = new RequestsForFlatBooking();
   status = 'all';
@@ -36,7 +40,7 @@ export class BookingRequestsComponent implements OnInit {
         this.requests.content = this.data;
         this.status = 'all';
         if (this.requests.content.length < 1) {
-          this.bar.open("You haven't made any requests yet!", "x",
+          this.bar.open('You haven\'t made any requests yet!', 'x',
             {
               verticalPosition: 'top',
               horizontalPosition: 'center',
@@ -53,7 +57,7 @@ export class BookingRequestsComponent implements OnInit {
         this.requests.content = this.data;
         this.status = 'declined';
         if (this.requests.content.length < 1) {
-          this.bar.open("You don't have any declined requests!", "x",
+          this.bar.open('You don\'t have any declined requests!', 'x',
             {
               duration: 5000,
               verticalPosition: 'top',
@@ -71,7 +75,7 @@ export class BookingRequestsComponent implements OnInit {
         this.requests.content = this.data;
         this.status = 'active';
         if (this.requests.content.length < 1) {
-          this.bar.open("You don't have any active requests!", "x",
+          this.bar.open('You don\'t have any active requests!', 'x',
             {
               duration: 5000,
               verticalPosition: 'top',
@@ -85,13 +89,13 @@ export class BookingRequestsComponent implements OnInit {
   openCancelDialog(id: number): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '350px',
-      data: "Do you confirm canceling the request?"
+      data: 'Do you confirm canceling the request?'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.bookingService.declineRequestForFlatBooking(id).subscribe(
           success => {
-            this.bar.open("Request was canceled!", "x",
+            this.bar.open('Request was canceled!', 'x',
               {
                 duration: 5000,
                 verticalPosition: 'top',
@@ -101,7 +105,7 @@ export class BookingRequestsComponent implements OnInit {
             this.ngOnInit();
           },
           error => {
-            this.bar.open(error.error.message, "x",
+            this.bar.open(error.error.message, 'x',
               {
                 duration: 5000,
                 verticalPosition: 'top',
@@ -127,7 +131,28 @@ export class BookingRequestsComponent implements OnInit {
     );
   }
 
-  payForApartment() {
-    
+  payForApartment(requestId: number, price: number) {
+    this.openDialogPayment(requestId, price);
+  }
+
+  openDialogPayment(requestId: number, price: number): void {
+    console.log('Open dialog for review');
+    const dialogRef = this.dialog.open(PaymentPageComponent, {
+      data: {id: requestId, flatPrice: price},
+      panelClass: 'customOpenDialog',
+      width: '600px',
+      height: '450px'
+    });
+    this.vSub = dialogRef.afterClosed().subscribe(() => {
+      this.ngOnInit();
+      console.log('The dialog was closed');
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.vSub) {
+      this.vSub.unsubscribe();
+    }
+    console.log('Finished destroy');
   }
 }

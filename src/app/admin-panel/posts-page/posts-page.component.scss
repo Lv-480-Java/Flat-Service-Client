@@ -67,3 +67,11 @@ button {
   width: 80px;
 }
 
+::ng-deep {
+  .customOpenDialog >  mat-dialog-container {
+    padding: 0;
+    overflow: hidden;
+    border: 2px grey solid;
+  }
+}
+

@@ -38,7 +38,7 @@
                       {{request.flat.address.houseNumber}}</mat-card-subtitle>
                   </mat-card-header>
 
-                  <div id="status" *ngIf="request.status == 'DECLINED'"> {{request.status}} </div>
+                  <div class="status" *ngIf="request.status == 'DECLINED'"> {{request.status}} </div>
 
                   <button *ngIf="(request.status !== 'DECLINED') && (request.isAgreementCreated == false
                   || request.isAgreementCreated == null)"
@@ -48,12 +48,16 @@
                     Agreement
                   </button>
 
-                  <button *ngIf="(request.isAgreementCreated == true) && (request.status !== 'DECLINED')"
+                  <button *ngIf="(request.isAgreementCreated == true) && (request.status !== 'DECLINED')
+                              && (request.isPaid !== true)"
                           id="payment_btn" mat-raised-button color="accent"
-                          (click)="payForApartment()" [disabled]="!request.isAgreementAccepted">Payment
+                          (click)="payForApartment(request.id, request.flat.monthPrice)"
+                          [disabled]="!request.isAgreementAccepted">Payment
                   </button>
 
-                  <button *ngIf="request.status !== 'DECLINED'" id="cancel_btn" mat-raised-button color="primary"
+                  <div class="paid" *ngIf="request.isPaid == true"> PAID </div>
+
+                  <button *ngIf="(request.status !== 'DECLINED') && (request.isPaid !== true)" id="cancel_btn" mat-raised-button color="primary"
                           (click)="openCancelDialog(request.id)">Cancel
                   </button>
 
