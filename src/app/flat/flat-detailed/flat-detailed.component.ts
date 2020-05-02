@@ -5,9 +5,10 @@ import {HttpClient} from '@angular/common/http';
 import {FlatDetailed} from './entity/FlatDetailed';
 import {BASE_URL} from 'src/app/utils/constants';
 import {User} from '../../admin-panel/component/Users';
-import {FlatBookingService} from "../../services/flat-booking.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {RequestForFlatBooking, RequestsForFlatBooking} from "../../renter/entity/request-for-flat-booking";
+import {FlatBookingService} from '../../services/flat-booking.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {RequestForFlatBooking, RequestsForFlatBooking} from '../../renter/entity/request-for-flat-booking';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-flat-detailed',
@@ -18,7 +19,8 @@ export class FlatDetailedComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient,
               private flatBookingService: FlatBookingService,
-              private bar: MatSnackBar) {
+              private bar: MatSnackBar,
+              private authService: AuthService) {
   }
 
   images: GalleryItem[];
@@ -38,7 +40,9 @@ export class FlatDetailedComponent implements OnInit {
       this.id = Number(params.get('id'));
     });
     this.loadFlat();
-    this.loadRenterRequests();
+    if (this.authService.isAuthenticated()) {
+      this.loadRenterRequests();
+    }
   }
 
   activateChat() {

@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserComment, UserCommentService} from '../../services/user-comment.service';
 import {ProfileService} from '../../services/profile.service';
 import {Like, LikeService} from '../../services/like.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-list-comments-about-coment',
@@ -9,7 +10,7 @@ import {Like, LikeService} from '../../services/like.service';
   styleUrls: ['./user-list-comments-about-coment.component.scss']
 })
 export class UserListCommentsAboutComentComponent implements OnInit {
-  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  isId: any = this.authService.isAuthenticated() ? this.profileService.getUserId().subscribe((id) => this.isId = id) : 0;
   isTrue = false;
   isList = false;
   isComplain = false;
@@ -20,7 +21,8 @@ export class UserListCommentsAboutComentComponent implements OnInit {
 
   constructor(private userCommentService: UserCommentService,
               private profileService: ProfileService,
-              private likeService: LikeService) {
+              private likeService: LikeService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
