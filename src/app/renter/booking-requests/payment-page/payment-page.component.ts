@@ -11,6 +11,7 @@ import {PaymentService} from "../../../services/payment.service";
   styleUrls: ['./payment-page.component.scss']
 })
 export class PaymentPageComponent implements OnInit, OnDestroy {
+
   month = '01';
   year = '20';
   cardNumber = '';
@@ -25,6 +26,10 @@ export class PaymentPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.paymentForm = new FormGroup({
       card: new FormControl('', [
         Validators.required,
