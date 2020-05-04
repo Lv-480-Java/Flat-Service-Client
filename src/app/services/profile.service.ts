@@ -59,7 +59,7 @@ export class ProfileService {
   }
 
   getUserInfo(id: number): Observable<User> {
-    return this.http.get<User>(BASE_URL + `users/${id}`);
+    return this.http.get<User>(BASE_URL + `users/getById/${id}`);
   }
 
   getUserId(): Observable<any> {

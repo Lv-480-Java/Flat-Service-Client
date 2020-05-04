@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FlatComment, FlatCommentService} from '../../services/flat-comment.service';
 import {ProfileService} from '../../services/profile.service';
 import {Like, LikeService} from '../../services/like.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-list-comment',
@@ -9,7 +10,7 @@ import {Like, LikeService} from '../../services/like.service';
   styleUrls: ['./list-comment.component.scss']
 })
 export class ListCommentComponent implements OnInit {
-  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  isId: any = this.authService.isAuthenticated() ? this.profileService.getUserId().subscribe((id) => this.isId = id) : 0;
   isTrue = false;
   isList = false;
   isComplain = false;
@@ -21,7 +22,8 @@ export class ListCommentComponent implements OnInit {
 
   constructor(private flatCommentService: FlatCommentService,
               private profileService: ProfileService,
-              private likeService: LikeService) {
+              private likeService: LikeService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {

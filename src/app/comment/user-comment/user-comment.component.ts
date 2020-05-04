@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserComment, UserCommentService} from '../../services/user-comment.service';
 import {ProfileService} from '../../services/profile.service';
 import {Like, LikeService} from '../../services/like.service';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {Like, LikeService} from '../../services/like.service';
 export class UserCommentComponent implements OnInit {
 
   comments: UserComment[] = [];
-  isId: any = this.profileService.getUserId().subscribe((id) => this.isId = id);
+  isId: any = this.authService.isAuthenticated() ? this.profileService.getUserId().subscribe((id) => this.isId = id) : 0;
   commentId: number;
   isTrue = false;
   isList = false;
@@ -23,7 +24,8 @@ export class UserCommentComponent implements OnInit {
 
   constructor(private userCommentService: UserCommentService,
               private profileService: ProfileService,
-              private likeService: LikeService) {
+              private likeService: LikeService,
+              private authService: AuthService) {
   }
 
   ngOnInit(): void {
