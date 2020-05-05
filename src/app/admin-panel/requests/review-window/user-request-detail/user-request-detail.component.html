@@ -1,142 +1,186 @@
-
-<div class="container bootstrap snippet">
-
+<div class="container bootstrap snippet" style="margin-top: 30px">
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-3" style="margin-left: 30px">
 
-      <div class="text-center">
-        <img [src]="userData.photoUrl" class="img-thumbnail">
-        <div class="nickname">{{userData.username}}</div>
-        <div class="phone">{{userData.phoneNumber}}</div>
-        <a class = "button" mat-button routerLink="/short_profile/{{userData.id}}" target="_blank">View Profile</a>
+      <div class="text-center" style="margin-left: 75px" >
+        <img *ngIf="userData.photoUrl !== null; else noData" [src]="userData.photoUrl" class="img-thumbnail"
+             style="width: 200px">
+        <ng-template #noData>
+          <img [src]="noPhoto" class="img-thumbnail" style="width: 200px">
+        </ng-template>
       </div>
 
     </div><!--/col-3-->
-    <div class="col-sm-9">
-      <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#passport">Passport Data</a></li>
-      </ul>
 
-      <div class="tab-content">
-        <div class="tab-pane active" id="passport">
-          <hr>
-          <form class="form" action="" method="post" enctype="multipart/form-data" id="registrationForm">
-            <div class="form-group">
+    <div class="col-sm-6" >
+      <form class="form" action="" method="post" enctype="multipart/form-data" id="registrationForm">
+        <div class="form-row">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>First name</mat-label>
+              <input matInput  [(ngModel)]="data.firstName"
+                     [ngModelOptions]="{standalone:true}">
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_FIRSTNAME$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
 
-              <div class="col-xs-6">
-                <h4>First name</h4>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Last name</mat-label>
+              <input matInput  [(ngModel)]="data.lastName"
+                     [ngModelOptions]="{standalone:true}" >
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_LASTNAME$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Middle name</mat-label>
+              <input matInput  [(ngModel)]="data.middleName"
+                     [ngModelOptions]="{standalone:true}">
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_MIDDLENAME$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Gender</mat-label>
+              <mat-select [(ngModel)]="data.gender" [ngModelOptions]="{standalone:true}">
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+              </mat-select>
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_GENDER$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Birth date</mat-label>
+              <input matInput [matDatepicker]="picker" [(ngModel)]="data.birthDate"
+                     [ngModelOptions]="{standalone:true}">
+              <mat-datepicker-toggle matSuffix [for]="picker">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_BIRTHDATE$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Birth place</mat-label>
+              <input matInput  [(ngModel)]="data.birthPlace"
+                     [ngModelOptions]="{standalone:true}" >
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_BIRTHPLACE$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Passport type</mat-label>
+              <mat-select [(ngModel)]="data.passportType"
+                          [ngModelOptions]="{standalone:true}">
+                <mat-option value="Id">Id</mat-option>
+                <mat-option value="Passport">Passport</mat-option>
+              </mat-select>
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_PASSPORTYPE$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Nationality</mat-label>
+              <input matInput  [(ngModel)]="data.nationality"
+                     [ngModelOptions]="{standalone:true}">
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_NATIONALITY$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
 
-                <input type="text" class="form-control" [(ngModel)]="data.firstName"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Last name</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.lastName"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Middle name</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.middleName"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <div class="col-xs-6">
-                <h4>Gender</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.gender" [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Birth date</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.birthDate"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Birth place</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.birthPlace"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Passport type</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.passportType"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Nationality</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.nationality"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Authority</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.authority"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Date of issue</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.dateOfIssue"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Expiration date</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.expirationDate"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Passport number</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.passportNumber"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-
-              <div class="col-xs-6">
-                <h4>Identification number</h4>
-                <input type="text" class="form-control" [(ngModel)]="data.identificationNumber"
-                       [ngModelOptions]="{standalone:true}">
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="col-xs-12">
-                <br>
-
-              </div>
-            </div>
-          </form>
-          <hr>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Date of issue</mat-label>
+              <input matInput [matDatepicker]="picker1" [(ngModel)]="data.dateOfIssue"
+                     [ngModelOptions]="{standalone:true}">
+              <mat-datepicker-toggle matSuffix [for]="picker1">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_DATEOFISSUE$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Authority</mat-label>
+              <input matInput  [(ngModel)]="data.authority"
+                     [ngModelOptions]="{standalone:true}">
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_AUTHORITY$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Expiration date</mat-label>
+              <input matInput  [matDatepicker]="picker2" [(ngModel)]="data.expirationDate"
+                     [ngModelOptions]="{standalone:true}">
+              <mat-datepicker-toggle matSuffix [for]="picker2">
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_EXPIRATIONDATE$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Passport number</mat-label>
+              <input matInput  [(ngModel)]="data.passportNumber"
+                     [ngModelOptions]="{standalone:true}">
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_PASSPORTNUMBER$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Identification number</mat-label>
+              <input matInput  [(ngModel)]="data.identificationNumber"
+                     [ngModelOptions]="{standalone:true}">
+              <small style="color: #d92550; font-size: 12px" class="align-baseline"
+                     *ngIf="landlordService.ERROR_IDENTIFICATIONNUMBER$ | async as error">
+                {{ error }}
+              </small>
+            </mat-form-field>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
+
   </div>
 </div>
+
+
+
 
