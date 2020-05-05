@@ -242,7 +242,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatNativeDateModule,
     MatTooltipModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyC1nmER6QbI2OWVw6cd1clewSnN0Ol9xUE'
     }),
     MatTabsModule
   ],
