@@ -12,6 +12,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup;
   submitted = false;
 
@@ -21,6 +22,10 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [
         Validators.email,
@@ -54,4 +59,5 @@ export class LoginComponent implements OnInit {
       this.submitted = false;
     });
   }
+
 }

@@ -20,6 +20,7 @@ export class FlatRequestsComponent implements OnInit {
   @ViewChild(ReviewAreaComponent) flatReviewAreaComponent;
   @ViewChild(LandlordAgreementReviewAreaComponent) agreementReviewAreaComponent;
   @ViewChild(LandlordAgreementReviewComponent) agreementReviewComponent;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   displayedColumns: string[] = ['id', 'author', 'date', 'review', 'agreement', 'cancel'];
   dataSource;
@@ -33,8 +34,6 @@ export class FlatRequestsComponent implements OnInit {
   requests;
   pageNumber = 0;
   pageSize = 5;
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(public bookingService: FlatBookingService, private formBuilder: FormBuilder,
               private bar: MatSnackBar, public dialog: MatDialog) {
@@ -165,4 +164,5 @@ export class FlatRequestsComponent implements OnInit {
   checkPayment() {
 
   }
+
 }

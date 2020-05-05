@@ -9,12 +9,15 @@
       <mat-card-header fxLayoutAlign="end" fxFlex="15">
         <mat-card-title>{{flatDetailed.monthPrice}} uah</mat-card-title>
       </mat-card-header>
-      <button fxFlex="15" style="font-size: 16px ; height:40px;" mat-raised-button color="accent"
-              (click)="bookApartment(id)" *ngIf="!isRequestApproved() && (getUserRole() == 'ROLE_USER'
+      <div matTooltip="To book apartment you need to fill passport data in Profile
+      and pass Renter verification" [matTooltipDisabled]="!((getUserRole() == 'ROLE_USER'))">
+        <button class="myButton" fxFlex="15" mat-raised-button color="accent"
+                (click)="bookApartment(id)" *ngIf="(!isRequestApproved() && (getUserRole() == 'ROLE_USER'
               || getUserRole() == 'ROLE_RENTER' || getUserRole() == 'ROLE_LANDLORD' || getUserRole() == 'ROLE_ADMIN'
-              || getUserRole() == 'ROLE_MODERATOR')"
-              [disabled]="(getUserRole() == 'ROLE_USER') || (getUserName() == flatDetailed.username)">Book
-      </button>
+              || getUserRole() == 'ROLE_MODERATOR')) && (getUserName() !== flatDetailed.username)"
+                [disabled]="getUserRole() == 'ROLE_USER'">Book
+        </button>
+      </div>
     </div>
 
     <div fxLayout="row">
@@ -26,13 +29,17 @@
             <mat-card-title [routerLink]="['/short_profile/', flatDetailed.userId]"
                             style="cursor: pointer;font-size: 16px">{{flatDetailed.username}}</mat-card-title>
           </mat-card-header>
-          <button fxFlex="30" style="font-size: 16px" mat-raised-button color="primary" (click)=activateChat()
-                  *ngIf="getUserRole() == 'ROLE_USER' || getUserRole() == 'ROLE_RENTER'
+          <div style="width: 120px" matTooltip="Contact button will be able after Landlord's approval"
+               [matTooltipDisabled]="!((getUserRole() == 'ROLE_USER') || !isRequestApproved())">
+            <button class="myButton" fxFlex="30" mat-raised-button color="primary"
+                    (click)=activateChat()
+                    *ngIf="(getUserRole() == 'ROLE_USER' || getUserRole() == 'ROLE_RENTER'
                   || getUserRole() == 'ROLE_LANDLORD' || getUserRole() == 'ROLE_ADMIN'
-                  || getUserRole() == 'ROLE_MODERATOR'"
-                  [disabled]="(getUserRole() == 'ROLE_USER') || (getUserName() == flatDetailed.username)
-                             || !isRequestApproved()">Contact
-          </button>
+                  || getUserRole() == 'ROLE_MODERATOR') && (getUserName() !== flatDetailed.username)"
+                    [disabled]="(getUserRole() == 'ROLE_USER') || !isRequestApproved()">
+              Contact
+            </button>
+          </div>
         </div>
 
         <mat-chip-list style="margin-top: 20px">

@@ -53,23 +53,34 @@
         <ng-container matColumnDef="agreement">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button class="cancel-button" *ngIf="(element.status=='APPROVED') && (element.isAgreementAccepted == false
-            || element.isAgreementAccepted == null)" mat-raised-button color="primary"
-                    (click)="reviewAgreement(element.id)" [disabled]="(element.isAgreementCreated == false)
-                    || (element.isAgreementCreated == null)">Review Agreement
-            </button>
 
-            <button *ngIf="(element.isAgreementAccepted == true) && (element.status !== 'DECLINED')"
-                    class="cancel-button" mat-raised-button color="primary"
-                    (click)="checkPayment()" [disabled]="element.isPaid !== true">Check Payment
-            </button>
+            <div style="height: 36px" matTooltip="You will be able to review agreement
+            as soon as Renter initiates its creation"
+                 [matTooltipDisabled]="!((element.isAgreementCreated == false) || (element.isAgreementCreated == null))"
+                 *ngIf="(element.status=='APPROVED') && (element.isAgreementAccepted == false
+            || element.isAgreementAccepted == null)">
+              <button class="cancel-button" mat-raised-button color="primary"
+                      (click)="reviewAgreement(element.id)" [disabled]="(element.isAgreementCreated == false)
+                    || (element.isAgreementCreated == null)">Review Agreement
+              </button>
+            </div>
+
+            <div style="height: 36px" matTooltip="You will be able to check payment
+            as soon as Renter pays for apartment" [matTooltipDisabled]="!(element.isPaid !== true)"
+                 *ngIf="(element.isAgreementAccepted == true) && (element.status !== 'DECLINED')">
+              <button class="cancel-button" mat-raised-button color="primary"
+                      (click)="checkPayment()" [disabled]="element.isPaid !== true">Check Payment
+              </button>
+            </div>
+
           </td>
         </ng-container>
 
         <ng-container matColumnDef="cancel">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let element">
-            <button class="cancel-button" *ngIf="element.status=='APPROVED'" mat-raised-button color="primary"
+            <button class="cancel-button" *ngIf="(element.status=='APPROVED') && (element.isAgreementAccepted==false
+            || element.isAgreementAccepted==null)" mat-raised-button color="primary"
                     (click)="openCancelDialog(element.id)">Cancel
             </button>
           </td>

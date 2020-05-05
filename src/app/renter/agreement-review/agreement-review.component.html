@@ -1,1 +1,1 @@
-<div class="agr" mat-dialog-content [innerHTML]="template | safeHtml"></div>
+<div *ngIf="template !== undefined" class="agr" mat-dialog-content [innerHTML]="template | safeHtml"></div>

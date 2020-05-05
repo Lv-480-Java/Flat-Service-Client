@@ -10,27 +10,18 @@ import {Observable} from 'rxjs';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
+
   form: FormGroup;
 
   constructor(public registrationService: RegistrationService,
               private router: Router) {
   }
 
-  submit(): Observable<any> {
-    if (this.form.invalid) {
-      return;
-    }
-    this.registrationService.register(this.form.value)
-      .subscribe(
-        (response) => {
-          this.registrationService.openSnackBar('Please, check your email to confirm registration', 'X')
-          this.form.reset();
-          this.router.navigate(['/login']);
-        }
-      )
+  ngOnInit() {
+    this.initializeForm();
   }
 
-  ngOnInit() {
+  initializeForm() {
     this.form = new FormGroup({
       username: new FormControl('', [
         Validators.required,
@@ -49,4 +40,19 @@ export class RegistrationComponent implements OnInit {
       ])
     });
   }
+
+  submit(): Observable<any> {
+    if (this.form.invalid) {
+      return;
+    }
+    this.registrationService.register(this.form.value)
+      .subscribe(
+        (response) => {
+          this.registrationService.openSnackBar('Please, check your email to confirm registration', 'X')
+          this.form.reset();
+          this.router.navigate(['/login']);
+        }
+      )
+  }
+
 }
