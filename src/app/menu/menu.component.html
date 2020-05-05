@@ -56,7 +56,7 @@
     <!-- Links -->
 
     <ul class="navbar-nav ml-auto nav-flex-icons">
-      <a id="username" style="font-size: 15px; vertical-align: center; color: white"
+      <a id="username" style="font-size: 15px; vertical-align: center; color: white; background: border-box;"
          *ngIf="authService.isAuthenticated()" class="dropdown-item waves-light" mdbWavesEffect href="#"
          routerLink="/data" routerLinkActive="active">{{displayName()}}</a>
       <li class="nav-item avatar dropdown" dropdown>
