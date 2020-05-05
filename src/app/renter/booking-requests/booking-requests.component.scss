@@ -139,8 +139,9 @@
 }
 
 #agreement_btn {
-  height: 30px;
-  width: 210px;
+  max-width: unset !important;
+  height: 30px !important;
+  width: 145px !important;
   line-height: normal;
   margin-right: 10px;
 }
@@ -180,8 +181,9 @@
 }
 
 #payment_btn {
-  height: 30px;
-  width: 120px;
+  max-width: unset !important;
+  height: 30px !important;
+  width: 100px !important;
   line-height: normal;
   margin-right: 15px;
 }

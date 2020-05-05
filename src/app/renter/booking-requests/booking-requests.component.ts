@@ -20,14 +20,14 @@ export class BookingRequestsComponent implements OnInit, OnDestroy {
   @ViewChild(AgreementReviewComponent) agreementReviewComponent;
   @ViewChild(PaymentPageComponent) paymentPageComponent;
 
-  constructor(private http: HttpClient, private bookingService: FlatBookingService,
-              private bar: MatSnackBar, public dialog: MatDialog) {
-  }
-
   vSub: Subscription;
   data: any;
   requests: RequestsForFlatBooking = new RequestsForFlatBooking();
   status = 'all';
+
+  constructor(private http: HttpClient, private bookingService: FlatBookingService,
+              private bar: MatSnackBar, public dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.loadFlats();
@@ -102,7 +102,7 @@ export class BookingRequestsComponent implements OnInit, OnDestroy {
                 horizontalPosition: 'right',
                 panelClass: ['snackbar']
               });
-            this.ngOnInit();
+            this.loadFlats();
           },
           error => {
             this.bar.open(error.error.message, 'x',
@@ -126,7 +126,7 @@ export class BookingRequestsComponent implements OnInit, OnDestroy {
     const dialogRef = this.dialog.open(AgreementReviewAreaComponent, {data: {requestId: id}});
     dialogRef.afterClosed().subscribe(
       success => {
-        this.ngOnInit();
+        this.loadFlats();
       }
     );
   }
@@ -136,7 +136,6 @@ export class BookingRequestsComponent implements OnInit, OnDestroy {
   }
 
   openDialogPayment(requestId: number, price: number): void {
-    console.log('Open dialog for review');
     const dialogRef = this.dialog.open(PaymentPageComponent, {
       data: {id: requestId, flatPrice: price},
       panelClass: 'customOpenDialog',
@@ -144,8 +143,7 @@ export class BookingRequestsComponent implements OnInit, OnDestroy {
       height: '450px'
     });
     this.vSub = dialogRef.afterClosed().subscribe(() => {
-      this.ngOnInit();
-      console.log('The dialog was closed');
+      this.loadFlats();
     });
   }
 
@@ -153,6 +151,6 @@ export class BookingRequestsComponent implements OnInit, OnDestroy {
     if (this.vSub) {
       this.vSub.unsubscribe();
     }
-    console.log('Finished destroy');
   }
+
 }

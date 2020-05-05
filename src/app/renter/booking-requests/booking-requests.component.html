@@ -40,24 +40,33 @@
 
                   <div class="status" *ngIf="request.status == 'DECLINED'"> {{request.status}} </div>
 
-                  <button *ngIf="(request.status !== 'DECLINED') && (request.isAgreementCreated == false
-                  || request.isAgreementCreated == null)"
-                          id="agreement_btn" mat-raised-button color="primary"
-                          [disabled]="(request.status !== 'APPROVED') || (request.isAgreementCreated == true)"
-                          (click)="createAgreement(request.id)">Create
-                    Agreement
-                  </button>
+                  <div style="height: 30px" matTooltip="You will be able to create agreement after Landlord's approval"
+                       [matTooltipDisabled]="!(request.status !== 'APPROVED')">
+                    <button class="myButton" *ngIf="(request.status !== 'DECLINED')
+                    && (request.isAgreementCreated == false || request.isAgreementCreated == null)"
+                            id="agreement_btn" mat-raised-button color="primary"
+                            [disabled]="(request.status !== 'APPROVED')"
+                            (click)="createAgreement(request.id)">Create
+                      Agreement
+                    </button>
+                  </div>
 
-                  <button *ngIf="(request.isAgreementCreated == true) && (request.status !== 'DECLINED')
+                  <div style="height: 30px" matTooltip="You will be able to pay for apartment
+                  as soon as agreement is signed" [matTooltipDisabled]="request.isAgreementAccepted">
+                    <button *ngIf="(request.isAgreementCreated == true) && (request.status !== 'DECLINED')
                               && (request.isPaid !== true)"
-                          id="payment_btn" mat-raised-button color="accent"
-                          (click)="payForApartment(request.id, request.flat.monthPrice)"
-                          [disabled]="!request.isAgreementAccepted">Payment
-                  </button>
+                            id="payment_btn" mat-raised-button color="accent"
+                            (click)="payForApartment(request.id, request.flat.monthPrice)"
+                            [disabled]="!request.isAgreementAccepted">Payment
+                    </button>
+                  </div>
 
-                  <div class="paid" *ngIf="request.isPaid == true"> PAID </div>
+                  <div class="paid" *ngIf="request.isPaid == true"> PAID</div>
 
-                  <button *ngIf="(request.status !== 'DECLINED') && (request.isPaid !== true)" id="cancel_btn" mat-raised-button color="primary"
+                  <button *ngIf="(request.status !== 'DECLINED') && (request.isPaid !== true)
+                  && (request.isAgreementAccepted == false || request.isAgreementAccepted == null)"
+                          id="cancel_btn"
+                          mat-raised-button color="primary"
                           (click)="openCancelDialog(request.id)">Cancel
                   </button>
 

@@ -11,13 +11,13 @@ import {HttpClient} from "@angular/common/http";
 })
 export class FlatRequestReviewComponent implements OnInit {
 
-  constructor(private http: HttpClient) {
-  }
-
   images: GalleryItem[];
   @Input() id: number;
   data: any;
   public flatDetailed: FlatDetailed = new FlatDetailed();
+
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     this.loadFlat();
@@ -28,7 +28,6 @@ export class FlatRequestReviewComponent implements OnInit {
     this.http.get(c)
       .subscribe(data => {
         this.data = data;
-        console.log(this.data);
         this.flatDetailed = this.data;
         this.loadImages();
       });
@@ -43,4 +42,5 @@ export class FlatRequestReviewComponent implements OnInit {
       }));
     });
   }
+
 }
