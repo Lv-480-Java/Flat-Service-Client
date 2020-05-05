@@ -121,7 +121,7 @@ import {ResendRegistrationTokenComponent} from './resend-registration-token/rese
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {SafeHtmlPipe} from './safe-html.pipe';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -240,8 +240,9 @@ import {SafeHtmlPipe} from './safe-html.pipe';
     MatButtonToggleModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTooltipModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyC1nmER6QbI2OWVw6cd1clewSnN0Ol9xUE'
     }),
     MatTabsModule
   ],

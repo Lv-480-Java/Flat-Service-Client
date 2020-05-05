@@ -11,12 +11,12 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class FavoriteFlatComponent implements OnInit {
 
+  data: any;
+  flatResponse: FlatResponse = new FlatResponse();
+
   constructor(private http: HttpClient, private flatService: FlatService,
               private bar: MatSnackBar) {
   }
-
-  data: any;
-  flatResponse: FlatResponse = new FlatResponse();
 
   ngOnInit() {
     this.loadFlats();
@@ -60,4 +60,5 @@ export class FavoriteFlatComponent implements OnInit {
       }
     );
   }
+
 }
