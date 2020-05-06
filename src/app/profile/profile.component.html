@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-3" style="margin-left: 30px">
 
-      <div class="text-center" style="margin-left: 75px" >w
+      <div class="text-center" style="margin-left: 75px">
         <img *ngIf="userData.photoUrl !== null; else noData" [src]="userData.photoUrl" class="img-thumbnail"
              style="width: 200px">
         <ng-template #noData>
